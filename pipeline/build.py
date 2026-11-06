@@ -37,6 +37,23 @@ def part_text(text, part):
 TRACKS = ['공법', '민사', '연습']
 
 
+def law_notes(art):
+    """조문에 붙은 표시 가운데 카드에 보일 것: 위헌·헌법불합치 결정(첫 하나), 2025년 이후 개정(날짜를 모아 한 줄).
+    표시는 조 단위라 인용한 항과 다른 항에 관한 것일 수 있다. PRINCIPLES 2 '개정되면 바뀐 조문을 표시'."""
+    out, dates = [], []
+    for n in art.get('notes', []):
+        if re.search(r'위헌|헌법불합치', n):
+            if not any('결정(조문에 붙은 표시)' in o for o in out):
+                out.append('결정(조문에 붙은 표시): ' + n.strip('[]<> '))
+            continue
+        m = re.search(r'(전문개정|개정|신설)\s*(20\d\d\.\s*\d+\.\s*\d+\.)', n)
+        if m and int(m.group(2)[:4]) >= 2025 and m.group(2) not in dates:
+            dates.append(m.group(2))
+    if dates:
+        out.append('최근 개정: 이 조는 ' + ', '.join(dates) + ' 개정됐다(인용한 항이 아닐 수 있다).')
+    return out
+
+
 def pick_para(art, para, jo):
     paras = art['paras']
     if para:
@@ -70,11 +87,19 @@ def main():
     def cite_of(ci, fallback=None):
         src = source(ci['law'], fallback)
         jo = str(ci['jo'])
+        if jo not in src['articles'] and fallback:
+            key = ci['law'] + '@' + fallback
+            if key not in srcs:
+                srcs[key] = json.loads((ROOT / fallback).read_text(encoding='utf-8'))
+            src = srcs[key]
         if jo not in src['articles']:
             raise SystemExit(f"{ci['law']} 제{jo}조 원문이 없음")
         art = src['articles'][jo]
         p = pick_para(art, ci.get('para'), jo)
-        if ci.get('ho'):
+        if ci.get('lead'):
+            # 호가 있는 항의 머리글만 외울 때(행정절차법 제21조 제1항 등)
+            text = p['text']
+        elif ci.get('ho'):
             hs = [h for h in p.get('ho', []) if h['no'] == str(ci['ho'])]
             if not hs:
                 raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para')}항 제{ci['ho']}호가 없음")
@@ -92,7 +117,7 @@ def main():
             'law': ci['law'], 'jo': jo, 'title': art['title'], 'text': text,
             'cite': f"{jo}조{tail}", 'label': f"{ci['law']} 제{jo}조{tail}", 'joLabel': f"제{jo}조",
             'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('part')] if x),
-            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []), 'conf': ci.get('confidence', ''),
+            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []) + law_notes(art), 'conf': ci.get('confidence', ''),
             'freq': freq.get((ci['law'], jo), ''),
             'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
         }
@@ -132,9 +157,12 @@ def main():
                      'cards': cards_of(st['id'], label, st['facts'], st['issues'], exam_src)})
     sets.sort(key=lambda x: (TRACKS.index(x['track']), -x.get('year', 0), x.get('q', '')))
     articles = {}
-    for law, src in srcs.items():
-        articles[law] = [{'label': f'제{jo}조', 'text': ' '.join(p['text'] + ' ' + ' '.join(h['text'] for h in p.get('ho', [])) for p in a['paras'])}
-                         for jo, a in src['articles'].items()]
+    for key, src in srcs.items():
+        law = key.split('@')[0]
+        articles.setdefault(law, [])
+        have = {a['label'] for a in articles[law]}
+        articles[law] += [a for a in [{'label': f'제{jo}조', 'text': ' '.join(p['text'] + ' ' + ' '.join(h['text'] for h in p.get('ho', [])) for p in a['paras'])}
+                         for jo, a in src['articles'].items()] if a['label'] not in have]
     data = {
         'tracks': TRACKS, 'sets': sets, 'articles': articles, 'near': near,
         'foot': '조문: law.go.kr 현행 법령. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 기출 사례는 세트마다 출처(공공누리)를 단다. 답안·해설은 Claude가 쓴 초안이고 영신 검수 전이다. 법학고양은 출제 기관과 관계없는 학습 게임이다.',

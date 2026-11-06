@@ -82,4 +82,9 @@ t('헷갈림 알림: 다른 조문 구절을 치면 그 조문을 알린다', ()
 t('원문 속 링크 말이 빠지지 않았다(제763조의 조 번호들)', () => {
   assert.strictEqual(src.articles['763'].paras[0].text, '제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.');
 });
+t('괄호 속 한자 풀이는 치지 않는다(보여 주기만)', () => {
+  const w = J.words('경정결정(更正決定)을');
+  assert.strictEqual(J.wordText(w[0]), '경정결정을');
+  assert.deepStrictEqual(J.norm('경정결정(更正決定)을'), Array.from('경정결정을'));
+});
 console.log(n + '개 통과');

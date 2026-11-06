@@ -7,7 +7,9 @@
    - 빈칸 사다리는 앞에서부터: 번호 → 첫 어절 → 첫 문구(첫 문장) → 전체. */
 (function (root) {
   'use strict';
-  var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
+  /* 치지 않는 글자: 공백·문장부호·괄호, 그리고 한자. law.go.kr 원문은 '확정판결(確定判決)'처럼 괄호 속에 한자 풀이를 붙인다.
+     한자는 외울 글이 아니라 풀이라서 괄호처럼 보여 주기만 한다(26.11.07 Claude, 하위 작업 검토에서 찾음). */
+  var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/;
 
   function isFixed(ch) { return FIXED.test(ch); }
   function norm(s) { return Array.from(String(s || '')).filter(function (c) { return !isFixed(c); }); }

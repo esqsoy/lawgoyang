@@ -164,7 +164,7 @@ body.rt-lock{overflow:hidden}
   <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="playCat" aria-live="polite"></p></div>
   <article class="card" id="card">
    <div id="caseBox"><div class="lab"><span>사례</span><span class="tag" id="caseTag"></span><button class="fold" id="fold" type="button" hidden>사례 보기</button></div><p class="case" id="facts"></p></div>
-   <div><div class="lab">설문</div><p class="q" id="q"></p></div>
+   <div><div class="lab"><span>설문</span><button class="fold" id="qfold" type="button" hidden>설문 보기</button></div><p class="q" id="q"></p></div>
    <div><div class="lab">답안</div><p class="ans" id="ansText"></p>
     <div class="law" id="law" role="group" aria-label="조문 빈칸. 누르고 치기"><span class="g" id="prefix"></span><span id="blank"></span><span class="g" id="suffix"></span><input id="ans" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="조문 입력"></div>
     <p class="title-hint" id="titleHint" hidden></p>
@@ -256,9 +256,11 @@ function showCard(first){
   $('prog').textContent=(run.i+1)+' / '+SET.cards.length;$('freq').textContent=c.freq?'빈출 '+c.freq:'';$('freq').hidden=!c.freq;
   $('stageChip').textContent='빈칸 '+st+'단계 · '+stageName(c,st);
   var same=prev&&prev.caseId===c.caseId;
-  $('facts').textContent=c.facts;$('caseTag').textContent=c.caseLabel;
-  $('facts').hidden=same;$('fold').hidden=!same;$('fold').textContent='사례 보기';
-  $('q').textContent=c.q;$('ansText').textContent=c.answer;$('ansText').hidden=!c.answer;
+  $('caseTag').textContent=c.caseLabel;
+  // 사례·설문은 200자에서 접는다(설계안 E). 같은 문의 다음 장은 아예 접어 둔다.
+  clip($('facts'),$('fold'),c.facts,same,'사례');
+  clip($('q'),$('qfold'),c.q,prev&&prev.q===c.q,'설문');
+  $('ansText').textContent=c.answer;$('ansText').hidden=!c.answer;
   $('prefix').textContent=c.prefix;$('suffix').textContent=c.suffix;
   $('titleHint').hidden=true;$('titleBtn').hidden=!c.title;$('titleBtn').disabled=false;
   $('after').hidden=true;$('nextBox').hidden=true;$('askRow').hidden=false;
@@ -269,6 +271,19 @@ function showCard(first){
   var limit=6000+1000*cur.exp.length;cur.limit=limit;
   if(!first)startTimer();else cur.startWait=setTimeout(startTimer,2600);
   focusInput();
+}
+var CLIP=200;
+function clip(el,btn,text,hideAll,name){
+  el.dataset.full=text;
+  if(hideAll){el.textContent=text;el.hidden=true;btn.hidden=false;btn.textContent=name+' 보기';btn.dataset.state='closed';return;}
+  el.hidden=false;
+  if(text.length>CLIP){el.textContent=text.slice(0,CLIP)+'…';btn.hidden=false;btn.textContent=name+' 전체 보기';btn.dataset.state='short';}
+  else{el.textContent=text;btn.hidden=true;btn.dataset.state='full';}
+}
+function toggleClip(el,btn,name){
+  var st=btn.dataset.state;
+  if(st==='full'){el.hidden=true;btn.textContent=name+' 보기';btn.dataset.state='closed';}
+  else{el.hidden=false;el.textContent=el.dataset.full;btn.textContent=name+' 접기';btn.dataset.state='full';}
 }
 function focusInput(){var a=$('ans');try{a.focus({preventScroll:true});}catch(e){a.focus();}
   var l=$('law');if(l.scrollIntoView&&window.innerHeight<700)l.scrollIntoView({block:'center',behavior:'smooth'});}
@@ -403,7 +418,8 @@ $('submit').addEventListener('click',function(){decide();focusInput();});
 $('skip').addEventListener('click',function(){decide(true);focusInput();});
 $('next').addEventListener('click',function(){next();focusInput();});
 $('card').addEventListener('click',function(e){if(cur&&cur.mode==='show'&&!e.target.closest('button,.fold'))next();});
-$('fold').addEventListener('click',function(){var h=$('facts').hidden;$('facts').hidden=!h;$('fold').textContent=h?'사례 접기':'사례 보기';});
+$('fold').addEventListener('click',function(){toggleClip($('facts'),$('fold'),'사례');});
+$('qfold').addEventListener('click',function(){toggleClip($('q'),$('qfold'),'설문');});
 $('titleBtn').addEventListener('click',function(){$('titleHint').textContent='조문 제목: '+cur.c.title;$('titleHint').hidden=false;$('titleBtn').disabled=true;say(pick(LINES.title));focusInput();});
 renderHome();
 })();

@@ -20,7 +20,7 @@ from pathlib import Path
 
 BASE = 'https://www.law.go.kr/LSW/'
 CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳'
-NOTE = re.compile(r'\s*<(개정|신설|전문개정|본조신설|제목개정)[^>]*>\s*')
+NOTE = re.compile(r'\s*(?:<(?:개정|신설|전문개정|본조신설|제목개정|타법개정)[^>]*>|\[(?:개정|신설|전문개정|본조신설|제목개정|타법개정|시행일|종전|제\d+조)[^\]]*\])\s*')
 
 
 def get(url, path, tries=4):
@@ -111,6 +111,10 @@ def shape(lines, jo):
         t = NOTE.sub(' ', t).strip()
         if not t:
             continue
+        if re.fullmatch(r'\[[^\]]*\]', t):
+            # 위헌·헌법불합치 결정 같은 대괄호 표시만 있는 줄: 조문 글이 아니라 표시다. 버리지 않고 notes에 둔다.
+            notes.append(t)
+            continue
         ho = re.match(r'^(\d+)(?:의(\d+))?\.\s*(.*)$', t)
         mok = re.match(r'^([가-하])\.\s*(.*)$', t)
         if ho and paras:
@@ -189,15 +193,24 @@ def main():
         outdir = Path(a.outdir)
         outdir.mkdir(parents=True, exist_ok=True)
         index = {}
+        missing = {}
         for law in sorted(want):
             name = OFFICIAL.get(law, law)
-            lsi, ef = find_current(name, cache)
+            try:
+                lsi, ef = find_current(name, cache)
+            except SystemExit as err:
+                # 이름이 바뀌었거나 없어진 법령: 멈추지 않고 목록에 남긴다(원장 확인 필요)
+                missing[law] = {'official': name, 'articles': sorted(want[law]), 'why': str(err)}
+                print(law, '못 찾음')
+                continue
             jos = sorted(want[law], key=lambda j: split_jo(j))
             doc = fetch_law(name, lsi, ef, jos, cache / lsi)
             f = outdir / f'{lsi}-{ef}.json'
             f.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
             index[law] = {'official': name, 'lsiSeq': lsi, 'efYd': ef, 'header': doc['header'], 'file': f.name, 'articles': len(jos)}
             print(law, lsi, ef, len(jos), '조 두 화면 일치')
+        if missing:
+            index['_missing'] = missing
         (outdir / 'index.json').write_text(json.dumps(index, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
         return
     doc = fetch_law(a.law, a.lsi, a.ef, a.jo, cache)
