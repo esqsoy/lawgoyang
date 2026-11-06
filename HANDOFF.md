@@ -10,7 +10,9 @@
   - 영신 직검수 페이지(4장 사례·답안·조문·해설, 줄 댓글): https://claude.ai/artifact/8d7VgGyWzfxw6RYYzmipMz
   - 검사: `node pipeline/tests/judge.test.cjs` 13개, `node pipeline/tests/smoke.cjs proto.html`(Chromium 390px 한 판) 통과(26.11.07). 실제 폰 한글 자판(조합 중 입력)은 미확인.
 - **조문 원문은 임시본:** API 키 전이라 law.go.kr 웹 화면 두 곳(lsInfoR·lsSideInfoP)을 대조해 받은 `sources/web/minbeop-20260317.json`(민법 2026. 3. 17. 시행, 법률 제21454호). 키가 오면 API로 다시 받아 대조한다([PRINCIPLES 2](PRINCIPLES.md#2-조문-원문은-정확하게)).
-- **조사 중:** 5년·10년 풀 차이(영신 "리서치를 철저하게 선행해줘"). 시험별 기출 공개처·연도·이용 조건 조사와, 변호사시험 공법 사례형(2012~2026) 시범 분석. 결과는 아직 없다. 방법은 설계안 A3.
+- **조사 중:** 5년·10년 풀 차이(영신 "리서치를 철저하게 선행해줘"). 방법은 설계안 A3.
+  - 끝남: 변호사시험 공법 사례형 1~15회 시범([research/gongbeop-pilot-20261107](research/gongbeop-pilot-20261107/README.md)). 10년 창이 20%p 더 덮음(51% → 71%), 외울 양 +33%, 이득은 거의 헌법·헌재법·행소법. '확실'만이면 +15%p.
+  - 진행 중: 민사법 사례형(민법·민소·민집) 같은 방식 시범, 시험별 기출 공개처·연도·이용 조건 조사. 둘 다 끝나면 결론을 영신에게 낸다.
 
 ## 막힌 것
 

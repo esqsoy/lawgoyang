@@ -1,0 +1,497 @@
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌제청신청 기각 후 헌법소원(68조2항) 적법성, 시행령 부분은 대상 아님", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "68조2항 헌법소원 청구기간(기각결정 송달 후 30일)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "1", "law": "국가공무원법", "article": "78", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "심판대상 조항(징계사유)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "1", "law": "국가공무원법", "article": "65", "para": "4", "basis": "문제지 명시", "confidence": "확실", "issue": "심판대상 조항(정치운동 금지 위임)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "공무원의 정치적 표현의 자유", "kind": "헌법"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "7", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "공무원의 정치적 중립성", "kind": "헌법"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "21", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "검열금지원칙", "kind": "헌법"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "3", "law": "공직선거법", "article": "82의4", "para": "3", "basis": "문제지 명시", "confidence": "확실", "issue": "선관위 삭제요청 조항(심판대상)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "3", "law": "공직선거법", "article": "82의4", "para": "4", "basis": "문제지 명시", "confidence": "확실", "issue": "삭제요청 이행의무 조항(심판대상)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "1", "sub": "전체", "law": "국가공무원법 시행령", "article": "27", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "경업자 원고적격(법률상 이익)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "4", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "예방적 금지소송 허용성(항고소송의 종류)", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "3(3)", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부관(부담)만의 독립 쟁송가능성-처분성", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "3(3)", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부관(부담)만의 독립 쟁송가능성-취소소송 대상", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "4", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "법인의 기본권 주체성, 자기관련성, 직접성, 보충성", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "전체", "law": "하수도법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "전체", "law": "하수도법", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "전체", "law": "하수도법", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "전체", "law": "하수도법", "article": "41", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2012, "round": 1, "part": "공법", "q": "2", "sub": "전체", "law": "하수도법", "article": "45", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "계획변경승인 거부의 처분성(신청권)", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "1", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "원고적격", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "1", "law": "행정소송법", "article": "13", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "피고적격(처분청)", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "2", "law": "행정소송법", "article": "23", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분 집행정지 가부", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "2", "law": "행정소송법", "article": "8", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "민사집행법상 가처분 준용 여부", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "2", "law": "민사집행법", "article": "300", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "임시지위를 정하는 가처분 요건", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "3", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분과 사전통지", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "3", "law": "행정절차법", "article": "22", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "의견제출 기회", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "4", "law": "행정소송법", "article": "30", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "취소판결의 기속력", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "4", "law": "행정소송법", "article": "30", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분 취소 후 재처분의무, 새로운 사유", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "5", "law": "행정소송법", "article": "34", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "간접강제", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "5", "law": "행정소송법", "article": "30", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "재처분의무 불이행", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "전체", "law": "폐기물관리법", "article": "25", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률", "article": "36", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "1", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "22", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법령에 따른 당연 감액-지급거부의 처분성", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "3", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "공법상 당사자소송", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송에서 당사자소송으로 소의 변경", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "2(1)", "law": "국가공무원법", "article": "33", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "임용결격사유", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "2(2)", "law": "민법", "article": "741", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "당연무효 임용과 기여금 부당이득", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "68조2항 헌법소원 적법요건", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "69", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간(송달 후 30일) 도과 여부", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "25", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변호사 대리", "kind": "법률"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법", "article": "23", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "연금수급권의 재산권성", "kind": "헌법"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법", "article": "13", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "진정소급입법 금지", "kind": "헌법"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "평등권", "kind": "헌법"}
+{"year": 2013, "round": 2, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법", "article": "34", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "사회보장수급권 성격", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "1", "law": "헌법", "article": "107", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "부령 형식 처분기준의 구체적 규범통제", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "2", "law": "행정절차법", "article": "22", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "청문 누락 하자의 치유", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "3", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "변경명령재결에 따른 변경처분 시 소송대상", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "3", "law": "행정소송법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "제소기간(재결서 송달일 기준)", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "3", "law": "행정심판법", "article": "43", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변경명령재결", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "4", "law": "행정소송법", "article": "27", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "재량 일탈·남용(평등·비례)", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "5", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "지위승계 수리 시 종전 영업자 사전통지", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "5", "law": "행정절차법", "article": "22", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "종전 영업자 의견제출", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "5", "law": "행정절차법", "article": "2", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "당사자등 개념(제4호)", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "10", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "13", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "29", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "40", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법 시행령", "article": "13", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2014, "round": 3, "part": "공법", "q": "1", "sub": "전체", "law": "석유 및 석유대체연료 사업법 시행령", "article": "14", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "1(1)", "law": "행정소송법", "article": "4", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "일부취소(‘변경’)의 가부", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "2", "law": "헌법", "article": "15", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "필요적 면허취소와 직업의 자유", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "2", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "일반적 행동의 자유", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "2", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법", "article": "107", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법원의 위헌제청(합리적 의심)", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌법률심판 제청", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(1)", "law": "헌법재판소법", "article": "41", "para": "4", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "제청신청 기각결정에 대한 불복 금지", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(2)", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "제청신청하지 않은 조항의 심판대상 포함 여부", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(3)", "law": "헌법", "article": "13", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "이중처벌금지", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(3)", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "일반적 행동의 자유", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(3)", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "평등원칙", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "3(3)", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법", "article": "44", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법", "article": "80", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법", "article": "93", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법", "article": "148의2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법 시행규칙", "article": "53", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2014, "round": 3, "part": "공법", "q": "2", "sub": "전체", "law": "도로교통법 시행규칙", "article": "91", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의 재판관 미선출 부작위의 심판대상성", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "부작위 헌법소원과 청구기간", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "111", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "재판관 9인 구성(작위의무 근거)", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "111", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "국회 선출 재판관(작위의무 근거)", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "2", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "부작위 개념(항고소송 대상)", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "2", "law": "행정소송법", "article": "4", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부작위위법확인소송", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "3", "law": "헌법", "article": "27", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "공정한 헌법재판을 받을 권리", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의1", "sub": "3", "law": "헌법", "article": "113", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "인용결정 6인 정족수", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의2", "sub": "", "law": "헌법", "article": "111", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의심판 관장", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의2", "sub": "", "law": "헌법재판소법", "article": "61", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의 청구사유·당사자", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의2", "sub": "", "law": "헌법재판소법", "article": "62", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의 종류·당사자(구청장 당사자능력)", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의3", "sub": "", "law": "헌법", "article": "53", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "법률안 재의요구", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의3", "sub": "", "law": "헌법", "article": "65", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "탄핵소추 의결 후 권한행사 정지", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의3", "sub": "", "law": "헌법", "article": "71", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "국무총리 권한대행 범위", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "1의3", "sub": "", "law": "헌법", "article": "79", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "사면은 법률로 정함(거부사유 당부)", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "1가", "law": "헌법", "article": "95", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "법령보충적 행정규칙(위임 형식)", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "1나", "law": "헌법", "article": "75", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "포괄위임금지", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "1나", "law": "헌법", "article": "95", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "고시 위임의 허용성", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "1나", "law": "행정규제기본법", "article": "4", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "고시 위임 근거", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "2", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "제재기간 경과 후 소의 이익(가중처분 규정)", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "3", "law": "국가배상법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국가배상 위법성·과실(취소판결 기판력)", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품위생법", "article": "10", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품위생법", "article": "72", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품위생법", "article": "75", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품위생법 시행규칙", "article": "89", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품등의 표시기준", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품등의 표시기준", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의1", "sub": "전체", "law": "식품등의 표시기준", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의2", "sub": "", "law": "헌법", "article": "117", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법령의 범위 안에서 조례", "kind": "헌법"}
+{"year": 2015, "round": 4, "part": "공법", "q": "2의2", "sub": "", "law": "지방자치법", "article": "22", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "조례제정 범위(침익적 사항은 법률 위임)", "kind": "법률", "current": {"article": "28", "para": "1", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "68조2항 헌법소원 적법성(한정위헌청구)", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "개인정보자기결정권 근거", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "17", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "개인정보자기결정권 근거", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "12", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "지문채취 강제와 영장주의", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "12", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "진술거부권", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "흡연권 근거", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "17", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "흡연권 근거", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "36", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "보건권(혐연권)", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "4", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "사전통지 결여 하자", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "4", "law": "행정절차법", "article": "22", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "의견제출 기회", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "4", "law": "행정소송법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "선결문제(형사법원의 처분 위법 판단)", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "경범죄처벌법", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "국민건강증진법", "article": "9", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "국민건강증진법", "article": "34", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률", "article": "28", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률", "article": "35", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률", "article": "45", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률 시행령", "article": "16", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "27", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "도로점용허가(재량) 거부의 재량 일탈·남용", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "무단점용자의 원고적격", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "4가", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "조례 헌법소원의 직접성", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "4나", "law": "헌법", "article": "23", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "점용허가 갱신기대와 재산권", "kind": "헌법"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "도로법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "도로법", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "도로법", "article": "40", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "도로법 시행령", "article": "24", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "서울특별시 보도상 영업시설물 관리 등에 관한 조례", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2016, "round": 5, "part": "공법", "q": "2", "sub": "전체", "law": "서울특별시 보도상 영업시설물 관리 등에 관한 조례", "article": "12", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "현재성·자기관련성·직접성", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법령소원 청구기간", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "25", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변호사 대리", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "상업광고와 표현의 자유", "kind": "헌법"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "21", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "사전심의와 검열금지", "kind": "헌법"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "3", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "원처분주의(재결 고유의 위법)", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "3", "law": "행정소송법", "article": "13", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "피고적격", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "3", "law": "행정소송법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "제소기간(재결서 송달일 기준)", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "3", "law": "행정심판법", "article": "43", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변경명령재결", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "20", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "24", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "25", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "36", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "42", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기법", "article": "52", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기 광고 사전심의규정", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기 광고 사전심의규정", "article": "5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기 광고 사전심의규정", "article": "10", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2017, "round": 6, "part": "공법", "q": "1", "sub": "전체", "law": "의료기기 광고 사전심의규정", "article": "12", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "1", "law": "정부조직법", "article": "6", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한의 위임·재위임 근거", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "1", "law": "지방자치법", "article": "104", "para": "4", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "위임받은 사무의 재위임", "kind": "법률", "current": {"article": "117", "para": "4", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "15", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "직업의 자유(시설 이용 등록제한)", "kind": "헌법"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "11의2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "13", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "27", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법", "article": "43", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "석유 및 석유대체연료 사업법 시행령", "article": "45", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2017, "round": 6, "part": "공법", "q": "2", "sub": "전체", "law": "행정권한의 위임 및 위탁에 관한 규정", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "조례 헌법소원: 직접성·보충성(조례의 처분성)", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "31", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "교육받을 권리", "kind": "헌법"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "36", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "부모의 자녀교육권 근거", "kind": "헌법"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "자녀교육권 근거", "kind": "헌법"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "111", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의심판 관장", "kind": "헌법"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "3", "law": "헌법재판소법", "article": "61", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의 청구사유", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "3", "law": "헌법재판소법", "article": "62", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "지자체 상호간 권한쟁의", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "3", "law": "헌법재판소법", "article": "62", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "교육·학예 사무와 교육감", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "3", "law": "헌법재판소법", "article": "63", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의 청구기간", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "4(1)", "law": "지방자치법", "article": "9", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "교육 사무의 자치사무성", "kind": "법률", "current": {"article": "13", "para": "2", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "4(2)", "law": "지방자치법", "article": "172", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "주무부장관의 재의요구 지시·제소", "kind": "법률", "current": {"article": "192", "para": "", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "지방교육자치에 관한 법률", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "지방교육자치에 관한 법률", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "지방교육자치에 관한 법률", "article": "18", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "지방교육자치에 관한 법률", "article": "19", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "지방교육자치에 관한 법률", "article": "20", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "초·중등교육법 시행령", "article": "15", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2018, "round": 7, "part": "공법", "q": "1", "sub": "전체", "law": "A도 학교설치 조례", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "세무조사결정의 처분성", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "2", "law": "국가배상법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국가배상 위법성(취소판결 기판력)", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "3", "law": "헌법재판소법", "article": "47", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌결정의 소급효(병행사건)", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "4", "law": "헌법재판소법", "article": "47", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "위헌 근거조항에 따른 재조사·부과처분", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "5", "law": "행정소송법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "제소기간 내 취소소송 가능 여부", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "5", "law": "행정소송법", "article": "10", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부당이득반환청구 관련청구 병합", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "5", "law": "헌법재판소법", "article": "47", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌결정의 효력 범위", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "5", "law": "민법", "article": "741", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "과오납금 부당이득반환", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "전체", "law": "국세기본법", "article": "81의4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "전체", "law": "국세기본법", "article": "81의7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "전체", "law": "국세기본법", "article": "81의17", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2018, "round": 7, "part": "공법", "q": "2", "sub": "전체", "law": "조세범 처벌법", "article": "17", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의1", "sub": "", "law": "헌법", "article": "8", "para": "4", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌정당해산", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의1", "sub": "", "law": "헌법재판소법", "article": "59", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "정당해산결정의 효력", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의1", "sub": "", "law": "공직선거법", "article": "192", "para": "4", "basis": "Claude 판단", "confidence": "확실", "issue": "비례대표의원 퇴직 사유(해산 예외)", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의1", "sub": "", "law": "헌법", "article": "46", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "자유위임(국익우선·양심)", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법", "article": "12", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "신체의 자유·적법절차", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법", "article": "12", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "영장주의", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "2", "law": "국가배상법", "article": "2", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "법령해석 잘못과 과실, 이중배상금지(단서) 적용범위", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법", "article": "29", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "군경 등 이중배상금지 헌법 근거", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률", "article": "2의5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률", "article": "5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률", "article": "6", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률", "article": "8", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률 시행령", "article": "34의2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰대 설치 및 운영에 관한 법률 시행령", "article": "39", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰 관리규칙", "article": "94", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰 관리규칙", "article": "95", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2019, "round": 8, "part": "공법", "q": "1의2", "sub": "전체", "law": "의무경찰 관리규칙", "article": "96", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "고시의 처분성", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "1", "law": "행정규제기본법", "article": "4", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "법령보충적 행정규칙", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "단체·제약회사 원고적격", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "3", "law": "행정소송법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "고시에 의한 처분의 제소기간", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "3", "law": "행정 효율과 협업 촉진에 관한 규정", "article": "6", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "고시 효력발생(5일 경과)", "kind": "대통령령"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "4", "law": "행정절차법", "article": "4", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "신뢰보호", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "13", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "소급입법 금지(부진정소급)", "kind": "헌법"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "전체", "law": "국민건강보험법", "article": "41", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "전체", "law": "국민건강보험 요양급여의 기준에 관한 규칙", "article": "8", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2019, "round": 8, "part": "공법", "q": "2", "sub": "전체", "law": "국민건강보험 요양급여의 기준에 관한 규칙", "article": "13", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "82", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "부서", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "111", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의심판 관장", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법재판소법", "article": "61", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의 청구사유", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법재판소법", "article": "62", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의원·국회의장 당사자능력", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법재판소법", "article": "63", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간(개정행위 도과)", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법재판소법", "article": "66", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "권한침해확인·무효확인", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "40", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "심의·표결권 근거", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "심의·표결권 근거", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "63", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "해임건의 의결정족수", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "3", "law": "헌법", "article": "61", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국정조사권과 정족수 강화", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "전체", "law": "국정감사 및 조사에 관한 법률", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "전체", "law": "법령 등 공포에 관한 법률", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의1", "sub": "전체", "law": "법령 등 공포에 관한 법률", "article": "5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법", "article": "12", "para": "4", "basis": "Claude 판단", "confidence": "확실", "issue": "변호인의 조력을 받을 권리(행정구금)", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "법률유보·과잉금지", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법", "article": "12", "para": "4", "basis": "Claude 판단", "confidence": "확실", "issue": "변호인이 되려는 자의 접견교통권", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "기본권 침해가능성", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "4", "law": "행정소송법", "article": "23", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분 집행정지 가부", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "1의2", "sub": "4", "law": "행정소송법", "article": "8", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "가처분 준용 여부", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "청원 회신·해제신청 거부의 처분성(신청권)", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "30", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "기속력", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "30", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "재처분의무와 다른 사유 재거부", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "23", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재산권 보장", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "23", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "보상규정 없는 공용제한", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "비례원칙", "kind": "헌법"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "4-1", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "83", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "수용재결 이의신청", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "4-1", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "85", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "수용재결 행정소송", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "4-1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "원처분주의(수용재결 대상)", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "4-2", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "사업인정과 하자승계", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "4-3", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "85", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "보상금증감소송", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "문화재보호법", "article": "27", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "문화재보호법", "article": "35", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "문화재보호법", "article": "70", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "문화재보호법", "article": "74", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "문화재보호법 시행령", "article": "21의2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "경기도 문화재 보호 조례", "article": "11", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "경기도 문화재 보호 조례", "article": "17", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2020, "round": 9, "part": "공법", "q": "2", "sub": "전체", "law": "관광진흥법", "article": "61", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "27", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "민사소송 대리인 접견 제한과 재판청구권", "kind": "헌법"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법재판소법", "article": "40", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "헌법소원 가처분(준용)", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "2", "law": "행정소송법", "article": "23", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "준용되는 집행정지 요건", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "2", "law": "민사집행법", "article": "300", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "준용되는 가처분 요건", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "전체", "law": "형의 집행 및 수용자의 처우에 관한 법률", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "전체", "law": "형의 집행 및 수용자의 처우에 관한 법률", "article": "43", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "전체", "law": "형의 집행 및 수용자의 처우에 관한 법률", "article": "44", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "전체", "law": "형의 집행 및 수용자의 처우에 관한 법률 시행령", "article": "58", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의1", "sub": "전체", "law": "형의 집행 및 수용자의 처우에 관한 법률 시행령", "article": "59", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "직접성·현재성", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "연임제한과 평등권", "kind": "헌법"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "3", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "도로점용허가에 대한 주민 원고적격", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "4", "law": "지방자치법", "article": "17", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "주민소송 요건(재무회계행위)", "kind": "법률", "current": {"article": "22", "para": "1", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "4", "law": "지방자치법", "article": "17", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "주민소송 종류", "kind": "법률", "current": {"article": "22", "para": "2", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "4", "law": "지방자치법", "article": "16", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "주민감사청구 전치", "kind": "법률", "current": {"article": "21", "para": "1", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "", "law": "지방자치법", "article": "95", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률", "current": {"article": "108", "para": "", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2021, "round": 10, "part": "공법", "q": "1의2", "sub": "전체", "law": "도로법", "article": "61", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "재신청에 대한 거부의 처분성", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "처분 개념", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "제소기간", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "2", "law": "감염병의 예방 및 관리에 관한 법률", "article": "71", "para": "", "basis": "문제지 명시", "confidence": "확실", "issue": "예방접종 피해 국가보상", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "3", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "계약 해지 통보와 사전통지", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "3", "law": "행정절차법", "article": "22", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "의견청취", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "3", "law": "행정절차법", "article": "2", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "처분 개념(사법상 계약 해지)", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "4(1)", "law": "감염병의 예방 및 관리에 관한 법률", "article": "46", "para": "", "basis": "문제지 명시", "confidence": "확실", "issue": "건강진단·예방접종 명령", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "4(2)", "law": "감염병의 예방 및 관리에 관한 법률", "article": "81", "para": "", "basis": "문제지 명시", "confidence": "확실", "issue": "처벌조항(심판대상)", "kind": "법률"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "4(2)", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "신체에 관한 자기결정권·일반적 행동자유", "kind": "헌법"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "4(2)", "law": "헌법", "article": "12", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "신체의 자유", "kind": "헌법"}
+{"year": 2021, "round": 10, "part": "공법", "q": "2", "sub": "4(2)", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "68조2항 헌법소원 적법성(시행령 부분)", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "75", "para": "7", "basis": "Claude 판단", "confidence": "확실", "issue": "당해사건 확정 후 재심 가능성과 전제성", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "25", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변호사 대리", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "2(2)", "law": "헌법", "article": "75", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "포괄위임금지원칙", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "누진요금제와 평등권", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "36", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "혼인·가족생활 보호", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "4(1)", "law": "행정조사기본법", "article": "17", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "행정조사 사전통지", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "4(2)", "law": "행정심판법", "article": "43", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "변경(일부취소)재결", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "4(2)", "law": "행정심판법", "article": "5", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "취소심판의 ‘변경’", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "6", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "16", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "21", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "22", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법", "article": "24", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법 시행령", "article": "7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "전기사업법 시행령", "article": "13", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2022, "round": 11, "part": "공법", "q": "1", "sub": "전체", "law": "발전사업세부허가기준, 전기요금산정기준, 전력량계허용오차 및 전력계통 운영업무에 관한 고시", "article": "11", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "1", "law": "행정기본법", "article": "2", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "법령보충적 행정규칙(법령 정의)", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "1", "law": "행정규제기본법", "article": "4", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "고시 위임 근거", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "2", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분과 사전통지", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "2", "law": "행정심판법", "article": "58", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "행정심판 고지의무", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "2", "law": "행정심판법", "article": "27", "para": "6", "basis": "Claude 판단", "confidence": "확실", "issue": "불고지 시 청구기간(180일)", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "2", "law": "행정절차법", "article": "26", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "불복 고지", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "3", "law": "지방자치법", "article": "15", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "조례 제정·개폐 청구권", "kind": "법률", "current": {"article": "19", "para": "1", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "3", "law": "지방자치법", "article": "14", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "주민투표", "kind": "법률", "current": {"article": "18", "para": "", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "3", "law": "지방자치법", "article": "73", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "청원", "kind": "법률", "current": {"article": "85", "para": "", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "4", "law": "지방자치법", "article": "22", "para": "", "basis": "문제지 명시", "confidence": "확실", "issue": "조례 위임(단서) 위헌성", "kind": "법률", "current": {"article": "28", "para": "1", "note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"}}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "117", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "조례제정권의 범위", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "75", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "조례 위임과 포괄위임", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "15", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "직업의 자유", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "가축분뇨의 관리 및 이용에 관한 법률", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "가축분뇨의 관리 및 이용에 관한 법률", "article": "8", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "A군 가축사육 제한에 관한 조례", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "A군 가축사육 제한에 관한 조례", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "A군 가축사육 제한에 관한 조례", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2022, "round": 11, "part": "공법", "q": "2", "sub": "전체", "law": "A군 가축사육 제한구역 지정 고시", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "고시조항의 헌법소원 대상성·보충성", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "1", "law": "헌법", "article": "107", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "명령·규칙 심사와 보충성", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "12", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "신체의 자유 제한 여부", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "14", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "거주·이전의 자유 제한 여부", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "2", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "일반적 행동의 자유", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "27", "para": "4", "basis": "Claude 판단", "confidence": "확실", "issue": "무죄추정원칙", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "12", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "적법절차원칙", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "4", "law": "헌법", "article": "64", "para": "4", "basis": "문제지 명시", "confidence": "확실", "issue": "제명처분 법원 제소 금지", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "4", "law": "헌법", "article": "64", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의원 제명", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "4", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "제명처분에 대한 헌법소원", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "4", "law": "헌법", "article": "111", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "헌법재판소 관장사항", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "5", "law": "행정소송법", "article": "18", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "필요적 행정심판전치", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "5", "law": "행정소송법", "article": "18", "para": "3", "basis": "Claude 판단", "confidence": "확실", "issue": "동종사건 기각재결 시 전치 면제", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "5", "law": "도로교통법", "article": "142", "para": "", "basis": "문제지 명시", "confidence": "확실", "issue": "운전면허 처분 행정심판전치", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "전체", "law": "전기용품 및 생활용품 안전관리법", "article": "15", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "전체", "law": "안전확인대상생활용품의 안전기준", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "전체", "law": "안전확인대상생활용품의 안전기준", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "행정규칙"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "전체", "law": "변호사법", "article": "102", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "1", "sub": "전체", "law": "변호사법", "article": "103", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "1(1)", "law": "행정소송법", "article": "27", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "감경사유 미고려와 재량 일탈·남용", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "1(2)", "law": "행정기본법", "article": "18", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "기각판결 확정 후 직권취소", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "23", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "집행정지 종기 도래와 처분 효력 부활", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "제재기간 경과 후 소의 이익", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "3", "law": "국가배상법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송 위법성과 국가배상 위법성", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "법률유보원칙", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "95", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부령에의 위임", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "4", "law": "행정기본법", "article": "8", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "법치행정(법률유보)", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "5", "law": "헌법", "article": "10", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "시체 처분에 대한 자기결정권", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "5", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법", "article": "11", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법 시행규칙", "article": "7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "공중위생관리법 시행규칙", "article": "19", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "시체 해부 및 보존에 관한 법률", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "시체 해부 및 보존에 관한 법률", "article": "4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "시체 해부 및 보존에 관한 법률", "article": "12", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2023, "round": 12, "part": "공법", "q": "2", "sub": "전체", "law": "장기등 이식에 관한 법률", "article": "12", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "1", "law": "헌법", "article": "53", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "법률안 재의요구 사유", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "1", "law": "헌법", "article": "53", "para": "4", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "재의결 정족수", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "2", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "68조2항 헌법소원 적법성(제청신청 안 한 부칙)", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "2", "law": "헌법재판소법", "article": "69", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "2", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "2", "law": "헌법재판소법", "article": "25", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "변호사 대리", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "3", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의원과의 차별", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(1)", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법령에 따른 지급정지 통보의 처분성", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(1)", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "취소소송의 대상", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(1)", "law": "행정소송법", "article": "3", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "당사자소송으로 다툴 대상", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(2)", "law": "행정소송법", "article": "3", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "미지급 퇴직연금 지급청구 당사자소송", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(2)", "law": "헌법재판소법", "article": "47", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "위헌결정의 소급효", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "4(2)", "law": "행정소송법", "article": "39", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "당사자소송 피고", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "전체", "law": "공무원연금법", "article": "47", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "전체", "law": "공무원연금법", "article": "부칙1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "1", "sub": "전체", "law": "공무원연금법", "article": "부칙2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "27", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "불확정개념·재량에 대한 사법심사", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "75", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "포괄위임금지원칙", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "23", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재산권", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "3", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "4", "law": "지방자치법", "article": "188", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "시정명령과 취소·정지", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "4", "law": "지방자치법", "article": "188", "para": "5", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "자치사무는 법령위반에 한정", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "4", "law": "지방자치법", "article": "188", "para": "6", "basis": "Claude 판단", "confidence": "확실", "issue": "취소·정지에 대한 대법원 제소", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "4", "law": "지방자치법", "article": "185", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "위임사무 지도·감독(사무 성격에 따라)", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률", "article": "56", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률", "article": "58", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "51", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "53", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2024, "round": 13, "part": "공법", "q": "2", "sub": "전체", "law": "국토의 계획 및 이용에 관한 법률 시행령", "article": "56", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "심판대상 확정·법적 관련성", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "1", "law": "헌법재판소법", "article": "69", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "청구기간", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "2(1)", "law": "헌법", "article": "13", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "소급입법에 의한 재산권 박탈 금지", "kind": "헌법"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "2(2)", "law": "헌법", "article": "15", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "직업의 자유", "kind": "헌법"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "2(2)", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙·신뢰보호", "kind": "헌법"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "2(2)", "law": "헌법", "article": "23", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "재산권", "kind": "헌법"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "3(2)", "law": "행정소송법", "article": "4", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "예방적 금지소송 허용성", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "3(2)", "law": "행정심판법", "article": "5", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "행정심판의 종류(예방적 금지심판)", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "게임산업진흥에 관한 법률", "article": "26", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "관광진흥법", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "관광진흥법", "article": "33", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "관광진흥법 시행규칙", "article": "40", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "관광진흥법 시행규칙", "article": "부칙3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "B시 인형뽑기 기구 설치 금지 조례", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "B시 인형뽑기 기구 설치 금지 조례", "article": "부칙2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "교육환경 보호에 관한 법률", "article": "8", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "1", "sub": "전체", "law": "교육환경 보호에 관한 법률", "article": "9", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "1(2)", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "환경상 이익과 재단법인 원고적격", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "2", "law": "행정소송법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "민사소송에서의 선결문제", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "2", "law": "행정기본법", "article": "15", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "처분의 효력(공정력)", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "3", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "74", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "잔여지 수용청구권", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "3", "law": "공익사업을 위한 토지 등의 취득 및 보상에 관한 법률", "article": "85", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "수용청구 거부재결과 보상금증감소송", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "45", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의원 면책특권", "kind": "헌법"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "전체", "law": "산업입지 및 개발에 관한 법률", "article": "7의2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "전체", "law": "산업입지 및 개발에 관한 법률", "article": "7의4", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "전체", "law": "산업입지 및 개발에 관한 법률", "article": "10", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "전체", "law": "산업입지 및 개발에 관한 법률", "article": "22", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2025, "round": 14, "part": "공법", "q": "2", "sub": "전체", "law": "산업입지 및 개발에 관한 법률 시행령", "article": "9", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "대통령령"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법", "article": "111", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "권한쟁의심판 관장", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법재판소법", "article": "61", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "당사자적격(권한침해)", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "1", "law": "헌법재판소법", "article": "62", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "국회의원·국회의장 당사자능력", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "46", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "자유위임원칙", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "7", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "자유위임원칙 근거", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "40", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "심의·표결권 근거", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "2", "law": "헌법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "심의·표결권 근거", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의1", "sub": "2", "law": "국회법", "article": "48", "para": "6", "basis": "문제지 발췌", "confidence": "확실", "issue": "회기 중 위원 개선 제한(문제지에도 명시)", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법재판소법", "article": "68", "para": "2", "basis": "문제지 명시", "confidence": "확실", "issue": "68조2항 헌법소원", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법재판소법", "article": "41", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "재판의 전제성", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "1", "law": "헌법재판소법", "article": "75", "para": "7", "basis": "Claude 판단", "confidence": "확실", "issue": "당해사건 확정 후 재심 가능성과 전제성", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법", "article": "11", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "부담금과 평등원칙", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "2", "law": "헌법", "article": "38", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "조세와 부담금의 구별", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "국민체육진흥법", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "국민체육진흥법", "article": "19", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "국민체육진흥법", "article": "20", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "국민체육진흥법", "article": "22", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "부담금관리 기본법", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의2", "sub": "전체", "law": "부담금관리 기본법", "article": "7", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "1", "law": "공유재산 및 물품 관리법", "article": "20", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "행정재산 사용허가의 성질", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "2", "law": "행정기본법", "article": "17", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "부관의 종류·한계", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "2", "law": "행정소송법", "article": "2", "para": "1", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부관만의 독립 쟁송가능성-처분성", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "2", "law": "행정소송법", "article": "19", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "부관만의 독립 쟁송가능성-취소소송 대상", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "전체", "law": "국민체육진흥법", "article": "33", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "1의3", "sub": "전체", "law": "A시 체육진흥 조례", "article": "18", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "12", "para": "", "basis": "Claude 판단", "confidence": "확실", "issue": "경원자 거부처분 취소소송의 소의 이익", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "1", "law": "행정소송법", "article": "30", "para": "2", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "재처분의무와 소의 이익", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "2(1)", "law": "지방자치법", "article": "28", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법률 기준을 강화한 조례의 적법성", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "2(1)", "law": "헌법", "article": "117", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "법령의 범위 안에서 조례", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "3(1)", "law": "행정절차법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "거부처분과 사전통지", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "3(1)", "law": "행정절차법", "article": "22", "para": "3", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "의견제출 기회", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "3(2)", "law": "행정절차법", "article": "17", "para": "5", "basis": "문제지 명시", "confidence": "확실", "issue": "신청 보완요구", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "21", "para": "1", "basis": "Claude 판단", "confidence": "확실", "issue": "알 권리(정보공개청구권)", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "37", "para": "2", "basis": "Claude 판단", "confidence": "확실", "issue": "과잉금지원칙", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "4", "law": "헌법", "article": "17", "para": "", "basis": "Claude 판단", "confidence": "확인 필요", "issue": "사생활 보호(충돌 법익)", "kind": "헌법"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "4", "law": "공공기관의 정보공개에 관한 법률", "article": "9", "para": "1", "basis": "문제지 명시", "confidence": "확실", "issue": "비공개대상정보 6호(심판대상)", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "액화석유가스의 안전관리 및 사업법", "article": "5", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "액화석유가스의 안전관리 및 사업법", "article": "6", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "법률"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "액화석유가스의 안전관리 및 사업법 시행규칙", "article": "12", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "부령"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "A광역시 B구 액화석유가스 사업의 허가기준에 관한 조례", "article": "1", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "A광역시 B구 액화석유가스 사업의 허가기준에 관한 조례", "article": "2", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
+{"year": 2026, "round": 15, "part": "공법", "q": "2", "sub": "전체", "law": "A광역시 B구 액화석유가스 사업의 허가기준에 관한 조례", "article": "3", "para": "", "basis": "문제지 발췌", "confidence": "확실", "issue": "참조조문 발췌", "kind": "자치법규"}
