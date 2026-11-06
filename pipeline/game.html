@@ -1,0 +1,404 @@
+<title>법학고양</title><meta name="claude:viewport-fit-sides" content="cover">
+<!-- 법학고양 게임 원본. build.py가 @JUDGE@·@DATA@를 채워 proto.html(생성물)을 만든다. 생성물을 고치지 말고 이 파일과 data/를 고친다. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 법전 한 장: 조문은 명조, 화면 글은 고딕, 판정은 인주색 도장 */
+:root{
+ --paper:#f4f5f7;--sheet:#ffffff;--ink:#171c26;--muted:#5a6374;--rule:#d6dae2;
+ --navy:#24457a;--seal:#b0302a;--seal-bg:#fbeceb;--blank:#fff5df;--blank-line:#bf9640;
+ --ok:#2b6a4d;--ok-bg:#e5f2ea;--bad:#b0302a;--bad-bg:#fbe6e4;--near:#7a6100;--near-bg:#fbf1c8;--soft:#eef1f6;
+ --display:"Nanum Myeongjo","AppleMyungjo","Noto Serif KR",serif;
+ --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --paper:#11151c;--sheet:#1a2029;--ink:#e6e9ef;--muted:#9aa3b1;--rule:#2c3440;
+ --navy:#a3bce6;--seal:#f08b82;--seal-bg:#3a1f1d;--blank:#2a2418;--blank-line:#c9a24a;
+ --ok:#8fd2ae;--ok-bg:#1a2e24;--bad:#f08b82;--bad-bg:#3a1f1d;--near:#e8cb5c;--near-bg:#332f18;--soft:#212935;color-scheme:dark}}
+:root[data-theme="dark"]{
+ --paper:#11151c;--sheet:#1a2029;--ink:#e6e9ef;--muted:#9aa3b1;--rule:#2c3440;
+ --navy:#a3bce6;--seal:#f08b82;--seal-bg:#3a1f1d;--blank:#2a2418;--blank-line:#c9a24a;
+ --ok:#8fd2ae;--ok-bg:#1a2e24;--bad:#f08b82;--bad-bg:#3a1f1d;--near:#e8cb5c;--near-bg:#332f18;--soft:#212935;color-scheme:dark}
+[hidden]{display:none!important}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;word-break:keep-all;overflow-wrap:break-word;-webkit-text-size-adjust:100%}
+.app{max-width:600px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px;display:grid;gap:16px}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.btn{border:0;border-radius:10px;background:var(--navy);color:var(--sheet);padding:11px 18px;font-weight:600;min-height:44px}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--rule)}
+.btn.small{padding:6px 12px;min-height:36px;font-size:.86rem;font-weight:500}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.muted{color:var(--muted)}
+.src{font-size:.78rem;color:var(--muted)}
+/* 고양이 */
+.cat{display:flex;gap:10px;align-items:flex-start;min-height:56px}
+.cat svg{flex:none;width:44px;height:44px;color:var(--ink)}
+.bubble{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:7px 11px;font-size:.92rem;line-height:1.45;min-width:0;max-width:34em}
+.bubble b{color:var(--seal)}
+/* 홈 */
+.home h1{font-family:var(--display);font-weight:800;font-size:2.3rem;margin:0;letter-spacing:-.01em}
+.home .sub{font-family:var(--display);color:var(--muted);margin:0}
+.course{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:16px;display:grid;gap:12px}
+.course h2{font-family:var(--display);font-size:1.2rem;margin:0}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;border-radius:4px;padding:0 6px;color:var(--near);background:var(--near-bg)}
+.arts{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.arts li{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;font-size:.92rem;border-top:1px dashed var(--rule);padding-top:6px}
+.arts .t{font-family:var(--display)}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--navy)}
+.dots i.on{background:var(--navy)}
+.ladder{font-size:.84rem;color:var(--muted);display:grid;gap:2px;margin:0;padding-left:1.2em}
+/* 문제 */
+.top{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}
+.prog{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.chip{font-size:.74rem;color:var(--navy);border:1px solid var(--navy);border-radius:99px;padding:0 8px;white-space:nowrap}
+.bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--navy);transform-origin:left;transition:transform .25s linear}
+.card{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:16px;display:grid;gap:12px}
+.lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.case,.q,.ans{font-family:var(--display);font-size:1.02rem;line-height:1.7;margin:0}
+.fold{border:0;background:none;color:var(--navy);padding:0;font-size:.84rem;text-decoration:underline;text-underline-offset:3px}
+.law{font-family:var(--display);font-size:1.02rem;line-height:2.2;position:relative;cursor:text;border-radius:8px;padding:2px 0}
+.law .g{color:var(--ink)}
+.w{display:inline-flex;gap:2px;margin-right:.5em;vertical-align:middle;flex-wrap:wrap}
+.bx{display:inline-grid;place-items:center;width:1.5em;height:1.66em;border-bottom:2px solid var(--blank-line);background:var(--blank);font-family:var(--display);font-size:.98rem;border-radius:2px 2px 0 0;line-height:1}
+.bx.on{background:transparent;border-bottom-color:var(--rule);color:var(--muted)}
+.bx.cur{box-shadow:inset 0 -3px 0 var(--navy)}
+.bx.ok{background:var(--ok-bg);border-bottom-color:var(--ok);color:var(--ok)}
+.bx.bad{background:var(--bad-bg);border-bottom-color:var(--bad);color:var(--bad)}
+.bx.near{background:var(--near-bg);border-bottom-color:var(--near);color:var(--near)}
+.bx.ghost{color:var(--muted);opacity:.55}
+.bx.typed{color:var(--ink);opacity:1}
+.p{font-family:var(--display);color:var(--muted)}
+.title-hint{font-size:.84rem;color:var(--navy)}
+#ans{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;border:0;padding:0;font-size:16px;pointer-events:none}
+.notes{display:grid;gap:4px;font-size:.9rem;margin:0;padding-left:1.1em}
+.stamp{display:inline-block;justify-self:start;font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--seal);border:2.5px solid var(--seal);border-radius:6px;padding:0 8px;transform:rotate(-8deg);background:var(--seal-bg);opacity:.92;pointer-events:none}
+.stamp.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+@media (prefers-reduced-motion:no-preference){.stamp{animation:press .32s cubic-bezier(.2,1.6,.4,1)}@keyframes press{from{transform:rotate(-8deg) scale(1.8);opacity:0}}}
+.next{display:grid;gap:6px}
+.next .bar i{background:var(--muted)}
+/* 결과 */
+.res{width:100%;border-collapse:collapse;font-size:.9rem}
+.res td{border-top:1px solid var(--rule);padding:7px 4px;vertical-align:top}
+.res td:last-child{text-align:right;white-space:nowrap;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.v{font-family:var(--display);font-weight:800}
+.v.인용{color:var(--ok)}.v.일부인용{color:var(--near)}.v.기각,.v.각하{color:var(--seal)}
+/* 기록 옮기기(보카고양 그대로, 색만 이 판 토큰) */
+.rt-open{align-self:center;justify-self:center;margin:2px auto 0;padding:9px 16px;border:1.5px solid var(--rule);border-radius:99px;background:transparent;color:var(--muted);font:inherit;font-size:.86rem;font-weight:600;cursor:pointer}
+.rt-open:hover,.rt-open:focus-visible{border-color:var(--navy);color:var(--ink);outline:none}
+body.rt-lock{overflow:hidden}
+.rt-sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,14,22,.6)}
+.rt-sheet[hidden]{display:none}
+.rt-card{position:relative;width:min(100%,440px);max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--rule);border-radius:14px;background:var(--sheet);padding:20px 18px 16px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.rt-card h2{margin:0 0 8px;font-size:1.2rem}
+.rt-lead,.rt-note{margin:0 0 14px;color:var(--muted);font-size:.88rem;line-height:1.55}
+.rt-note{margin:12px 0 0;font-size:.78rem}
+.rt-step{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.rt-step b{font-size:.9rem;color:var(--navy)}
+.rt-step small{color:var(--muted);font-size:.78rem;line-height:1.45}
+.rt-btn{display:block;width:100%;padding:12px 14px;border:1.5px solid var(--navy);border-radius:12px;background:var(--soft);color:var(--ink);font:inherit;font-size:.95rem;font-weight:600;text-align:center;cursor:pointer;box-sizing:border-box}
+.rt-btn.ghost{border-color:var(--rule);background:transparent;color:var(--muted)}
+.rt-x{position:absolute;top:8px;right:10px;width:36px;height:36px;border:0;background:transparent;color:var(--muted);font-size:1.5rem;line-height:1;cursor:pointer}
+.rt-status{min-height:1.2em;margin:4px 0 0;font-size:.88rem;line-height:1.5}
+.rt-status.ok{color:var(--ok)}
+.rt-status.bad{color:var(--seal)}
+.rt-confirm{display:flex;gap:8px;margin-top:10px}
+.rt-confirm[hidden]{display:none}
+@media (max-width:420px){.home h1{font-size:2rem}.card{padding:14px 12px}.bx{width:1.38em}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cat" viewBox="0 0 48 48"><path d="M9 20 7 5l11 8M39 20l2-15-11 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><ellipse cx="24" cy="27" rx="16" ry="14" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="18" cy="25" r="2" fill="currentColor"/><circle cx="30" cy="25" r="2" fill="currentColor"/><path d="M22 31h4l-2 2z" fill="currentColor"/><path d="M4 28h9M5 33l8-2M44 28h-9M43 33l-8-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol></svg>
+
+<main class="app" id="app">
+ <section class="home" id="home">
+  <div class="row" style="justify-content:space-between;align-items:baseline"><h1>법학고양</h1><span class="src">시제품</span></div>
+  <p class="sub">답안 속 조문을 통째로 치는 고양</p>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="homeCat">조문은 한 글자도 안 봐준다고양. 구두점만 봐준다고양.</p></div>
+  <div class="course">
+   <div class="lab"><span id="courseTag" class="tag">임시 예시 · 기출 아님</span></div>
+   <h2 id="courseTitle">임시판 · 민법 불법행위</h2>
+   <ul class="arts" id="arts"></ul>
+   <ol class="ladder"><li>빈칸은 조문마다 커진다: 핵심어 → 어절 절반 → 첫 글자만 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
+   <div class="row"><button class="btn" id="start" type="button">시작</button><span class="src" id="homeNote"></span></div>
+  </div>
+  <!-- RECORD_TRANSFER_UI_START -->
+  <button class="rt-open" id="rtOpen" type="button">⇄ 다른 기기로 기록 옮기기</button>
+  <div class="rt-sheet" id="rtSheet" hidden role="dialog" aria-modal="true" aria-labelledby="rtTitle">
+    <div class="rt-card">
+      <button class="rt-x" id="rtClose" type="button" aria-label="닫기">×</button>
+      <h2 id="rtTitle">기록 옮기기</h2>
+      <p class="rt-lead">진도·숙련도는 이 기기의 이 브라우저에만 저장된다고양. 다른 기기에서 이어 하려면 파일로 옮기라고양.</p>
+      <div class="rt-step">
+        <b>① 지금 기기에서</b>
+        <button class="rt-btn" id="rtMake" type="button">기록 파일 만들기</button>
+        <small>카톡 ‘나와의 채팅’처럼 다른 기기에서 열 수 있는 곳으로 보내라고양.</small>
+      </div>
+      <div class="rt-step">
+        <b>② 다른 기기에서</b>
+        <label class="rt-btn" for="rtFile">기록 파일 열기</label>
+        <input id="rtFile" type="file" accept=".json,application/json,text/plain" hidden>
+        <small>덮어쓰지 않고 합친다고양. 두 기기에서 한 것이 다 남는다고양.</small>
+      </div>
+      <p class="rt-status" id="rtStatus" aria-live="polite"></p>
+      <div class="rt-confirm" id="rtConfirm" hidden>
+        <button class="rt-btn" id="rtMerge" type="button">합치기</button>
+        <button class="rt-btn ghost" id="rtCancel" type="button">그만두기</button>
+      </div>
+      <p class="rt-note">카톡 안에서 연 화면과 사파리·크롬은 같은 폰이어도 기록이 따로라고양.</p>
+    </div>
+  </div>
+  <!-- RECORD_TRANSFER_UI_END -->
+  <p class="src" id="foot"></p>
+ </section>
+
+ <section id="play" hidden>
+  <div class="top"><span class="prog" id="prog"></span><span class="chip" id="stageChip"></span><div class="bar"><i id="timeBar"></i></div></div>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="playCat" aria-live="polite"></p></div>
+  <article class="card" id="card">
+   <div id="caseBox"><div class="lab"><span>사례</span><span class="tag" id="caseTag"></span><button class="fold" id="fold" type="button" hidden>사례 보기</button></div><p class="case" id="facts"></p></div>
+   <div><div class="lab">설문</div><p class="q" id="q"></p></div>
+   <div><div class="lab">답안</div><p class="ans" id="ansText"></p>
+    <div class="law" id="law" role="group" aria-label="조문 빈칸. 누르고 치기"><span class="g" id="prefix"></span><span id="blank"></span><span class="g" id="suffix"></span><input id="ans" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="조문 입력"></div>
+    <p class="title-hint" id="titleHint" hidden></p>
+   </div>
+   <div class="row" id="askRow"><button class="btn small" id="submit" type="button">확인</button><button class="btn small ghost" id="titleBtn" type="button">조문 제목</button><button class="btn small ghost" id="skip" type="button">넘기기</button></div>
+   <div id="verdict"></div>
+   <div id="after" hidden>
+    <ul class="notes" id="notes"></ul>
+    <p class="src" id="srcLine"></p>
+   </div>
+   <div class="next" id="nextBox" hidden><div class="bar"><i id="readBar"></i></div><button class="btn small" id="next" type="button">다음 (Enter)</button></div>
+  </article>
+ </section>
+
+ <section id="result" hidden>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="resCat"></p></div>
+  <div class="course"><h2>판결 목록</h2><table class="res"><tbody id="resRows"></tbody></table>
+   <div class="row"><button class="btn" id="again" type="button">한 판 더</button><button class="btn ghost" id="toHome" type="button">처음으로</button></div></div>
+ </section>
+</main>
+
+<script>@JUDGE@</script>
+<script id="law-data" type="application/json">@DATA@</script>
+<script>
+(function(){
+'use strict';
+var D=JSON.parse(document.getElementById('law-data').textContent),J=window.LawJudge;
+function $(id){return document.getElementById(id);}
+var K={stage:'lawgoyang-stage-v1',missed:'lawgoyang-missed-v1',progress:'lawgoyang-progress-v1'};
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+var LINES={
+ start:['조문은 한 글자도 안 봐준다고양. 구두점만 봐준다고양.','띄어쓰기는 칸이 알려 준다고양. 글자만 쳐라고양.'],
+ 인용:['인용! …이번만 인정한다고양.','인용이다고양. 법전이 머리에 들어 있다고양.','인용. 흥, 그 정도는 해야지고양.'],
+ 일부인용:['일부인용이다고양. 나머지는 기각이다고양!','거의 다 왔다고양. 거의는 답안지에 못 쓴다고양.'],
+ 기각:['기각이다고양! 법전 다시 펴라고양.','기각. 이유 없다고양. 따라 쳐라고양.'],
+ 각하:['각하다고양. 쳐야 판단을 해 주지고양.'],
+ copied:['그래, 그렇게 쓰는 거다고양.','이제야 법전 같다고양.'],
+ timeout:['시간 다 됐다고양. 그래도 끝까지 쳐라고양.'],
+ hint:['첫 글자는 공짜다고양. 두 번은 없다고양.'],
+ title:['제목까지 알려 줬다고양. 고마운 줄 알라고양.'],
+ allWin:['전부 인용이다고양. …내가 가르친 보람이 있다고양.'],
+ mixed:['판결문 받아 가라고양. 기각된 건 다시 온다고양.']
+};
+var stages=load(K.stage,{}),missed=load(K.missed,{});
+function stageOf(k){var s=Number(stages[k]);return s>=1&&s<=4?s:1;}
+var STAGE_NAME={1:'핵심어만',2:'어절 절반',3:'첫 글자만',4:'통빈칸'};
+
+/* 홈 */
+function renderHome(){
+  $('courseTitle').textContent=D.title;$('courseTag').textContent=D.label;
+  var seen={},ul=$('arts');ul.innerHTML='';
+  D.cards.forEach(function(c){if(seen[c.skey])return;seen[c.skey]=1;
+    var li=document.createElement('li'),s=stageOf(c.skey);
+    li.innerHTML='<span class="t"></span><span class="dots" aria-label="빈칸 '+s+'단계">'+[1,2,3,4].map(function(i){return '<i class="'+(i<=s?'on':'')+'"></i>';}).join('')+'</span>';
+    li.querySelector('.t').textContent=c.label+' · '+STAGE_NAME[s];ul.appendChild(li);});
+  $('homeNote').textContent=D.cards.length+'장 · 3~5분';
+  $('foot').textContent=D.foot;
+}
+
+/* 판 */
+var run=null,cur=null;
+function startRun(){
+  run={i:0,results:[],t0:Date.now()};
+  $('home').hidden=true;$('result').hidden=true;$('play').hidden=false;
+  say(pick(LINES.start));
+  showCard(true);
+}
+function say(t){$('playCat').textContent=t;}
+
+function showCard(first){
+  var c=D.cards[run.i],prev=D.cards[run.i-1];
+  var st=stageOf(c.skey);
+  var ws=J.words(c.cite,{cite:true}).concat(J.words(c.text).map(function(w){var o=Object.assign({},w);o.key=c.key.indexOf(J.wordText(w))>=0;return o;}));
+  var given=J.givenMap(ws,st);
+  cur={c:c,ws:ws,given:given,stage:st,mode:'ask',hintUsed:false,timer:null,readTimer:null,started:false};
+  cur.exp=J.expected(ws,given);
+  $('prog').textContent=(run.i+1)+' / '+D.cards.length;
+  $('stageChip').textContent='빈칸 '+st+'단계 · '+STAGE_NAME[st];
+  var same=prev&&prev.caseId===c.caseId;
+  $('facts').textContent=c.facts;$('caseTag').textContent=c.caseLabel;
+  $('facts').hidden=same;$('fold').hidden=!same;$('fold').textContent='사례 보기';
+  $('q').textContent=c.q;$('ansText').textContent=c.answer;$('ansText').hidden=!c.answer;
+  $('prefix').textContent=c.prefix;$('suffix').textContent=c.suffix;
+  $('titleHint').hidden=true;$('titleBtn').hidden=!c.title;$('titleBtn').disabled=false;
+  $('after').hidden=true;$('nextBox').hidden=true;$('askRow').hidden=false;
+  $('verdict').innerHTML='';
+  $('ans').value='';
+  drawBlank();
+  setBar($('timeBar'),1);
+  var limit=6000+1000*cur.exp.length;cur.limit=limit;
+  if(!first)startTimer();else cur.startWait=setTimeout(startTimer,2600);
+  focusInput();
+}
+function focusInput(){var a=$('ans');try{a.focus({preventScroll:true});}catch(e){a.focus();}
+  var l=$('law');if(l.scrollIntoView&&window.innerHeight<700)l.scrollIntoView({block:'center',behavior:'smooth'});}
+function startTimer(){
+  if(!cur||cur.started)return;cur.started=true;clearTimeout(cur.startWait);
+  var t0=Date.now(),c0=cur;
+  cur.timer=setInterval(function(){if(cur!==c0||cur.mode!=='ask'){clearInterval(c0.timer);return;}
+    var left=1-(Date.now()-t0)/cur.limit;setBar($('timeBar'),Math.max(0,left));
+    if(left<=0){clearInterval(cur.timer);say(pick(LINES.timeout));}},200);
+}
+function setBar(el,f){el.style.transform='scaleX('+f+')';}
+
+/* 칸 그리기. mode: ask(친 글자) / show(정답·색) / copy(틀린 어절만 따라쓰기) */
+function drawBlank(){
+  var ws=cur.ws,g=cur.given,T=J.norm($('ans').value),box=$('blank'),html=[],slot=0;
+  var wrong=cur.res?cur.res.wrong:[],near=cur.res?cur.res.near.map(function(x){return x.w;}):[];
+  var copyIdx=0,copyT=cur.mode==='copy'?T:null;
+  ws.forEach(function(w,i){
+    var full=w.chars.every(function(c,k){return !c.slot||g[i][k];});
+    if(full&&cur.mode==='ask'){html.push('<span class="w g">'+esc(w.chars.map(function(c){return c.ch;}).join(''))+'</span>');return;}
+    var parts=[];
+    w.chars.forEach(function(c,k){
+      if(!c.slot){parts.push('<span class="p">'+esc(c.ch)+'</span>');return;}
+      if(g[i][k]){parts.push('<span class="bx on">'+esc(c.ch)+'</span>');return;}
+      if(cur.mode==='ask'){var ch=T[slot]||'';parts.push('<span class="bx'+(slot===T.length?' cur':'')+'" data-s="'+slot+'">'+esc(ch)+'</span>');slot++;return;}
+      var isBad=wrong.indexOf(i)>=0,cls=isBad?(near.indexOf(i)>=0?'near':'bad'):'ok';
+      if(cur.mode==='copy'&&isBad){var t=copyT[copyIdx]||'';parts.push('<span class="bx '+cls+(t?' typed':' ghost')+(copyIdx===copyT.length?' cur':'')+'">'+esc(t||c.ch)+'</span>');copyIdx++;return;}
+      parts.push('<span class="bx '+cls+'">'+esc(c.ch)+'</span>');
+    });
+    html.push('<span class="w">'+parts.join('')+'</span>');
+  });
+  box.innerHTML=html.join('');
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+function onInput(){
+  if(!cur)return;
+  if(cur.mode==='ask'){
+    startTimer();drawBlank();
+    var T=J.norm($('ans').value).join(''),E=cur.exp.map(function(x){return x.ch;}).join('');
+    if(T===E)decide();
+  }else if(cur.mode==='copy'){
+    drawBlank();
+    if(J.norm($('ans').value).join('')===cur.copyWant)copied();
+  }else{$('ans').value='';}
+}
+function decide(skip){
+  if(cur.mode!=='ask')return;
+  clearInterval(cur.timer);clearTimeout(cur.startWait);
+  var c=cur.c,others=D.articles.filter(function(a){return a.label!==c.joLabel;});
+  var r=J.judge(cur.ws,cur.given,skip?'':$('ans').value,D.near,others);
+  cur.res=r;run.results.push({c:c,v:r.verdict,from:cur.stage});
+  stamp(r.verdict);
+  var line=pick(LINES[r.verdict]);
+  if(r.near.length)line='뜻은 맞다고양. 근데 법전엔 ‘'+r.near[0].want+'’이라고 써 있다고양.';
+  if(r.confuse)line='그건 '+r.confuse+' 말이다고양. 헷갈리지 말라고양.';
+  say(line);
+  // 숙련도: 맞히면 한 칸 오르고(짧은 조문은 바로 4), 틀리면 한 칸 내려간다(설계안 C).
+  var s=cur.stage;
+  if(r.verdict==='인용')s=J.norm(c.text).length<=30?4:Math.min(4,s+1);else s=Math.max(1,s-1);
+  stages[c.skey]=s;save(K.stage,stages);run.results[run.results.length-1].to=s;
+  if(r.verdict!=='인용'){missed[c.skey]=(Number(missed[c.skey])||0)+1;save(K.missed,missed);}
+  $('askRow').hidden=true;
+  if(r.verdict==='인용'){cur.mode='show';$('ans').value='';drawBlank();reveal();}
+  else{
+    cur.mode='copy';
+    var want=[];cur.ws.forEach(function(w,i){if(r.wrong.indexOf(i)<0)return;w.chars.forEach(function(ch,k){if(ch.slot&&!cur.given[i][k])want.push(ch.ch);});});
+    cur.copyWant=want.join('');$('ans').value='';drawBlank();focusInput();
+  }
+}
+function copied(){cur.mode='show';$('ans').value='';say(pick(LINES.copied));drawBlank();reveal();}
+function stamp(v){var s=document.createElement('span');s.className='stamp'+(v==='인용'?' ok':'');s.textContent=v;$('verdict').appendChild(s);}
+function reveal(){
+  var c=cur.c;$('notes').innerHTML='';
+  (c.note||[]).forEach(function(n){var li=document.createElement('li');li.textContent=n;$('notes').appendChild(li);});
+  $('srcLine').textContent=c.srcLine;$('after').hidden=false;$('nextBox').hidden=false;
+  var chars=J.norm(c.text).length,noteChars=(c.note||[]).join('').length;
+  var ms=Math.min(20000,2000+50*chars+110*noteChars),t0=Date.now(),c0=cur;
+  setBar($('readBar'),1);
+  cur.readTimer=setInterval(function(){if(cur!==c0){clearInterval(c0.readTimer);return;}
+    var f=1-(Date.now()-t0)/ms;setBar($('readBar'),Math.max(0,f));if(f<=0){clearInterval(cur.readTimer);next();}},150);
+  focusInput();
+}
+function next(){
+  if(!cur||cur.mode!=='show')return;
+  clearInterval(cur.readTimer);cur.mode='done';
+  run.i++;
+  if(run.i<D.cards.length)showCard(false);else finish();
+}
+function finish(){
+  $('play').hidden=true;$('result').hidden=false;
+  var rows=$('resRows');rows.innerHTML='';var win=0;
+  run.results.forEach(function(r){if(r.v==='인용')win++;
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="v '+r.v+'"></td><td></td><td></td>';
+    tr.children[0].textContent=r.v;tr.children[1].textContent=r.c.label;
+    tr.children[2].textContent='빈칸 '+r.from+'→'+r.to;rows.appendChild(tr);});
+  $('resCat').textContent=pick(win===run.results.length?LINES.allWin:LINES.mixed);
+  var p=load(K.progress,{}),b=p[D.id]||(p[D.id]={}),ms=Date.now()-run.t0;
+  var cur0=b[D.runKey]||{};
+  b[D.runKey]={completed:true,bestMs:cur0.bestMs&&cur0.bestMs<ms?cur0.bestMs:ms};save(K.progress,p);
+  $('again').focus();
+}
+
+/* 조작 */
+$('start').addEventListener('click',startRun);
+$('again').addEventListener('click',startRun);
+$('toHome').addEventListener('click',function(){$('result').hidden=true;$('home').hidden=false;renderHome();});
+$('ans').addEventListener('input',onInput);
+$('ans').addEventListener('compositionend',onInput);
+$('ans').addEventListener('keydown',function(e){
+  if(e.key!=='Enter'||e.isComposing||e.keyCode===229)return;
+  e.preventDefault();
+  if(cur.mode==='ask')decide();else if(cur.mode==='show')next();
+});
+document.addEventListener('keydown',function(e){
+  if(e.target===$('ans'))return;
+  if(e.key==='Enter'&&!$('play').hidden&&cur&&cur.mode==='show'){e.preventDefault();next();}
+});
+$('law').addEventListener('click',function(e){
+  var b=e.target.closest('.bx[data-s="0"]');
+  if(b&&cur.mode==='ask'&&!cur.hintUsed&&!J.norm($('ans').value).length){
+    // 첫 칸을 누르면 첫 글자를 한 번 보인다(보카고양 그대로)
+    cur.hintUsed=true;var e0=cur.exp[0],wi=e0.w;
+    var k=cur.ws[wi].chars.findIndex(function(c,kk){return c.slot&&!cur.given[wi][kk];});
+    cur.given[wi][k]=true;cur.exp=J.expected(cur.ws,cur.given);drawBlank();say(pick(LINES.hint));
+  }
+  focusInput();
+});
+$('submit').addEventListener('click',function(){decide();focusInput();});
+$('skip').addEventListener('click',function(){decide(true);focusInput();});
+$('next').addEventListener('click',function(){next();focusInput();});
+$('card').addEventListener('click',function(e){if(cur&&cur.mode==='show'&&!e.target.closest('button,.fold'))next();});
+$('fold').addEventListener('click',function(){var h=$('facts').hidden;$('facts').hidden=!h;$('fold').textContent=h?'사례 접기':'사례 보기';});
+$('titleBtn').addEventListener('click',function(){$('titleHint').textContent='조문 제목: '+cur.c.title;$('titleHint').hidden=false;$('titleBtn').disabled=true;say(pick(LINES.title));focusInput();});
+renderHome();
+})();
+</script>
+
+<script id="record-transfer">
+/* RECORD_TRANSFER_START */
+var RT_CONFIG=@RT_CONFIG@;
+/* 기록 옮기기: 보카고양 공개 index(탄고고양 index.html 사본, 26.11.06)에서 그대로 가져왔다(PRINCIPLES 7, 영신 26.11.07).
+   바꾼 것은 RT_CONFIG뿐이다. 법학고양 키는 'lawgoyang-'로 시작한다:
+   진도 lawgoyang-progress-v1(보카고양 progress와 같은 꼴), 빈칸 숙련도 lawgoyang-stage-v1과 틀린 횟수 lawgoyang-missed-v1({열쇠: 수}, 합칠 때 큰 쪽 = 보카고양 missed와 같은 합치기).
+   같은 주소의 다른 고양 기록은 건드리지 않는다. 세트 도장은 없다. */
+@RT_CODE@
+/* RECORD_TRANSFER_END */
+</script>

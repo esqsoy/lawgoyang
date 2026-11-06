@@ -4,9 +4,10 @@
 
 단어장 시리즈와 성격이 달라 고유 설계로 간다. 단어장에서는 고양이 말투, 사람 이름 규칙, 기록하는 법, 문장 안 입력칸과 오답 따라쓰기, 기록 옮기기만 가져온다([PRINCIPLES 0-1](PRINCIPLES.md#0-1-단어장에서-가져오는-것)).
 
-- 지금 상태: 설계 단계. 게임 화면과 카드는 아직 없다. [HANDOFF.md](HANDOFF.md)
+- 지금 상태: 설계안 채택, 시제품(`proto.html`, 임시 사례 4장) 있음, 배포 없음. [HANDOFF.md](HANDOFF.md)
+- 만드는 법과 검사: [pipeline/README.md](pipeline/README.md)
 - 원칙과 이유: [PRINCIPLES.md](PRINCIPLES.md)
-- 설계안(영신 결정 대기): [design/proposal-20261107.md](design/proposal-20261107.md)
+- 설계안(26.11.07 채택): [design/proposal-20261107.md](design/proposal-20261107.md)
 - 작업 기록: [WORK_LOG.md](WORK_LOG.md), 작업 지침: [AGENTS.md](AGENTS.md)
 
 조문 원문은 국가법령정보센터(law.go.kr) 공동활용 Open API에서 받는다. 헌법·법률·명령 등과 법원의 판결은 저작권법 제7조에 따라 보호받지 못하는 저작물이다. 수험서·해설서는 옮기지 않고, 기출 문제는 이용 조건을 확인한 뒤에만 쓴다.

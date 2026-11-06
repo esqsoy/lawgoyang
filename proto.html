@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 생성물: python3 -I pipeline/build.py 로 만든다. 고치지 말 것. -->
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+<title>법학고양</title><meta name="claude:viewport-fit-sides" content="cover">
+<!-- 법학고양 게임 원본. build.py가 /* 법학고양 판정 핵심(브라우저·node 둘 다). build.py가 게임 HTML에 그대로 넣는다.
+   - 구두점·괄호·가운뎃점·공백은 치지 않는다(영신 26.11.07 "구두점을 제외하고는 그대로").
+     띄어쓰기는 칸 배치로 보여 주고 치지 않는다(설계안 D, 영신 "모두 동의해").
+   - 판정은 어절 단위다. 친 글자를 정답과 줄 맞춤(편집 거리)해서, 글자 하나를 빼먹거나 더 쳐도
+     뒤 어절이 줄줄이 틀리지 않게 한다.
+   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다. */
+(function (root) {
+  'use strict';
+  var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
+
+  function isFixed(ch) { return FIXED.test(ch); }
+  function norm(s) { return Array.from(String(s || '')).filter(function (c) { return !isFixed(c); }); }
+
+  /* 원문 한 덩어리 → 어절 목록. 어절마다 글자 칸(slot)과 미리 찍는 기호(fixed). */
+  function words(text, extra) {
+    return String(text || '').split(/\s+/).filter(Boolean).map(function (w) {
+      var o = { chars: Array.from(w).map(function (c) { return { ch: c, slot: !isFixed(c) }; }) };
+      if (extra) Object.keys(extra).forEach(function (k) { o[k] = extra[k]; });
+      return o;
+    }).filter(function (w) { return w.chars.some(function (c) { return c.slot; }); });
+  }
+  function wordText(w) { return w.chars.filter(function (c) { return c.slot; }).map(function (c) { return c.ch; }).join(''); }
+
+  /* 빈칸 사다리(설계안 C): 어느 칸을 미리 보여 줄지.
+     1 핵심어만 · 2 어절 절반 · 3 첫 글자만 · 4 통빈칸. 번호(cite) 어절은 늘 빈칸. */
+  function givenMap(ws, stage) {
+    var n = ws.length, blank = ws.map(function (w) { return !!(w.cite || stage >= 3 || (stage === 1 && w.key)); });
+    if (stage === 2) {
+      var need = Math.ceil(n / 2);
+      ws.forEach(function (w, i) { if (w.cite || w.key) blank[i] = true; });
+      var count = blank.filter(Boolean).length;
+      for (var i = 1; i < n && count < need; i += 2) if (!blank[i]) { blank[i] = true; count++; }
+      for (var j = 0; j < n && count < need; j++) if (!blank[j]) { blank[j] = true; count++; }
+    }
+    if (stage === 1 && !ws.some(function (w) { return w.key && !w.cite; })) {
+      // 핵심어를 안 정한 조문은 절반 쪽으로
+      return givenMap(ws, 2);
+    }
+    return ws.map(function (w, i) {
+      var first = true;
+      return w.chars.map(function (c) {
+        if (!c.slot) return true;
+        var g = !blank[i];
+        if (stage === 3 && !w.cite && first) g = true;
+        first = false;
+        return g;
+      });
+    });
+  }
+
+  /* 정답 칸(미리 보인 칸 빼고) 차례대로: [{ch, w}] */
+  function expected(ws, given) {
+    var out = [];
+    ws.forEach(function (w, i) { w.chars.forEach(function (c, k) { if (c.slot && !given[i][k]) out.push({ ch: c.ch, w: i }); }); });
+    return out;
+  }
+
+  /* 편집 거리 줄 맞춤. E: 정답 글자 배열, T: 친 글자 배열.
+     반환: st[i] = 'ok'|'sub'|'del', got[i] = 그 자리에 친 글자, ins[k] = E[k] 앞에 더 친 글자들(k=0..n) */
+  function align(E, T) {
+    var n = E.length, m = T.length, d = [], i, j;
+    for (i = 0; i <= n; i++) { d.push(new Array(m + 1)); d[i][0] = i; }
+    for (j = 0; j <= m; j++) d[0][j] = j;
+    for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) {
+      var s = d[i - 1][j - 1] + (E[i - 1] === T[j - 1] ? 0 : 1);
+      d[i][j] = Math.min(s, d[i - 1][j] + 1, d[i][j - 1] + 1);
+    }
+    var st = new Array(n), got = new Array(n), ins = [];
+    for (i = 0; i <= n; i++) ins.push([]);
+    i = n; j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + (E[i - 1] === T[j - 1] ? 0 : 1)) {
+        st[i - 1] = E[i - 1] === T[j - 1] ? 'ok' : 'sub'; got[i - 1] = T[j - 1]; i--; j--;
+      } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+        st[i - 1] = 'del'; got[i - 1] = ''; i--;
+      } else {
+        ins[i].unshift(T[j - 1]); j--;
+      }
+    }
+    return { st: st, got: got, ins: ins };
+  }
+
+  /* 판정. near: {정답 어절: [뜻은 같은 다른 말…]}(사람이 확인한 것만), others: [{label, text}] 헷갈림 알림용 */
+  function judge(ws, given, typed, near, others) {
+    var exp = expected(ws, given), E = exp.map(function (x) { return x.ch; }), T = norm(typed);
+    var res = { verdict: '', wrong: [], near: [], confuse: null, blankWords: 0 };
+    var blankIdx = [];
+    ws.forEach(function (w, i) { if (exp.some(function (x) { return x.w === i; })) blankIdx.push(i); });
+    res.blankWords = blankIdx.length;
+    if (!T.length) { res.verdict = '각하'; res.wrong = blankIdx.slice(); return res; }
+    var a = align(E, T), span = {};
+    exp.forEach(function (x, k) { (span[x.w] = span[x.w] || []).push(k); });
+    blankIdx.forEach(function (wi) {
+      var ks = span[wi], bad = false, typedW = '';
+      ks.forEach(function (k, t) {
+        if (a.st[k] !== 'ok') bad = true;
+        if (t > 0 && a.ins[k].length) bad = true;   // 어절 안에 더 친 글자
+        if (t > 0) typedW += a.ins[k].join('');
+        typedW += a.got[k] || '';
+      });
+      var last = ks[ks.length - 1] + 1;              // 어절 끝 뒤에 더 친 글자는 이 어절 몫
+      if (last === E.length && a.ins[last].length) { bad = true; typedW += a.ins[last].join(''); }
+      else if (last < E.length && exp[last].w !== wi && a.ins[last].length) { bad = true; typedW += a.ins[last].join(''); }
+      if (ks[0] === 0 && a.ins[0].length) { bad = true; typedW = a.ins[0].join('') + typedW; }
+      if (bad) {
+        res.wrong.push(wi);
+        var want = wordText(ws[wi]), alts = (near && near[want]) || [];
+        if (alts.indexOf(typedW) >= 0) res.near.push({ w: wi, typed: typedW, want: want });
+      }
+    });
+    if (!res.wrong.length) res.verdict = '인용';
+    else if (res.wrong.length <= Math.max(1, Math.floor(res.blankWords / 3))) res.verdict = '일부인용';
+    else res.verdict = '기각';
+    if (res.wrong.length && others && others.length) res.confuse = confusion(T, E, others);
+    return res;
+  }
+
+  /* 친 글 가운데 정답에 없는 5글자 이상 덩어리가 다른 조문에 있으면 그 조문을 알린다(아이디어 3). */
+  function confusion(T, E, others) {
+    var want = E.join(''), L = 5;
+    for (var s = 0; s + L <= T.length; s++) {
+      var piece = T.slice(s, s + L).join('');
+      if (want.indexOf(piece) >= 0) continue;
+      for (var o = 0; o < others.length; o++) if (norm(others[o].text).join('').indexOf(piece) >= 0) return others[o].label;
+    }
+    return null;
+  }
+
+  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LawJudge = api;
+})(this);
+·{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "key": ["고의", "과실로", "배상할", "책임이"], "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "key": ["사무집행에", "관하여", "제삼자에게"], "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "key": ["제393조", "제394조", "제396조", "제399조의", "준용한다"], "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "key": ["채권자에게", "과실이", "참작하여야"], "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}를 채워 proto.html(생성물)을 만든다. 생성물을 고치지 말고 이 파일과 data/를 고친다. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 법전 한 장: 조문은 명조, 화면 글은 고딕, 판정은 인주색 도장 */
+:root{
+ --paper:#f4f5f7;--sheet:#ffffff;--ink:#171c26;--muted:#5a6374;--rule:#d6dae2;
+ --navy:#24457a;--seal:#b0302a;--seal-bg:#fbeceb;--blank:#fff5df;--blank-line:#bf9640;
+ --ok:#2b6a4d;--ok-bg:#e5f2ea;--bad:#b0302a;--bad-bg:#fbe6e4;--near:#7a6100;--near-bg:#fbf1c8;--soft:#eef1f6;
+ --display:"Nanum Myeongjo","AppleMyungjo","Noto Serif KR",serif;
+ --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --paper:#11151c;--sheet:#1a2029;--ink:#e6e9ef;--muted:#9aa3b1;--rule:#2c3440;
+ --navy:#a3bce6;--seal:#f08b82;--seal-bg:#3a1f1d;--blank:#2a2418;--blank-line:#c9a24a;
+ --ok:#8fd2ae;--ok-bg:#1a2e24;--bad:#f08b82;--bad-bg:#3a1f1d;--near:#e8cb5c;--near-bg:#332f18;--soft:#212935;color-scheme:dark}}
+:root[data-theme="dark"]{
+ --paper:#11151c;--sheet:#1a2029;--ink:#e6e9ef;--muted:#9aa3b1;--rule:#2c3440;
+ --navy:#a3bce6;--seal:#f08b82;--seal-bg:#3a1f1d;--blank:#2a2418;--blank-line:#c9a24a;
+ --ok:#8fd2ae;--ok-bg:#1a2e24;--bad:#f08b82;--bad-bg:#3a1f1d;--near:#e8cb5c;--near-bg:#332f18;--soft:#212935;color-scheme:dark}
+[hidden]{display:none!important}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;word-break:keep-all;overflow-wrap:break-word;-webkit-text-size-adjust:100%}
+.app{max-width:600px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px;display:grid;gap:16px}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.btn{border:0;border-radius:10px;background:var(--navy);color:var(--sheet);padding:11px 18px;font-weight:600;min-height:44px}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--rule)}
+.btn.small{padding:6px 12px;min-height:36px;font-size:.86rem;font-weight:500}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.muted{color:var(--muted)}
+.src{font-size:.78rem;color:var(--muted)}
+/* 고양이 */
+.cat{display:flex;gap:10px;align-items:flex-start;min-height:56px}
+.cat svg{flex:none;width:44px;height:44px;color:var(--ink)}
+.bubble{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:7px 11px;font-size:.92rem;line-height:1.45;min-width:0;max-width:34em}
+.bubble b{color:var(--seal)}
+/* 홈 */
+.home h1{font-family:var(--display);font-weight:800;font-size:2.3rem;margin:0;letter-spacing:-.01em}
+.home .sub{font-family:var(--display);color:var(--muted);margin:0}
+.course{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:16px;display:grid;gap:12px}
+.course h2{font-family:var(--display);font-size:1.2rem;margin:0}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;border-radius:4px;padding:0 6px;color:var(--near);background:var(--near-bg)}
+.arts{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.arts li{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;font-size:.92rem;border-top:1px dashed var(--rule);padding-top:6px}
+.arts .t{font-family:var(--display)}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--navy)}
+.dots i.on{background:var(--navy)}
+.ladder{font-size:.84rem;color:var(--muted);display:grid;gap:2px;margin:0;padding-left:1.2em}
+/* 문제 */
+.top{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}
+.prog{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.chip{font-size:.74rem;color:var(--navy);border:1px solid var(--navy);border-radius:99px;padding:0 8px;white-space:nowrap}
+.bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--navy);transform-origin:left;transition:transform .25s linear}
+.card{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:16px;display:grid;gap:12px}
+.lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.case,.q,.ans{font-family:var(--display);font-size:1.02rem;line-height:1.7;margin:0}
+.fold{border:0;background:none;color:var(--navy);padding:0;font-size:.84rem;text-decoration:underline;text-underline-offset:3px}
+.law{font-family:var(--display);font-size:1.02rem;line-height:2.2;position:relative;cursor:text;border-radius:8px;padding:2px 0}
+.law .g{color:var(--ink)}
+.w{display:inline-flex;gap:2px;margin-right:.5em;vertical-align:middle;flex-wrap:wrap}
+.bx{display:inline-grid;place-items:center;width:1.5em;height:1.66em;border-bottom:2px solid var(--blank-line);background:var(--blank);font-family:var(--display);font-size:.98rem;border-radius:2px 2px 0 0;line-height:1}
+.bx.on{background:transparent;border-bottom-color:var(--rule);color:var(--muted)}
+.bx.cur{box-shadow:inset 0 -3px 0 var(--navy)}
+.bx.ok{background:var(--ok-bg);border-bottom-color:var(--ok);color:var(--ok)}
+.bx.bad{background:var(--bad-bg);border-bottom-color:var(--bad);color:var(--bad)}
+.bx.near{background:var(--near-bg);border-bottom-color:var(--near);color:var(--near)}
+.bx.ghost{color:var(--muted);opacity:.55}
+.bx.typed{color:var(--ink);opacity:1}
+.p{font-family:var(--display);color:var(--muted)}
+.title-hint{font-size:.84rem;color:var(--navy)}
+#ans{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;border:0;padding:0;font-size:16px;pointer-events:none}
+.notes{display:grid;gap:4px;font-size:.9rem;margin:0;padding-left:1.1em}
+.stamp{display:inline-block;justify-self:start;font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--seal);border:2.5px solid var(--seal);border-radius:6px;padding:0 8px;transform:rotate(-8deg);background:var(--seal-bg);opacity:.92;pointer-events:none}
+.stamp.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+@media (prefers-reduced-motion:no-preference){.stamp{animation:press .32s cubic-bezier(.2,1.6,.4,1)}@keyframes press{from{transform:rotate(-8deg) scale(1.8);opacity:0}}}
+.next{display:grid;gap:6px}
+.next .bar i{background:var(--muted)}
+/* 결과 */
+.res{width:100%;border-collapse:collapse;font-size:.9rem}
+.res td{border-top:1px solid var(--rule);padding:7px 4px;vertical-align:top}
+.res td:last-child{text-align:right;white-space:nowrap;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.v{font-family:var(--display);font-weight:800}
+.v.인용{color:var(--ok)}.v.일부인용{color:var(--near)}.v.기각,.v.각하{color:var(--seal)}
+/* 기록 옮기기(보카고양 그대로, 색만 이 판 토큰) */
+.rt-open{align-self:center;justify-self:center;margin:2px auto 0;padding:9px 16px;border:1.5px solid var(--rule);border-radius:99px;background:transparent;color:var(--muted);font:inherit;font-size:.86rem;font-weight:600;cursor:pointer}
+.rt-open:hover,.rt-open:focus-visible{border-color:var(--navy);color:var(--ink);outline:none}
+body.rt-lock{overflow:hidden}
+.rt-sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,14,22,.6)}
+.rt-sheet[hidden]{display:none}
+.rt-card{position:relative;width:min(100%,440px);max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--rule);border-radius:14px;background:var(--sheet);padding:20px 18px 16px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.rt-card h2{margin:0 0 8px;font-size:1.2rem}
+.rt-lead,.rt-note{margin:0 0 14px;color:var(--muted);font-size:.88rem;line-height:1.55}
+.rt-note{margin:12px 0 0;font-size:.78rem}
+.rt-step{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.rt-step b{font-size:.9rem;color:var(--navy)}
+.rt-step small{color:var(--muted);font-size:.78rem;line-height:1.45}
+.rt-btn{display:block;width:100%;padding:12px 14px;border:1.5px solid var(--navy);border-radius:12px;background:var(--soft);color:var(--ink);font:inherit;font-size:.95rem;font-weight:600;text-align:center;cursor:pointer;box-sizing:border-box}
+.rt-btn.ghost{border-color:var(--rule);background:transparent;color:var(--muted)}
+.rt-x{position:absolute;top:8px;right:10px;width:36px;height:36px;border:0;background:transparent;color:var(--muted);font-size:1.5rem;line-height:1;cursor:pointer}
+.rt-status{min-height:1.2em;margin:4px 0 0;font-size:.88rem;line-height:1.5}
+.rt-status.ok{color:var(--ok)}
+.rt-status.bad{color:var(--seal)}
+.rt-confirm{display:flex;gap:8px;margin-top:10px}
+.rt-confirm[hidden]{display:none}
+@media (max-width:420px){.home h1{font-size:2rem}.card{padding:14px 12px}.bx{width:1.38em}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cat" viewBox="0 0 48 48"><path d="M9 20 7 5l11 8M39 20l2-15-11 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><ellipse cx="24" cy="27" rx="16" ry="14" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="18" cy="25" r="2" fill="currentColor"/><circle cx="30" cy="25" r="2" fill="currentColor"/><path d="M22 31h4l-2 2z" fill="currentColor"/><path d="M4 28h9M5 33l8-2M44 28h-9M43 33l-8-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol></svg>
+
+<main class="app" id="app">
+ <section class="home" id="home">
+  <div class="row" style="justify-content:space-between;align-items:baseline"><h1>법학고양</h1><span class="src">시제품</span></div>
+  <p class="sub">답안 속 조문을 통째로 치는 고양</p>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="homeCat">조문은 한 글자도 안 봐준다고양. 구두점만 봐준다고양.</p></div>
+  <div class="course">
+   <div class="lab"><span id="courseTag" class="tag">임시 예시 · 기출 아님</span></div>
+   <h2 id="courseTitle">임시판 · 민법 불법행위</h2>
+   <ul class="arts" id="arts"></ul>
+   <ol class="ladder"><li>빈칸은 조문마다 커진다: 핵심어 → 어절 절반 → 첫 글자만 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
+   <div class="row"><button class="btn" id="start" type="button">시작</button><span class="src" id="homeNote"></span></div>
+  </div>
+  <!-- RECORD_TRANSFER_UI_START -->
+  <button class="rt-open" id="rtOpen" type="button">⇄ 다른 기기로 기록 옮기기</button>
+  <div class="rt-sheet" id="rtSheet" hidden role="dialog" aria-modal="true" aria-labelledby="rtTitle">
+    <div class="rt-card">
+      <button class="rt-x" id="rtClose" type="button" aria-label="닫기">×</button>
+      <h2 id="rtTitle">기록 옮기기</h2>
+      <p class="rt-lead">진도·숙련도는 이 기기의 이 브라우저에만 저장된다고양. 다른 기기에서 이어 하려면 파일로 옮기라고양.</p>
+      <div class="rt-step">
+        <b>① 지금 기기에서</b>
+        <button class="rt-btn" id="rtMake" type="button">기록 파일 만들기</button>
+        <small>카톡 ‘나와의 채팅’처럼 다른 기기에서 열 수 있는 곳으로 보내라고양.</small>
+      </div>
+      <div class="rt-step">
+        <b>② 다른 기기에서</b>
+        <label class="rt-btn" for="rtFile">기록 파일 열기</label>
+        <input id="rtFile" type="file" accept=".json,application/json,text/plain" hidden>
+        <small>덮어쓰지 않고 합친다고양. 두 기기에서 한 것이 다 남는다고양.</small>
+      </div>
+      <p class="rt-status" id="rtStatus" aria-live="polite"></p>
+      <div class="rt-confirm" id="rtConfirm" hidden>
+        <button class="rt-btn" id="rtMerge" type="button">합치기</button>
+        <button class="rt-btn ghost" id="rtCancel" type="button">그만두기</button>
+      </div>
+      <p class="rt-note">카톡 안에서 연 화면과 사파리·크롬은 같은 폰이어도 기록이 따로라고양.</p>
+    </div>
+  </div>
+  <!-- RECORD_TRANSFER_UI_END -->
+  <p class="src" id="foot"></p>
+ </section>
+
+ <section id="play" hidden>
+  <div class="top"><span class="prog" id="prog"></span><span class="chip" id="stageChip"></span><div class="bar"><i id="timeBar"></i></div></div>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="playCat" aria-live="polite"></p></div>
+  <article class="card" id="card">
+   <div id="caseBox"><div class="lab"><span>사례</span><span class="tag" id="caseTag"></span><button class="fold" id="fold" type="button" hidden>사례 보기</button></div><p class="case" id="facts"></p></div>
+   <div><div class="lab">설문</div><p class="q" id="q"></p></div>
+   <div><div class="lab">답안</div><p class="ans" id="ansText"></p>
+    <div class="law" id="law" role="group" aria-label="조문 빈칸. 누르고 치기"><span class="g" id="prefix"></span><span id="blank"></span><span class="g" id="suffix"></span><input id="ans" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="조문 입력"></div>
+    <p class="title-hint" id="titleHint" hidden></p>
+   </div>
+   <div class="row" id="askRow"><button class="btn small" id="submit" type="button">확인</button><button class="btn small ghost" id="titleBtn" type="button">조문 제목</button><button class="btn small ghost" id="skip" type="button">넘기기</button></div>
+   <div id="verdict"></div>
+   <div id="after" hidden>
+    <ul class="notes" id="notes"></ul>
+    <p class="src" id="srcLine"></p>
+   </div>
+   <div class="next" id="nextBox" hidden><div class="bar"><i id="readBar"></i></div><button class="btn small" id="next" type="button">다음 (Enter)</button></div>
+  </article>
+ </section>
+
+ <section id="result" hidden>
+  <div class="cat"><svg><use href="#cat"/></svg><p class="bubble" id="resCat"></p></div>
+  <div class="course"><h2>판결 목록</h2><table class="res"><tbody id="resRows"></tbody></table>
+   <div class="row"><button class="btn" id="again" type="button">한 판 더</button><button class="btn ghost" id="toHome" type="button">처음으로</button></div></div>
+ </section>
+</main>
+
+<script>/* 법학고양 판정 핵심(브라우저·node 둘 다). build.py가 게임 HTML에 그대로 넣는다.
+   - 구두점·괄호·가운뎃점·공백은 치지 않는다(영신 26.11.07 "구두점을 제외하고는 그대로").
+     띄어쓰기는 칸 배치로 보여 주고 치지 않는다(설계안 D, 영신 "모두 동의해").
+   - 판정은 어절 단위다. 친 글자를 정답과 줄 맞춤(편집 거리)해서, 글자 하나를 빼먹거나 더 쳐도
+     뒤 어절이 줄줄이 틀리지 않게 한다.
+   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다. */
+(function (root) {
+  'use strict';
+  var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
+
+  function isFixed(ch) { return FIXED.test(ch); }
+  function norm(s) { return Array.from(String(s || '')).filter(function (c) { return !isFixed(c); }); }
+
+  /* 원문 한 덩어리 → 어절 목록. 어절마다 글자 칸(slot)과 미리 찍는 기호(fixed). */
+  function words(text, extra) {
+    return String(text || '').split(/\s+/).filter(Boolean).map(function (w) {
+      var o = { chars: Array.from(w).map(function (c) { return { ch: c, slot: !isFixed(c) }; }) };
+      if (extra) Object.keys(extra).forEach(function (k) { o[k] = extra[k]; });
+      return o;
+    }).filter(function (w) { return w.chars.some(function (c) { return c.slot; }); });
+  }
+  function wordText(w) { return w.chars.filter(function (c) { return c.slot; }).map(function (c) { return c.ch; }).join(''); }
+
+  /* 빈칸 사다리(설계안 C): 어느 칸을 미리 보여 줄지.
+     1 핵심어만 · 2 어절 절반 · 3 첫 글자만 · 4 통빈칸. 번호(cite) 어절은 늘 빈칸. */
+  function givenMap(ws, stage) {
+    var n = ws.length, blank = ws.map(function (w) { return !!(w.cite || stage >= 3 || (stage === 1 && w.key)); });
+    if (stage === 2) {
+      var need = Math.ceil(n / 2);
+      ws.forEach(function (w, i) { if (w.cite || w.key) blank[i] = true; });
+      var count = blank.filter(Boolean).length;
+      for (var i = 1; i < n && count < need; i += 2) if (!blank[i]) { blank[i] = true; count++; }
+      for (var j = 0; j < n && count < need; j++) if (!blank[j]) { blank[j] = true; count++; }
+    }
+    if (stage === 1 && !ws.some(function (w) { return w.key && !w.cite; })) {
+      // 핵심어를 안 정한 조문은 절반 쪽으로
+      return givenMap(ws, 2);
+    }
+    return ws.map(function (w, i) {
+      var first = true;
+      return w.chars.map(function (c) {
+        if (!c.slot) return true;
+        var g = !blank[i];
+        if (stage === 3 && !w.cite && first) g = true;
+        first = false;
+        return g;
+      });
+    });
+  }
+
+  /* 정답 칸(미리 보인 칸 빼고) 차례대로: [{ch, w}] */
+  function expected(ws, given) {
+    var out = [];
+    ws.forEach(function (w, i) { w.chars.forEach(function (c, k) { if (c.slot && !given[i][k]) out.push({ ch: c.ch, w: i }); }); });
+    return out;
+  }
+
+  /* 편집 거리 줄 맞춤. E: 정답 글자 배열, T: 친 글자 배열.
+     반환: st[i] = 'ok'|'sub'|'del', got[i] = 그 자리에 친 글자, ins[k] = E[k] 앞에 더 친 글자들(k=0..n) */
+  function align(E, T) {
+    var n = E.length, m = T.length, d = [], i, j;
+    for (i = 0; i <= n; i++) { d.push(new Array(m + 1)); d[i][0] = i; }
+    for (j = 0; j <= m; j++) d[0][j] = j;
+    for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) {
+      var s = d[i - 1][j - 1] + (E[i - 1] === T[j - 1] ? 0 : 1);
+      d[i][j] = Math.min(s, d[i - 1][j] + 1, d[i][j - 1] + 1);
+    }
+    var st = new Array(n), got = new Array(n), ins = [];
+    for (i = 0; i <= n; i++) ins.push([]);
+    i = n; j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + (E[i - 1] === T[j - 1] ? 0 : 1)) {
+        st[i - 1] = E[i - 1] === T[j - 1] ? 'ok' : 'sub'; got[i - 1] = T[j - 1]; i--; j--;
+      } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+        st[i - 1] = 'del'; got[i - 1] = ''; i--;
+      } else {
+        ins[i].unshift(T[j - 1]); j--;
+      }
+    }
+    return { st: st, got: got, ins: ins };
+  }
+
+  /* 판정. near: {정답 어절: [뜻은 같은 다른 말…]}(사람이 확인한 것만), others: [{label, text}] 헷갈림 알림용 */
+  function judge(ws, given, typed, near, others) {
+    var exp = expected(ws, given), E = exp.map(function (x) { return x.ch; }), T = norm(typed);
+    var res = { verdict: '', wrong: [], near: [], confuse: null, blankWords: 0 };
+    var blankIdx = [];
+    ws.forEach(function (w, i) { if (exp.some(function (x) { return x.w === i; })) blankIdx.push(i); });
+    res.blankWords = blankIdx.length;
+    if (!T.length) { res.verdict = '각하'; res.wrong = blankIdx.slice(); return res; }
+    var a = align(E, T), span = {};
+    exp.forEach(function (x, k) { (span[x.w] = span[x.w] || []).push(k); });
+    blankIdx.forEach(function (wi) {
+      var ks = span[wi], bad = false, typedW = '';
+      ks.forEach(function (k, t) {
+        if (a.st[k] !== 'ok') bad = true;
+        if (t > 0 && a.ins[k].length) bad = true;   // 어절 안에 더 친 글자
+        if (t > 0) typedW += a.ins[k].join('');
+        typedW += a.got[k] || '';
+      });
+      var last = ks[ks.length - 1] + 1;              // 어절 끝 뒤에 더 친 글자는 이 어절 몫
+      if (last === E.length && a.ins[last].length) { bad = true; typedW += a.ins[last].join(''); }
+      else if (last < E.length && exp[last].w !== wi && a.ins[last].length) { bad = true; typedW += a.ins[last].join(''); }
+      if (ks[0] === 0 && a.ins[0].length) { bad = true; typedW = a.ins[0].join('') + typedW; }
+      if (bad) {
+        res.wrong.push(wi);
+        var want = wordText(ws[wi]), alts = (near && near[want]) || [];
+        if (alts.indexOf(typedW) >= 0) res.near.push({ w: wi, typed: typedW, want: want });
+      }
+    });
+    if (!res.wrong.length) res.verdict = '인용';
+    else if (res.wrong.length <= Math.max(1, Math.floor(res.blankWords / 3))) res.verdict = '일부인용';
+    else res.verdict = '기각';
+    if (res.wrong.length && others && others.length) res.confuse = confusion(T, E, others);
+    return res;
+  }
+
+  /* 친 글 가운데 정답에 없는 5글자 이상 덩어리가 다른 조문에 있으면 그 조문을 알린다(아이디어 3). */
+  function confusion(T, E, others) {
+    var want = E.join(''), L = 5;
+    for (var s = 0; s + L <= T.length; s++) {
+      var piece = T.slice(s, s + L).join('');
+      if (want.indexOf(piece) >= 0) continue;
+      for (var o = 0; o < others.length; o++) if (norm(others[o].text).join('').indexOf(piece) >= 0) return others[o].label;
+    }
+    return null;
+  }
+
+  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LawJudge = api;
+})(this);
+</script>
+<script id="law-data" type="application/json">{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "key": ["고의", "과실로", "배상할", "책임이"], "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "key": ["사무집행에", "관하여", "제삼자에게"], "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "key": ["제393조", "제394조", "제396조", "제399조의", "준용한다"], "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "key": ["채권자에게", "과실이", "참작하여야"], "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}</script>
+<script>
+(function(){
+'use strict';
+var D=JSON.parse(document.getElementById('law-data').textContent),J=window.LawJudge;
+function $(id){return document.getElementById(id);}
+var K={stage:'lawgoyang-stage-v1',missed:'lawgoyang-missed-v1',progress:'lawgoyang-progress-v1'};
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+var LINES={
+ start:['조문은 한 글자도 안 봐준다고양. 구두점만 봐준다고양.','띄어쓰기는 칸이 알려 준다고양. 글자만 쳐라고양.'],
+ 인용:['인용! …이번만 인정한다고양.','인용이다고양. 법전이 머리에 들어 있다고양.','인용. 흥, 그 정도는 해야지고양.'],
+ 일부인용:['일부인용이다고양. 나머지는 기각이다고양!','거의 다 왔다고양. 거의는 답안지에 못 쓴다고양.'],
+ 기각:['기각이다고양! 법전 다시 펴라고양.','기각. 이유 없다고양. 따라 쳐라고양.'],
+ 각하:['각하다고양. 쳐야 판단을 해 주지고양.'],
+ copied:['그래, 그렇게 쓰는 거다고양.','이제야 법전 같다고양.'],
+ timeout:['시간 다 됐다고양. 그래도 끝까지 쳐라고양.'],
+ hint:['첫 글자는 공짜다고양. 두 번은 없다고양.'],
+ title:['제목까지 알려 줬다고양. 고마운 줄 알라고양.'],
+ allWin:['전부 인용이다고양. …내가 가르친 보람이 있다고양.'],
+ mixed:['판결문 받아 가라고양. 기각된 건 다시 온다고양.']
+};
+var stages=load(K.stage,{}),missed=load(K.missed,{});
+function stageOf(k){var s=Number(stages[k]);return s>=1&&s<=4?s:1;}
+var STAGE_NAME={1:'핵심어만',2:'어절 절반',3:'첫 글자만',4:'통빈칸'};
+
+/* 홈 */
+function renderHome(){
+  $('courseTitle').textContent=D.title;$('courseTag').textContent=D.label;
+  var seen={},ul=$('arts');ul.innerHTML='';
+  D.cards.forEach(function(c){if(seen[c.skey])return;seen[c.skey]=1;
+    var li=document.createElement('li'),s=stageOf(c.skey);
+    li.innerHTML='<span class="t"></span><span class="dots" aria-label="빈칸 '+s+'단계">'+[1,2,3,4].map(function(i){return '<i class="'+(i<=s?'on':'')+'"></i>';}).join('')+'</span>';
+    li.querySelector('.t').textContent=c.label+' · '+STAGE_NAME[s];ul.appendChild(li);});
+  $('homeNote').textContent=D.cards.length+'장 · 3~5분';
+  $('foot').textContent=D.foot;
+}
+
+/* 판 */
+var run=null,cur=null;
+function startRun(){
+  run={i:0,results:[],t0:Date.now()};
+  $('home').hidden=true;$('result').hidden=true;$('play').hidden=false;
+  say(pick(LINES.start));
+  showCard(true);
+}
+function say(t){$('playCat').textContent=t;}
+
+function showCard(first){
+  var c=D.cards[run.i],prev=D.cards[run.i-1];
+  var st=stageOf(c.skey);
+  var ws=J.words(c.cite,{cite:true}).concat(J.words(c.text).map(function(w){var o=Object.assign({},w);o.key=c.key.indexOf(J.wordText(w))>=0;return o;}));
+  var given=J.givenMap(ws,st);
+  cur={c:c,ws:ws,given:given,stage:st,mode:'ask',hintUsed:false,timer:null,readTimer:null,started:false};
+  cur.exp=J.expected(ws,given);
+  $('prog').textContent=(run.i+1)+' / '+D.cards.length;
+  $('stageChip').textContent='빈칸 '+st+'단계 · '+STAGE_NAME[st];
+  var same=prev&&prev.caseId===c.caseId;
+  $('facts').textContent=c.facts;$('caseTag').textContent=c.caseLabel;
+  $('facts').hidden=same;$('fold').hidden=!same;$('fold').textContent='사례 보기';
+  $('q').textContent=c.q;$('ansText').textContent=c.answer;$('ansText').hidden=!c.answer;
+  $('prefix').textContent=c.prefix;$('suffix').textContent=c.suffix;
+  $('titleHint').hidden=true;$('titleBtn').hidden=!c.title;$('titleBtn').disabled=false;
+  $('after').hidden=true;$('nextBox').hidden=true;$('askRow').hidden=false;
+  $('verdict').innerHTML='';
+  $('ans').value='';
+  drawBlank();
+  setBar($('timeBar'),1);
+  var limit=6000+1000*cur.exp.length;cur.limit=limit;
+  if(!first)startTimer();else cur.startWait=setTimeout(startTimer,2600);
+  focusInput();
+}
+function focusInput(){var a=$('ans');try{a.focus({preventScroll:true});}catch(e){a.focus();}
+  var l=$('law');if(l.scrollIntoView&&window.innerHeight<700)l.scrollIntoView({block:'center',behavior:'smooth'});}
+function startTimer(){
+  if(!cur||cur.started)return;cur.started=true;clearTimeout(cur.startWait);
+  var t0=Date.now(),c0=cur;
+  cur.timer=setInterval(function(){if(cur!==c0||cur.mode!=='ask'){clearInterval(c0.timer);return;}
+    var left=1-(Date.now()-t0)/cur.limit;setBar($('timeBar'),Math.max(0,left));
+    if(left<=0){clearInterval(cur.timer);say(pick(LINES.timeout));}},200);
+}
+function setBar(el,f){el.style.transform='scaleX('+f+')';}
+
+/* 칸 그리기. mode: ask(친 글자) / show(정답·색) / copy(틀린 어절만 따라쓰기) */
+function drawBlank(){
+  var ws=cur.ws,g=cur.given,T=J.norm($('ans').value),box=$('blank'),html=[],slot=0;
+  var wrong=cur.res?cur.res.wrong:[],near=cur.res?cur.res.near.map(function(x){return x.w;}):[];
+  var copyIdx=0,copyT=cur.mode==='copy'?T:null;
+  ws.forEach(function(w,i){
+    var full=w.chars.every(function(c,k){return !c.slot||g[i][k];});
+    if(full&&cur.mode==='ask'){html.push('<span class="w g">'+esc(w.chars.map(function(c){return c.ch;}).join(''))+'</span>');return;}
+    var parts=[];
+    w.chars.forEach(function(c,k){
+      if(!c.slot){parts.push('<span class="p">'+esc(c.ch)+'</span>');return;}
+      if(g[i][k]){parts.push('<span class="bx on">'+esc(c.ch)+'</span>');return;}
+      if(cur.mode==='ask'){var ch=T[slot]||'';parts.push('<span class="bx'+(slot===T.length?' cur':'')+'" data-s="'+slot+'">'+esc(ch)+'</span>');slot++;return;}
+      var isBad=wrong.indexOf(i)>=0,cls=isBad?(near.indexOf(i)>=0?'near':'bad'):'ok';
+      if(cur.mode==='copy'&&isBad){var t=copyT[copyIdx]||'';parts.push('<span class="bx '+cls+(t?' typed':' ghost')+(copyIdx===copyT.length?' cur':'')+'">'+esc(t||c.ch)+'</span>');copyIdx++;return;}
+      parts.push('<span class="bx '+cls+'">'+esc(c.ch)+'</span>');
+    });
+    html.push('<span class="w">'+parts.join('')+'</span>');
+  });
+  box.innerHTML=html.join('');
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+function onInput(){
+  if(!cur)return;
+  if(cur.mode==='ask'){
+    startTimer();drawBlank();
+    var T=J.norm($('ans').value).join(''),E=cur.exp.map(function(x){return x.ch;}).join('');
+    if(T===E)decide();
+  }else if(cur.mode==='copy'){
+    drawBlank();
+    if(J.norm($('ans').value).join('')===cur.copyWant)copied();
+  }else{$('ans').value='';}
+}
+function decide(skip){
+  if(cur.mode!=='ask')return;
+  clearInterval(cur.timer);clearTimeout(cur.startWait);
+  var c=cur.c,others=D.articles.filter(function(a){return a.label!==c.joLabel;});
+  var r=J.judge(cur.ws,cur.given,skip?'':$('ans').value,D.near,others);
+  cur.res=r;run.results.push({c:c,v:r.verdict,from:cur.stage});
+  stamp(r.verdict);
+  var line=pick(LINES[r.verdict]);
+  if(r.near.length)line='뜻은 맞다고양. 근데 법전엔 ‘'+r.near[0].want+'’이라고 써 있다고양.';
+  if(r.confuse)line='그건 '+r.confuse+' 말이다고양. 헷갈리지 말라고양.';
+  say(line);
+  // 숙련도: 맞히면 한 칸 오르고(짧은 조문은 바로 4), 틀리면 한 칸 내려간다(설계안 C).
+  var s=cur.stage;
+  if(r.verdict==='인용')s=J.norm(c.text).length<=30?4:Math.min(4,s+1);else s=Math.max(1,s-1);
+  stages[c.skey]=s;save(K.stage,stages);run.results[run.results.length-1].to=s;
+  if(r.verdict!=='인용'){missed[c.skey]=(Number(missed[c.skey])||0)+1;save(K.missed,missed);}
+  $('askRow').hidden=true;
+  if(r.verdict==='인용'){cur.mode='show';$('ans').value='';drawBlank();reveal();}
+  else{
+    cur.mode='copy';
+    var want=[];cur.ws.forEach(function(w,i){if(r.wrong.indexOf(i)<0)return;w.chars.forEach(function(ch,k){if(ch.slot&&!cur.given[i][k])want.push(ch.ch);});});
+    cur.copyWant=want.join('');$('ans').value='';drawBlank();focusInput();
+  }
+}
+function copied(){cur.mode='show';$('ans').value='';say(pick(LINES.copied));drawBlank();reveal();}
+function stamp(v){var s=document.createElement('span');s.className='stamp'+(v==='인용'?' ok':'');s.textContent=v;$('verdict').appendChild(s);}
+function reveal(){
+  var c=cur.c;$('notes').innerHTML='';
+  (c.note||[]).forEach(function(n){var li=document.createElement('li');li.textContent=n;$('notes').appendChild(li);});
+  $('srcLine').textContent=c.srcLine;$('after').hidden=false;$('nextBox').hidden=false;
+  var chars=J.norm(c.text).length,noteChars=(c.note||[]).join('').length;
+  var ms=Math.min(20000,2000+50*chars+110*noteChars),t0=Date.now(),c0=cur;
+  setBar($('readBar'),1);
+  cur.readTimer=setInterval(function(){if(cur!==c0){clearInterval(c0.readTimer);return;}
+    var f=1-(Date.now()-t0)/ms;setBar($('readBar'),Math.max(0,f));if(f<=0){clearInterval(cur.readTimer);next();}},150);
+  focusInput();
+}
+function next(){
+  if(!cur||cur.mode!=='show')return;
+  clearInterval(cur.readTimer);cur.mode='done';
+  run.i++;
+  if(run.i<D.cards.length)showCard(false);else finish();
+}
+function finish(){
+  $('play').hidden=true;$('result').hidden=false;
+  var rows=$('resRows');rows.innerHTML='';var win=0;
+  run.results.forEach(function(r){if(r.v==='인용')win++;
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="v '+r.v+'"></td><td></td><td></td>';
+    tr.children[0].textContent=r.v;tr.children[1].textContent=r.c.label;
+    tr.children[2].textContent='빈칸 '+r.from+'→'+r.to;rows.appendChild(tr);});
+  $('resCat').textContent=pick(win===run.results.length?LINES.allWin:LINES.mixed);
+  var p=load(K.progress,{}),b=p[D.id]||(p[D.id]={}),ms=Date.now()-run.t0;
+  var cur0=b[D.runKey]||{};
+  b[D.runKey]={completed:true,bestMs:cur0.bestMs&&cur0.bestMs<ms?cur0.bestMs:ms};save(K.progress,p);
+  $('again').focus();
+}
+
+/* 조작 */
+$('start').addEventListener('click',startRun);
+$('again').addEventListener('click',startRun);
+$('toHome').addEventListener('click',function(){$('result').hidden=true;$('home').hidden=false;renderHome();});
+$('ans').addEventListener('input',onInput);
+$('ans').addEventListener('compositionend',onInput);
+$('ans').addEventListener('keydown',function(e){
+  if(e.key!=='Enter'||e.isComposing||e.keyCode===229)return;
+  e.preventDefault();
+  if(cur.mode==='ask')decide();else if(cur.mode==='show')next();
+});
+document.addEventListener('keydown',function(e){
+  if(e.target===$('ans'))return;
+  if(e.key==='Enter'&&!$('play').hidden&&cur&&cur.mode==='show'){e.preventDefault();next();}
+});
+$('law').addEventListener('click',function(e){
+  var b=e.target.closest('.bx[data-s="0"]');
+  if(b&&cur.mode==='ask'&&!cur.hintUsed&&!J.norm($('ans').value).length){
+    // 첫 칸을 누르면 첫 글자를 한 번 보인다(보카고양 그대로)
+    cur.hintUsed=true;var e0=cur.exp[0],wi=e0.w;
+    var k=cur.ws[wi].chars.findIndex(function(c,kk){return c.slot&&!cur.given[wi][kk];});
+    cur.given[wi][k]=true;cur.exp=J.expected(cur.ws,cur.given);drawBlank();say(pick(LINES.hint));
+  }
+  focusInput();
+});
+$('submit').addEventListener('click',function(){decide();focusInput();});
+$('skip').addEventListener('click',function(){decide(true);focusInput();});
+$('next').addEventListener('click',function(){next();focusInput();});
+$('card').addEventListener('click',function(e){if(cur&&cur.mode==='show'&&!e.target.closest('button,.fold'))next();});
+$('fold').addEventListener('click',function(){var h=$('facts').hidden;$('facts').hidden=!h;$('fold').textContent=h?'사례 접기':'사례 보기';});
+$('titleBtn').addEventListener('click',function(){$('titleHint').textContent='조문 제목: '+cur.c.title;$('titleHint').hidden=false;$('titleBtn').disabled=true;say(pick(LINES.title));focusInput();});
+renderHome();
+})();
+</script>
+
+<script id="record-transfer">
+/* RECORD_TRANSFER_START */
+var RT_CONFIG={"game": "법학고양", "app": "lawgoyang-records", "prefix": "lawgoyang-", "skip": [], "target": "proto.html", "kinds": {"progress": "^lawgoyang-progress-v1$", "missed": "^lawgoyang-(stage|missed)-v1$"}};
+/* 기록 옮기기: 보카고양 공개 index(탄고고양 index.html 사본, 26.11.06)에서 그대로 가져왔다(PRINCIPLES 7, 영신 26.11.07).
+   바꾼 것은 RT_CONFIG뿐이다. 법학고양 키는 'lawgoyang-'로 시작한다:
+   진도 lawgoyang-progress-v1(보카고양 progress와 같은 꼴), 빈칸 숙련도 lawgoyang-stage-v1과 틀린 횟수 lawgoyang-missed-v1({열쇠: 수}, 합칠 때 큰 쪽 = 보카고양 missed와 같은 합치기).
+   같은 주소의 다른 고양 기록은 건드리지 않는다. 세트 도장은 없다. */
+/* 기록 옮기기 공용 코드: esqsoy/tangogoyang index.html @ f652afe 의 RECORD_TRANSFER 구간에서 RT_CONFIG 아래를 그대로 떼어 옴(2026-11-07).
+   탄고고양 사본은 보카고양 공개 index(26.11.06)에서 가져온 것이다. 고치지 말고, 본가가 바뀌면 다시 떼어 온다. 설정은 build.py의 RT_CONFIG. */
+var RT_CFG=typeof RT_CONFIG!=='undefined'?RT_CONFIG:require('./config.json');
+var RT_APP=RT_CFG.app,RT_VERSION=1,RT_PREFIX=RT_CFG.prefix,RT_GAME=RT_CFG.game;
+var RT_SKIP=RT_CFG.skip||[];                // 검사용 키 등 옮기지 않는 것
+var RT_KINDS=Object.keys(RT_CFG.kinds||{}).map(kind=>[kind,new RegExp(RT_CFG.kinds[kind])]);   // 위에서부터 처음 맞는 종류
+var RT_PACE_KEEP=600;                       // pace 런타임의 paceKeep과 같다
+
+function rtWanted(k){return typeof k==='string'&&k.startsWith(RT_PREFIX)&&!RT_SKIP.includes(k);}
+function rtCollect(store){
+  const data={};
+  for(let i=0;i<store.length;i++){const k=store.key(i);if(!rtWanted(k))continue;const v=store.getItem(k);if(typeof v==='string')data[k]=v;}
+  return data;
+}
+function rtPack(data,now){return {app:RT_APP,v:RT_VERSION,exportedAt:new Date(now).toISOString(),data};}
+function rtParse(text){
+  let o;try{o=JSON.parse(text);}catch(e){throw new Error('파일이 깨졌다고양. 내보낸 파일을 그대로 골라 달라고양.');}
+  if(!o||typeof o!=='object'||o.app!==RT_APP||!o.data||typeof o.data!=='object'||Array.isArray(o.data))throw new Error(RT_GAME+' 기록 파일이 아니라고양.');
+  if(!(Number(o.v)>=1))throw new Error(RT_GAME+' 기록 파일이 아니라고양.');
+  if(Number(o.v)>RT_VERSION)throw new Error('더 새 판에서 만든 파일이라고양. 이 화면을 새로고침하고 다시 해 보라고양.');
+  const data={};Object.keys(o.data).forEach(k=>{if(rtWanted(k)&&typeof o.data[k]==='string')data[k]=o.data[k];});
+  return {exportedAt:typeof o.exportedAt==='string'?o.exportedAt:'',data};
+}
+
+function rtJson(s){if(typeof s!=='string')return undefined;try{return JSON.parse(s);}catch(e){return undefined;}}
+function rtObj(v){return v&&typeof v==='object'&&!Array.isArray(v)?v:null;}
+function rtKind(k){
+  for(const [kind,re] of RT_KINDS)if(RT_MERGE[kind]&&re.test(k))return kind;
+  return 'keep';                              // 설정·이어하기 자리 등: 이 기기에 없을 때만 가져온다
+}
+/* 종류마다 합친다. 반환값: {value: 새 문자열(바뀌지 않으면 null), n: 늘어난 개수} */
+var RT_MERGE={
+  // 진도 {묶음: {연습: {completed, bestMs…}}}: 한쪽이라도 클리어했으면 클리어. 둘 다면 이 기기 것을 두고 최고 시간만 더 빠른 쪽으로.
+  progress(a,b){
+    const L=rtObj(rtJson(a))||{},I=rtObj(rtJson(b));if(!I)return {value:null,n:0};
+    let n=0,changed=false;
+    Object.keys(I).forEach(lid=>{const ib=rtObj(I[lid]);if(!ib)return;
+      Object.keys(ib).forEach(t=>{const r=rtObj(ib[t]);if(!r)return;
+        const lb=rtObj(L[lid])||(L[lid]={}),cur=rtObj(lb[t]);
+        if(!cur){lb[t]=r;changed=true;if(r.completed)n++;return;}
+        if(!cur.completed&&r.completed){lb[t]=r;changed=true;n++;return;}
+        if(cur.completed&&r.completed&&Number(r.bestMs)>0&&!(Number(cur.bestMs)>0&&Number(cur.bestMs)<=Number(r.bestMs))){cur.bestMs=Number(r.bestMs);changed=true;}
+      });});
+    return {value:changed?JSON.stringify(L):null,n};
+  },
+  // 모아둔 카드 [{id, addedAt}]: 양쪽에 담은 카드를 다 남긴다. 이 기기 순서를 두고 새 카드는 담은 순서대로 뒤에.
+  saved(a,b){
+    const list=r=>Array.isArray(r)?r.filter(x=>x&&typeof x.id==='string'):[];
+    const L=list(rtJson(a)),I=list(rtJson(b)),at=new Map(L.map(x=>[x.id,x]));
+    let n=0,changed=false;
+    I.slice().sort((x,y)=>(Number(x.addedAt)||0)-(Number(y.addedAt)||0)).forEach(x=>{
+      const cur=at.get(x.id),t=Number(x.addedAt)||0;
+      if(!cur){const r={id:x.id,addedAt:t};L.push(r);at.set(x.id,r);n++;changed=true;}
+      else if(t>0&&!(Number(cur.addedAt)>0&&Number(cur.addedAt)<=t)){cur.addedAt=t;changed=true;}
+    });
+    return {value:changed?JSON.stringify(L):null,n};
+  },
+  // 익힌 단어 {교재: [표제어…]}: 교재마다 합집합(이 기기 순서 먼저). 교재를 열면 진도로 다시 맞춘다.
+  learned(a,b){
+    const L=rtObj(rtJson(a))||{},I=rtObj(rtJson(b));if(!I)return {value:null,n:0};
+    let changed=false;
+    Object.keys(I).forEach(c=>{if(!Array.isArray(I[c]))return;const cur=Array.isArray(L[c])?L[c]:(L[c]=[]),has=new Set(cur);
+      I[c].forEach(k=>{if(typeof k==='string'&&k&&!has.has(k)){has.add(k);cur.push(k);changed=true;}});});
+    return {value:changed?JSON.stringify(L):null,n:0};
+  },
+  // 틀렸던 단어 {표제어: 횟수}: 더 큰 쪽. 더하면 같은 파일을 두 번 합칠 때 부풀어 오른다.
+  missed(a,b){
+    const L=rtObj(rtJson(a))||{},I=rtObj(rtJson(b));if(!I)return {value:null,n:0};
+    let changed=false;
+    Object.keys(I).forEach(k=>{const v=Number(I[k])||0;if(v>(Number(L[k])||0)){L[k]=v;changed=true;}});
+    return {value:changed?JSON.stringify(L):null,n:0};
+  },
+  // 돌파 축하 {seen}: 더 큰 쪽(이미 본 축하를 다시 띄우지 않는다).
+  milestone(a,b){
+    const l=Number(rtObj(rtJson(a))?.seen)||0,i=Number(rtObj(rtJson(b))?.seen)||0;
+    return {value:i>l?JSON.stringify({seen:i}):null,n:0};
+  },
+  // 세트 도장 {세트: 받은 때}: 어느 쪽에서든 받은 도장은 남긴다. 둘 다 있으면 이 기기 것.
+  stamps(a,b){
+    const L=rtObj(rtJson(a)),I=rtObj(rtJson(b));if(!I)return {value:null,n:0};
+    const out=L||{};let n=0,changed=!L&&Object.keys(I).length>0;
+    Object.keys(I).forEach(k=>{if(!Object.prototype.hasOwnProperty.call(out,k)){out[k]=Number(I[k])||0;n++;changed=true;}});
+    return {value:changed?JSON.stringify(out):null,n};
+  },
+  // 진행 속도 기록 [{at, ms, u, k}]: 합쳐서 시간순, 최근 600판.
+  pace(a,b){
+    const list=r=>Array.isArray(r)?r.filter(x=>x&&Number(x.at)>0):[];
+    const L=list(rtJson(a)),I=list(rtJson(b)),key=x=>x.at+'|'+x.ms,seen=new Set(L.map(key));
+    const add=I.filter(x=>!seen.has(key(x)));if(!add.length)return {value:null,n:0};
+    const all=L.concat(add).sort((x,y)=>x.at-y.at).slice(-RT_PACE_KEEP);
+    return {value:JSON.stringify(all),n:0};
+  },
+  // 진행 속도 메타 {total, target…}: 판 수는 큰 쪽, 나머지는 이 기기에 없을 때만.
+  paceMeta(a,b){
+    const L=rtObj(rtJson(a))||{},I=rtObj(rtJson(b));if(!I)return {value:null,n:0};
+    let changed=false;
+    Object.keys(I).forEach(k=>{
+      if(k==='total'){const v=Number(I.total);if(Number.isFinite(v)&&!(Number.isFinite(Number(L.total))&&Number(L.total)>=v)){L.total=v;changed=true;}}
+      else if(!Object.prototype.hasOwnProperty.call(L,k)){L[k]=I[k];changed=true;}
+    });
+    return {value:changed?JSON.stringify(L):null,n:0};
+  },
+  keep(a,b){return {value:a==null&&typeof b==='string'?b:null,n:0};}
+};
+/* local·incoming: {키: 문자열}. 반환: {writes: {키: 새 문자열}, summary: {exercises, saved, stamps}} */
+function rtMerge(local,incoming){
+  const writes={},summary={exercises:0,saved:0,stamps:0};
+  Object.keys(incoming||{}).forEach(k=>{
+    if(!rtWanted(k)||typeof incoming[k]!=='string')return;
+    const kind=rtKind(k),a=Object.prototype.hasOwnProperty.call(local,k)?local[k]:null;
+    const r=a==null&&kind!=='keep'?{value:incoming[k],n:RT_COUNT[kind]?RT_COUNT[kind](incoming[k]):0}:RT_MERGE[kind](a,incoming[k]);
+    if(r.value!=null&&r.value!==a)writes[k]=r.value;
+    if(kind==='progress')summary.exercises+=r.n;else if(kind==='saved')summary.saved+=r.n;else if(kind==='stamps')summary.stamps+=r.n;
+  });
+  return {writes,summary};
+}
+/* 이 기기에 그 키가 아예 없을 때 가져오는 개수 */
+var RT_COUNT={
+  progress(s){let n=0;const o=rtObj(rtJson(s))||{};Object.values(o).forEach(b=>{if(rtObj(b))Object.values(b).forEach(r=>{if(rtObj(r)?.completed)n++;});});return n;},
+  saved(s){const r=rtJson(s);return Array.isArray(r)?r.filter(x=>x&&typeof x.id==='string').length:0;},
+  stamps(s){const o=rtObj(rtJson(s));return o?Object.keys(o).length:0;}
+};
+(function(){
+  const $=id=>document.getElementById(id);
+  const sheet=$('rtSheet'),status=$('rtStatus'),file=$('rtFile'),confirmBox=$('rtConfirm');
+  if(!sheet)return;
+  let pending=null;
+  function say(text,kind){status.textContent=text;status.className='rt-status'+(kind?' '+kind:'');}
+  function open(){sheet.hidden=false;document.body.classList.add('rt-lock');say('');confirmBox.hidden=true;pending=null;$('rtMake').focus();}
+  function close(){sheet.hidden=true;document.body.classList.remove('rt-lock');pending=null;if(location.hash==='#records')history.replaceState(null,'',location.pathname+location.search);}
+  function store(){try{return window.localStorage;}catch(e){return null;}}
+  function today(){const d=new Date(),p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
+  $('rtOpen').addEventListener('click',open);
+  $('rtClose').addEventListener('click',close);
+  sheet.addEventListener('click',e=>{if(e.target===sheet)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden)close();});
+  if(location.hash==='#records')open();
+
+  // ① 기록 파일 만들기: 폰이면 공유 시트(카톡 '나와의 채팅' 등), 아니면 파일로 저장.
+  $('rtMake').addEventListener('click',async()=>{
+    const s=store();if(!s){say('이 브라우저는 기록을 저장하지 못한다고양.','bad');return;}
+    const data=rtCollect(s);
+    if(!Object.keys(data).length){say('아직 옮길 기록이 없다고양. 한 판이라도 하고 오라고양.','bad');return;}
+    const text=JSON.stringify(rtPack(data,Date.now())),name=RT_GAME+'-기록-'+today()+'.json';
+    const blob=new Blob([text],{type:'application/json'});
+    try{
+      const f=new File([blob],name,{type:'application/json'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})&&matchMedia('(pointer:coarse)').matches){
+        await navigator.share({files:[f],title:RT_GAME+' 기록'});
+        say('보냈다고양. 다른 기기에서 그 파일을 열면 된다고양.','ok');return;
+      }
+    }catch(e){if(e&&e.name==='AbortError'){say('');return;}}
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+    say('‘'+name+'’을 저장했다고양. 이 파일을 다른 기기로 보내라고양.','ok');
+  });
+
+  // ② 기록 파일 열기: 읽고, 무엇이 늘어나는지 보여 준 뒤 합친다.
+  file.addEventListener('change',()=>{
+    const f=file.files&&file.files[0];file.value='';if(!f)return;
+    const s=store();if(!s){say('이 브라우저는 기록을 저장하지 못한다고양.','bad');return;}
+    const r=new FileReader();
+    r.onerror=()=>say('파일을 못 읽었다고양.','bad');
+    r.onload=()=>{
+      let got;try{got=rtParse(String(r.result||''));}catch(e){say(e.message,'bad');confirmBox.hidden=true;return;}
+      const m=rtMerge(rtCollect(s),got.data),keys=Object.keys(m.writes);
+      if(!keys.length){say('이미 이 기기에 다 있는 기록이라고양. 합칠 게 없다고양.','ok');confirmBox.hidden=true;return;}
+      pending=m;
+      const parts=[];
+      if(m.summary.exercises)parts.push('클리어한 연습 '+m.summary.exercises+'개');
+      if(m.summary.stamps)parts.push('세트 도장 '+m.summary.stamps+'개');
+      if(m.summary.saved)parts.push('모아둔 카드 '+m.summary.saved+'장');
+      say((parts.length?parts.join(' · ')+'이 늘어난다고양.':'자잘한 기록이 더해진다고양.')+' 이 기기 기록은 지우지 않고 합친다고양.');
+      confirmBox.hidden=false;$('rtMerge').focus();
+    };
+    r.readAsText(f);
+  });
+  $('rtMerge').addEventListener('click',()=>{
+    const s=store();if(!pending||!s)return;
+    const w=pending.writes;
+    try{Object.keys(w).forEach(k=>s.setItem(k,w[k]));}
+    catch(e){say('저장 공간이 모자라서 다 못 합쳤다고양. 브라우저 저장 공간을 확인하라고양.','bad');return;}
+    pending=null;confirmBox.hidden=true;
+    say('합쳤다고양! 이제 교재를 열면 이어서 할 수 있다고양. 다른 탭에 게임이 열려 있으면 새로고침하라고양.','ok');
+  });
+  $('rtCancel').addEventListener('click',()=>{pending=null;confirmBox.hidden=true;say('안 합쳤다고양.');});
+})();
+
+/* RECORD_TRANSFER_END */
+</script>
+
+</body>
+</html>
