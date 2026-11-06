@@ -12,11 +12,11 @@ const assert = require('assert');
   const errs = [];
   p.on('pageerror', e => errs.push(String(e)));
   await p.goto('file://' + file);
-  await p.click('#start');
+  await p.click('.set[data-id="proto"]');
   // 지금 장에서 쳐야 할 글(미리 보인 칸 빼고)
   const want = () => p.evaluate(() => {
     const D = JSON.parse(document.getElementById('law-data').textContent), J = window.LawJudge;
-    const i = Number(document.getElementById('prog').textContent.split('/')[0]) - 1, c = D.cards[i];
+    const i = Number(document.getElementById('prog').textContent.split('/')[0]) - 1, c = D.sets.find(s => s.id === 'proto').cards[i];
     const st = Number((JSON.parse(localStorage.getItem('lawgoyang-stage-v1') || '{}'))[c.skey]) || 1;
     const ws = J.words(c.cite, { cite: true }).concat(J.words(c.text));
     return J.expected(ws, J.givenMap(ws, st, c.phrase)).map(x => x.ch).join('');

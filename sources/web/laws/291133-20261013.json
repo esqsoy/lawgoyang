@@ -1,0 +1,25 @@
+{
+ "law": "도로교통법",
+ "lsiSeq": "291133",
+ "efYd": "20261013",
+ "header": "[시행 2026. 10. 13.] [법률 제22067호, 2026. 10. 13., 일부개정]",
+ "fetched": "2026-11-06",
+ "method": "law.go.kr 웹 화면 두 곳(lsInfoR 전체·lsSideInfoP 조문 하나)을 따로 받아 글자 단위로 대조. Open API 키 전 임시.",
+ "source": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=291133&efYd=20261013",
+ "articles": {
+  "142": {
+   "title": "행정소송과의 관계",
+   "paras": [
+    {
+     "no": null,
+     "text": "이 법에 따른 처분으로서 해당 처분에 대한 행정소송은 행정심판의 재결(裁決)을 거치지 아니하면 제기할 수 없다."
+    },
+    {
+     "no": null,
+     "text": "[전문개정 2011. 6. 8.]"
+    }
+   ],
+   "notes": []
+  }
+ }
+}

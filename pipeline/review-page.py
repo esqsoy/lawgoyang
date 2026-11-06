@@ -26,6 +26,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:
 .wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:26px 64px;display:grid;gap:18px}
 h1{font-family:var(--display);font-weight:800;font-size:1.7rem;margin:0}
 p{margin:0}.lead{color:var(--muted);max-width:64ch}
+h2{font-family:var(--display);font-size:1.2rem;margin:18px 0 0}h2 small{font-family:var(--body);font-size:.78rem;color:var(--muted);font-weight:400;margin-left:6px}
 .card{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;display:grid;gap:6px;min-width:0}
 .id{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
 .row{display:grid;grid-template-columns:3.6em 1fr;gap:8px;align-items:baseline;padding:2px 4px}
@@ -49,8 +50,8 @@ body.cm-on .ln{cursor:text;border-radius:6px}
 P = ['<title>법학고양 직검수</title><meta name="claude:viewport-fit-sides" content="cover">',
      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono&display=swap">',
      f'<style>{CSS}</style><div class="wrap">',
-     f'<h1>법학고양 직검수 · {e(D["title"])}</h1>',
-     f'<p class="lead">카드 {len(D["cards"])}장. 사례·설문·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니야. 조문은 노랗게 표시한 자리가 게임에서 빈칸이 되는 곳이야(번호부터). 법적으로 틀린 곳, 어색한 답안, 빼거나 더할 해설을 줄마다 달아 줘.</p>',
+     '<h1>법학고양 직검수</h1>',
+     f'<p class="lead">세트 {len(D["sets"])}개, 카드 {sum(len(x["cards"]) for x in D["sets"])}장. 답안·해설은 Claude 초안이야. 노랗게 표시한 자리가 게임에서 빈칸이 되는 조문이야(번호부터). 법적으로 틀린 곳, 어색한 답안, 빼거나 더할 해설, 근거 조문이 맞는지를 줄마다 달아 줘.</p>',
      '<p class="hint" id="cmhint">줄 댓글을 준비하는 중이야.</p>']
 
 
@@ -58,18 +59,25 @@ def row(id, k, v, cls='v'):
     return f'<div class="row ln" id="{e(id)}"><span class="k">{e(k)}</span><span class="{cls}">{v}</span></div>'
 
 
-seen = set()
-for c in D['cards']:
-    P.append(f'<section class="card" id="{e(c["id"])}"><div class="id">{e(c["id"])} · {e(c["label"])} · 3단계 빈칸(첫 문구) {e(c["phrase"] or "자동")}</div>')
-    if c['caseId'] not in seen:
-        seen.add(c['caseId'])
-        P.append(row(c['id'] + '-facts', '사례', e(c['facts'])))
-    P.append(row(c['id'] + '-q', '설문', e(c['q'])))
-    P.append(row(c['id'] + '-a', '답안', e(c['prefix']) + '<mark>' + e(c['cite'] + ' ' + c['text']) + '</mark>' + e(c['suffix'])))
-    for i, n in enumerate(c['note']):
-        P.append(row(f'{c["id"]}-n{i + 1}', '해설', e(n), 'v s'))
-    P.append(row(c['id'] + '-src', '출처', e(c['srcLine']), 'v s'))
-    P.append('</section>')
+only = sys.argv[sys.argv.index('--sets') + 1].split(',') if '--sets' in sys.argv else None
+for st in D['sets']:
+    if only and st['id'] not in only:
+        continue
+    P.append(f'<h2 id="{e(st["id"])}">{e(st["title"])} <small>{e(st["label"])}{" · " + e(st["status"]) if st.get("status") else ""}</small></h2>')
+    seen = set()
+    for c in st['cards']:
+        conf = f' · {c["conf"]}' if c.get('conf') else ''
+        freq = f' · 빈출 {c["freq"]}' if c.get('freq') else ''
+        P.append(f'<section class="card" id="{e(c["id"])}"><div class="id">{e(c["id"])} · {e(c["label"])}{e(freq)}{e(conf)} · 3단계 빈칸(첫 문구) {e(c["phrase"] or "자동")}</div>')
+        if c['caseId'] not in seen:
+            seen.add(c['caseId'])
+            P.append(row(c['id'] + '-facts', '사례', e(c['facts']).replace('\n', '<br>')))
+        P.append(row(c['id'] + '-q', '설문', e(c['q'])))
+        P.append(row(c['id'] + '-a', '답안', e(c['prefix']) + '<mark>' + e(c['cite'] + ' ' + c['text']) + '</mark>' + e(c['suffix'])))
+        for i, n in enumerate(c['note']):
+            P.append(row(f'{c["id"]}-n{i + 1}', '해설', e(n), 'v s'))
+        P.append(row(c['id'] + '-src', '출처', e(c['srcLine']) + ('<br>' + e(c['examSrc']) if c.get('examSrc') else ''), 'v s'))
+        P.append('</section>')
 P.append('<section class="card" id="near"><div class="id">뜻은 맞음 짝(data/near.json) · ' + e(near['status']) + '</div>')
 for k, v in near['pairs'].items():
     P.append(row('near-' + k, '짝', e(f'{k} ↔ {", ".join(v)}'), 'v s'))

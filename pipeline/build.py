@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """법학고양 시제품을 조립한다: data/ + sources/ + pipeline/game.html → proto.html(생성물).
 
-사용: python3 -I pipeline/build.py [--artifact <파일>]
+사용: python3 -I pipeline/build.py [--artifact <파일>] [--check] [--only 세트id,세트id]
+- --check: 조립·검사만 하고 파일은 쓰지 않는다. --only: 그 세트만 읽는다(임시판은 늘 포함).
 - proto.html: 혼자 열리는 완성 문서(나중에 GitHub Pages용).
 - --artifact: claude.ai Artifact 미리보기용(문서 껍데기 없이 본문만).
 생성물(proto.html)을 손으로 고치지 않는다. game.html·judge.js·data/를 고치고 다시 조립한다.
@@ -14,9 +15,15 @@ P = ROOT / 'pipeline'
 
 
 def part_text(text, part):
-    """본문·단서를 원문 경계에서 자른다(설계안 B3). 민법의 옛 단서는 '그러나', 요즘 단서는 '다만,'으로 시작한다."""
+    """본문·단서, 전문·후문을 원문 경계에서 자른다(설계안 B3).
+    단서는 '그러나'(민법 등 옛 법)·'다만,'으로 시작한다. 전문·후문은 첫 마침표 뒤에서 나눈다(단서가 아닌 둘째 문장)."""
     if not part:
         return text
+    if part in ('전문', '후문'):
+        m = re.search(r'\.\s', text)
+        if not m:
+            raise SystemExit(f'전문·후문 경계를 못 찾음: {text[:40]}')
+        return text[:m.start() + 1].strip() if part == '전문' else text[m.end():].strip()
     m = re.search(r'\s(그러나|다만,)\s', text)
     if not m:
         raise SystemExit(f'본문·단서 경계를 못 찾음: {text[:40]}')
@@ -27,58 +34,112 @@ def part_text(text, part):
     raise SystemExit(f'모르는 부분: {part}')
 
 
-def main():
-    deck = json.loads((ROOT / 'data' / 'proto-cards.json').read_text(encoding='utf-8'))
-    src = json.loads((ROOT / deck['source']).read_text(encoding='utf-8'))
-    near = json.loads((ROOT / 'data' / 'near.json').read_text(encoding='utf-8'))['pairs']
-    header = src['header']
-    when = re.sub(r'\]\s*\[', '] [', header or '')
+TRACKS = ['공법', '민사', '연습']
 
-    def cite_of(ci):
-        art = src['articles'][ci['jo']]
-        paras = art['paras']
-        if ci.get('para'):
-            text = paras[ci['para'] - 1]['text']
+
+def pick_para(art, para, jo):
+    paras = art['paras']
+    if para:
+        for i, p in enumerate(paras):
+            if p['no'] == para or (p['no'] is None and i == para - 1):
+                return p
+        raise SystemExit(f'제{jo}조 제{para}항이 없음')
+    if len(paras) != 1:
+        raise SystemExit(f'제{jo}조는 항이 여럿이라 para를 정해야 함')
+    return paras[0]
+
+
+def main():
+    near = json.loads((ROOT / 'data' / 'near.json').read_text(encoding='utf-8'))['pairs']
+    ledger = json.loads((ROOT / 'data' / 'ledger' / 'ledger-v0.json').read_text(encoding='utf-8'))
+    freq = {(a['law'], a['article']): a['freq_text'] for a in ledger['articles']}
+    idx_path = ROOT / 'sources' / 'web' / 'laws' / 'index.json'
+    index = json.loads(idx_path.read_text(encoding='utf-8')) if idx_path.exists() else {}
+    srcs = {}
+
+    def source(law, fallback=None):
+        if law not in srcs:
+            if law in index:
+                srcs[law] = json.loads((idx_path.parent / index[law]['file']).read_text(encoding='utf-8'))
+            elif fallback:
+                srcs[law] = json.loads((ROOT / fallback).read_text(encoding='utf-8'))
+            else:
+                raise SystemExit(f'조문 원문이 없음: {law} (pipeline/fetch_web.py --ledger 로 받는다)')
+        return srcs[law]
+
+    def cite_of(ci, fallback=None):
+        src = source(ci['law'], fallback)
+        jo = str(ci['jo'])
+        if jo not in src['articles']:
+            raise SystemExit(f"{ci['law']} 제{jo}조 원문이 없음")
+        art = src['articles'][jo]
+        p = pick_para(art, ci.get('para'), jo)
+        if ci.get('ho'):
+            hs = [h for h in p.get('ho', []) if h['no'] == str(ci['ho'])]
+            if not hs:
+                raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para')}항 제{ci['ho']}호가 없음")
+            text = hs[0]['text']
         else:
-            if len(paras) != 1:
-                raise SystemExit(f"제{ci['jo']}조는 항이 여럿이라 para를 정해야 함")
-            text = paras[0]['text']
+            if p.get('ho'):
+                raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para') or ''}항은 호가 있어 ho를 정해야 함")
+            text = p['text']
         text = part_text(text, ci.get('part'))
         if ci.get('phrase') and not re.sub(r'\s+', ' ', text).startswith(ci['phrase']):
-            raise SystemExit(f"제{ci['jo']}조 첫 문구가 원문 앞부분과 다름: {ci['phrase']}")
-        tail = (f" 제{ci['para']}항" if ci.get('para') else '') + (f" {ci['part']}" if ci.get('part') else '')
+            raise SystemExit(f"{ci['law']} 제{jo}조 첫 문구가 원문 앞부분과 다름: {ci['phrase']}")
+        tail = (f" 제{ci['para']}항" if ci.get('para') else '') + (f" 제{ci['ho']}호" if ci.get('ho') else '') + (f" {ci['part']}" if ci.get('part') else '')
+        when = re.sub(r'\]\s*\[', '] [', src.get('header') or '')
         return {
-            'law': ci['law'], 'jo': ci['jo'], 'title': art['title'], 'text': text,
-            'cite': f"{ci['jo']}조{tail}",
-            'label': f"{ci['law']} 제{ci['jo']}조{tail}",
-            'joLabel': f"제{ci['jo']}조",
-            'skey': ':'.join(str(x) for x in [ci['law'], ci['jo'], ci.get('para'), ci.get('part')] if x),
-            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []),
+            'law': ci['law'], 'jo': jo, 'title': art['title'], 'text': text,
+            'cite': f"{jo}조{tail}", 'label': f"{ci['law']} 제{jo}조{tail}", 'joLabel': f"제{jo}조",
+            'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('part')] if x),
+            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []), 'conf': ci.get('confidence', ''),
+            'freq': freq.get((ci['law'], jo), ''),
+            'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
         }
 
-    cards = []
-    for case in deck['cases']:
-        for iss in case['issues']:
+    def cards_of(set_id, label, facts, issues, exam_src, fallback=None):
+        out = []
+        for iss in issues:
             done = []
             for k, ci in enumerate(iss['cites']):
-                c = cite_of(ci)
+                c = cite_of(ci, fallback)
                 prefix = iss['answer'] + '(' + ci['law'] + ' 제'
                 for d in done:
                     prefix += d['cite'] + ' ' + d['text'] + ' 제'
-                c.update({
-                    'id': iss['id'] + ('abcdefgh'[k] if len(iss['cites']) > 1 else ''),
-                    'caseId': case['id'], 'caseLabel': case['label'], 'facts': case['facts'],
-                    'q': iss['q'], 'answer': '', 'prefix': prefix, 'suffix': ')',
-                    'srcLine': f"{c['law']} 제{c['jo']}조({c['title']}) · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
-                })
-                cards.append(c)
+                last = k == len(iss['cites']) - 1
+                c.update({'id': iss['id'] + ('abcdefgh'[k] if len(iss['cites']) > 1 else ''), 'setId': set_id,
+                          'caseId': set_id, 'caseLabel': label, 'facts': facts, 'q': iss['q'], 'answer': '',
+                          'prefix': prefix, 'suffix': ')' + (iss.get('after', '') if last else ''), 'examSrc': exam_src})
+                out.append(c)
                 done.append(c)
-    articles = [{'label': f'제{jo}조', 'text': ' '.join(p['text'] for p in a['paras'])} for jo, a in src['articles'].items()]
+        return out
+
+    sets = []
+    deck = json.loads((ROOT / 'data' / 'proto-cards.json').read_text(encoding='utf-8'))
+    case = deck['cases'][0]
+    sets.append({'id': 'proto', 'track': '연습', 'title': '임시 사례 · 배달 자전거 사고', 'label': '민법 불법행위 · 기출 아님',
+                 'status': '', 'cards': cards_of('proto', case['label'], case['facts'], case['issues'], '', deck['source'])})
+    only = sys.argv[sys.argv.index('--only') + 1].split(',') if '--only' in sys.argv else None
+    for f in sorted((ROOT / 'data' / 'sets').glob('*.json')):
+        st = json.loads(f.read_text(encoding='utf-8'))
+        if only and st['id'] not in only:
+            continue
+        src = st['source']
+        exam_src = f"출처: {src['org']}, {src['name']}({st['year']}), 공공누리 {src['kogl']}, {src['url']}"
+        label = f"{src['short']}"
+        sets.append({'id': st['id'], 'track': st['track'], 'title': st['title'], 'label': label, 'year': st['year'],
+                     'q': st['q'], 'status': st.get('status_short', ''),
+                     'cards': cards_of(st['id'], label, st['facts'], st['issues'], exam_src)})
+    sets.sort(key=lambda x: (TRACKS.index(x['track']), -x.get('year', 0), x.get('q', '')))
+    articles = {}
+    for law, src in srcs.items():
+        articles[law] = [{'label': f'제{jo}조', 'text': ' '.join(p['text'] + ' ' + ' '.join(h['text'] for h in p.get('ho', [])) for p in a['paras'])}
+                         for jo, a in src['articles'].items()]
     data = {
-        'id': deck['id'], 'runKey': deck['cases'][0]['id'], 'title': deck['title'], 'label': deck['cases'][0]['label'],
-        'foot': f"조문: law.go.kr {src['law']} {when}. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.",
-        'cards': cards, 'articles': articles, 'near': near,
+        'tracks': TRACKS, 'sets': sets, 'articles': articles, 'near': near,
+        'foot': '조문: law.go.kr 현행 법령. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 기출 사례는 세트마다 출처(공공누리)를 단다. 답안·해설은 Claude가 쓴 초안이고 영신 검수 전이다. 법학고양은 출제 기관과 관계없는 학습 게임이다.',
     }
+    cards = [c for st in sets for c in st['cards']]
     rt = {'game': '법학고양', 'app': 'lawgoyang-records', 'prefix': 'lawgoyang-', 'skip': [], 'target': 'proto.html',
           'kinds': {'progress': '^lawgoyang-progress-v1$', 'missed': '^lawgoyang-(stage|missed)-v1$'}}
 
@@ -93,6 +154,11 @@ def main():
     left = re.findall(r'@[A-Z_]+@', page)
     if left:
         raise SystemExit(f'채우지 못한 자리: {left}')
+    if '--check' in sys.argv:
+        # 검사만: 결과 파일을 쓰지 않는다(여럿이 동시에 돌려도 부딪히지 않게)
+        for st in sets:
+            print(st['id'], len(st['cards']), '장 확인')
+        return
     cut = page.index('</style>') + len('</style>')
     head, body = page[:cut], page[cut:]
     full = ('<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n'
@@ -101,7 +167,7 @@ def main():
             '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>\n'
             + head + '\n</head>\n<body>\n' + body + '\n</body>\n</html>\n')
     (ROOT / 'proto.html').write_text(full, encoding='utf-8')
-    print('proto.html', len(cards), '장')
+    print('proto.html', len(sets), '세트', len(cards), '장')
     if '--artifact' in sys.argv:
         # Artifact 미리보기는 파일 내려받기가 막혀 기록 옮기기가 동작하지 않는다. 그래서 그 단추와 코드를 뺀다.
         prev = re.sub(r'<!-- RECORD_TRANSFER_UI_START -->.*?<!-- RECORD_TRANSFER_UI_END -->', '', page, flags=re.S)
