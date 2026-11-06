@@ -5,10 +5,10 @@
 ## 지금 상태
 
 - **설계안 채택(26.11.07 영신 "모두 동의해").** 추천을 모두 채택했고, 5년·10년(A3)만 조사 뒤에 정한다. 요약은 [PRINCIPLES 7-1](PRINCIPLES.md#7-1-설계안-결정), 전문은 [design/proposal-20261107.md](design/proposal-20261107.md). 읽기 페이지 https://claude.ai/artifact/SHQ9mxXn2L1q3AZD68ec1M
-- **시제품 있음, 배포 없음.** `proto.html`(생성물) ← [pipeline/](pipeline/README.md). 임시 민법 불법행위 사례 1개, 4장(제750조, 제756조 제1항 본문, 제763조 → 제396조). 사례·답안·해설은 Claude가 쓴 임시 예시(기출 아님). 빈칸 사다리 4단계, 인용·일부인용·기각·각하, 틀린 어절만 따라쓰기, '뜻은 맞음', 헷갈림 알림, 조문 제목 힌트, 첫 글자 힌트, 기록 옮기기(`lawgoyang-`).
+- **시제품 있음, 배포 없음.** `proto.html`(생성물) ← [pipeline/](pipeline/README.md). 임시 민법 불법행위 사례 1개, 4장(제750조, 제756조 제1항 본문, 제763조 → 제396조). 사례·답안·해설은 Claude가 쓴 임시 예시(기출 아님). 빈칸 사다리 4단계(앞에서부터: 번호만 → 첫 단어 → 첫 문구·첫 문장 → 전체, 26.11.07 영신), 인용·일부인용·기각·각하, 틀린 어절만 따라쓰기, '뜻은 맞음', 헷갈림 알림, 조문 제목 힌트, 첫 글자 힌트, 기록 옮기기(`lawgoyang-`).
   - 미리보기(Artifact, 기록 옮기기 단추 뺀 판): https://claude.ai/artifact/YTs5dJdTDsZhYtLbMY7zUR
   - 영신 직검수 페이지(4장 사례·답안·조문·해설, 줄 댓글): https://claude.ai/artifact/8d7VgGyWzfxw6RYYzmipMz
-  - 검사: `node pipeline/tests/judge.test.cjs` 13개, `node pipeline/tests/smoke.cjs proto.html`(Chromium 390px 한 판) 통과(26.11.07). 실제 폰 한글 자판(조합 중 입력)은 미확인.
+  - 검사: `node pipeline/tests/judge.test.cjs` 16개, `node pipeline/tests/smoke.cjs proto.html`(Chromium 390px 한 판) 통과(26.11.07). 실제 폰 한글 자판(조합 중 입력)은 미확인.
 - **조문 원문은 임시본:** API 키 전이라 law.go.kr 웹 화면 두 곳(lsInfoR·lsSideInfoP)을 대조해 받은 `sources/web/minbeop-20260317.json`(민법 2026. 3. 17. 시행, 법률 제21454호). 키가 오면 API로 다시 받아 대조한다([PRINCIPLES 2](PRINCIPLES.md#2-조문-원문은-정확하게)).
 - **창은 최근 10년으로 확정(26.11.07 영신).** 지금은 2017~2026(사시 마지막 2차 2017년 제59회 포함). 근거는 [PRINCIPLES 1](PRINCIPLES.md#1-무엇을-외우나-사례형-기출-조문), 분석은 [research/](research/)(변시 공법·민사 시범, 사시 2차 공법 이어 붙이기, 시험별 자료·이용 조건).
   - 진행 중: 사법시험 2차 민사(민법·민소, 2003~2017) 매핑. 결정에는 더 쓰지 않고, 원장(2017년분)과 보관함 자료로 쓴다.

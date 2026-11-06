@@ -60,7 +60,7 @@ def row(id, k, v, cls='v'):
 
 seen = set()
 for c in D['cards']:
-    P.append(f'<section class="card" id="{e(c["id"])}"><div class="id">{e(c["id"])} · {e(c["label"])} · 핵심어 {e(", ".join(c["key"]))}</div>')
+    P.append(f'<section class="card" id="{e(c["id"])}"><div class="id">{e(c["id"])} · {e(c["label"])} · 3단계 빈칸(첫 문구) {e(c["phrase"] or "자동")}</div>')
     if c['caseId'] not in seen:
         seen.add(c['caseId'])
         P.append(row(c['id'] + '-facts', '사례', e(c['facts'])))

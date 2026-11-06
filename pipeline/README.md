@@ -4,11 +4,11 @@
 
 | 원본 | 무엇 |
 |---|---|
-| `data/proto-cards.json` | 시제품 카드: 사례·설문·답안·인용할 조문(법·조·항·본문/단서)·핵심어·해설. 지금은 Claude가 쓴 임시 사례(기출 아님) |
+| `data/proto-cards.json` | 시제품 카드: 사례·설문·답안·인용할 조문(법·조·항·본문/단서)·첫 문구(3단계 빈칸 끝)·해설. 지금은 Claude가 쓴 임시 사례(기출 아님) |
 | `data/near.json` | '뜻은 맞음' 짝. 사람이 확인한 것만(설계안 D) |
 | `sources/web/*.json` | 조문 원문. API 키 전이라 law.go.kr 웹 화면 두 곳을 대조해 받은 임시본([PRINCIPLES 2](../PRINCIPLES.md#2-조문-원문은-정확하게)) |
 | `pipeline/game.html` | 게임 화면·조작 |
-| `pipeline/judge.js` | 판정 핵심(어절 단위 줄 맞춤, 인용·일부인용·기각·각하, 빈칸 사다리, 헷갈림 알림) |
+| `pipeline/judge.js` | 판정 핵심(어절 단위 줄 맞춤, 인용·일부인용·기각·각하, 앞에서부터 비우는 빈칸 사다리, 헷갈림 알림) |
 | `pipeline/record-transfer.js` | 기록 옮기기 공용 코드(탄고고양 사본에서 그대로 떼어 옴, 고치지 않음) |
 | `pipeline/comment-widget.js` | 직검수 페이지 줄 댓글 |
 
@@ -30,13 +30,13 @@ python3 -I pipeline/build.py --artifact <미리보기 파일>
 node pipeline/tests/judge.test.cjs
 ```
 
-판정 검사(13개).
+판정 검사(16개).
 
 ```bash
 node pipeline/tests/smoke.cjs proto.html
 ```
 
-브라우저로 한 판을 돈다: 인용 → 오답과 틀린 어절만 따라쓰기 → 각하 → 결과·숙련도 저장 → 한 판 더(빈칸 2단계). Playwright가 필요하다.
+브라우저로 한 판을 돈다: 인용 → 오답과 틀린 어절만 따라쓰기 → 각하 → 결과·숙련도 저장 → 한 판 더(빈칸 2단계, 번호 + 첫 단어). Playwright가 필요하다.
 
 ```bash
 python3 -I pipeline/review-page.py --out <파일>

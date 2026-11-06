@@ -44,6 +44,8 @@ def main():
                 raise SystemExit(f"제{ci['jo']}조는 항이 여럿이라 para를 정해야 함")
             text = paras[0]['text']
         text = part_text(text, ci.get('part'))
+        if ci.get('phrase') and not re.sub(r'\s+', ' ', text).startswith(ci['phrase']):
+            raise SystemExit(f"제{ci['jo']}조 첫 문구가 원문 앞부분과 다름: {ci['phrase']}")
         tail = (f" 제{ci['para']}항" if ci.get('para') else '') + (f" {ci['part']}" if ci.get('part') else '')
         return {
             'law': ci['law'], 'jo': ci['jo'], 'title': art['title'], 'text': text,
@@ -51,7 +53,7 @@ def main():
             'label': f"{ci['law']} 제{ci['jo']}조{tail}",
             'joLabel': f"제{ci['jo']}조",
             'skey': ':'.join(str(x) for x in [ci['law'], ci['jo'], ci.get('para'), ci.get('part')] if x),
-            'key': ci.get('key', []), 'note': ci.get('note', []),
+            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []),
         }
 
     cards = []

@@ -11,7 +11,8 @@
      띄어쓰기는 칸 배치로 보여 주고 치지 않는다(설계안 D, 영신 "모두 동의해").
    - 판정은 어절 단위다. 친 글자를 정답과 줄 맞춤(편집 거리)해서, 글자 하나를 빼먹거나 더 쳐도
      뒤 어절이 줄줄이 틀리지 않게 한다.
-   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다. */
+   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다.
+   - 빈칸 사다리는 앞에서부터: 번호 → 첫 어절 → 첫 문구(첫 문장) → 전체. */
 (function (root) {
   'use strict';
   var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
@@ -29,30 +30,35 @@
   }
   function wordText(w) { return w.chars.filter(function (c) { return c.slot; }).map(function (c) { return c.ch; }).join(''); }
 
-  /* 빈칸 사다리(설계안 C): 어느 칸을 미리 보여 줄지.
-     1 핵심어만 · 2 어절 절반 · 3 첫 글자만 · 4 통빈칸. 번호(cite) 어절은 늘 빈칸. */
-  function givenMap(ws, stage) {
-    var n = ws.length, blank = ws.map(function (w) { return !!(w.cite || stage >= 3 || (stage === 1 && w.key)); });
-    if (stage === 2) {
-      var need = Math.ceil(n / 2);
-      ws.forEach(function (w, i) { if (w.cite || w.key) blank[i] = true; });
-      var count = blank.filter(Boolean).length;
-      for (var i = 1; i < n && count < need; i += 2) if (!blank[i]) { blank[i] = true; count++; }
-      for (var j = 0; j < n && count < need; j++) if (!blank[j]) { blank[j] = true; count++; }
+  /* 빈칸 사다리: 앞에서부터 차례로 비운다(26.11.07 영신 "임의로 뚫지말고 그냥 앞에서부터 단계적으로 가는걸로 가자",
+     "1단계 750조 (조문숫자만) 2단계 첫단어만. 3단계 첫문구 내지 첫문장만 4단계 전체").
+     1 번호만 · 2 번호 + 첫 어절 · 3 번호 + 첫 문구(두 문장 이상이면 첫 문장) · 4 전체. 비우지 않은 뒤쪽은 보여 준다.
+     첫 문구는 카드 데이터(phrase)로 정한다. 없으면 두 어절 넘어 처음 나오는 쉼표까지, 그것도 없으면 앞 절반. */
+  var STAGES = 4;
+  function endsWith(w, re) { var c = w.chars[w.chars.length - 1]; return !!c && !c.slot && re.test(c.ch); }
+  function stage3Len(ws, phrase) {
+    var body = ws.filter(function (w) { return !w.cite; }), n = body.length, i;
+    for (i = 0; i < n - 1; i++) if (endsWith(body[i], /[.。]/)) return { len: i + 1, kind: '첫 문장' };
+    if (phrase) {
+      var pw = String(phrase).split(/\s+/).filter(Boolean), ok = pw.length <= n;
+      for (i = 0; ok && i < pw.length; i++) if (body[i].chars.map(function (c) { return c.ch; }).join('') !== pw[i]) ok = false;
+      if (ok && pw.length) return { len: pw.length, kind: '첫 문구' };
     }
-    if (stage === 1 && !ws.some(function (w) { return w.key && !w.cite; })) {
-      // 핵심어를 안 정한 조문은 절반 쪽으로
-      return givenMap(ws, 2);
-    }
-    return ws.map(function (w, i) {
-      var first = true;
-      return w.chars.map(function (c) {
-        if (!c.slot) return true;
-        var g = !blank[i];
-        if (stage === 3 && !w.cite && first) g = true;
-        first = false;
-        return g;
-      });
+    for (i = 1; i < n - 1; i++) if (endsWith(body[i], /[,，]/)) return { len: i + 1, kind: '첫 문구' };
+    return { len: Math.max(1, Math.ceil(n / 2)), kind: '첫 문구' };
+  }
+  function blankLen(ws, stage, phrase) {
+    var n = ws.filter(function (w) { return !w.cite; }).length;
+    if (stage <= 1) return 0;
+    if (stage === 2) return Math.min(1, n);
+    if (stage === 3) return stage3Len(ws, phrase).len;
+    return n;
+  }
+  function givenMap(ws, stage, phrase) {
+    var cut = blankLen(ws, Math.max(1, Math.min(STAGES, stage || 1)), phrase), seen = 0;
+    return ws.map(function (w) {
+      var blank = w.cite ? true : (seen++ < cut);
+      return w.chars.map(function (c) { return !c.slot || !blank; });
     });
   }
 
@@ -134,10 +140,10 @@
     return null;
   }
 
-  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
+  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, stage3Len: stage3Len, STAGES: STAGES, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LawJudge = api;
 })(this);
-·{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "key": ["고의", "과실로", "배상할", "책임이"], "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "key": ["사무집행에", "관하여", "제삼자에게"], "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "key": ["제393조", "제394조", "제396조", "제399조의", "준용한다"], "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "key": ["채권자에게", "과실이", "참작하여야"], "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}를 채워 proto.html(생성물)을 만든다. 생성물을 고치지 말고 이 파일과 data/를 고친다. -->
+·{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "phrase": "고의 또는 과실로 인한 위법행위로", "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "phrase": "타인을 사용하여 어느 사무에 종사하게 한 자는", "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "phrase": "제393조, 제394조, 제396조, 제399조의 규정은", "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "phrase": "채무불이행에 관하여 채권자에게 과실이 있는 때에는", "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}를 채워 proto.html(생성물)을 만든다. 생성물을 고치지 말고 이 파일과 data/를 고친다. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* 법전 한 장: 조문은 명조, 화면 글은 고딕, 판정은 인주색 도장 */
@@ -261,7 +267,7 @@ body.rt-lock{overflow:hidden}
    <div class="lab"><span id="courseTag" class="tag">임시 예시 · 기출 아님</span></div>
    <h2 id="courseTitle">임시판 · 민법 불법행위</h2>
    <ul class="arts" id="arts"></ul>
-   <ol class="ladder"><li>빈칸은 조문마다 커진다: 핵심어 → 어절 절반 → 첫 글자만 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
+   <ol class="ladder"><li>빈칸은 조문마다 앞에서부터 커진다: 번호만 → 첫 단어까지 → 첫 문구까지 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
    <div class="row"><button class="btn" id="start" type="button">시작</button><span class="src" id="homeNote"></span></div>
   </div>
   <!-- RECORD_TRANSFER_UI_START -->
@@ -326,7 +332,8 @@ body.rt-lock{overflow:hidden}
      띄어쓰기는 칸 배치로 보여 주고 치지 않는다(설계안 D, 영신 "모두 동의해").
    - 판정은 어절 단위다. 친 글자를 정답과 줄 맞춤(편집 거리)해서, 글자 하나를 빼먹거나 더 쳐도
      뒤 어절이 줄줄이 틀리지 않게 한다.
-   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다. */
+   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다.
+   - 빈칸 사다리는 앞에서부터: 번호 → 첫 어절 → 첫 문구(첫 문장) → 전체. */
 (function (root) {
   'use strict';
   var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
@@ -344,30 +351,35 @@ body.rt-lock{overflow:hidden}
   }
   function wordText(w) { return w.chars.filter(function (c) { return c.slot; }).map(function (c) { return c.ch; }).join(''); }
 
-  /* 빈칸 사다리(설계안 C): 어느 칸을 미리 보여 줄지.
-     1 핵심어만 · 2 어절 절반 · 3 첫 글자만 · 4 통빈칸. 번호(cite) 어절은 늘 빈칸. */
-  function givenMap(ws, stage) {
-    var n = ws.length, blank = ws.map(function (w) { return !!(w.cite || stage >= 3 || (stage === 1 && w.key)); });
-    if (stage === 2) {
-      var need = Math.ceil(n / 2);
-      ws.forEach(function (w, i) { if (w.cite || w.key) blank[i] = true; });
-      var count = blank.filter(Boolean).length;
-      for (var i = 1; i < n && count < need; i += 2) if (!blank[i]) { blank[i] = true; count++; }
-      for (var j = 0; j < n && count < need; j++) if (!blank[j]) { blank[j] = true; count++; }
+  /* 빈칸 사다리: 앞에서부터 차례로 비운다(26.11.07 영신 "임의로 뚫지말고 그냥 앞에서부터 단계적으로 가는걸로 가자",
+     "1단계 750조 (조문숫자만) 2단계 첫단어만. 3단계 첫문구 내지 첫문장만 4단계 전체").
+     1 번호만 · 2 번호 + 첫 어절 · 3 번호 + 첫 문구(두 문장 이상이면 첫 문장) · 4 전체. 비우지 않은 뒤쪽은 보여 준다.
+     첫 문구는 카드 데이터(phrase)로 정한다. 없으면 두 어절 넘어 처음 나오는 쉼표까지, 그것도 없으면 앞 절반. */
+  var STAGES = 4;
+  function endsWith(w, re) { var c = w.chars[w.chars.length - 1]; return !!c && !c.slot && re.test(c.ch); }
+  function stage3Len(ws, phrase) {
+    var body = ws.filter(function (w) { return !w.cite; }), n = body.length, i;
+    for (i = 0; i < n - 1; i++) if (endsWith(body[i], /[.。]/)) return { len: i + 1, kind: '첫 문장' };
+    if (phrase) {
+      var pw = String(phrase).split(/\s+/).filter(Boolean), ok = pw.length <= n;
+      for (i = 0; ok && i < pw.length; i++) if (body[i].chars.map(function (c) { return c.ch; }).join('') !== pw[i]) ok = false;
+      if (ok && pw.length) return { len: pw.length, kind: '첫 문구' };
     }
-    if (stage === 1 && !ws.some(function (w) { return w.key && !w.cite; })) {
-      // 핵심어를 안 정한 조문은 절반 쪽으로
-      return givenMap(ws, 2);
-    }
-    return ws.map(function (w, i) {
-      var first = true;
-      return w.chars.map(function (c) {
-        if (!c.slot) return true;
-        var g = !blank[i];
-        if (stage === 3 && !w.cite && first) g = true;
-        first = false;
-        return g;
-      });
+    for (i = 1; i < n - 1; i++) if (endsWith(body[i], /[,，]/)) return { len: i + 1, kind: '첫 문구' };
+    return { len: Math.max(1, Math.ceil(n / 2)), kind: '첫 문구' };
+  }
+  function blankLen(ws, stage, phrase) {
+    var n = ws.filter(function (w) { return !w.cite; }).length;
+    if (stage <= 1) return 0;
+    if (stage === 2) return Math.min(1, n);
+    if (stage === 3) return stage3Len(ws, phrase).len;
+    return n;
+  }
+  function givenMap(ws, stage, phrase) {
+    var cut = blankLen(ws, Math.max(1, Math.min(STAGES, stage || 1)), phrase), seen = 0;
+    return ws.map(function (w) {
+      var blank = w.cite ? true : (seen++ < cut);
+      return w.chars.map(function (c) { return !c.slot || !blank; });
     });
   }
 
@@ -449,11 +461,11 @@ body.rt-lock{overflow:hidden}
     return null;
   }
 
-  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
+  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, stage3Len: stage3Len, STAGES: STAGES, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LawJudge = api;
 })(this);
 </script>
-<script id="law-data" type="application/json">{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "key": ["고의", "과실로", "배상할", "책임이"], "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "key": ["사무집행에", "관하여", "제삼자에게"], "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "key": ["제393조", "제394조", "제396조", "제399조의", "준용한다"], "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "key": ["채권자에게", "과실이", "참작하여야"], "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}</script>
+<script id="law-data" type="application/json">{"id": "proto", "runKey": "P1", "title": "임시판 · 민법 불법행위", "label": "임시 예시 · 기출 아님", "foot": "조문: law.go.kr 민법 [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정]. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 사례·답안·해설은 Claude가 쓴 임시 예시이고 기출이 아니다.", "cards": [{"law": "민법", "jo": "750", "title": "불법행위의 내용", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다.", "cite": "750조", "label": "민법 제750조", "joLabel": "제750조", "skey": "민법:750", "phrase": "고의 또는 과실로 인한 위법행위로", "note": ["원문은 '위법행위'를 붙여 쓴다. 칸도 원문 띄어쓰기대로 나뉜다."], "id": "P1-1", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 갑에게 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 휴대전화를 보다가 을을 치어 다치게 했으므로, 을에게 불법행위에 따른 손해배상을 하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제750조(불법행위의 내용) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "756", "title": "사용자의 배상책임", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다.", "cite": "756조 제1항 본문", "label": "민법 제756조 제1항 본문", "joLabel": "제756조", "skey": "민법:756:1:본문", "phrase": "타인을 사용하여 어느 사무에 종사하게 한 자는", "note": ["'제삼자'는 숫자 3이 아니라 한글 '삼'이다.", "제1항 단서: 선임·감독에 상당한 주의를 했거나, 주의를 했어도 손해가 났을 경우에는 책임이 없다."], "id": "P1-2", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을은 병 주식회사에도 손해배상을 청구할 수 있는가?", "answer": "", "prefix": "갑은 병 회사의 배달 업무를 하던 중 사고를 냈고, 병 회사가 갑의 선임과 감독에 상당한 주의를 했다는 사정도 보이지 않으므로, 병 회사는 사용자로서 을에게 손해를 배상하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제756조(사용자의 배상책임) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "763", "title": "준용규정", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다.", "cite": "763조", "label": "민법 제763조", "joLabel": "제763조", "skey": "민법:763", "phrase": "제393조, 제394조, 제396조, 제399조의 규정은", "note": ["채무불이행 조문 넷을 끌어 쓴다: 제393조(손해배상의 범위), 제394조(손해배상의 방법), 제396조(과실상계), 제399조(손해배상자의 대위)."], "id": "P1-3a", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제", "suffix": ")", "srcLine": "민법 제763조(준용규정) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}, {"law": "민법", "jo": "396", "title": "과실상계", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다.", "cite": "396조", "label": "민법 제396조", "joLabel": "제396조", "skey": "민법:396", "phrase": "채무불이행에 관하여 채권자에게 과실이 있는 때에는", "note": ["원래 채무불이행 조문이라 불법행위에는 제763조를 거쳐 쓴다.", "'정할 때'가 아니라 '정함에'."], "id": "P1-3b", "caseId": "P1", "caseLabel": "임시 예시 · 기출 아님", "facts": "갑은 병 주식회사의 배달원이다. 갑은 회사 자전거로 음식을 배달하던 중 휴대전화를 보다가 횡단보도를 건너던 을을 치어 다치게 했다. 을은 보행 신호가 빨간불로 바뀐 뒤에 횡단보도에 들어섰다.", "q": "을에게도 잘못이 있다면 손해배상에 어떤 영향이 있는가?", "answer": "", "prefix": "을도 빨간불에 횡단보도에 들어선 과실이 있으므로, 법원은 손해배상의 책임과 금액을 정할 때 을의 과실을 참작하여야 한다(민법 제763조 제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다. 제", "suffix": ")", "srcLine": "민법 제396조(과실상계) · [시행 2026. 3. 17.] [법률 제21454호, 2026. 3. 17., 일부개정] · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, 2026-11-06)"}], "articles": [{"label": "제750조", "text": "고의 또는 과실로 인한 위법행위로 타인에게 손해를 가한 자는 그 손해를 배상할 책임이 있다."}, {"label": "제756조", "text": "타인을 사용하여 어느 사무에 종사하게 한 자는 피용자가 그 사무집행에 관하여 제삼자에게 가한 손해를 배상할 책임이 있다. 그러나 사용자가 피용자의 선임 및 그 사무감독에 상당한 주의를 한 때 또는 상당한 주의를 하여도 손해가 있을 경우에는 그러하지 아니하다. 사용자에 갈음하여 그 사무를 감독하는 자도 전항의 책임이 있다. 전2항의 경우에 사용자 또는 감독자는 피용자에 대하여 구상권을 행사할 수 있다."}, {"label": "제763조", "text": "제393조, 제394조, 제396조, 제399조의 규정은 불법행위로 인한 손해배상에 준용한다."}, {"label": "제393조", "text": "채무불이행으로 인한 손해배상은 통상의 손해를 그 한도로 한다. 특별한 사정으로 인한 손해는 채무자가 그 사정을 알았거나 알 수 있었을 때에 한하여 배상의 책임이 있다."}, {"label": "제394조", "text": "다른 의사표시가 없으면 손해는 금전으로 배상한다."}, {"label": "제396조", "text": "채무불이행에 관하여 채권자에게 과실이 있는 때에는 법원은 손해배상의 책임 및 그 금액을 정함에 이를 참작하여야 한다."}, {"label": "제399조", "text": "채권자가 그 채권의 목적인 물건 또는 권리의 가액전부를 손해배상으로 받은 때에는 채무자는 그 물건 또는 권리에 관하여 당연히 채권자를 대위한다."}], "near": {"가한": ["입힌"]}}</script>
 <script>
 (function(){
 'use strict';
@@ -478,7 +490,9 @@ var LINES={
 };
 var stages=load(K.stage,{}),missed=load(K.missed,{});
 function stageOf(k){var s=Number(stages[k]);return s>=1&&s<=4?s:1;}
-var STAGE_NAME={1:'핵심어만',2:'어절 절반',3:'첫 글자만',4:'통빈칸'};
+var STAGE_NAME={1:'번호만',2:'첫 단어까지',3:'첫 문구까지',4:'통빈칸'};
+function stageName(c,s){if(s!==3)return STAGE_NAME[s];var ws=wordsOf(c);return J.stage3Len(ws,c.phrase).kind+'까지';}
+function wordsOf(c){return J.words(c.cite,{cite:true}).concat(J.words(c.text));}
 
 /* 홈 */
 function renderHome(){
@@ -487,7 +501,7 @@ function renderHome(){
   D.cards.forEach(function(c){if(seen[c.skey])return;seen[c.skey]=1;
     var li=document.createElement('li'),s=stageOf(c.skey);
     li.innerHTML='<span class="t"></span><span class="dots" aria-label="빈칸 '+s+'단계">'+[1,2,3,4].map(function(i){return '<i class="'+(i<=s?'on':'')+'"></i>';}).join('')+'</span>';
-    li.querySelector('.t').textContent=c.label+' · '+STAGE_NAME[s];ul.appendChild(li);});
+    li.querySelector('.t').textContent=c.label+' · '+stageName(c,s);ul.appendChild(li);});
   $('homeNote').textContent=D.cards.length+'장 · 3~5분';
   $('foot').textContent=D.foot;
 }
@@ -505,12 +519,12 @@ function say(t){$('playCat').textContent=t;}
 function showCard(first){
   var c=D.cards[run.i],prev=D.cards[run.i-1];
   var st=stageOf(c.skey);
-  var ws=J.words(c.cite,{cite:true}).concat(J.words(c.text).map(function(w){var o=Object.assign({},w);o.key=c.key.indexOf(J.wordText(w))>=0;return o;}));
-  var given=J.givenMap(ws,st);
+  var ws=wordsOf(c);
+  var given=J.givenMap(ws,st,c.phrase);
   cur={c:c,ws:ws,given:given,stage:st,mode:'ask',hintUsed:false,timer:null,readTimer:null,started:false};
   cur.exp=J.expected(ws,given);
   $('prog').textContent=(run.i+1)+' / '+D.cards.length;
-  $('stageChip').textContent='빈칸 '+st+'단계 · '+STAGE_NAME[st];
+  $('stageChip').textContent='빈칸 '+st+'단계 · '+stageName(c,st);
   var same=prev&&prev.caseId===c.caseId;
   $('facts').textContent=c.facts;$('caseTag').textContent=c.caseLabel;
   $('facts').hidden=same;$('fold').hidden=!same;$('fold').textContent='사례 보기';

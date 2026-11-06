@@ -120,7 +120,7 @@ body.rt-lock{overflow:hidden}
    <div class="lab"><span id="courseTag" class="tag">임시 예시 · 기출 아님</span></div>
    <h2 id="courseTitle">임시판 · 민법 불법행위</h2>
    <ul class="arts" id="arts"></ul>
-   <ol class="ladder"><li>빈칸은 조문마다 커진다: 핵심어 → 어절 절반 → 첫 글자만 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
+   <ol class="ladder"><li>빈칸은 조문마다 앞에서부터 커진다: 번호만 → 첫 단어까지 → 첫 문구까지 → 통빈칸</li><li>맞히면 한 칸 오르고, 틀리면 한 칸 내려간다</li></ol>
    <div class="row"><button class="btn" id="start" type="button">시작</button><span class="src" id="homeNote"></span></div>
   </div>
   <!-- RECORD_TRANSFER_UI_START -->
@@ -206,7 +206,9 @@ var LINES={
 };
 var stages=load(K.stage,{}),missed=load(K.missed,{});
 function stageOf(k){var s=Number(stages[k]);return s>=1&&s<=4?s:1;}
-var STAGE_NAME={1:'핵심어만',2:'어절 절반',3:'첫 글자만',4:'통빈칸'};
+var STAGE_NAME={1:'번호만',2:'첫 단어까지',3:'첫 문구까지',4:'통빈칸'};
+function stageName(c,s){if(s!==3)return STAGE_NAME[s];var ws=wordsOf(c);return J.stage3Len(ws,c.phrase).kind+'까지';}
+function wordsOf(c){return J.words(c.cite,{cite:true}).concat(J.words(c.text));}
 
 /* 홈 */
 function renderHome(){
@@ -215,7 +217,7 @@ function renderHome(){
   D.cards.forEach(function(c){if(seen[c.skey])return;seen[c.skey]=1;
     var li=document.createElement('li'),s=stageOf(c.skey);
     li.innerHTML='<span class="t"></span><span class="dots" aria-label="빈칸 '+s+'단계">'+[1,2,3,4].map(function(i){return '<i class="'+(i<=s?'on':'')+'"></i>';}).join('')+'</span>';
-    li.querySelector('.t').textContent=c.label+' · '+STAGE_NAME[s];ul.appendChild(li);});
+    li.querySelector('.t').textContent=c.label+' · '+stageName(c,s);ul.appendChild(li);});
   $('homeNote').textContent=D.cards.length+'장 · 3~5분';
   $('foot').textContent=D.foot;
 }
@@ -233,12 +235,12 @@ function say(t){$('playCat').textContent=t;}
 function showCard(first){
   var c=D.cards[run.i],prev=D.cards[run.i-1];
   var st=stageOf(c.skey);
-  var ws=J.words(c.cite,{cite:true}).concat(J.words(c.text).map(function(w){var o=Object.assign({},w);o.key=c.key.indexOf(J.wordText(w))>=0;return o;}));
-  var given=J.givenMap(ws,st);
+  var ws=wordsOf(c);
+  var given=J.givenMap(ws,st,c.phrase);
   cur={c:c,ws:ws,given:given,stage:st,mode:'ask',hintUsed:false,timer:null,readTimer:null,started:false};
   cur.exp=J.expected(ws,given);
   $('prog').textContent=(run.i+1)+' / '+D.cards.length;
-  $('stageChip').textContent='빈칸 '+st+'단계 · '+STAGE_NAME[st];
+  $('stageChip').textContent='빈칸 '+st+'단계 · '+stageName(c,st);
   var same=prev&&prev.caseId===c.caseId;
   $('facts').textContent=c.facts;$('caseTag').textContent=c.caseLabel;
   $('facts').hidden=same;$('fold').hidden=!same;$('fold').textContent='사례 보기';

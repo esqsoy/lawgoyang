@@ -3,7 +3,8 @@
      띄어쓰기는 칸 배치로 보여 주고 치지 않는다(설계안 D, 영신 "모두 동의해").
    - 판정은 어절 단위다. 친 글자를 정답과 줄 맞춤(편집 거리)해서, 글자 하나를 빼먹거나 더 쳐도
      뒤 어절이 줄줄이 틀리지 않게 한다.
-   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다. */
+   - 인용(다 맞음)·일부인용(어절 3분의 1 이하 틀림)·기각·각하(아무것도 안 침). 일부인용도 오답이다.
+   - 빈칸 사다리는 앞에서부터: 번호 → 첫 어절 → 첫 문구(첫 문장) → 전체. */
 (function (root) {
   'use strict';
   var FIXED = /[\s.,·ㆍ・'"“”‘’()（）「」『』<>〈〉《》\[\]{}:;!?…~\-–—\/]/;
@@ -21,30 +22,35 @@
   }
   function wordText(w) { return w.chars.filter(function (c) { return c.slot; }).map(function (c) { return c.ch; }).join(''); }
 
-  /* 빈칸 사다리(설계안 C): 어느 칸을 미리 보여 줄지.
-     1 핵심어만 · 2 어절 절반 · 3 첫 글자만 · 4 통빈칸. 번호(cite) 어절은 늘 빈칸. */
-  function givenMap(ws, stage) {
-    var n = ws.length, blank = ws.map(function (w) { return !!(w.cite || stage >= 3 || (stage === 1 && w.key)); });
-    if (stage === 2) {
-      var need = Math.ceil(n / 2);
-      ws.forEach(function (w, i) { if (w.cite || w.key) blank[i] = true; });
-      var count = blank.filter(Boolean).length;
-      for (var i = 1; i < n && count < need; i += 2) if (!blank[i]) { blank[i] = true; count++; }
-      for (var j = 0; j < n && count < need; j++) if (!blank[j]) { blank[j] = true; count++; }
+  /* 빈칸 사다리: 앞에서부터 차례로 비운다(26.11.07 영신 "임의로 뚫지말고 그냥 앞에서부터 단계적으로 가는걸로 가자",
+     "1단계 750조 (조문숫자만) 2단계 첫단어만. 3단계 첫문구 내지 첫문장만 4단계 전체").
+     1 번호만 · 2 번호 + 첫 어절 · 3 번호 + 첫 문구(두 문장 이상이면 첫 문장) · 4 전체. 비우지 않은 뒤쪽은 보여 준다.
+     첫 문구는 카드 데이터(phrase)로 정한다. 없으면 두 어절 넘어 처음 나오는 쉼표까지, 그것도 없으면 앞 절반. */
+  var STAGES = 4;
+  function endsWith(w, re) { var c = w.chars[w.chars.length - 1]; return !!c && !c.slot && re.test(c.ch); }
+  function stage3Len(ws, phrase) {
+    var body = ws.filter(function (w) { return !w.cite; }), n = body.length, i;
+    for (i = 0; i < n - 1; i++) if (endsWith(body[i], /[.。]/)) return { len: i + 1, kind: '첫 문장' };
+    if (phrase) {
+      var pw = String(phrase).split(/\s+/).filter(Boolean), ok = pw.length <= n;
+      for (i = 0; ok && i < pw.length; i++) if (body[i].chars.map(function (c) { return c.ch; }).join('') !== pw[i]) ok = false;
+      if (ok && pw.length) return { len: pw.length, kind: '첫 문구' };
     }
-    if (stage === 1 && !ws.some(function (w) { return w.key && !w.cite; })) {
-      // 핵심어를 안 정한 조문은 절반 쪽으로
-      return givenMap(ws, 2);
-    }
-    return ws.map(function (w, i) {
-      var first = true;
-      return w.chars.map(function (c) {
-        if (!c.slot) return true;
-        var g = !blank[i];
-        if (stage === 3 && !w.cite && first) g = true;
-        first = false;
-        return g;
-      });
+    for (i = 1; i < n - 1; i++) if (endsWith(body[i], /[,，]/)) return { len: i + 1, kind: '첫 문구' };
+    return { len: Math.max(1, Math.ceil(n / 2)), kind: '첫 문구' };
+  }
+  function blankLen(ws, stage, phrase) {
+    var n = ws.filter(function (w) { return !w.cite; }).length;
+    if (stage <= 1) return 0;
+    if (stage === 2) return Math.min(1, n);
+    if (stage === 3) return stage3Len(ws, phrase).len;
+    return n;
+  }
+  function givenMap(ws, stage, phrase) {
+    var cut = blankLen(ws, Math.max(1, Math.min(STAGES, stage || 1)), phrase), seen = 0;
+    return ws.map(function (w) {
+      var blank = w.cite ? true : (seen++ < cut);
+      return w.chars.map(function (c) { return !c.slot || !blank; });
     });
   }
 
@@ -126,6 +132,6 @@
     return null;
   }
 
-  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
+  var api = { norm: norm, words: words, wordText: wordText, givenMap: givenMap, stage3Len: stage3Len, STAGES: STAGES, expected: expected, align: align, judge: judge, confusion: confusion, isFixed: isFixed };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LawJudge = api;
 })(this);

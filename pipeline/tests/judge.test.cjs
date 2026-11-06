@@ -7,7 +7,8 @@ let n = 0;
 function t(name, f) { f(); n++; console.log('ok', name); }
 
 const A750 = src.articles['750'].paras[0].text;
-const ws = J.words('750조', { cite: true }).concat(J.words(A750).map(w => ({ ...w, key: ['고의', '과실로', '배상할', '책임이'].includes(J.wordText(w)) })));
+const ws = J.words('750조', { cite: true }).concat(J.words(A750));
+const P750 = '고의 또는 과실로 인한 위법행위로';
 const all4 = J.givenMap(ws, 4);
 const answer = '750조' + A750;
 
@@ -44,23 +45,34 @@ t('번호를 틀리면 번호 어절이 틀린다', () => {
   const r = J.judge(ws, all4, answer.replace('750조', '751조'));
   assert.deepStrictEqual(r.wrong.map(i => J.wordText(ws[i])), ['750조']);
 });
-t('사다리 1단계: 번호와 핵심어만 빈칸', () => {
-  const g = J.givenMap(ws, 1);
-  const blank = ws.filter((w, i) => g[i].some(x => !x)).map(J.wordText);
-  assert.deepStrictEqual(blank, ['750조', '고의', '과실로', '배상할', '책임이']);
-  assert.strictEqual(J.judge(ws, g, '750조고의과실로배상할책임이').verdict, '인용');
+const blankWords = g => ws.filter((w, i) => g[i].some(x => !x)).map(J.wordText);
+t('사다리 1단계: 번호만 빈칸', () => {
+  assert.deepStrictEqual(blankWords(J.givenMap(ws, 1, P750)), ['750조']);
+  assert.strictEqual(J.judge(ws, J.givenMap(ws, 1, P750), '750조').verdict, '인용');
 });
-t('사다리 2단계: 어절 절반 이상, 번호·핵심어 포함', () => {
-  const g = J.givenMap(ws, 2);
-  const blank = ws.filter((w, i) => g[i].some(x => !x)).map(J.wordText);
-  assert.ok(blank.length >= Math.ceil(ws.length / 2));
-  ['750조', '고의', '과실로', '배상할', '책임이'].forEach(k => assert.ok(blank.includes(k), k));
+t('사다리 2단계: 번호 + 첫 단어', () => {
+  assert.deepStrictEqual(blankWords(J.givenMap(ws, 2, P750)), ['750조', '고의']);
 });
-t('사다리 3단계: 어절마다 첫 글자만 보임, 번호는 다 빈칸', () => {
-  const g = J.givenMap(ws, 3);
-  assert.deepStrictEqual(g[0], [false, false, false, false]);
-  const i = ws.findIndex(w => J.wordText(w) === '위법행위로');
-  assert.deepStrictEqual(g[i], [true, false, false, false, false]);
+t('사다리 3단계: 번호 + 첫 문구(카드에 정한 것)', () => {
+  assert.deepStrictEqual(blankWords(J.givenMap(ws, 3, P750)), ['750조', '고의', '또는', '과실로', '인한', '위법행위로']);
+  assert.strictEqual(J.stage3Len(ws, P750).kind, '첫 문구');
+});
+t('사다리 3단계: 두 문장 이상이면 첫 문장', () => {
+  const t756 = src.articles['756'].paras[0].text; // 본문 + 단서(그러나 …) 두 문장
+  const w2 = J.words('756조 제1항', { cite: true }).concat(J.words(t756));
+  const r = J.stage3Len(w2, '');
+  assert.strictEqual(r.kind, '첫 문장');
+  assert.strictEqual(J.wordText(w2.filter(w => !w.cite)[r.len - 1]), '있다');
+});
+t('사다리 3단계: 첫 문구가 원문과 안 맞으면 쉼표·절반으로 대신', () => {
+  assert.strictEqual(J.stage3Len(ws, '엉뚱한 문구').len, Math.ceil(14 / 2));
+});
+t('사다리 4단계: 통빈칸, 앞에서부터만 커진다', () => {
+  assert.strictEqual(blankWords(J.givenMap(ws, 4, P750)).length, ws.length);
+  for (let s = 1; s < 4; s++) {
+    const a = blankWords(J.givenMap(ws, s, P750)), b = blankWords(J.givenMap(ws, s + 1, P750));
+    assert.deepStrictEqual(b.slice(0, a.length), a);
+  }
 });
 t('헷갈림 알림: 다른 조문 구절을 치면 그 조문을 알린다', () => {
   const others = [{ label: '제396조', text: src.articles['396'].paras[0].text }];
