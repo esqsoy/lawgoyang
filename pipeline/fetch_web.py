@@ -23,7 +23,7 @@ CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳'
 NOTE = re.compile(r'\s*(?:<(?:개정|신설|전문개정|본조신설|제목개정|타법개정)[^>]*>|\[(?:개정|신설|전문개정|본조신설|제목개정|타법개정|시행일|종전|제\d+조)[^\]]*\])\s*')
 
 
-def get(url, path, tries=4):
+def get(url, path, tries=6):
     if path.exists() and path.stat().st_size > 1000:
         return path.read_text(encoding='utf-8')
     for k in range(tries):

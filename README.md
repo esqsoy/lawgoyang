@@ -4,7 +4,7 @@
 
 단어장 시리즈와 성격이 달라 고유 설계로 간다. 단어장에서는 고양이 말투, 사람 이름 규칙, 기록하는 법, 문장 안 입력칸과 오답 따라쓰기, 기록 옮기기만 가져온다([PRINCIPLES 0-1](PRINCIPLES.md#0-1-단어장에서-가져오는-것)).
 
-- 지금 상태: 기출 조문 원장 v0(변시·사시), 2026 변시 14세트 카드(검수 전), 시제품 `proto.html`. 배포 없음. [HANDOFF.md](HANDOFF.md)
+- 지금 상태: 기출 조문 원장 v0(변시·사시, 외울 조문 338), 2026·2025·2024 변시 34세트 245장 카드(검수 전), 시제품 `proto.html`. 배포 없음. [HANDOFF.md](HANDOFF.md)
 - 만드는 법과 검사: [pipeline/README.md](pipeline/README.md)
 - 원칙과 이유: [PRINCIPLES.md](PRINCIPLES.md)
 - 설계안(26.11.07 채택): [design/proposal-20261107.md](design/proposal-20261107.md)
