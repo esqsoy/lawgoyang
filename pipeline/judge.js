@@ -27,18 +27,25 @@
   /* 빈칸 사다리: 앞에서부터 차례로 비운다(26.11.07 영신 "임의로 뚫지말고 그냥 앞에서부터 단계적으로 가는걸로 가자",
      "1단계 750조 (조문숫자만) 2단계 첫단어만. 3단계 첫문구 내지 첫문장만 4단계 전체").
      1 번호만 · 2 번호 + 첫 어절 · 3 번호 + 첫 문구(두 문장 이상이면 첫 문장) · 4 전체. 비우지 않은 뒤쪽은 보여 준다.
-     첫 문구는 카드 데이터(phrase)로 정한다. 없으면 두 어절 넘어 처음 나오는 쉼표까지, 그것도 없으면 앞 절반. */
+     첫 문구는 카드 데이터(phrase)로 정한다. 없으면 첫 문장(두 문장 이상일 때), 두 어절 넘어 처음 나오는 쉼표, 앞 절반 순서. */
   var STAGES = 4;
   function endsWith(w, re) { var c = w.chars[w.chars.length - 1]; return !!c && !c.slot && re.test(c.ch); }
+  /* 첫 문구 차례: 카드에 정한 phrase → 첫 문장(두 문장 이상일 때) → 두 어절 넘어 첫 쉼표 → 앞 절반.
+     괄호 안의 마침표·쉼표('(…포함한다. 이하 같다)')는 문장·문구 끝으로 보지 않는다(26.11.07 하위 작업이 짚음). */
+  function depthAfter(body) {
+    var d = 0, out = [];
+    body.forEach(function (w) { w.chars.forEach(function (c) { if (/[(（]/.test(c.ch)) d++; else if (/[)）]/.test(c.ch)) d = Math.max(0, d - 1); }); out.push(d); });
+    return out;
+  }
   function stage3Len(ws, phrase) {
-    var body = ws.filter(function (w) { return !w.cite; }), n = body.length, i;
-    for (i = 0; i < n - 1; i++) if (endsWith(body[i], /[.。]/)) return { len: i + 1, kind: '첫 문장' };
+    var body = ws.filter(function (w) { return !w.cite; }), n = body.length, i, dep = depthAfter(body);
     if (phrase) {
       var pw = String(phrase).split(/\s+/).filter(Boolean), ok = pw.length <= n;
       for (i = 0; ok && i < pw.length; i++) if (body[i].chars.map(function (c) { return c.ch; }).join('') !== pw[i]) ok = false;
       if (ok && pw.length) return { len: pw.length, kind: '첫 문구' };
     }
-    for (i = 1; i < n - 1; i++) if (endsWith(body[i], /[,，]/)) return { len: i + 1, kind: '첫 문구' };
+    for (i = 0; i < n - 1; i++) if (dep[i] === 0 && endsWith(body[i], /[.。]/)) return { len: i + 1, kind: '첫 문장' };
+    for (i = 1; i < n - 1; i++) if (dep[i] === 0 && endsWith(body[i], /[,，]/)) return { len: i + 1, kind: '첫 문구' };
     return { len: Math.max(1, Math.ceil(n / 2)), kind: '첫 문구' };
   }
   function blankLen(ws, stage, phrase) {

@@ -20,10 +20,19 @@ def part_text(text, part):
     if not part:
         return text
     if part in ('전문', '후문'):
-        m = re.search(r'\.\s', text)
-        if not m:
+        # 괄호 밖의 첫 마침표에서 나눈다('(…포함한다. 이하 같다)'의 마침표는 경계가 아니다)
+        depth, cut = 0, None
+        for k, ch in enumerate(text):
+            if ch in '(（':
+                depth += 1
+            elif ch in ')）':
+                depth = max(0, depth - 1)
+            elif ch == '.' and depth == 0 and k + 1 < len(text) and text[k + 1].isspace():
+                cut = k
+                break
+        if cut is None:
             raise SystemExit(f'전문·후문 경계를 못 찾음: {text[:40]}')
-        return text[:m.start() + 1].strip() if part == '전문' else text[m.end():].strip()
+        return text[:cut + 1].strip() if part == '전문' else text[cut + 1:].strip()
     m = re.search(r'\s(그러나|다만,)\s', text)
     if not m:
         raise SystemExit(f'본문·단서 경계를 못 찾음: {text[:40]}')

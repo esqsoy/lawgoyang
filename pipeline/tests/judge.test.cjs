@@ -87,4 +87,15 @@ t('괄호 속 한자 풀이는 치지 않는다(보여 주기만)', () => {
   assert.strictEqual(J.wordText(w[0]), '경정결정을');
   assert.deepStrictEqual(J.norm('경정결정(更正決定)을'), Array.from('경정결정을'));
 });
+t('괄호 안 마침표는 문장 끝이 아니다(3단계)', () => {
+  const w = J.words('1조', { cite: true }).concat(J.words('위헌 여부 심판의 제청(헌법소원을 포함한다. 이하 같다)은 법원이 한다. 다만, 예외가 있다.'));
+  const r = J.stage3Len(w, '');
+  assert.strictEqual(r.kind, '첫 문장');
+  assert.strictEqual(J.wordText(w.filter(x => !x.cite)[r.len - 1]), '한다');
+});
+t('카드에 정한 첫 문구가 첫 문장보다 먼저', () => {
+  const t756 = src.articles['756'].paras[0].text;
+  const w2 = J.words('756조 제1항', { cite: true }).concat(J.words(t756));
+  assert.strictEqual(J.stage3Len(w2, '타인을 사용하여').len, 2);
+});
 console.log(n + '개 통과');
