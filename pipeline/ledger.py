@@ -11,6 +11,7 @@
   · 빈출도는 시험 한 글자 + 창 안에서 나온 해(회차) 수: 변8 사1.
   · 사시의 '이론' 설문(subq.jsonl qtype)은 사례형이 아니라서 뺀다.
 - sets-v0.json: 세트 = 기출 한 문(시험·연도·과목·문), 최근 회차부터. 카드 = 그 문의 (설문, 조문) 하나.
+- data/sets/에 쓴 세트가 있으면 그 문은 세트의 근거 조문으로 센다(원장 매핑을 대신한다).
 """
 import json
 from collections import defaultdict
@@ -74,6 +75,22 @@ def main():
             if note:
                 h['number_note'] = note
             hits.append(h)
+
+    # 쓴 세트가 있으면 그 문(시험·연도·과목·문)은 세트의 근거 조문이 원장 매핑을 대신한다.
+    # 세트를 쓰며 사례를 다시 읽고 고친 번호·더한 조문이 원장에 그대로 들어간다(26.11.07 영신 "원장에 다 넣고 계속 쓰자").
+    written = {}
+    for f in sorted((ROOT / 'data' / 'sets').glob('*.json')):
+        st = json.loads(f.read_text(encoding='utf-8'))
+        written[(st['exam'], st['year'], st['part'], st['q'])] = st
+    hits = [h for h in hits if (h['exam'], h['year'], h['part'], h['q']) not in written]
+    for (exam, year, part, q), st in written.items():
+        for iss in st['issues']:
+            for c in iss['cites']:
+                hits.append({'exam': exam, 'year': year, 'round': st.get('round'), 'part': part, 'q': q, 'sub': str(iss.get('sub', '')),
+                             'issue': st['title'], 'basis': '세트(Claude 판단)', 'confidence': c.get('confidence', '확인 필요'),
+                             'asked': {'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or '')},
+                             'source': 'data/sets/' + st['id'] + '.json',
+                             'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or '')})
 
     by = defaultdict(list)
     for h in hits:

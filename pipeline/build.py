@@ -122,9 +122,15 @@ def main():
             'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
         }
 
+    pending = []
+
     def cards_of(set_id, label, facts, issues, exam_src, fallback=None):
         out = []
         for iss in issues:
+            if any(ci.get('pending') for ci in iss['cites']):
+                # 원문을 아직 받지 않은 조문(세트 쓰는 중 더한 것): 원장에는 들어가고, 카드는 원문을 받은 뒤 만든다
+                pending.append(iss['id'])
+                continue
             done = []
             for k, ci in enumerate(iss['cites']):
                 c = cite_of(ci, fallback)
@@ -182,6 +188,8 @@ def main():
     left = re.findall(r'@[A-Z_]+@', page)
     if left:
         raise SystemExit(f'채우지 못한 자리: {left}')
+    if pending:
+        print('원문 받기 전이라 건너뛴 카드', len(pending), ':', ', '.join(pending))
     if '--check' in sys.argv:
         # 검사만: 결과 파일을 쓰지 않는다(여럿이 동시에 돌려도 부딪히지 않게)
         for st in sets:

@@ -11,7 +11,7 @@
   "사": "사법시험"
  },
  "counts": {
-  "articles": 321,
+  "articles": 324,
   "archive": 232,
   "retired_rows": 0
  },
@@ -49,15 +49,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4",
-     "issue": "과잉금지원칙",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "37",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "헌법",
      "article": "37",
      "para": "2"
@@ -441,15 +441,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "1",
-     "issue": "68조2항 헌법소원",
-     "basis": "문제지 명시",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "68",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의2.json",
      "law": "헌법재판소법",
      "article": "68",
      "para": "2"
@@ -705,17 +705,37 @@
      "year": 2026,
      "round": 15,
      "part": "민사법",
-     "q": "2의4",
-     "sub": "3",
-     "issue": "공동상속인 1인이 수령한 차임의 반환",
-     "basis": "Claude 판단",
+     "q": "2의3",
+     "sub": "",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "741",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
+     "law": "민법",
+     "article": "741",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의4",
+     "sub": "3",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "741",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "741",
      "para": ""
@@ -1043,253 +1063,6 @@
    ]
   },
   {
-   "law": "민사소송법",
-   "article": "216",
-   "paras": [
-    "1",
-    "2"
-   ],
-   "freq": {
-    "변": 8,
-    "사": 1
-   },
-   "freq_text": "변8 사1",
-   "years": [
-    2017,
-    2019,
-    2020,
-    2021,
-    2022,
-    2023,
-    2024,
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "",
-     "issue": "무변론판결 기준시와 차단효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2024,
-     "round": 13,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "2(2)",
-     "issue": "상계 판단의 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    },
-    {
-     "exam": "변",
-     "year": 2023,
-     "round": 12,
-     "part": "민사법",
-     "q": "1의2",
-     "sub": "③",
-     "issue": "판단되지 않은 상계 주장과 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    },
-    {
-     "exam": "변",
-     "year": 2022,
-     "round": 11,
-     "part": "민사법",
-     "q": "1의4",
-     "sub": "",
-     "issue": "상계 주장 판단의 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    },
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "",
-     "issue": "시효중단 재소에서 변론종결 후 사유(변제) 심리",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "1의4",
-     "sub": "",
-     "issue": "소유권확인 확정판결과 후소 인도청구(선결관계)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2020,
-     "round": 9,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "1",
-     "issue": "동시이행항변에 대한 상계 재항변과 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    },
-    {
-     "exam": "변",
-     "year": 2020,
-     "round": 9,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "3",
-     "issue": "원금 부존재 판결과 변론종결 후 지연손해금(선결관계)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2019,
-     "round": 8,
-     "part": "민사법",
-     "q": "1의2",
-     "sub": "1",
-     "issue": "화해 불이행 해제 주장과 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "2",
-     "issue": "상계 주장의 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    },
-    {
-     "exam": "사",
-     "year": 2017,
-     "round": 59,
-     "part": "사시 2차 민사소송법",
-     "q": "2의1",
-     "sub": "2",
-     "issue": "이행기 미도래 배척 상계항변의 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "216",
-      "para": "2"
-     },
-     "source": "sasi-minsa-20261107",
-     "law": "민사소송법",
-     "article": "216",
-     "para": "2"
-    }
-   ]
-  },
-  {
    "law": "민법",
    "article": "404",
    "paras": [
@@ -1319,15 +1092,15 @@
      "part": "민사법",
      "q": "1의6",
      "sub": "",
-     "issue": "채권자의 채무자 시효 원용 대위",
-     "basis": "Claude 판단",
+     "issue": "시효 대위원용과 배당이의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "404",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의6.json",
      "law": "민법",
      "article": "404",
      "para": "1"
@@ -1562,15 +1335,15 @@
      "part": "공법",
      "q": "1의3",
      "sub": "2",
-     "issue": "부관만의 독립 쟁송가능성-취소소송 대상",
-     "basis": "Claude 판단",
+     "issue": "수변공원 사용허가와 야간운영 금지 부관",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "행정소송법",
       "article": "19",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의3.json",
      "law": "행정소송법",
      "article": "19",
      "para": ""
@@ -1760,6 +1533,232 @@
    ]
   },
   {
+   "law": "민사소송법",
+   "article": "216",
+   "paras": [
+    "1",
+    "2"
+   ],
+   "freq": {
+    "변": 7,
+    "사": 1
+   },
+   "freq_text": "변7 사1",
+   "years": [
+    2017,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "last_year": 2024,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2024,
+     "round": 13,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "2(2)",
+     "issue": "상계 판단의 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2023,
+     "round": 12,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "③",
+     "issue": "판단되지 않은 상계 주장과 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2022,
+     "round": 11,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "",
+     "issue": "상계 주장 판단의 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "",
+     "issue": "시효중단 재소에서 변론종결 후 사유(변제) 심리",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "",
+     "issue": "소유권확인 확정판결과 후소 인도청구(선결관계)",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "1",
+     "issue": "동시이행항변에 대한 상계 재항변과 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "3",
+     "issue": "원금 부존재 판결과 변론종결 후 지연손해금(선결관계)",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2019,
+     "round": 8,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "1",
+     "issue": "화해 불이행 해제 주장과 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "2",
+     "issue": "상계 주장의 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    },
+    {
+     "exam": "사",
+     "year": 2017,
+     "round": 59,
+     "part": "사시 2차 민사소송법",
+     "q": "2의1",
+     "sub": "2",
+     "issue": "이행기 미도래 배척 상계항변의 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "216",
+      "para": "2"
+     },
+     "source": "sasi-minsa-20261107",
+     "law": "민사소송법",
+     "article": "216",
+     "para": "2"
+    }
+   ]
+  },
+  {
    "law": "민법",
    "article": "214",
    "paras": [],
@@ -1786,15 +1785,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "",
-     "issue": "위조등기 승계인에 대한 진정명의회복",
-     "basis": "Claude 판단",
+     "issue": "위조등기 매수인의 토지 개발과 진정명의회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "214",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의2.json",
      "law": "민법",
      "article": "214",
      "para": ""
@@ -1972,15 +1971,15 @@
      "part": "공법",
      "q": "1의3",
      "sub": "2",
-     "issue": "부관만의 독립 쟁송가능성-처분성",
-     "basis": "Claude 판단",
+     "issue": "수변공원 사용허가와 야간운영 금지 부관",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "행정소송법",
       "article": "2",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의3.json",
      "law": "행정소송법",
      "article": "2",
      "para": "1"
@@ -2134,15 +2133,15 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "1",
-     "issue": "물상보증인 소에 대한 응소와 시효중단 부정",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "168",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의1.json",
      "law": "민법",
      "article": "168",
      "para": ""
@@ -2154,15 +2153,35 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "압류에 의한 시효중단",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "168",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의1.json",
+     "law": "민법",
+     "article": "168",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "2",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "168",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의1.json",
      "law": "민법",
      "article": "168",
      "para": ""
@@ -2317,15 +2336,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "상계적상",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "492",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "492",
      "para": "1"
@@ -2500,15 +2519,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "",
-     "issue": "임차인 이행제공 중지와 지연손해금",
-     "basis": "Claude 판단",
+     "issue": "보증금반환채권 전부명령과 청구이의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "536",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의5.json",
      "law": "민법",
      "article": "536",
      "para": "1"
@@ -3010,15 +3029,15 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "채권 10년 시효",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "162",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의1.json",
      "law": "민법",
      "article": "162",
      "para": "1"
@@ -3150,15 +3169,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "",
-     "issue": "건물 소유자 아닌 자에 대한 토지 인도청구",
-     "basis": "Claude 판단",
+     "issue": "위조등기 매수인의 토지 개발과 진정명의회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "213",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의2.json",
      "law": "민법",
      "article": "213",
      "para": ""
@@ -3290,15 +3309,15 @@
      "part": "공법",
      "q": "2",
      "sub": "1",
-     "issue": "경원자 거부처분 취소소송의 소의 이익",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "12",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "행정소송법",
      "article": "12",
      "para": ""
@@ -3413,15 +3432,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "2",
-     "issue": "부담금과 평등원칙",
-     "basis": "Claude 판단",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "11",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의2.json",
      "law": "헌법",
      "article": "11",
      "para": "1"
@@ -3961,15 +3980,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "2",
-     "issue": "소송대리인 있는 당사자 사망과 수계하지 않은 상속인",
-     "basis": "Claude 판단",
+     "issue": "소송 중 당사자 사망과 판결경정",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "233",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의1.json",
      "law": "민사소송법",
      "article": "233",
      "para": "1"
@@ -4060,15 +4079,15 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "",
-     "issue": "추완항소로 생긴 소송계속 중복",
-     "basis": "Claude 판단",
+     "issue": "추완항소 뒤 중복소송·재소금지와 승계참가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "259",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의3.json",
      "law": "민사소송법",
      "article": "259",
      "para": ""
@@ -4162,15 +4181,15 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "",
-     "issue": "중복 해소 목적 소 취하와 재소금지",
-     "basis": "Claude 판단",
+     "issue": "추완항소 뒤 중복소송·재소금지와 승계참가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "267",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의3.json",
      "law": "민사소송법",
      "article": "267",
      "para": "2"
@@ -4252,7 +4271,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": true,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
@@ -4261,15 +4280,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "불복 없는 청구의 확정과 심판범위",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "인도청구와 대상청구, 파기환송 뒤 심판범위",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "415",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의4.json",
      "law": "민사소송법",
      "article": "415",
      "para": ""
@@ -4384,15 +4403,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "",
-     "issue": "보증금반환채권 전부명령 후 발생 차임 공제",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "보증금반환채권 전부명령과 청구이의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "민사집행법",
       "article": "229",
       "para": "3"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의5.json",
      "law": "민사집행법",
      "article": "229",
      "para": "3"
@@ -4480,125 +4499,6 @@
    ]
   },
   {
-   "law": "상법",
-   "article": "64",
-   "paras": [],
-   "freq": {
-    "변": 4
-   },
-   "freq_text": "변4",
-   "years": [
-    2018,
-    2019,
-    2022,
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": true,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "1의6",
-     "sub": "",
-     "issue": "회사 차용금 상사시효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "상법",
-      "article": "64",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "상법",
-     "article": "64",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2022,
-     "round": 11,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "2",
-     "issue": "대부업자 대여금 상사시효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "상법",
-      "article": "64",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "상법",
-     "article": "64",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2019,
-     "round": 8,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "1",
-     "issue": "상사시효 5년",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "상법",
-      "article": "64",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "상법",
-     "article": "64",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2018,
-     "round": 7,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "2",
-     "issue": "상사시효 5년",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "상법",
-      "article": "64",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "상법",
-     "article": "64",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2018,
-     "round": 7,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "3",
-     "issue": "보증채무 상사시효",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "상법",
-      "article": "64",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "상법",
-     "article": "64",
-     "para": ""
-    }
-   ]
-  },
-  {
    "law": "헌법",
    "article": "111",
    "paras": [
@@ -4626,15 +4526,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "1",
-     "issue": "권한쟁의심판 관장",
-     "basis": "Claude 판단",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "111",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법",
      "article": "111",
      "para": "1"
@@ -4729,15 +4629,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "1",
-     "issue": "재판의 전제성",
-     "basis": "Claude 판단",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "41",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의2.json",
      "law": "헌법재판소법",
      "article": "41",
      "para": "1"
@@ -5855,15 +5755,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "차임채권 3년 시효",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "163",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "163",
      "para": ""
@@ -5912,8 +5812,87 @@
   },
   {
    "law": "민법",
+   "article": "369",
+   "paras": [],
+   "freq": {
+    "변": 3
+   },
+   "freq_text": "변3",
+   "years": [
+    2017,
+    2021,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "1의6",
+     "sub": "",
+     "issue": "시효 대위원용과 배당이의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "369",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-1의6.json",
+     "law": "민법",
+     "article": "369",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "2",
+     "issue": "피담보채무 소멸과 근저당 소멸, 무효등기 유용",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "369",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "369",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "1",
+     "issue": "최고액 변제 후 말소청구",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "369",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "369",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
    "article": "999",
    "paras": [
+    "1",
     "2"
    ],
    "freq": {
@@ -5935,15 +5914,35 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "1",
-     "issue": "상속회복청구 제척기간",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "999",
+      "para": "1"
+     },
+     "source": "data/sets/변2026-민사법-2의4.json",
+     "law": "민법",
+     "article": "999",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의4",
+     "sub": "1",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "999",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "999",
      "para": "2"
@@ -5955,15 +5954,15 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "2",
-     "issue": "가액지급청구와 제척기간(헌법불합치 결정)",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "999",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "999",
      "para": "2"
@@ -6013,7 +6012,9 @@
   {
    "law": "민법",
    "article": "1009",
-   "paras": [],
+   "paras": [
+    "1"
+   ],
    "freq": {
     "변": 3
    },
@@ -6033,18 +6034,18 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "3",
-     "issue": "법정상속분에 따른 과실 귀속",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1009",
-      "para": ""
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "1009",
-     "para": ""
+     "para": "1"
     },
     {
      "exam": "변",
@@ -6090,85 +6091,6 @@
   },
   {
    "law": "민법",
-   "article": "1041",
-   "paras": [],
-   "freq": {
-    "변": 2,
-    "사": 1
-   },
-   "freq_text": "변2 사1",
-   "years": [
-    2017,
-    2018,
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": true,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "2의4",
-     "sub": "1",
-     "issue": "포기의 소급효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "1041",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "1041",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2018,
-     "round": 7,
-     "part": "민사법",
-     "q": "2의2",
-     "sub": "",
-     "issue": "포기의 소급효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "1041",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "1041",
-     "para": ""
-    },
-    {
-     "exam": "사",
-     "year": 2017,
-     "round": 59,
-     "part": "사시 2차 민법",
-     "q": "1",
-     "sub": "3",
-     "issue": "포기의 효력 발생 시기",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "민법",
-      "article": "1041",
-      "para": ""
-     },
-     "source": "sasi-minsa-20261107",
-     "law": "민법",
-     "article": "1041",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
    "article": "1042",
    "paras": [],
    "freq": {
@@ -6191,15 +6113,15 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "1",
-     "issue": "포기의 소급효",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1042",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "1042",
      "para": ""
@@ -6271,18 +6193,18 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "",
-     "issue": "탈퇴하지 못한 피참가인과 필수적 공동소송 규정 준용",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "전부채권자의 승계참가와 탈퇴하지 못한 원고",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민사소송법",
       "article": "67",
-      "para": ""
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의2.json",
      "law": "민사소송법",
      "article": "67",
-     "para": ""
+     "para": "1"
     },
     {
      "exam": "변",
@@ -6347,6 +6269,127 @@
    ]
   },
   {
+   "law": "민사소송법",
+   "article": "79",
+   "paras": [
+    "1",
+    "2"
+   ],
+   "freq": {
+    "변": 3
+   },
+   "freq_text": "변3",
+   "years": [
+    2017,
+    2021,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "",
+     "issue": "전부채권자의 승계참가와 탈퇴하지 못한 원고",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민사소송법",
+      "article": "79",
+      "para": "2"
+     },
+     "source": "data/sets/변2026-민사법-1의2.json",
+     "law": "민사소송법",
+     "article": "79",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "1",
+     "issue": "권리주장참가(양립 가능한 채권적 청구)",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "79",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "79",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "2",
+     "issue": "참가 각하 후 참가인 항소와 본소 확정",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "79",
+      "para": "2"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "79",
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "1(1)",
+     "issue": "사해방지참가 요건",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "79",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "79",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "1(2)",
+     "issue": "사해방지참가와 확인의 이익",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "79",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "79",
+     "para": "1"
+    }
+   ]
+  },
+  {
    "law": "행정절차법",
    "article": "21",
    "paras": [
@@ -6362,7 +6405,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -6371,15 +6414,15 @@
      "part": "공법",
      "q": "2",
      "sub": "3(1)",
-     "issue": "거부처분과 사전통지",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "행정절차법",
       "article": "21",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "행정절차법",
      "article": "21",
      "para": "1"
@@ -6454,15 +6497,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4",
-     "issue": "알 권리(정보공개청구권)",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "21",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "헌법",
      "article": "21",
      "para": "1"
@@ -6577,16 +6620,16 @@
      "round": 15,
      "part": "공법",
      "q": "1의1",
-     "sub": "2",
-     "issue": "심의·표결권 근거",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "sub": "1",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "41",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법",
      "article": "41",
      "para": "1"
@@ -6637,7 +6680,9 @@
   {
    "law": "헌법재판소법",
    "article": "61",
-   "paras": [],
+   "paras": [
+    "2"
+   ],
    "freq": {
     "변": 3
    },
@@ -6657,18 +6702,18 @@
      "part": "공법",
      "q": "1의1",
      "sub": "1",
-     "issue": "당사자적격(권한침해)",
-     "basis": "Claude 판단",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "61",
-      "para": ""
+      "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법재판소법",
      "article": "61",
-     "para": ""
+     "para": "2"
     },
     {
      "exam": "변",
@@ -6729,7 +6774,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -6738,15 +6783,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "1",
-     "issue": "국회의원·국회의장 당사자능력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "헌법재판소법",
       "article": "62",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법재판소법",
      "article": "62",
      "para": "1"
@@ -7857,6 +7902,104 @@
    ]
   },
   {
+   "law": "상법",
+   "article": "64",
+   "paras": [],
+   "freq": {
+    "변": 3
+   },
+   "freq_text": "변3",
+   "years": [
+    2018,
+    2019,
+    2022
+   ],
+   "last_year": 2022,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2022,
+     "round": 11,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "2",
+     "issue": "대부업자 대여금 상사시효",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "상법",
+      "article": "64",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "상법",
+     "article": "64",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2019,
+     "round": 8,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "1",
+     "issue": "상사시효 5년",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "상법",
+      "article": "64",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "상법",
+     "article": "64",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2018,
+     "round": 7,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "2",
+     "issue": "상사시효 5년",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "상법",
+      "article": "64",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "상법",
+     "article": "64",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2018,
+     "round": 7,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "3",
+     "issue": "보증채무 상사시효",
+     "basis": "Claude 판단",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "상법",
+      "article": "64",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "상법",
+     "article": "64",
+     "para": ""
+    }
+   ]
+  },
+  {
    "law": "민법",
    "article": "184",
    "paras": [
@@ -8017,6 +8160,65 @@
   },
   {
    "law": "민법",
+   "article": "166",
+   "paras": [
+    "1"
+   ],
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2017,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "2",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "166",
+      "para": "1"
+     },
+     "source": "data/sets/변2026-민사법-2의1.json",
+     "law": "민법",
+     "article": "166",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "1",
+     "issue": "시효 기산점과 변론주의",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "166",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "166",
+     "para": "1"
+    }
+   ]
+  },
+  {
+   "law": "민법",
    "article": "203",
    "paras": [
     "2"
@@ -8040,15 +8242,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "",
-     "issue": "점유자 유익비 상환청구의 시기와 상대방",
-     "basis": "Claude 판단",
+     "issue": "위조등기 매수인의 토지 개발과 진정명의회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "203",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의2.json",
      "law": "민법",
      "article": "203",
      "para": "2"
@@ -8097,15 +8299,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "시효완성 차임채권과 상계",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "495",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "495",
      "para": ""
@@ -8134,6 +8336,63 @@
   },
   {
    "law": "민법",
+   "article": "860",
+   "paras": [],
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2022,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의4",
+     "sub": "2",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "860",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의4.json",
+     "law": "민법",
+     "article": "860",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2022,
+     "round": 11,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "2",
+     "issue": "인지의 소급효와 제3자 보호",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "860",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "860",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
    "article": "1014",
    "paras": [],
    "freq": {
@@ -8154,15 +8413,15 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "2",
-     "issue": "피인지자의 가액지급청구",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1014",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "1014",
      "para": ""
@@ -8211,15 +8470,15 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "3",
-     "issue": "분할 소급효와 분할 전 과실(차임)",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1015",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "1015",
      "para": ""
@@ -8267,6 +8526,120 @@
    ]
   },
   {
+   "law": "민법",
+   "article": "1043",
+   "paras": [],
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2018,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의4",
+     "sub": "1",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "1043",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의4.json",
+     "law": "민법",
+     "article": "1043",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2018,
+     "round": 7,
+     "part": "민사법",
+     "q": "2의2",
+     "sub": "",
+     "issue": "포기한 상속분의 귀속",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "1043",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "1043",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민사소송법",
+   "article": "80",
+   "paras": [],
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2020,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "",
+     "issue": "전부채권자의 승계참가와 탈퇴하지 못한 원고",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "80",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-1의2.json",
+     "law": "민사소송법",
+     "article": "80",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "4",
+     "issue": "소송탈퇴와 판결 효력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "80",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "80",
+     "para": ""
+    }
+   ]
+  },
+  {
    "law": "민사소송법",
    "article": "95",
    "paras": [],
@@ -8288,15 +8661,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "2",
-     "issue": "소송대리인 있는 당사자 사망과 수계하지 않은 상속인",
-     "basis": "Claude 판단",
+     "issue": "소송 중 당사자 사망과 판결경정",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "95",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의1.json",
      "law": "민사소송법",
      "article": "95",
      "para": ""
@@ -8365,15 +8738,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "2",
-     "issue": "소송대리인 있는 당사자 사망과 수계하지 않은 상속인",
-     "basis": "Claude 판단",
+     "issue": "소송 중 당사자 사망과 판결경정",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "238",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의1.json",
      "law": "민사소송법",
      "article": "238",
      "para": ""
@@ -8422,15 +8795,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "현재이행과 대상청구의 단순병합",
-     "basis": "Claude 판단",
+     "issue": "인도청구와 대상청구, 파기환송 뒤 심판범위",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "253",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의4.json",
      "law": "민사소송법",
      "article": "253",
      "para": ""
@@ -8481,15 +8854,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "환송판결의 기속력",
-     "basis": "Claude 판단",
+     "issue": "인도청구와 대상청구, 파기환송 뒤 심판범위",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "436",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의4.json",
      "law": "민사소송법",
      "article": "436",
      "para": "2"
@@ -8540,15 +8913,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "",
-     "issue": "청구이의 사유(변론종결 후 사유)",
-     "basis": "Claude 판단",
+     "issue": "보증금반환채권 전부명령과 청구이의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사집행법",
       "article": "44",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의5.json",
      "law": "민사집행법",
      "article": "44",
      "para": "2"
@@ -8576,63 +8949,6 @@
    ]
   },
   {
-   "law": "민사집행법",
-   "article": "231",
-   "paras": [],
-   "freq": {
-    "변": 2
-   },
-   "freq_text": "변2",
-   "years": [
-    2020,
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": true,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "",
-     "issue": "보증금반환채권 전부명령 후 발생 차임 공제",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "민사집행법",
-      "article": "231",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사집행법",
-     "article": "231",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2020,
-     "round": 9,
-     "part": "민사법",
-     "q": "2의2",
-     "sub": "2",
-     "issue": "추심권능에 대한 전부명령 무효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사집행법",
-      "article": "231",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사집행법",
-     "article": "231",
-     "para": ""
-    }
-   ]
-  },
-  {
    "law": "지방자치법",
    "article": "28",
    "paras": [
@@ -8656,15 +8972,35 @@
      "part": "공법",
      "q": "2",
      "sub": "2(1)",
-     "issue": "법률 기준을 강화한 조례의 적법성",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "지방자치법",
       "article": "28",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
+     "law": "지방자치법",
+     "article": "28",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "공법",
+     "q": "2",
+     "sub": "2(1)",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "지방자치법",
+      "article": "28",
+      "para": "1"
+     },
+     "source": "data/sets/변2026-공법-2.json",
      "law": "지방자치법",
      "article": "28",
      "para": "1"
@@ -8689,6 +9025,63 @@
      "article": "28",
      "para": "1",
      "number_note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"
+    }
+   ]
+  },
+  {
+   "law": "행정기본법",
+   "article": "15",
+   "paras": [],
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2025,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "공법",
+     "q": "2",
+     "sub": "2(2)",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "행정기본법",
+      "article": "15",
+      "para": ""
+     },
+     "source": "data/sets/변2026-공법-2.json",
+     "law": "행정기본법",
+     "article": "15",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2025,
+     "round": 14,
+     "part": "공법",
+     "q": "2",
+     "sub": "2",
+     "issue": "처분의 효력(공정력)",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "행정기본법",
+      "article": "15",
+      "para": ""
+     },
+     "source": "gongbeop-pilot-20261107",
+     "law": "행정기본법",
+     "article": "15",
+     "para": ""
     }
    ]
   },
@@ -8718,15 +9111,15 @@
      "part": "공법",
      "q": "2",
      "sub": "1",
-     "issue": "재처분의무와 소의 이익",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "행정소송법",
       "article": "30",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "행정소송법",
      "article": "30",
      "para": "2"
@@ -8798,15 +9191,15 @@
      "part": "공법",
      "q": "2",
      "sub": "3(1)",
-     "issue": "의견제출 기회",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "행정절차법",
       "article": "22",
       "para": "3"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "행정절차법",
      "article": "22",
      "para": "3"
@@ -8854,16 +9247,16 @@
      "round": 15,
      "part": "공법",
      "q": "1의1",
-     "sub": "2",
-     "issue": "심의·표결권 근거",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "sub": "1",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "40",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법",
      "article": "40",
      "para": ""
@@ -8914,15 +9307,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "2",
-     "issue": "자유위임원칙",
-     "basis": "Claude 판단",
+     "issue": "국회의원 상임위원 개선과 권한쟁의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "46",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의1.json",
      "law": "헌법",
      "article": "46",
      "para": "2"
@@ -8974,15 +9367,15 @@
      "part": "공법",
      "q": "2",
      "sub": "2(1)",
-     "issue": "법령의 범위 안에서 조례",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "117",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "헌법",
      "article": "117",
      "para": "1"
@@ -9013,7 +9406,8 @@
    "law": "헌법재판소법",
    "article": "75",
    "paras": [
-    "7"
+    "7",
+    "8"
    ],
    "freq": {
     "변": 2
@@ -9033,18 +9427,18 @@
      "part": "공법",
      "q": "1의2",
      "sub": "1",
-     "issue": "당해사건 확정 후 재심 가능성과 전제성",
-     "basis": "Claude 판단",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "75",
-      "para": "7"
+      "para": "8"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의2.json",
      "law": "헌법재판소법",
      "article": "75",
-     "para": "7"
+     "para": "8"
     },
     {
      "exam": "변",
@@ -11114,63 +11508,6 @@
   },
   {
    "law": "민법",
-   "article": "369",
-   "paras": [],
-   "freq": {
-    "변": 2
-   },
-   "freq_text": "변2",
-   "years": [
-    2017,
-    2021
-   ],
-   "last_year": 2021,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "2",
-     "issue": "피담보채무 소멸과 근저당 소멸, 무효등기 유용",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "369",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "369",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의4",
-     "sub": "1",
-     "issue": "최고액 변제 후 말소청구",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "369",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "369",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
    "article": "640",
    "paras": [],
    "freq": {
@@ -11224,106 +11561,6 @@
      "law": "민법",
      "article": "640",
      "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민사소송법",
-   "article": "79",
-   "paras": [
-    "1",
-    "2"
-   ],
-   "freq": {
-    "변": 2
-   },
-   "freq_text": "변2",
-   "years": [
-    2017,
-    2021
-   ],
-   "last_year": 2021,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "1",
-     "issue": "권리주장참가(양립 가능한 채권적 청구)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "79",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "79",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "2",
-     "issue": "참가 각하 후 참가인 항소와 본소 확정",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "79",
-      "para": "2"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "79",
-     "para": "2"
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의2",
-     "sub": "1(1)",
-     "issue": "사해방지참가 요건",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "79",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "79",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의2",
-     "sub": "1(2)",
-     "issue": "사해방지참가와 확인의 이익",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "79",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "79",
-     "para": "1"
     }
    ]
   },
@@ -11914,6 +12151,64 @@
    ]
   },
   {
+   "law": "민법",
+   "article": "1041",
+   "paras": [],
+   "freq": {
+    "변": 1,
+    "사": 1
+   },
+   "freq_text": "변1 사1",
+   "years": [
+    2017,
+    2018
+   ],
+   "last_year": 2018,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2018,
+     "round": 7,
+     "part": "민사법",
+     "q": "2의2",
+     "sub": "",
+     "issue": "포기의 소급효",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "1041",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "1041",
+     "para": ""
+    },
+    {
+     "exam": "사",
+     "year": 2017,
+     "round": 59,
+     "part": "사시 2차 민법",
+     "q": "1",
+     "sub": "3",
+     "issue": "포기의 효력 발생 시기",
+     "basis": "Claude 판단",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민법",
+      "article": "1041",
+      "para": ""
+     },
+     "source": "sasi-minsa-20261107",
+     "law": "민법",
+     "article": "1041",
+     "para": ""
+    }
+   ]
+  },
+  {
    "law": "민사집행법",
    "article": "91",
    "paras": [
@@ -12196,15 +12491,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4",
-     "issue": "비공개대상정보 6호(심판대상)",
-     "basis": "문제지 명시",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "공공기관의 정보공개에 관한 법률",
       "article": "9",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "공공기관의 정보공개에 관한 법률",
      "article": "9",
      "para": "1"
@@ -12234,15 +12529,15 @@
      "part": "공법",
      "q": "1의3",
      "sub": "1",
-     "issue": "행정재산 사용허가의 성질",
-     "basis": "Claude 판단",
+     "issue": "수변공원 사용허가와 야간운영 금지 부관",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "공유재산 및 물품 관리법",
       "article": "20",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의3.json",
      "law": "공유재산 및 물품 관리법",
      "article": "20",
      "para": "1"
@@ -12270,15 +12565,15 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "물상보증인 재산 압류와 채무자 통지",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "176",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의1.json",
      "law": "민법",
      "article": "176",
      "para": ""
@@ -12287,8 +12582,10 @@
   },
   {
    "law": "민법",
-   "article": "177",
-   "paras": [],
+   "article": "178",
+   "paras": [
+    "1"
+   ],
    "freq": {
     "변": 1
    },
@@ -12306,18 +12603,18 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "일부 변제와 승인",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
-      "article": "177",
-      "para": ""
+      "article": "178",
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의1.json",
      "law": "민법",
-     "article": "177",
-     "para": ""
+     "article": "178",
+     "para": "1"
     }
    ]
   },
@@ -12333,7 +12630,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -12342,18 +12639,56 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "공동임차인 보증금반환채권의 불가분성",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민법",
       "article": "409",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "409",
      "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "410",
+   "paras": [
+    "1"
+   ],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민법",
+      "article": "410",
+      "para": "1"
+     },
+     "source": "data/sets/변2026-민사법-2의3.json",
+     "law": "민법",
+     "article": "410",
+     "para": "1"
     }
    ]
   },
@@ -12378,17 +12713,53 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "연대채무자 1인 면제의 절대효(부담부분)",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "419",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "419",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "424",
+   "paras": [],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "424",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의3.json",
+     "law": "민법",
+     "article": "424",
      "para": ""
     }
    ]
@@ -12414,15 +12785,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "공동차주의 연대의무",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "616",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "616",
      "para": ""
@@ -12450,15 +12821,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "",
-     "issue": "임대차에 공동차주 연대 규정 준용",
-     "basis": "Claude 판단",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "654",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의3.json",
      "law": "민법",
      "article": "654",
      "para": ""
@@ -12486,15 +12857,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "1",
-     "issue": "대습상속",
-     "basis": "Claude 판단",
+     "issue": "소송 중 당사자 사망과 판결경정",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1001",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의1.json",
      "law": "민법",
      "article": "1001",
      "para": ""
@@ -12506,18 +12877,56 @@
      "part": "민사법",
      "q": "2의4",
      "sub": "1",
-     "issue": "대습상속(포기는 대습원인 아님)",
-     "basis": "Claude 판단",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "1001",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-2의4.json",
      "law": "민법",
      "article": "1001",
      "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "1010",
+   "paras": [
+    "1"
+   ],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의4",
+     "sub": "1",
+     "issue": "대습상속·상속포기·사후 인지와 상속회복",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "1010",
+      "para": "1"
+     },
+     "source": "data/sets/변2026-민사법-2의4.json",
+     "law": "민법",
+     "article": "1010",
+     "para": "1"
     }
    ]
   },
@@ -12542,15 +12951,15 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "",
-     "issue": "승계참가",
-     "basis": "Claude 판단",
+     "issue": "전부채권자의 승계참가와 탈퇴하지 못한 원고",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "81",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의2.json",
      "law": "민사소송법",
      "article": "81",
      "para": ""
@@ -12562,15 +12971,15 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "",
-     "issue": "항소심 승계참가",
-     "basis": "Claude 판단",
+     "issue": "추완항소 뒤 중복소송·재소금지와 승계참가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "81",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의3.json",
      "law": "민사소송법",
      "article": "81",
      "para": ""
@@ -12600,35 +13009,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "1",
-     "issue": "판결경정의 한계(주문 금액 실질 변경 불가)",
-     "basis": "Claude 판단",
+     "issue": "소송 중 당사자 사망과 판결경정",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "211",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "211",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "2",
-     "issue": "누락 상속인 당사자 표시 경정",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "211",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의1.json",
      "law": "민사소송법",
      "article": "211",
      "para": "1"
@@ -12656,15 +13045,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "인도 집행불능 대비 대상청구(장래이행)의 병합",
-     "basis": "Claude 판단",
+     "issue": "인도청구와 대상청구, 파기환송 뒤 심판범위",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "251",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의4.json",
      "law": "민사소송법",
      "article": "251",
      "para": ""
@@ -12674,7 +13063,9 @@
   {
    "law": "민사집행법",
    "article": "151",
-   "paras": [],
+   "paras": [
+    "3"
+   ],
    "freq": {
     "변": 1
    },
@@ -12683,7 +13074,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -12692,25 +13083,27 @@
      "part": "민사법",
      "q": "1의6",
      "sub": "",
-     "issue": "배당표에 대한 이의",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "시효 대위원용과 배당이의",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민사집행법",
       "article": "151",
-      "para": ""
+      "para": "3"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의6.json",
      "law": "민사집행법",
      "article": "151",
-     "para": ""
+     "para": "3"
     }
    ]
   },
   {
    "law": "민사집행법",
    "article": "154",
-   "paras": [],
+   "paras": [
+    "1"
+   ],
    "freq": {
     "변": 1
    },
@@ -12728,17 +13121,53 @@
      "part": "민사법",
      "q": "1의6",
      "sub": "",
-     "issue": "배당이의의 소(원고 몫 한정)",
-     "basis": "Claude 판단",
+     "issue": "시효 대위원용과 배당이의",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사집행법",
       "article": "154",
-      "para": ""
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2026-민사법-1의6.json",
      "law": "민사집행법",
      "article": "154",
+     "para": "1"
+    }
+   ]
+  },
+  {
+   "law": "부담금관리 기본법",
+   "article": "2",
+   "paras": [],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "공법",
+     "q": "1의2",
+     "sub": "2",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "부담금관리 기본법",
+      "article": "2",
+      "para": ""
+     },
+     "source": "data/sets/변2026-공법-1의2.json",
+     "law": "부담금관리 기본법",
+     "article": "2",
      "para": ""
     }
    ]
@@ -12746,7 +13175,9 @@
   {
    "law": "행정기본법",
    "article": "17",
-   "paras": [],
+   "paras": [
+    "1"
+   ],
    "freq": {
     "변": 1
    },
@@ -12764,18 +13195,18 @@
      "part": "공법",
      "q": "1의3",
      "sub": "2",
-     "issue": "부관의 종류·한계",
-     "basis": "Claude 판단",
+     "issue": "수변공원 사용허가와 야간운영 금지 부관",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정기본법",
       "article": "17",
-      "para": ""
+      "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의3.json",
      "law": "행정기본법",
      "article": "17",
-     "para": ""
+     "para": "1"
     }
    ]
   },
@@ -12802,57 +13233,18 @@
      "part": "공법",
      "q": "2",
      "sub": "3(2)",
-     "issue": "신청 보완요구",
-     "basis": "문제지 명시",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정절차법",
       "article": "17",
       "para": "5"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "행정절차법",
      "article": "17",
      "para": "5"
-    }
-   ]
-  },
-  {
-   "law": "헌법",
-   "article": "7",
-   "paras": [
-    "1",
-    "2"
-   ],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": true,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "공법",
-     "q": "1의1",
-     "sub": "2",
-     "issue": "자유위임원칙 근거",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "헌법",
-      "article": "7",
-      "para": "1"
-     },
-     "source": "gongbeop-pilot-20261107",
-     "law": "헌법",
-     "article": "7",
-     "para": "1"
     }
    ]
   },
@@ -12877,15 +13269,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4",
-     "issue": "사생활 보호(충돌 법익)",
-     "basis": "Claude 판단",
+     "issue": "LPG 충전소 경원자 거부처분과 조례",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "헌법",
       "article": "17",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-2.json",
      "law": "헌법",
      "article": "17",
      "para": ""
@@ -12913,15 +13305,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "2",
-     "issue": "조세와 부담금의 구별",
-     "basis": "Claude 판단",
+     "issue": "골프장 부가금과 위헌소원",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "헌법",
       "article": "38",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2026-공법-1의2.json",
      "law": "헌법",
      "article": "38",
      "para": ""
@@ -13536,42 +13928,6 @@
      "source": "minsa-pilot-20261107",
      "law": "민사집행법",
      "article": "296",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "행정기본법",
-   "article": "15",
-   "paras": [],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2025
-   ],
-   "last_year": 2025,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2025,
-     "round": 14,
-     "part": "공법",
-     "q": "2",
-     "sub": "2",
-     "issue": "처분의 효력(공정력)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "행정기본법",
-      "article": "15",
-      "para": ""
-     },
-     "source": "gongbeop-pilot-20261107",
-     "law": "행정기본법",
-     "article": "15",
      "para": ""
     }
    ]
@@ -15378,42 +15734,6 @@
   },
   {
    "law": "민법",
-   "article": "860",
-   "paras": [],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2022
-   ],
-   "last_year": 2022,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2022,
-     "round": 11,
-     "part": "민사법",
-     "q": "2의3",
-     "sub": "2",
-     "issue": "인지의 소급효와 제3자 보호",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "860",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "860",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
    "article": "1005",
    "paras": [],
    "freq": {
@@ -16949,42 +17269,6 @@
   },
   {
    "law": "민사소송법",
-   "article": "80",
-   "paras": [],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2020
-   ],
-   "last_year": 2020,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2020,
-     "round": 9,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "4",
-     "issue": "소송탈퇴와 판결 효력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "80",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "80",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민사소송법",
    "article": "202의2",
    "paras": [],
    "freq": {
@@ -17015,6 +17299,42 @@
      "source": "minsa-pilot-20261107",
      "law": "민사소송법",
      "article": "202의2",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민사집행법",
+   "article": "231",
+   "paras": [],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2020
+   ],
+   "last_year": 2020,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "2의2",
+     "sub": "2",
+     "issue": "추심권능에 대한 전부명령 무효",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사집행법",
+      "article": "231",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사집행법",
+     "article": "231",
      "para": ""
     }
    ]
@@ -18039,42 +18359,6 @@
    ]
   },
   {
-   "law": "민법",
-   "article": "1043",
-   "paras": [],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2018
-   ],
-   "last_year": 2018,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2018,
-     "round": 7,
-     "part": "민사법",
-     "q": "2의2",
-     "sub": "",
-     "issue": "포기한 상속분의 귀속",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "1043",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "1043",
-     "para": ""
-    }
-   ]
-  },
-  {
    "law": "민사집행법",
    "article": "92",
    "paras": [
@@ -18586,44 +18870,6 @@
      "source": "sasi-minsa-20261107",
      "law": "민법",
      "article": "10",
-     "para": "1"
-    }
-   ]
-  },
-  {
-   "law": "민법",
-   "article": "166",
-   "paras": [
-    "1"
-   ],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2017
-   ],
-   "last_year": 2017,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의5",
-     "sub": "1",
-     "issue": "시효 기산점과 변론주의",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "166",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "166",
      "para": "1"
     }
    ]
@@ -25494,6 +25740,61 @@
   },
   {
    "law": "헌법",
+   "article": "7",
+   "paras": [
+    "2"
+   ],
+   "freq": {},
+   "freq_text": "",
+   "years": [],
+   "last_year": 2012,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2012,
+     "round": 1,
+     "part": "공법",
+     "q": "1",
+     "sub": "2",
+     "issue": "공무원의 정치적 중립성",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "헌법",
+      "article": "7",
+      "para": "2"
+     },
+     "source": "gongbeop-pilot-20261107",
+     "law": "헌법",
+     "article": "7",
+     "para": "2"
+    },
+    {
+     "exam": "사",
+     "year": 2010,
+     "round": 52,
+     "part": "사시 2차 헌법",
+     "q": "1",
+     "sub": "2",
+     "issue": "공무원의 정치적 중립성",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "헌법",
+      "article": "7",
+      "para": "2"
+     },
+     "source": "sasi-gongbeop-20261107",
+     "law": "헌법",
+     "article": "7",
+     "para": "2",
+     "number_note": "번호 변동 없음(Claude 기억)"
+    }
+   ]
+  },
+  {
+   "law": "헌법",
    "article": "1",
    "paras": [
     "2"
@@ -27771,38 +28072,6 @@
      "source": "sasi-minsa-20261107",
      "law": "민법",
      "article": "755",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
-   "article": "1010",
-   "paras": [],
-   "freq": {},
-   "freq_text": "",
-   "years": [],
-   "last_year": 2007,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "사",
-     "year": 2007,
-     "round": 49,
-     "part": "사시 2차 민법",
-     "q": "2의2",
-     "sub": "",
-     "issue": "대습상속분",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "1010",
-      "para": ""
-     },
-     "source": "sasi-minsa-20261107",
-     "law": "민법",
-     "article": "1010",
      "para": ""
     }
    ]
