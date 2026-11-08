@@ -7,6 +7,26 @@
  "method": "law.go.kr 웹 화면 두 곳(lsInfoR 전체·lsSideInfoP 조문 하나)을 따로 받아 글자 단위로 대조. Open API 키 전 임시.",
  "source": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290113&efYd=20261002",
  "articles": {
+  "2": {
+   "title": "보통재판적",
+   "paras": [
+    {
+     "no": null,
+     "text": "소(訴)는 피고의 보통재판적(普通裁判籍)이 있는 곳의 법원이 관할한다."
+    }
+   ],
+   "notes": []
+  },
+  "3": {
+   "title": "사람의 보통재판적",
+   "paras": [
+    {
+     "no": null,
+     "text": "사람의 보통재판적은 그의 주소에 따라 정한다. 다만, 대한민국에 주소가 없거나 주소를 알 수 없는 경우에는 거소에 따라 정하고, 거소가 일정하지 아니하거나 거소도 알 수 없으면 마지막 주소에 따라 정한다."
+    }
+   ],
+   "notes": []
+  },
   "25": {
    "title": "관련재판적",
    "paras": [

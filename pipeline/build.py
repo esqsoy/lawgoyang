@@ -140,6 +140,17 @@ def main():
             if not hs:
                 raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para')}항 제{ci['ho']}호가 없음")
             text = hs[0]['text']
+            if ci.get('mok'):
+                # 목·세목(행정기본법 제2조 제1호 가목 3) 등)
+                ms = [m for m in hs[0].get('mok', []) if m['no'] == str(ci['mok'])]
+                if not ms:
+                    raise SystemExit(f"{ci['law']} 제{jo}조 제{ci['ho']}호 {ci['mok']}목이 없음")
+                text = ms[0]['text']
+                if ci.get('sub'):
+                    ss = [x for x in ms[0].get('sub', []) if x['no'] == str(ci['sub'])]
+                    if not ss:
+                        raise SystemExit(f"{ci['law']} 제{jo}조 제{ci['ho']}호 {ci['mok']}목 {ci['sub']})이 없음")
+                    text = ss[0]['text']
         else:
             if p.get('ho'):
                 raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para') or ''}항은 호가 있어 ho를 정해야 함")
@@ -147,12 +158,13 @@ def main():
         text = part_text(text, ci.get('part'))
         if ci.get('phrase') and not re.sub(r'\s+', ' ', text).startswith(ci['phrase']):
             raise SystemExit(f"{ci['law']} 제{jo}조 첫 문구가 원문 앞부분과 다름: {ci['phrase']}")
-        tail = (f" 제{ci['para']}항" if ci.get('para') else '') + (f" 제{ci['ho']}호" if ci.get('ho') else '') + (f" {ci['part']}" if ci.get('part') else '')
+        tail = ((f" 제{ci['para']}항" if ci.get('para') else '') + (f" 제{ci['ho']}호" if ci.get('ho') else '')
+                + (f" {ci['mok']}목" if ci.get('mok') else '') + (f" {ci['sub']})" if ci.get('sub') else '') + (f" {ci['part']}" if ci.get('part') else ''))
         when = re.sub(r'\]\s*\[', '] [', src.get('header') or '')
         return {
             'law': ci['law'], 'jo': jo, 'title': art['title'], 'text': text,
             'cite': f"{jo}조{tail}", 'label': f"{ci['law']} 제{jo}조{tail}", 'joLabel': f"제{jo}조",
-            'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('part')] if x),
+            'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('mok'), ci.get('sub'), ci.get('part')] if x),
             'phrase': ci.get('phrase', ''), 'note': ci.get('note', []) + [prec_line(x) for x in ci.get('precedent', [])] + law_notes(art),
             'conf': ci.get('confidence', ''), 'research': ci.get('research', ''),
             'freq': freq.get((ci['law'], jo), ''),

@@ -117,6 +117,12 @@ def shape(lines, jo):
             continue
         ho = re.match(r'^(\d+)(?:의(\d+))?\.\s*(.*)$', t)
         mok = re.match(r'^([가-하])\.\s*(.*)$', t)
+        sub = re.match(r'^(\d+|[가-하])\)\s*(.*)$', t)
+        if sub and paras and paras[-1].get('ho'):
+            # 목 아래 세목(행정기본법 제2조 제1호 가목 1)~3)처럼): 가장 가까운 목(없으면 호) 아래에 둔다. 항으로 자르지 않는다.
+            box = paras[-1]['ho'][-1]['mok'][-1] if paras[-1]['ho'][-1].get('mok') else paras[-1]['ho'][-1]
+            box.setdefault('sub', []).append({'no': sub.group(1), 'text': sub.group(2).strip()})
+            continue
         if ho and paras:
             # 호: 바로 앞 항 아래에 둔다(제111조 제1항 제4호처럼 인용한다)
             paras[-1].setdefault('ho', []).append({'no': ho.group(1) + (f'의{ho.group(2)}' if ho.group(2) else ''), 'text': ho.group(3).strip()})

@@ -42,6 +42,7 @@ python3 -I pipeline/build.py --artifact <미리보기 파일>
 `proto.html`을 만든다. `--artifact`는 claude.ai 미리보기용 본문만 따로 쓴다(내려받기가 막혀 기록 옮기기 단추는 뺀다).
 
 ```bash
+python3 -I pipeline/tests/shape_test.py   # 조문 원문 나누기(목 아래 세목 1)~3))
 node pipeline/tests/judge.test.cjs
 ```
 
