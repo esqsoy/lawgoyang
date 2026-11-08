@@ -103,6 +103,13 @@ def pick_para(art, para, jo):
 
 
 def main():
+    if '--help' in sys.argv or '-h' in sys.argv:
+        # 도움말만 보여 주고 끝낸다(생성물을 쓰지 않는다. 26.11.08 하위 작업이 --help로 proto.html을 다시 쓴 일이 있었다)
+        print(__doc__)
+        return
+    unknown = [a for a in sys.argv[1:] if a.startswith('-') and a not in ('--check', '--stamp', '--artifact', '--only')]
+    if unknown:
+        raise SystemExit(f'모르는 옵션: {unknown}\n' + __doc__)
     near = json.loads((ROOT / 'data' / 'near.json').read_text(encoding='utf-8'))['pairs']
     ledger = json.loads((ROOT / 'data' / 'ledger' / 'ledger-v0.json').read_text(encoding='utf-8'))
     freq = {(a['law'], a['article']): a['freq_text'] for a in ledger['articles']}
