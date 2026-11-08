@@ -67,6 +67,7 @@ for st in D['sets']:
     seen = set()
     for c in st['cards']:
         conf = f' · {c["conf"]}' if c.get('conf') else ''
+        conf += f' · 판례연구 {c["research"]}' if c.get('research') else ''
         freq = f' · 빈출 {c["freq"]}' if c.get('freq') else ''
         P.append(f'<section class="card" id="{e(c["id"])}"><div class="id">{e(c["id"])} · {e(c["label"])}{e(freq)}{e(conf)} · 3단계 빈칸(첫 문구) {e(c["phrase"] or "자동")}</div>')
         if c['caseId'] not in seen:
@@ -77,6 +78,12 @@ for st in D['sets']:
         for i, n in enumerate(c['note']):
             P.append(row(f'{c["id"]}-n{i + 1}', '해설', e(n), 'v s'))
         P.append(row(c['id'] + '-src', '출처', e(c['srcLine']) + ('<br>' + e(c['examSrc']) if c.get('examSrc') else ''), 'v s'))
+        P.append('</section>')
+    if st.get('later'):
+        P.append(f'<section class="card" id="{e(st["id"])}-later"><div class="id">{e(st["id"])} · 나중 층(카드 없음, 데이터로만)</div>')
+        for i, x in enumerate(st['later']):
+            pr = ' / '.join(f"{p['court']} {p['date']} 선고 {p['no']} {p.get('kind', '판결')}({p['checked']})" for p in x.get('precedent', []))
+            P.append(row(f'{st["id"]}-later{i + 1}', '층 ' + x['layer'], e(f"설문 {x['sub']}: {x['issue']}" + (f' · {pr}' if pr else '') + f" · {x.get('checked', '확인 필요')}"), 'v s'))
         P.append('</section>')
 P.append('<section class="card" id="near"><div class="id">뜻은 맞음 짝(data/near.json) · ' + e(near['status']) + '</div>')
 for k, v in near['pairs'].items():

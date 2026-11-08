@@ -12,6 +12,7 @@
   · 사시의 '이론' 설문(subq.jsonl qtype)은 사례형이 아니라서 뺀다.
 - sets-v0.json: 세트 = 기출 한 문(시험·연도·과목·문), 최근 회차부터. 카드 = 그 문의 (설문, 조문) 하나.
 - data/sets/에 쓴 세트가 있으면 그 문은 세트의 근거 조문으로 센다(원장 매핑을 대신한다).
+- later: 판례 층·학설 층으로 미룬 것(세트의 later, 카드 해설의 '판례 법리' 메모). 데이터로만 두고 빈출도에 세지 않는다(PRINCIPLES 1-2).
 """
 import json
 from collections import defaultdict
@@ -92,6 +93,19 @@ def main():
                              'source': 'data/sets/' + st['id'] + '.json',
                              'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or '')})
 
+    # 나중 층(PRINCIPLES 1-2): 세트의 later와 카드 해설 속 '판례 법리' 메모를 모은다. 빈출도에는 세지 않는다.
+    later = []
+    for (exam, year, part, q), st in written.items():
+        for x in st.get('later', []):
+            later.append({'layer': x['layer'], 'set': st['id'], 'year': year, 'sub': x.get('sub', ''), 'issue': x['issue'],
+                          'precedent': x.get('precedent', []), 'checked': x.get('checked', '')})
+        for iss in st['issues']:
+            for c in iss['cites']:
+                for n in c.get('note', []):
+                    if '판례 법리' in n:
+                        later.append({'layer': '판례', 'set': st['id'], 'year': year, 'sub': str(iss.get('sub', '')), 'card': iss['id'],
+                                      'law': c['law'], 'article': str(c['jo']), 'issue': n, 'precedent': [], 'checked': '판례 확인 전(카드 해설 메모)'})
+
     by = defaultdict(list)
     for h in hits:
         by[(h['law'], h['article'])].append(h)
@@ -121,8 +135,10 @@ def main():
         'status': '변호사시험·사법시험만. 매핑은 Claude, 영신 검수 전. v1에서 노무사·변리사·감정평가사·법무사·5급·입법고시·법원행정고시를 더한다.',
         'rules': '발췌 조문 제외, 현행 번호, 사례 설문만, 창 안 1회 이상이면 외울 조문, 빈출도는 시험별 회차 수.',
         'exams': EXAM,
-        'counts': {'articles': len(arts), 'archive': len(archive), 'retired_rows': len(retired)},
+        'counts': {'articles': len(arts), 'archive': len(archive), 'retired_rows': len(retired),
+                   'later_판례': sum(1 for x in later if x['layer'] == '판례'), 'later_학설': sum(1 for x in later if x['layer'] == '학설')},
         'articles': arts, 'archive': archive, 'retired': retired,
+        'later': sorted(later, key=lambda x: (x['layer'], -x['year'], x['set'])),
     }
     (out / 'ledger-v0.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 
@@ -145,7 +161,8 @@ def main():
                      'q': q, 'cards': cards, 'status': '카드 쓰기 전'})
     (out / 'sets-v0.json').write_text(json.dumps({'version': 'v0', 'order': '최근 회차부터, 같은 해는 시험·과목·문 순',
                                                   'sets': plan}, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print(f"외울 조문 {len(arts)} · 보관함 {len(archive)} · 원장 밖 {len(retired)}줄 · 세트 {len(plan)} · 카드 {sum(len(s['cards']) for s in plan)}")
+    print(f"외울 조문 {len(arts)} · 보관함 {len(archive)} · 원장 밖 {len(retired)}줄 · 세트 {len(plan)} · 카드 {sum(len(s['cards']) for s in plan)}"
+          f" · 나중 층 판례 {doc['counts']['later_판례']} 학설 {doc['counts']['later_학설']}")
 
 
 if __name__ == '__main__':

@@ -46,6 +46,11 @@ def part_text(text, part):
 TRACKS = ['공법', '민사', '연습']
 
 
+def prec_line(x):
+    """판례연구로 확인한 판결 한 줄(PRINCIPLES 1-2)."""
+    return f"판례: {x['court']} {x['date']} 선고 {x['no']} {x.get('kind', '판결')} — {x['point']} ({x['checked']})"
+
+
 def law_notes(art):
     """조문에 붙은 표시 가운데 카드에 보일 것: 위헌·헌법불합치 결정(첫 하나), 2025년 이후 개정(날짜를 모아 한 줄).
     표시는 조 단위라 인용한 항과 다른 항에 관한 것일 수 있다. PRINCIPLES 2 '개정되면 바뀐 조문을 표시'."""
@@ -126,7 +131,8 @@ def main():
             'law': ci['law'], 'jo': jo, 'title': art['title'], 'text': text,
             'cite': f"{jo}조{tail}", 'label': f"{ci['law']} 제{jo}조{tail}", 'joLabel': f"제{jo}조",
             'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('part')] if x),
-            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []) + law_notes(art), 'conf': ci.get('confidence', ''),
+            'phrase': ci.get('phrase', ''), 'note': ci.get('note', []) + [prec_line(x) for x in ci.get('precedent', [])] + law_notes(art),
+            'conf': ci.get('confidence', ''), 'research': ci.get('research', ''),
             'freq': freq.get((ci['law'], jo), ''),
             'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
         }
@@ -168,7 +174,7 @@ def main():
         exam_src = f"출처: {src['org']}, {src['name']}({st['year']}), 공공누리 {src['kogl']}, {src['url']}"
         label = f"{src['short']}"
         sets.append({'id': st['id'], 'track': st['track'], 'title': st['title'], 'label': label, 'year': st['year'],
-                     'q': st['q'], 'status': st.get('status_short', ''),
+                     'q': st['q'], 'status': st.get('status_short', ''), 'later': st.get('later', []),
                      'cards': cards_of(st['id'], label, st['facts'], st['issues'], exam_src)})
     sets.sort(key=lambda x: (TRACKS.index(x['track']), -x.get('year', 0), x.get('q', '')))
     articles = {}

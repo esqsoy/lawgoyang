@@ -3,7 +3,7 @@
  "lsiSeq": "273629",
  "efYd": "20260910",
  "header": "[시행 2026. 9. 10.] [법률 제21044호, 2025. 9. 9., 일부개정]",
- "fetched": "2026-11-07",
+ "fetched": "2026-11-08",
  "method": "law.go.kr 웹 화면 두 곳(lsInfoR 전체·lsSideInfoP 조문 하나)을 따로 받아 글자 단위로 대조. Open API 키 전 임시.",
  "source": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=273629&efYd=20260910",
  "articles": {

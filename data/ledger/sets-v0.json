@@ -507,7 +507,7 @@
      "article": "151",
      "para": "3",
      "issue": "시효 대위원용과 배당이의",
-     "confidence": "확인 필요"
+     "confidence": "확실"
     },
     {
      "sub": "",
@@ -636,7 +636,7 @@
      "article": "409",
      "para": "",
      "issue": "공동임차인의 보증금반환과 연체차임 공제",
-     "confidence": "확인 필요"
+     "confidence": "확실"
     },
     {
      "sub": "",
@@ -644,7 +644,7 @@
      "article": "410",
      "para": "1",
      "issue": "공동임차인의 보증금반환과 연체차임 공제",
-     "confidence": "확인 필요"
+     "confidence": "확실"
     },
     {
      "sub": "",
@@ -1388,10 +1388,18 @@
     {
      "sub": "",
      "law": "민사집행법",
-     "article": "296",
+     "article": "227",
      "para": "3",
      "issue": "분양권 대물변제약정과 가압류를 무시한 이행",
-     "confidence": "확인 필요"
+     "confidence": "확실"
+    },
+    {
+     "sub": "",
+     "law": "민사집행법",
+     "article": "291",
+     "para": "",
+     "issue": "분양권 대물변제약정과 가압류를 무시한 이행",
+     "confidence": "확실"
     }
    ],
    "status": "카드 쓰기 전"
@@ -1900,7 +1908,7 @@
      "article": "396",
      "para": "",
      "issue": "이행보조자 과실·도급인 지시 면책과 항소심의 선택적 병합",
-     "confidence": "확인 필요"
+     "confidence": "확실"
     },
     {
      "sub": "1",
