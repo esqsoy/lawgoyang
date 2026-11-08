@@ -11,11 +11,11 @@
   "사": "사법시험"
  },
  "counts": {
-  "articles": 349,
+  "articles": 351,
   "archive": 222,
   "retired_rows": 0,
-  "later_판례": 197,
-  "later_학설": 6
+  "later_판례": 244,
+  "later_학설": 9
  },
  "articles": [
   {
@@ -171,15 +171,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "1",
-     "issue": "과잉금지원칙",
-     "basis": "Claude 판단",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "37",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의1.json",
      "law": "헌법",
      "article": "37",
      "para": "2"
@@ -191,15 +191,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4(2)",
-     "issue": "과잉금지원칙",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "37",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "헌법",
      "article": "37",
      "para": "2"
@@ -583,15 +583,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "1",
-     "issue": "직접성·현재성",
-     "basis": "문제지 명시",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "68",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "헌법재판소법",
      "article": "68",
      "para": "1"
@@ -888,16 +888,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-2",
-     "issue": "건물 임차인의 토지 차임 상당 부당이득 부정",
-     "basis": "Claude 판단",
+     "sub": "1-2)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "741",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "741",
      "para": ""
@@ -909,15 +909,15 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "사용수익 없는 점유와 부당이득 부정",
-     "basis": "Claude 판단",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "741",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "741",
      "para": ""
@@ -1125,7 +1125,7 @@
     2026
    ],
    "last_year": 2026,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -1194,15 +1194,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "2",
-     "issue": "가압류권자의 대위 말소청구(유용합의 당사자인 채무자)",
-     "basis": "Claude 판단",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "404",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의5.json",
      "law": "민법",
      "article": "404",
      "para": "1"
@@ -1213,16 +1213,36 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲가",
-     "issue": "피보전채권 시효소멸 주장과 제3채무자의 원용 불가",
-     "basis": "Claude 판단",
+     "sub": "2-가",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "404",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
+     "law": "민법",
+     "article": "404",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의6",
+     "sub": "2-나",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민법",
+      "article": "404",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "404",
      "para": "1"
@@ -1234,15 +1254,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "2",
-     "issue": "취소 확정 후 채무자 대위 청구",
-     "basis": "Claude 판단",
+     "issue": "채권양도의 사해행위 취소와 원상회복, 취소 뒤 대위청구",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "404",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의2.json",
      "law": "민법",
      "article": "404",
      "para": "1"
@@ -1417,15 +1437,15 @@
      "part": "공법",
      "q": "2",
      "sub": "1",
-     "issue": "재신청에 대한 거부의 처분성",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "19",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정소송법",
      "article": "19",
      "para": ""
@@ -1705,15 +1725,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "",
-     "issue": "시효중단 재소에서 변론종결 후 사유(변제) 심리",
-     "basis": "Claude 판단",
+     "issue": "공사대금 확정판결 10년 뒤의 시효중단 재소와 변제 항변",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "216",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의1.json",
      "law": "민사소송법",
      "article": "216",
      "para": "1"
@@ -1725,15 +1745,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "소유권확인 확정판결과 후소 인도청구(선결관계)",
-     "basis": "Claude 판단",
+     "issue": "소유권확인 승소판결 뒤 패소자의 소유권에 기한 인도청구",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "216",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의4.json",
      "law": "민사소송법",
      "article": "216",
      "para": "1"
@@ -1967,15 +1987,55 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "2",
-     "issue": "원인무효 등기 말소청구권",
-     "basis": "Claude 판단",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "민법",
       "article": "214",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의5.json",
+     "law": "민법",
+     "article": "214",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "214",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-2의1.json",
+     "law": "민법",
+     "article": "214",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "1-2)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "214",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "214",
      "para": ""
@@ -2113,15 +2173,15 @@
      "part": "공법",
      "q": "2",
      "sub": "1",
-     "issue": "처분 개념",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "2",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정소송법",
      "article": "2",
      "para": "1"
@@ -2334,16 +2394,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲다",
-     "issue": "응소에 의한 시효중단(답변서 제출 시)",
-     "basis": "Claude 판단",
+     "sub": "2-다",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "168",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "168",
      "para": ""
@@ -2681,15 +2741,15 @@
      "part": "민사법",
      "q": "2의1",
      "sub": "2",
-     "issue": "보증금 반환과 인도의 동시이행",
-     "basis": "Claude 판단",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "536",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "536",
      "para": "1"
@@ -2844,16 +2904,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲다",
-     "issue": "점유취득시효 완성 시점",
-     "basis": "Claude 판단",
+     "sub": "2-다",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "245",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "245",
      "para": "1"
@@ -2917,6 +2977,187 @@
      "law": "민법",
      "article": "245",
      "para": "1"
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "750",
+   "paras": [],
+   "freq": {
+    "변": 5,
+    "사": 1
+   },
+   "freq_text": "변5 사1",
+   "years": [
+    2017,
+    2021,
+    2022,
+    2024,
+    2025
+   ],
+   "last_year": 2025,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2025,
+     "round": 14,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "1",
+     "issue": "명시적 일부청구의 시효중단과 항소취하",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2025-민사법-1의1.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2025,
+     "round": 14,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "2",
+     "issue": "직함 사용 허락과 대리권 남용, 횡령한 매매대금",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2025-민사법-1의4.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2025,
+     "round": 14,
+     "part": "민사법",
+     "q": "2의2",
+     "sub": "",
+     "issue": "분양권 대물변제약정과 가압류를 무시한 이행",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2025-민사법-2의2.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2024,
+     "round": 13,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "",
+     "issue": "매립 폐기물과 방해배제·하자담보·불법행위",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2024-민사법-2의3.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2022,
+     "round": 11,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "2",
+     "issue": "종중의 단축급부와 대표자 비위의 소멸시효 기산점",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2022-민사법-2의1.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "2의1",
+     "sub": "2",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-2의1.json",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "1",
+     "issue": "운전사·도로 무단점유자의 불법행위",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "750",
+     "para": ""
+    },
+    {
+     "exam": "사",
+     "year": 2017,
+     "round": 59,
+     "part": "사시 2차 민법",
+     "q": "3",
+     "sub": "2",
+     "issue": "임차 외 부분 손해의 불법행위책임",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "750",
+      "para": ""
+     },
+     "source": "sasi-minsa-20261107",
+     "law": "민법",
+     "article": "750",
+     "para": ""
     }
    ]
   },
@@ -3009,15 +3250,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "1",
-     "issue": "근저당권자의 사해행위 취소로 제3취득자 지위 소멸",
-     "basis": "Claude 판단",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "406",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의5.json",
      "law": "민법",
      "article": "406",
      "para": "1"
@@ -3029,15 +3270,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "1",
-     "issue": "채권양도의 사해행위 취소",
-     "basis": "Claude 판단",
+     "issue": "채권양도의 사해행위 취소와 원상회복, 취소 뒤 대위청구",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "406",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의2.json",
      "law": "민법",
      "article": "406",
      "para": "1"
@@ -3210,16 +3451,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲가",
-     "issue": "등기청구권 시효(매수인 점유 시 불진행)",
-     "basis": "Claude 판단",
+     "sub": "2-가",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "162",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "162",
      "para": "1"
@@ -3331,15 +3572,15 @@
      "part": "민사법",
      "q": "1의4",
      "sub": "",
-     "issue": "소유권 기한 인도청구",
-     "basis": "Claude 판단",
+     "issue": "소유권확인 승소판결 뒤 패소자의 소유권에 기한 인도청구",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "213",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의4.json",
      "law": "민법",
      "article": "213",
      "para": ""
@@ -3350,16 +3591,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-2",
-     "issue": "건물 임차인에 대한 퇴거청구",
-     "basis": "Claude 판단",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "213",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "213",
      "para": ""
@@ -3798,15 +4039,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "3",
-     "issue": "도로점용허가에 대한 주민 원고적격",
-     "basis": "Claude 판단",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "12",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "행정소송법",
      "article": "12",
      "para": ""
@@ -3921,15 +4162,15 @@
      "part": "공법",
      "q": "1의2",
      "sub": "2",
-     "issue": "연임제한과 평등권",
-     "basis": "Claude 판단",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "11",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "헌법",
      "article": "11",
      "para": "1"
@@ -3975,7 +4216,7 @@
     2025
    ],
    "last_year": 2025,
-   "needs_check": true,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
@@ -4043,16 +4284,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲다",
-     "issue": "자주점유 추정",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "sub": "2-다",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "197",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "197",
      "para": "1"
@@ -4118,7 +4359,7 @@
     2025
    ],
    "last_year": 2025,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -4207,15 +4448,15 @@
      "part": "민사법",
      "q": "2의2",
      "sub": "1",
-     "issue": "채권 원상회복과 대항요건",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "채권양도의 사해행위 취소와 원상회복, 취소 뒤 대위청구",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민법",
       "article": "450",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의2.json",
      "law": "민법",
      "article": "450",
      "para": "1"
@@ -4239,166 +4480,6 @@
      "law": "민법",
      "article": "450",
      "para": "2"
-    }
-   ]
-  },
-  {
-   "law": "민법",
-   "article": "750",
-   "paras": [],
-   "freq": {
-    "변": 4,
-    "사": 1
-   },
-   "freq_text": "변4 사1",
-   "years": [
-    2017,
-    2022,
-    2024,
-    2025
-   ],
-   "last_year": 2025,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2025,
-     "round": 14,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "1",
-     "issue": "명시적 일부청구의 시효중단과 항소취하",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "data/sets/변2025-민사법-1의1.json",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2025,
-     "round": 14,
-     "part": "민사법",
-     "q": "1의4",
-     "sub": "2",
-     "issue": "직함 사용 허락과 대리권 남용, 횡령한 매매대금",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "data/sets/변2025-민사법-1의4.json",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2025,
-     "round": 14,
-     "part": "민사법",
-     "q": "2의2",
-     "sub": "",
-     "issue": "분양권 대물변제약정과 가압류를 무시한 이행",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "data/sets/변2025-민사법-2의2.json",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2024,
-     "round": 13,
-     "part": "민사법",
-     "q": "2의3",
-     "sub": "",
-     "issue": "매립 폐기물과 방해배제·하자담보·불법행위",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "data/sets/변2024-민사법-2의3.json",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2022,
-     "round": 11,
-     "part": "민사법",
-     "q": "2의1",
-     "sub": "2",
-     "issue": "종중의 단축급부와 대표자 비위의 소멸시효 기산점",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "data/sets/변2022-민사법-2의1.json",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "2의3",
-     "sub": "1",
-     "issue": "운전사·도로 무단점유자의 불법행위",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "750",
-     "para": ""
-    },
-    {
-     "exam": "사",
-     "year": 2017,
-     "round": 59,
-     "part": "사시 2차 민법",
-     "q": "3",
-     "sub": "2",
-     "issue": "임차 외 부분 손해의 불법행위책임",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "750",
-      "para": ""
-     },
-     "source": "sasi-minsa-20261107",
-     "law": "민법",
-     "article": "750",
-     "para": ""
     }
    ]
   },
@@ -4522,6 +4603,105 @@
      "law": "헌법재판소법",
      "article": "69",
      "para": "1"
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "163",
+   "paras": [],
+   "freq": {
+    "변": 4
+   },
+   "freq_text": "변4",
+   "years": [
+    2020,
+    2021,
+    2023,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2026,
+     "round": 15,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "",
+     "issue": "공동임차인의 보증금반환과 연체차임 공제",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "163",
+      "para": ""
+     },
+     "source": "data/sets/변2026-민사법-2의3.json",
+     "law": "민법",
+     "article": "163",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2023,
+     "round": 12,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "1",
+     "issue": "공사대금 소 취하 뒤 재소의 시효와 다른 추심채권자",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "163",
+      "para": ""
+     },
+     "source": "data/sets/변2023-민사법-1의4.json",
+     "law": "민법",
+     "article": "163",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "",
+     "issue": "공사대금 확정판결 10년 뒤의 시효중단 재소와 변제 항변",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "163",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-1의1.json",
+     "law": "민법",
+     "article": "163",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "2의2",
+     "sub": "1",
+     "issue": "상인의 상품대금 3년 시효",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "163",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민법",
+     "article": "163",
+     "para": ""
     }
    ]
   },
@@ -5313,15 +5493,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "2",
-     "issue": "채무불이행 손해배상",
-     "basis": "Claude 판단",
+     "issue": "승마체험 무료 광고의 계약 편입과 이행보조자 책임",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "390",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의3.json",
      "law": "민법",
      "article": "390",
      "para": ""
@@ -5552,15 +5732,15 @@
      "part": "공법",
      "q": "2",
      "sub": "4(2)",
-     "issue": "신체에 관한 자기결정권·일반적 행동자유",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "10",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "헌법",
      "article": "10",
      "para": ""
@@ -5696,17 +5876,37 @@
      "year": 2021,
      "round": 10,
      "part": "공법",
+     "q": "1의1",
+     "sub": "1",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "헌법",
+      "article": "12",
+      "para": "4"
+     },
+     "source": "data/sets/변2021-공법-1의1.json",
+     "law": "헌법",
+     "article": "12",
+     "para": "4"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
      "q": "2",
      "sub": "4(2)",
-     "issue": "신체의 자유",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "헌법",
       "article": "12",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "헌법",
      "article": "12",
      "para": "1"
@@ -5794,6 +5994,107 @@
    ]
   },
   {
+   "law": "민사소송법",
+   "article": "269",
+   "paras": [
+    "1"
+   ],
+   "freq": {
+    "변": 4
+   },
+   "freq_text": "변4",
+   "years": [
+    2017,
+    2019,
+    2020,
+    2021
+   ],
+   "last_year": 2021,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "1",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "269",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-민사법-1의5.json",
+     "law": "민사소송법",
+     "article": "269",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2020,
+     "round": 9,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "1",
+     "issue": "부존재확인 본소와 이행 반소, 확인의 이익 유지",
+     "basis": "Claude 판단",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민사소송법",
+      "article": "269",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "269",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2019,
+     "round": 8,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "3",
+     "issue": "예비적 반소와 본소 항소기각 시 판단 불요",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "269",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "269",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2017,
+     "round": 6,
+     "part": "민사법",
+     "q": "1의5",
+     "sub": "2",
+     "issue": "반소 요건",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "269",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "269",
+     "para": ""
+    }
+   ]
+  },
+  {
    "law": "행정소송법",
    "article": "20",
    "paras": [
@@ -5820,15 +6121,15 @@
      "part": "공법",
      "q": "2",
      "sub": "1",
-     "issue": "제소기간",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "20",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정소송법",
      "article": "20",
      "para": "1"
@@ -5892,84 +6193,6 @@
      "law": "행정소송법",
      "article": "20",
      "para": "1"
-    }
-   ]
-  },
-  {
-   "law": "민법",
-   "article": "163",
-   "paras": [],
-   "freq": {
-    "변": 3
-   },
-   "freq_text": "변3",
-   "years": [
-    2020,
-    2023,
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "2의3",
-     "sub": "",
-     "issue": "공동임차인의 보증금반환과 연체차임 공제",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "163",
-      "para": ""
-     },
-     "source": "data/sets/변2026-민사법-2의3.json",
-     "law": "민법",
-     "article": "163",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2023,
-     "round": 12,
-     "part": "민사법",
-     "q": "1의4",
-     "sub": "1",
-     "issue": "공사대금 소 취하 뒤 재소의 시효와 다른 추심채권자",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "163",
-      "para": ""
-     },
-     "source": "data/sets/변2023-민사법-1의4.json",
-     "law": "민법",
-     "article": "163",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2020,
-     "round": 9,
-     "part": "민사법",
-     "q": "2의2",
-     "sub": "1",
-     "issue": "상인의 상품대금 3년 시효",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "163",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "163",
-     "para": ""
     }
    ]
   },
@@ -6096,15 +6319,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "2",
-     "issue": "피담보채무 소멸과 근저당 소멸, 무효등기 유용",
-     "basis": "Claude 판단",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "369",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의5.json",
      "law": "민법",
      "article": "369",
      "para": ""
@@ -6536,18 +6759,18 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "2",
-     "issue": "필수적 공동소송 규정 준용 범위",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "매수인의 이전등기 소송에 취득시효 권리주장참가와 참가인만의 항소",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "67",
-      "para": ""
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의3.json",
      "law": "민사소송법",
      "article": "67",
-     "para": ""
+     "para": "1"
     }
    ]
   },
@@ -6597,15 +6820,15 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "1",
-     "issue": "권리주장참가(양립 가능한 채권적 청구)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "매수인의 이전등기 소송에 취득시효 권리주장참가와 참가인만의 항소",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민사소송법",
       "article": "79",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의3.json",
      "law": "민사소송법",
      "article": "79",
      "para": "1"
@@ -6617,15 +6840,15 @@
      "part": "민사법",
      "q": "1의3",
      "sub": "2",
-     "issue": "참가 각하 후 참가인 항소와 본소 확정",
-     "basis": "Claude 판단",
+     "issue": "매수인의 이전등기 소송에 취득시효 권리주장참가와 참가인만의 항소",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "79",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의3.json",
      "law": "민사소송법",
      "article": "79",
      "para": "2"
@@ -6918,15 +7141,15 @@
      "part": "공법",
      "q": "2",
      "sub": "3",
-     "issue": "계약 해지 통보와 사전통지",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정절차법",
       "article": "21",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정절차법",
      "article": "21",
      "para": "1"
@@ -7865,7 +8088,7 @@
     2024
    ],
    "last_year": 2024,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -7934,18 +8157,18 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "2",
-     "issue": "지휘감독 관계 없는 수탁자와 사용자책임",
-     "basis": "Claude 판단",
-     "confidence": "확실",
+     "issue": "승마체험 무료 광고의 계약 편입과 이행보조자 책임",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
      "asked": {
       "law": "민법",
       "article": "756",
-      "para": ""
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의3.json",
      "law": "민법",
      "article": "756",
-     "para": ""
+     "para": "1"
     },
     {
      "exam": "변",
@@ -8153,16 +8376,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "乙나",
-     "issue": "매매사실 자백",
-     "basis": "Claude 판단",
+     "sub": "1-나",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "288",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민사소송법",
      "article": "288",
      "para": ""
@@ -8648,10 +8871,112 @@
    ]
   },
   {
+   "law": "민사소송법",
+   "article": "218",
+   "paras": [
+    "1",
+    "3"
+   ],
+   "freq": {
+    "변": 3
+   },
+   "freq_text": "변3",
+   "years": [
+    2019,
+    2021,
+    2023
+   ],
+   "last_year": 2023,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2023,
+     "round": 12,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "1",
+     "issue": "채권자대위소송 중 원고 사망과 상속인들의 소취하·항소",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "218",
+      "para": "3"
+     },
+     "source": "data/sets/변2023-민사법-1의1.json",
+     "law": "민사소송법",
+     "article": "218",
+     "para": "3"
+    },
+    {
+     "exam": "변",
+     "year": 2023,
+     "round": 12,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "2",
+     "issue": "공사대금 소 취하 뒤 재소의 시효와 다른 추심채권자",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "218",
+      "para": "1"
+     },
+     "source": "data/sets/변2023-민사법-1의4.json",
+     "law": "민사소송법",
+     "article": "218",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의4",
+     "sub": "",
+     "issue": "소유권확인 승소판결 뒤 패소자의 소유권에 기한 인도청구",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "218",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-민사법-1의4.json",
+     "law": "민사소송법",
+     "article": "218",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2019,
+     "round": 8,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "3",
+     "issue": "변론종결 전후 승계인과 기판력",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "218",
+      "para": "1"
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "218",
+     "para": "1"
+    }
+   ]
+  },
+  {
    "law": "행정소송법",
    "article": "23",
    "paras": [
-    "2"
+    "2",
+    "3"
    ],
    "freq": {
     "변": 3
@@ -8692,18 +9017,38 @@
      "part": "공법",
      "q": "1의1",
      "sub": "2",
-     "issue": "준용되는 집행정지 요건",
-     "basis": "Claude 판단",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "행정소송법",
       "article": "23",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의1.json",
      "law": "행정소송법",
      "article": "23",
      "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "1의1",
+     "sub": "2",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "행정소송법",
+      "article": "23",
+      "para": "3"
+     },
+     "source": "data/sets/변2021-공법-1의1.json",
+     "law": "행정소송법",
+     "article": "23",
+     "para": "3"
     },
     {
      "exam": "변",
@@ -8809,6 +9154,84 @@
    ]
   },
   {
+   "law": "민사소송법",
+   "article": "66",
+   "paras": [],
+   "freq": {
+    "변": 3
+   },
+   "freq_text": "변3",
+   "years": [
+    2018,
+    2021,
+    2022
+   ],
+   "last_year": 2022,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2022,
+     "round": 11,
+     "part": "민사법",
+     "q": "1의3",
+     "sub": "2",
+     "issue": "불량 버섯 공동불법행위자에 대한 관할과 변제 항변",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "66",
+      "para": ""
+     },
+     "source": "data/sets/변2022-민사법-1의3.json",
+     "law": "민사소송법",
+     "article": "66",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의6",
+     "sub": "1-나",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "66",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-1의6.json",
+     "law": "민사소송법",
+     "article": "66",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2018,
+     "round": 7,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "2",
+     "issue": "공동소송인 독립(주채무자 시효항변의 효력)",
+     "basis": "Claude 판단",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "66",
+      "para": ""
+     },
+     "source": "minsa-pilot-20261107",
+     "law": "민사소송법",
+     "article": "66",
+     "para": ""
+    }
+   ]
+  },
+  {
    "law": "민법",
    "article": "407",
    "paras": [],
@@ -8830,36 +9253,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의2",
-     "sub": "1",
-     "issue": "수익자의 제3채무자에 대한 취소 통지",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "민법",
-      "article": "407",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민법",
-     "article": "407",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2021,
-     "round": 10,
-     "part": "민사법",
-     "q": "2의2",
      "sub": "2",
-     "issue": "취소의 상대효와 책임재산 회복",
-     "basis": "Claude 판단",
+     "issue": "채권양도의 사해행위 취소와 원상회복, 취소 뒤 대위청구",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "407",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의2.json",
      "law": "민법",
      "article": "407",
      "para": ""
@@ -8988,80 +9391,62 @@
    ]
   },
   {
-   "law": "민사소송법",
-   "article": "269",
-   "paras": [],
-   "freq": {
-    "변": 3
-   },
-   "freq_text": "변3",
-   "years": [
-    2017,
-    2019,
-    2020
+   "law": "민법",
+   "article": "178",
+   "paras": [
+    "1",
+    "2"
    ],
-   "last_year": 2020,
-   "needs_check": true,
+   "freq": {
+    "변": 2
+   },
+   "freq_text": "변2",
+   "years": [
+    2021,
+    2026
+   ],
+   "last_year": 2026,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
-     "year": 2020,
-     "round": 9,
+     "year": 2026,
+     "round": 15,
      "part": "민사법",
-     "q": "1의3",
-     "sub": "1",
-     "issue": "부존재확인 본소와 이행 반소, 확인의 이익 유지",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
-     "asked": {
-      "law": "민사소송법",
-      "article": "269",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "269",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2019,
-     "round": 8,
-     "part": "민사법",
-     "q": "1의2",
-     "sub": "3",
-     "issue": "예비적 반소와 본소 항소기각 시 판단 불요",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "269",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "269",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2017,
-     "round": 6,
-     "part": "민사법",
-     "q": "1의5",
+     "q": "2의1",
      "sub": "2",
-     "issue": "반소 요건",
-     "basis": "Claude 판단",
+     "issue": "물상보증인의 시효 주장과 시효중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
-      "law": "민사소송법",
-      "article": "269",
-      "para": ""
+      "law": "민법",
+      "article": "178",
+      "para": "1"
      },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "269",
-     "para": ""
+     "source": "data/sets/변2026-민사법-2의1.json",
+     "law": "민법",
+     "article": "178",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의1",
+     "sub": "",
+     "issue": "공사대금 확정판결 10년 뒤의 시효중단 재소와 변제 항변",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민법",
+      "article": "178",
+      "para": "2"
+     },
+     "source": "data/sets/변2021-민사법-1의1.json",
+     "law": "민법",
+     "article": "178",
+     "para": "2"
     }
    ]
   },
@@ -9979,15 +10364,15 @@
      "part": "공법",
      "q": "2",
      "sub": "3",
-     "issue": "의견청취",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "행정절차법",
       "article": "22",
       "para": "3"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정절차법",
      "article": "22",
      "para": "3"
@@ -11116,16 +11501,16 @@
      "round": 10,
      "part": "민사법",
      "q": "1의6",
-     "sub": "甲다",
-     "issue": "취득시효에 소멸시효 중단 규정 준용",
-     "basis": "Claude 판단",
+     "sub": "2-다",
+     "issue": "순차매수인의 이전등기 청구와 응소에 의한 취득시효 중단",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "247",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의6.json",
      "law": "민법",
      "article": "247",
      "para": "2"
@@ -11174,15 +11559,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "2",
-     "issue": "독립 사업자인 이행보조자",
-     "basis": "Claude 판단",
+     "issue": "승마체험 무료 광고의 계약 편입과 이행보조자 책임",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "391",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의3.json",
      "law": "민법",
      "article": "391",
      "para": ""
@@ -11231,15 +11616,35 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "2",
-     "issue": "참가적 효력과 배제 사유",
-     "basis": "Claude 판단",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "77",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의2.json",
+     "law": "민사소송법",
+     "article": "77",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "2",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "민사소송법",
+      "article": "77",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-1의2.json",
      "law": "민사소송법",
      "article": "77",
      "para": ""
@@ -11349,15 +11754,15 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "1",
-     "issue": "항소기간 2주",
-     "basis": "Claude 판단",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "396",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의2.json",
      "law": "민사소송법",
      "article": "396",
      "para": "1"
@@ -11640,18 +12045,15 @@
    ]
   },
   {
-   "law": "민사소송법",
-   "article": "218",
-   "paras": [
-    "1",
-    "3"
-   ],
+   "law": "민법",
+   "article": "186",
+   "paras": [],
    "freq": {
     "변": 2
    },
    "freq_text": "변2",
    "years": [
-    2019,
+    2021,
     2023
    ],
    "last_year": 2023,
@@ -11662,60 +12064,40 @@
      "year": 2023,
      "round": 12,
      "part": "민사법",
-     "q": "1의1",
+     "q": "2의1",
      "sub": "1",
-     "issue": "채권자대위소송 중 원고 사망과 상속인들의 소취하·항소",
+     "issue": "등기의 효력발생시기와 3자간 등기명의신탁 부동산의 대물변제",
      "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
-      "law": "민사소송법",
-      "article": "218",
-      "para": "3"
+      "law": "민법",
+      "article": "186",
+      "para": ""
      },
-     "source": "data/sets/변2023-민사법-1의1.json",
-     "law": "민사소송법",
-     "article": "218",
-     "para": "3"
+     "source": "data/sets/변2023-민사법-2의1.json",
+     "law": "민법",
+     "article": "186",
+     "para": ""
     },
     {
      "exam": "변",
-     "year": 2023,
-     "round": 12,
+     "year": 2021,
+     "round": 10,
      "part": "민사법",
-     "q": "1의4",
+     "q": "1의5",
      "sub": "2",
-     "issue": "공사대금 소 취하 뒤 재소의 시효와 다른 추심채권자",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
      "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
-      "law": "민사소송법",
-      "article": "218",
-      "para": "1"
+      "law": "민법",
+      "article": "186",
+      "para": ""
      },
-     "source": "data/sets/변2023-민사법-1의4.json",
-     "law": "민사소송법",
-     "article": "218",
-     "para": "1"
-    },
-    {
-     "exam": "변",
-     "year": 2019,
-     "round": 8,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "3",
-     "issue": "변론종결 전후 승계인과 기판력",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "218",
-      "para": "1"
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "218",
-     "para": "1"
+     "source": "data/sets/변2021-민사법-1의5.json",
+     "law": "민법",
+     "article": "186",
+     "para": ""
     }
    ]
   },
@@ -11938,15 +12320,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "1",
-     "issue": "민사소송 대리인 접견 제한과 재판청구권",
-     "basis": "Claude 판단",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법",
       "article": "27",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의1.json",
      "law": "헌법",
      "article": "27",
      "para": "1"
@@ -12223,63 +12605,6 @@
      "source": "minsa-pilot-20261107",
      "law": "민법",
      "article": "1013",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민사소송법",
-   "article": "66",
-   "paras": [],
-   "freq": {
-    "변": 2
-   },
-   "freq_text": "변2",
-   "years": [
-    2018,
-    2022
-   ],
-   "last_year": 2022,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2022,
-     "round": 11,
-     "part": "민사법",
-     "q": "1의3",
-     "sub": "2",
-     "issue": "불량 버섯 공동불법행위자에 대한 관할과 변제 항변",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "66",
-      "para": ""
-     },
-     "source": "data/sets/변2022-민사법-1의3.json",
-     "law": "민사소송법",
-     "article": "66",
-     "para": ""
-    },
-    {
-     "exam": "변",
-     "year": 2018,
-     "round": 7,
-     "part": "민사법",
-     "q": "1의1",
-     "sub": "2",
-     "issue": "공동소송인 독립(주채무자 시효항변의 효력)",
-     "basis": "Claude 판단",
-     "confidence": "확실",
-     "asked": {
-      "law": "민사소송법",
-      "article": "66",
-      "para": ""
-     },
-     "source": "minsa-pilot-20261107",
-     "law": "민사소송법",
-     "article": "66",
      "para": ""
     }
    ]
@@ -12625,15 +12950,15 @@
      "part": "민사법",
      "q": "1의5",
      "sub": "1",
-     "issue": "제3취득자의 변제와 말소청구",
-     "basis": "문제지 명시",
+     "issue": "근저당 토지의 사해적 매도와 무효 근저당등기의 유용",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "364",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의5.json",
      "law": "민법",
      "article": "364",
      "para": ""
@@ -12682,16 +13007,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-1",
-     "issue": "차임연체와 해지",
-     "basis": "Claude 판단",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "640",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "640",
      "para": ""
@@ -13674,44 +13999,6 @@
      "law": "민법",
      "article": "176",
      "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
-   "article": "178",
-   "paras": [
-    "1"
-   ],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2026
-   ],
-   "last_year": 2026,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2026,
-     "round": 15,
-     "part": "민사법",
-     "q": "2의1",
-     "sub": "2",
-     "issue": "물상보증인의 시효 주장과 시효중단",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "178",
-      "para": "1"
-     },
-     "source": "data/sets/변2026-민사법-2의1.json",
-     "law": "민법",
-     "article": "178",
-     "para": "1"
     }
    ]
   },
@@ -16644,42 +16931,6 @@
   },
   {
    "law": "민법",
-   "article": "186",
-   "paras": [],
-   "freq": {
-    "변": 1
-   },
-   "freq_text": "변1",
-   "years": [
-    2023
-   ],
-   "last_year": 2023,
-   "needs_check": false,
-   "hits": [
-    {
-     "exam": "변",
-     "year": 2023,
-     "round": 12,
-     "part": "민사법",
-     "q": "2의1",
-     "sub": "1",
-     "issue": "등기의 효력발생시기와 3자간 등기명의신탁 부동산의 대물변제",
-     "basis": "세트(Claude 판단)",
-     "confidence": "확실",
-     "asked": {
-      "law": "민법",
-      "article": "186",
-      "para": ""
-     },
-     "source": "data/sets/변2023-민사법-2의1.json",
-     "law": "민법",
-     "article": "186",
-     "para": ""
-    }
-   ]
-  },
-  {
-   "law": "민법",
    "article": "348",
    "paras": [],
    "freq": {
@@ -18566,15 +18817,35 @@
      "part": "공법",
      "q": "2",
      "sub": "4(1)",
-     "issue": "건강진단·예방접종 명령",
-     "basis": "문제지 명시",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "감염병의 예방 및 관리에 관한 법률",
       "article": "46",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
+     "law": "감염병의 예방 및 관리에 관한 법률",
+     "article": "46",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "2",
+     "sub": "4(1)",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "감염병의 예방 및 관리에 관한 법률",
+      "article": "46",
+      "para": ""
+     },
+     "source": "data/sets/변2021-공법-2.json",
      "law": "감염병의 예방 및 관리에 관한 법률",
      "article": "46",
      "para": ""
@@ -18584,7 +18855,10 @@
   {
    "law": "감염병의 예방 및 관리에 관한 법률",
    "article": "71",
-   "paras": [],
+   "paras": [
+    "1",
+    "2"
+   ],
    "freq": {
     "변": 1
    },
@@ -18602,18 +18876,58 @@
      "part": "공법",
      "q": "2",
      "sub": "2",
-     "issue": "예방접종 피해 국가보상",
-     "basis": "문제지 명시",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "감염병의 예방 및 관리에 관한 법률",
       "article": "71",
-      "para": ""
+      "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "감염병의 예방 및 관리에 관한 법률",
      "article": "71",
-     "para": ""
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "2",
+     "sub": "2",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "감염병의 예방 및 관리에 관한 법률",
+      "article": "71",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-공법-2.json",
+     "law": "감염병의 예방 및 관리에 관한 법률",
+     "article": "71",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "2",
+     "sub": "2",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "감염병의 예방 및 관리에 관한 법률",
+      "article": "71",
+      "para": "2"
+     },
+     "source": "data/sets/변2021-공법-2.json",
+     "law": "감염병의 예방 및 관리에 관한 법률",
+     "article": "71",
+     "para": "2"
     }
    ]
   },
@@ -18638,17 +18952,73 @@
      "part": "공법",
      "q": "2",
      "sub": "4(2)",
-     "issue": "처벌조항(심판대상)",
-     "basis": "문제지 명시",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "감염병의 예방 및 관리에 관한 법률",
       "article": "81",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "감염병의 예방 및 관리에 관한 법률",
      "article": "81",
+     "para": ""
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "2",
+     "sub": "4(2)",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "감염병의 예방 및 관리에 관한 법률",
+      "article": "81",
+      "para": ""
+     },
+     "source": "data/sets/변2021-공법-2.json",
+     "law": "감염병의 예방 및 관리에 관한 법률",
+     "article": "81",
+     "para": ""
+    }
+   ]
+  },
+  {
+   "law": "민법",
+   "article": "105",
+   "paras": [],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2021
+   ],
+   "last_year": 2021,
+   "needs_check": true,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "2의3",
+     "sub": "1",
+     "issue": "승마체험 무료 광고의 계약 편입과 이행보조자 책임",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민법",
+      "article": "105",
+      "para": ""
+     },
+     "source": "data/sets/변2021-민사법-2의3.json",
+     "law": "민법",
+     "article": "105",
      "para": ""
     }
    ]
@@ -18676,15 +19046,15 @@
      "part": "민사법",
      "q": "1의1",
      "sub": "",
-     "issue": "판결로 확정된 채권 10년 시효와 재소",
-     "basis": "Claude 판단",
+     "issue": "공사대금 확정판결 10년 뒤의 시효중단 재소와 변제 항변",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "165",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의1.json",
      "law": "민법",
      "article": "165",
      "para": "1"
@@ -18694,7 +19064,9 @@
   {
    "law": "민법",
    "article": "283",
-   "paras": [],
+   "paras": [
+    "2"
+   ],
    "freq": {
     "변": 1
    },
@@ -18711,19 +19083,19 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-1",
-     "issue": "지상물매수청구권",
-     "basis": "문제지 명시",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "283",
-      "para": ""
+      "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "283",
-     "para": ""
+     "para": "2"
     }
    ]
   },
@@ -18739,7 +19111,7 @@
     2021
    ],
    "last_year": 2021,
-   "needs_check": true,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
@@ -18748,15 +19120,15 @@
      "part": "민사법",
      "q": "2의3",
      "sub": "1",
-     "issue": "광고(청약의 유인)와 계약 내용 편입",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "승마체험 무료 광고의 계약 편입과 이행보조자 책임",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "527",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의3.json",
      "law": "민법",
      "article": "527",
      "para": ""
@@ -18783,16 +19155,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-1",
-     "issue": "건물 소유 목적 토지임대차 해지",
-     "basis": "Claude 판단",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "641",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "641",
      "para": ""
@@ -18819,16 +19191,16 @@
      "round": 10,
      "part": "민사법",
      "q": "2의1",
-     "sub": "1-1",
-     "issue": "토지임차인 지상물매수청구(차임연체 해지 시 불가)",
-     "basis": "문제지 명시",
+     "sub": "1-1)",
+     "issue": "차임연체 해지와 지상물매수청구, 건물임차인의 퇴거·보증금",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민법",
       "article": "643",
       "para": ""
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-2의1.json",
      "law": "민법",
      "article": "643",
      "para": ""
@@ -18850,7 +19222,7 @@
     2021
    ],
    "last_year": 2021,
-   "needs_check": false,
+   "needs_check": true,
    "hits": [
     {
      "exam": "변",
@@ -18859,15 +19231,15 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "1",
-     "issue": "보조참가인 항소기간(피참가인 기준)",
-     "basis": "Claude 판단",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "76",
       "para": "1"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의2.json",
      "law": "민사소송법",
      "article": "76",
      "para": "1"
@@ -18879,15 +19251,35 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "1",
-     "issue": "피참가인의 참가인 항소 취하",
-     "basis": "Claude 판단",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확인 필요",
+     "asked": {
+      "law": "민사소송법",
+      "article": "76",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-민사법-1의2.json",
+     "law": "민사소송법",
+     "article": "76",
+     "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "민사법",
+     "q": "1의2",
+     "sub": "1",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "76",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의2.json",
      "law": "민사소송법",
      "article": "76",
      "para": "2"
@@ -18899,15 +19291,15 @@
      "part": "민사법",
      "q": "1의2",
      "sub": "2",
-     "issue": "피참가인 행위에 어긋나는 참가인 행위",
-     "basis": "Claude 판단",
+     "issue": "연대보증 소송의 주채무자 보조참가와 참가적 효력",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "민사소송법",
       "article": "76",
       "para": "2"
      },
-     "source": "minsa-pilot-20261107",
+     "source": "data/sets/변2021-민사법-1의2.json",
      "law": "민사소송법",
      "article": "76",
      "para": "2"
@@ -18937,15 +19329,15 @@
      "part": "공법",
      "q": "1의1",
      "sub": "2",
-     "issue": "준용되는 가처분 요건",
-     "basis": "Claude 판단",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "민사집행법",
       "article": "300",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의1.json",
      "law": "민사집행법",
      "article": "300",
      "para": "2"
@@ -18966,7 +19358,7 @@
     2021
    ],
    "last_year": 2021,
-   "needs_check": true,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
@@ -18975,19 +19367,18 @@
      "part": "공법",
      "q": "1의2",
      "sub": "4",
-     "issue": "주민감사청구 전치",
-     "basis": "Claude 판단",
-     "confidence": "확인 필요",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
      "asked": {
       "law": "지방자치법",
-      "article": "16",
+      "article": "21",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "지방자치법",
      "article": "21",
-     "para": "1",
-     "number_note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"
+     "para": "1"
     }
    ]
   },
@@ -19006,7 +19397,7 @@
     2021
    ],
    "last_year": 2021,
-   "needs_check": true,
+   "needs_check": false,
    "hits": [
     {
      "exam": "변",
@@ -19015,19 +19406,18 @@
      "part": "공법",
      "q": "1의2",
      "sub": "4",
-     "issue": "주민소송 요건(재무회계행위)",
-     "basis": "Claude 판단",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "지방자치법",
-      "article": "17",
+      "article": "22",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "지방자치법",
      "article": "22",
-     "para": "1",
-     "number_note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"
+     "para": "1"
     },
     {
      "exam": "변",
@@ -19036,19 +19426,38 @@
      "part": "공법",
      "q": "1의2",
      "sub": "4",
-     "issue": "주민소송 종류",
-     "basis": "Claude 판단",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "지방자치법",
-      "article": "17",
+      "article": "22",
       "para": "2"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의2.json",
      "law": "지방자치법",
      "article": "22",
-     "para": "2",
-     "number_note": "2021 전부개정 전 조문번호. 현행 번호는 Claude 기억(확인 필요)"
+     "para": "2"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "1의2",
+     "sub": "4",
+     "issue": "시장 연임제한과 도로점용허가",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "지방자치법",
+      "article": "22",
+      "para": "2"
+     },
+     "source": "data/sets/변2021-공법-1의2.json",
+     "law": "지방자치법",
+     "article": "22",
+     "para": "2"
     }
    ]
   },
@@ -19073,15 +19482,15 @@
      "part": "공법",
      "q": "2",
      "sub": "3",
-     "issue": "처분 개념(사법상 계약 해지)",
-     "basis": "Claude 판단",
+     "issue": "예방접종 피해보상 거부와 건강진단·예방접종명령",
+     "basis": "세트(Claude 판단)",
      "confidence": "확인 필요",
      "asked": {
       "law": "행정절차법",
       "article": "2",
       "para": ""
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-2.json",
      "law": "행정절차법",
      "article": "2",
      "para": ""
@@ -19111,18 +19520,74 @@
      "part": "공법",
      "q": "1의1",
      "sub": "2",
-     "issue": "헌법소원 가처분(준용)",
-     "basis": "Claude 판단",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
      "confidence": "확실",
      "asked": {
       "law": "헌법재판소법",
       "article": "40",
       "para": "1"
      },
-     "source": "gongbeop-pilot-20261107",
+     "source": "data/sets/변2021-공법-1의1.json",
      "law": "헌법재판소법",
      "article": "40",
      "para": "1"
+    },
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "1의1",
+     "sub": "2",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "헌법재판소법",
+      "article": "40",
+      "para": "1"
+     },
+     "source": "data/sets/변2021-공법-1의1.json",
+     "law": "헌법재판소법",
+     "article": "40",
+     "para": "1"
+    }
+   ]
+  },
+  {
+   "law": "헌법재판소법",
+   "article": "71의2",
+   "paras": [],
+   "freq": {
+    "변": 1
+   },
+   "freq_text": "변1",
+   "years": [
+    2021
+   ],
+   "last_year": 2021,
+   "needs_check": false,
+   "hits": [
+    {
+     "exam": "변",
+     "year": 2021,
+     "round": 10,
+     "part": "공법",
+     "q": "1의1",
+     "sub": "2",
+     "issue": "수형자의 소송대리인 접견 제한과 효력정지가처분",
+     "basis": "세트(Claude 판단)",
+     "confidence": "확실",
+     "asked": {
+      "law": "헌법재판소법",
+      "article": "71의2",
+      "para": ""
+     },
+     "source": "data/sets/변2021-공법-1의1.json",
+     "law": "헌법재판소법",
+     "article": "71의2",
+     "para": ""
     }
    ]
   },
@@ -33478,6 +33943,817 @@
    "checked": "판례 확인 전(판례 단계에서)"
   },
   {
+   "layer": "판례",
+   "set": "변2021-공법-1의2",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-공법-1의2-1a",
+   "law": "헌법재판소법",
+   "article": "68",
+   "issue": "법령에 대한 헌법소원은 그 법령으로 청구인의 기본권이 직접, 현재 침해되어야 한다는 일반 요건은 판례 법리, 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-공법-1의2",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-공법-1의2-2a",
+   "law": "헌법",
+   "article": "11",
+   "issue": "평등권 심사를 엄격하게 할지 완화하여 할지 가르는 기준(헌법이 특별히 평등을 요구하는지, 관련 기본권에 중대한 제한을 초래하는지)은 판례 법리, 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-공법-2",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-공법-2-1a",
+   "law": "행정소송법",
+   "article": "2",
+   "issue": "거부가 처분이 되려면 신청인에게 법규상·조리상 신청권이 있어야 한다는 것은 판례 법리, 판례 문구 작업 때 카드로 만든다. 확인 필요.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-공법-2",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-공법-2-2b",
+   "law": "감염병의 예방 및 관리에 관한 법률",
+   "article": "71",
+   "issue": "인과관계 증명의 정도는 판례 법리, 판례 문구 작업 때 카드로 만든다. 피해 인정 여부의 결정이 행정청의 재량에 속한다는 판례(2014두274, 구 전염병예방법 사안)도 있다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-공법-2",
+   "year": 2021,
+   "sub": "4(2)",
+   "card": "변2021-공법-2-4d",
+   "law": "헌법",
+   "article": "10",
+   "issue": "자기결정권과 일반적 행동자유권이 이 조의 행복추구권에서 나온다는 것과, 신체의 자유와 함께 제한될 때 가장 밀접한 기본권만 판단할지는 판례 법리, 판례 문구 작업 때 카드로 만든다. 2021헌바329는 격리 조치 위반 처벌에서 신체의 자유를 판단하는 이상 일반적 행동자유권은 따로 판단하지 않았다. 확인 필요.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의1",
+   "year": 2021,
+   "sub": "",
+   "issue": "확정판결 채권의 시효중단을 위한 재소의 소의 이익(10년 경과가 임박한 경우), 10년이 지나 제기된 후소도 곧바로 각하하지 않고 본안판단을 한다는 것, 전소 변론종결 뒤 생긴 변제 등 채권소멸사유가 후소의 심리대상이라는 것(카드 d)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2019. 1. 17.",
+     "no": "2018다24349",
+     "kind": "판결",
+     "point": "확정판결 채권의 소멸시효 10년 경과가 임박하면 시효중단을 위한 재소에 소의 이익이 있다. 후소 법원은 확정된 권리의 요건을 다시 심리할 수 없으나 전소 변론종결 뒤 생긴 변제·상계·면제 등 채권소멸사유는 후소의 심리대상이고, 후소가 전소 판결 확정 후 10년이 지나 제기되었더라도 곧바로 각하하지 않고 피고의 항변에 따라 본안판단을 하여야 한다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의1",
+   "year": 2021,
+   "sub": "",
+   "card": "변2021-민사법-1의1-d",
+   "law": "민사소송법",
+   "article": "216",
+   "issue": "원장 v0과 같다. 시효중단을 위한 재소의 소의 이익, 10년이 지나 제기된 후소도 곧바로 각하하지 않고 본안판단을 한다는 것, 전소 변론종결 뒤의 변제·상계·면제 등이 후소의 심리대상이라는 것은 판례 법리(2018다24349), 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의2",
+   "year": 2021,
+   "sub": "1",
+   "issue": "보조참가인의 상소기간은 피참가인의 상소기간에 따른다는 법리. 판결(2007다41966)은 참가인 자신의 기간 안이라도 피참가인의 기간이 지났으면 부적법하다는 것이고, 참가인 자신의 기간이 지났어도 피참가인의 기간 안이면 적법한지는 직접 말하지 않는다(카드 1b)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2007. 9. 6.",
+     "no": "2007다41966",
+     "kind": "판결",
+     "point": "보조참가인은 참가할 때의 소송의 진행 정도에 따라 피참가인이 할 수 없는 소송행위를 할 수 없으므로(제76조 제1항 단서), 보조참가인에게 판결정본이 송달된 때부터 따지면 상고기간 안이라도 피참가인에 대한 상고기간이 지났다면 보조참가인의 상고는 부적법하다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의2",
+   "year": 2021,
+   "sub": "1",
+   "issue": "피참가인은 보조참가인이 제기한 항소를 포기·취하할 수 있다(카드 1d)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2010. 10. 14.",
+     "no": "2010다38168",
+     "kind": "판결",
+     "point": "제76조 제2항의 취지는 피참가인과 보조참가인의 소송행위가 어긋나면 피참가인의 의사가 우선한다는 것이므로, 피참가인은 보조참가인이 제기한 항소를 포기 또는 취하할 수 있다. 피참가인의 항소포기로 보조참가인들이 제기한 항소가 취하되어 소가 종료되었다고 한 사례",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의2",
+   "year": 2021,
+   "sub": "2",
+   "issue": "참가적 효력의 성질과 범위: 참가인과 피참가인 사이에만 미치고, 판결 결론의 기초가 된 사실상·법률상 판단으로서 공동이익으로 주장하거나 다툴 수 있었던 사항에 미친다. 피참가인이 참가인의 소송행위와 어긋나게 처분한 경우 그 효력이 참가인에게 미치지 않는다(카드 2a~2c)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1988. 12. 13.",
+     "no": "86다카2289",
+     "kind": "판결",
+     "point": "보조참가인이 피참가인을 보조하여 소송을 수행하였으나 피참가인이 패소한 경우 형평의 원칙상 보조참가인이 피참가인에게 그 패소판결이 부당하다고 주장할 수 없도록 하는 참가적 효력이 있을 뿐, 기판력이 참가인과 피참가인의 상대방 사이에 미치지는 않는다. 보조참가인이 사실을 부인하였는데도 피참가인이 청구를 인낙하였다면 그 인낙조서의 효력은 참가인에게 미칠 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "1997. 9. 5.",
+     "no": "95다42133",
+     "kind": "판결",
+     "point": "참가적 효력은 전소 확정판결의 결론의 기초가 된 사실상·법률상 판단으로서 보조참가인이 피참가인과 공동이익으로 주장하거나 다툴 수 있었던 사항에 한하여 미치고, 부가적·보충적 판단이나 방론에는 미치지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의2",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-1의2-1d",
+   "law": "민사소송법",
+   "article": "76",
+   "issue": "원장 v0과 같다. 피참가인이 보조참가인의 항소를 포기·취하할 수 있다는 것은 판례 법리(2010다38168).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의2",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-1의2-2a",
+   "law": "민사소송법",
+   "article": "77",
+   "issue": "참가적 효력이 참가인과 피참가인 사이에 미치고 판결 결론의 기초가 된 사실상·법률상 판단에도 미친다는 것은 판례 법리(86다카2289, 95다42133).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의3",
+   "year": 2021,
+   "sub": "1",
+   "issue": "권리주장참가의 요건(본소청구와 참가인의 청구가 주장 자체에서 양립할 수 없는 관계)과, 매매를 원인으로 한 이전등기청구와 취득시효를 원인으로 한 이전등기청구가 양립하는지(카드 1a)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2017. 4. 26.",
+     "no": "2014다221777, 221784",
+     "kind": "판결",
+     "point": "독립당사자참가 중 권리주장참가는 원고의 본소청구와 참가인의 청구가 주장 자체에서 양립할 수 없는 관계라고 볼 수 있는 경우에 허용될 수 있다. 근저당권 이전을 구하는 소송에 채무자가 근저당권 말소를 구하며 낸 독립당사자참가 신청을 각하한 사례",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "1996. 6. 28.",
+     "no": "94다50595, 50601",
+     "kind": "판결",
+     "point": "갑의 을에 대한 취득시효 완성을 원인으로 한 소유권이전등기청구와 병의 을에 대한 같은 원인의 청구는 채권적 등기청구권이지만 어느 한쪽이 인정되면 다른 쪽은 인정될 수 없어 서로 양립할 수 없으므로 병의 독립당사자참가는 적법하다고 한 사례",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의3",
+   "year": 2021,
+   "sub": "2",
+   "issue": "독립당사자참가소송에서 참가인만 상소한 경우 이심의 범위, 원고 승소 부분을 불리하게 바꿀 수 있는 한계(참가신청이 적법하고 합일확정이 필요한 경우), 그 경우 본소 부분의 확정 시점(카드 2a·2b)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2007. 12. 14.",
+     "no": "2007다37776, 37783",
+     "kind": "판결",
+     "point": "제79조 제2항으로 제67조가 준용되어 원고승소 판결에 참가인만 상소해도 판결 전체의 확정이 차단되고 사건 전부가 이심되지만, 상소심이 원고의 청구인용 부분을 원고에게 불리하게 바꿀 수 있는 것은 참가신청이 적법하고 합일확정의 요청상 필요한 경우에 한한다. 원고 청구 인용·참가신청 각하의 제1심판결에 참가인만 항소했는데 참가인의 항소를 기각하면서 피고가 항소하지도 않은 본소 부분을 취소하고 원고의 청구를 기각한 원심은 위법하다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의3",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-1의3-2b",
+   "law": "민사소송법",
+   "article": "67",
+   "issue": "이때 1심 판결 중 본소 부분은 참가인이 항소심 판결에 상고하지 않아 상고기간이 지난 때 확정된다는 것은 판례 법리(2007다37776), 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의4",
+   "year": 2021,
+   "sub": "",
+   "issue": "소유권확인 확정판결의 기판력이 소유권에 기한 후소의 선결문제로 작용한다는 법리, 변론종결 전 사유의 차단(시적 범위), 말소등기청구 확정판결의 기판력은 소유권에 미치지 않는다는 법리(카드 b·c)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1994. 12. 27.",
+     "no": "94다4684",
+     "kind": "판결",
+     "point": "확정된 전소의 기판력 있는 법률관계가 후소의 선결문제가 되면 기판력이 작용하므로, 소유권확인청구에 대한 판결이 확정된 뒤 같은 당사자 사이에 소유권에 기한 물권적 청구권을 청구원인으로 하는 소송에서는 전소의 소유권 존부 판단에 구속되어 당사자는 다른 주장을, 법원은 다른 판단을 할 수 없다. 변론종결 후 새로 소유권을 취득하였다는 등 특별한 사정이 없는 한 후소 청구는 기각된다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2016. 8. 30.",
+     "no": "2016다222149",
+     "kind": "판결",
+     "point": "확정판결의 기판력은 전소의 변론종결 전에 당사자가 주장하였거나 주장할 수 있었던 모든 공격방어방법에 미치고, 변론종결 후 새로 발생한 사유(새로운 사실관계)가 있을 때에만 차단된다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2014. 10. 30.",
+     "no": "2013다53939",
+     "kind": "판결",
+     "point": "소유권이전등기 말소등기청구 승소확정판결의 기판력은 말소등기청구권의 존부에만 미치고 소유권의 존부는 전제가 되는 법률관계에 불과하여 기판력이 미치지 않으므로, 그 뒤 건물인도 등 청구에 전소의 기판력이 미치지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의4",
+   "year": 2021,
+   "sub": "",
+   "card": "변2021-민사법-1의4-c",
+   "law": "민사소송법",
+   "article": "218",
+   "issue": "기판력이 변론종결 전에 주장할 수 있었던 공격방어방법에 미친다는 시적 범위는 판례 법리(2016다222149), 판례 문구 작업 때 카드로 만든다. 판결은 이때 후소 청구를 기각한다(94다4684).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "1",
+   "issue": "근저당부동산 제3취득자의 채권최고액 범위 변제와 소멸청구(카드 1a), 근저당권자의 채권자취소권은 우선변제권 범위 밖의 채권만 피보전채권으로 한다는 법리(카드 1b)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2002. 5. 24.",
+     "no": "2002다7176",
+     "kind": "판결",
+     "point": "근저당부동산에 대하여 소유권을 취득한 제3자는 피담보채무가 확정된 이후에 그 확정된 피담보채무를 채권최고액의 범위 내에서 변제하고 근저당권의 소멸을 청구할 수 있다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2002. 11. 8.",
+     "no": "2002다41589",
+     "kind": "판결",
+     "point": "채권자에게 근저당권이 설정되어 우선변제권이 확보된 범위에서는 채무자의 재산처분행위가 그 채권자를 해하지 않고, 채무액이 부동산 가액 및 채권최고액을 넘는 경우 우선변제받을 액을 공제한 나머지 채권액에 대해서만 채권자취소권이 인정된다. 피보전채권액이 근저당권의 채권최고액을 넘어 그 초과 부분에 관한 채권자취소권 행사가 가능하다고 한 사례",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "1",
+   "issue": "피고가 본소에 대해 사해행위취소 반소를 낸 경우 반소 인용 판결이 확정되지 않았어도 이를 이유로 본소 청구를 기각할 수 있다(카드 1c)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2019. 3. 14.",
+     "no": "2018다277785, 277792",
+     "kind": "판결",
+     "point": "원고의 본소 청구에 피고가 원고의 소유권 취득 원인인 법률행위가 사해행위라고 다투면서 그 취소와 원상회복을 구하는 반소를 적법하게 제기한 경우, 법원이 반소 청구가 이유 있다고 판단하면 그 판결이 확정되지 않았더라도 법률행위가 취소되었음을 전제로 본소 청구를 심리하여 기각할 수 있다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "2",
+   "issue": "무효등기 유용 합의와 부기등기의 효력, 부기등기 전 이해관계인에 대한 한계, 대위채권자가 주장할 수 있는 사유의 범위(카드 2b·2d)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1998. 3. 24.",
+     "no": "97다56242",
+     "kind": "판결",
+     "point": "채무를 모두 변제하여 저당권이 소멸하면 그 등기도 효력을 잃지만, 소유자가 새 채권자와 그 등기를 유용하기로 합의하고 저당권 이전의 부기등기를 마치면 새 채권자는 소유자에게 유용 합의로 대항할 수 있다. 다만 부기등기 전에 등기부상 이해관계를 가지게 된 자에게는 그 등기의 유효를 주장할 수 없다. 소유자·종전 채권자·새 채권자의 3자 합의가 있으면 소유자를 대위하는 자에게도 대항할 수 있다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2009. 5. 28.",
+     "no": "2009다4787",
+     "kind": "판결",
+     "point": "효력을 잃은 가등기를 유용하기로 합의하고 이전의 부기등기를 마친 자는 소유자와 그를 대위하는 채권자에게 대항할 수 있고, 부기등기 전 가압류채권자에게는 그 범위에서 대항할 수 없지만, 채권자대위권을 행사하는 채권자는 채무자가 주장할 수 있는 사유만 주장할 수 있으므로 소유자를 대위하여 말소를 구하는 가압류채권자는 부기등기 전에 가압류하였다는 자기 사유를 주장할 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-1의5-1a",
+   "law": "민법",
+   "article": "364",
+   "issue": "원장 v0과 같다. 근저당부동산의 제3취득자가 확정된 피담보채무를 채권최고액 범위에서 변제하고 소멸을 청구할 수 있다는 것은 판례 법리(2002다7176).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-1의5-1b",
+   "law": "민법",
+   "article": "406",
+   "issue": "담보권으로 우선변제가 확보된 범위에서는 채권자취소권을 행사할 수 없고 그 밖의 채권만 피보전채권이 된다는 것은 판례 법리(2002다41589). 원상회복의 방법은 이 설문에서 묻지 않아 다루지 않았다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-1의5-1c",
+   "law": "민사소송법",
+   "article": "269",
+   "issue": "반소 사해행위취소 판결이 확정되지 않았어도 이를 이유로 본소 청구를 기각할 수 있다는 것은 판례 법리(2018다277785), 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-1의5-2b",
+   "law": "민법",
+   "article": "186",
+   "issue": "유용 합의의 효력과, 부기등기 전에 등기상 이해관계를 가진 자에게 대항할 수 없다는 한계는 판례 법리(97다56242, 2009다4787), 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-1의5-2d",
+   "law": "민법",
+   "article": "404",
+   "issue": "대위채권자는 채무자가 주장할 수 있는 사유의 범위에서만 주장할 수 있고 자기와 제3채무자 사이의 독자적 사유는 주장할 수 없다는 것은 판례 법리(2009다4787).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "1-가",
+   "issue": "乙에 대한 소의 적법성: 이행의 소는 원고가 이행청구권의 존재를 주장하는 것으로 소의 이익이 인정되고, 판결을 받아도 집행이 사실상 불가능하거나 곤란하다는 사정만으로 소의 이익이 부정되지 않는다. 乙은 석명에 이행불능 항변이 아니라고 답했으므로 乙에 대한 소는 적법하다(조문 없음)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2016. 8. 30.",
+     "no": "2015다255265",
+     "kind": "판결",
+     "point": "이행의 소는 원칙적으로 원고가 이행청구권의 존재를 주장하는 것으로서 권리보호의 이익이 인정되고, 이행판결을 받아도 집행이 사실상 불가능하거나 현저히 곤란하다는 사정만으로 그 이익이 부정되지 않는다(개성공업지구 건물 인도청구)",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2022. 1. 27.",
+     "no": "2018다259565",
+     "kind": "판결",
+     "point": "이행의 소는 원칙적으로 원고가 이행청구권의 존재를 주장하는 것으로서 권리보호의 이익이 인정되고, 이행판결을 받아도 집행이 사실상 불가능하거나 현저히 곤란하다는 사정만으로 그 이익이 부정되는 것은 아니다(출제 뒤 판결)",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "1-나",
+   "issue": "통상공동소송에는 주장공통의 원칙이 적용되지 않는다(카드 1b)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1994. 5. 10.",
+     "no": "93다47196",
+     "kind": "판결",
+     "point": "판결 당시 민사소송법 제62조(통상공동소송인의 지위)의 명문 규정과 변론주의 소송구조에 비추어 통상의 공동소송에는 주장공통의 원칙이 적용되지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-가",
+   "issue": "매수인이 목적물을 인도받아 점유하는 동안 등기청구권은 소멸시효에 걸리지 않는다(카드 2a). 제3채무자는 피보전채권의 소멸시효를 원용할 수 없고, 채무자가 피보전채권 소송에서 시효를 원용한 경우의 예외(카드 2b)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1976. 11. 6.",
+     "no": "76다148",
+     "kind": "전원합의체 판결",
+     "point": "부동산 매수인이 목적물을 인도받아 사용·수익하고 있는 경우 그 매수인의 등기청구권은 다른 채권과 달리 소멸시효에 걸리지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2008. 1. 31.",
+     "no": "2007다64471",
+     "kind": "판결",
+     "point": "채권자대위소송에서 제3채무자는 채무자가 채권자에 대하여 가지는 항변으로 대항할 수 없고, 소멸시효 완성을 원용할 수 있는 자는 시효로 직접 이익을 받는 자뿐이라 제3채무자는 피보전채권의 소멸시효를 원용할 수 없다. 다만 채권자가 채무자를 상대로 피보전채권의 이행을 구한 소송에서 채무자가 시효를 원용하였다면 대위소송에서도 시효완성 여부를 심리하여야 한다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-나",
+   "issue": "피대위권리가 인정되지 않으면 채권자대위소송은 각하가 아니라 청구 기각이라는 법리(카드 2c). law.go.kr에서 판결을 찾지 못했다(판례 단계에서 다시 찾는다)",
+   "precedent": [],
+   "checked": "2026-11-08 law.go.kr 검색(판결 찾지 못함)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-다",
+   "issue": "응소에 의한 취득시효 중단(재판상 청구 포함, 변론에서 주장 필요)과 그 효력 발생 시점(현실적으로 응소한 때, 답변서 제출일)(카드 2e·2f)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2003. 6. 13.",
+     "no": "2003다17927, 17934",
+     "kind": "판결",
+     "point": "취득시효를 주장하는 자가 낸 소에 권리자가 응소하여 적극적으로 권리를 주장하고 그것이 받아들여지면 제247조 제2항으로 준용되는 제168조 제1호, 제170조 제1항의 재판상 청구에 포함된다. 다만 변론주의상 피고가 응소로 시효가 중단되었다고 주장하여야 하고, 그 주장은 취득시효 완성 뒤라도 사실심 변론종결 전에는 할 수 있다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2005. 12. 23.",
+     "no": "2005다59383, 59390",
+     "kind": "판결",
+     "point": "피고로서 응소하여 적극적으로 권리를 주장하고 그것이 받아들여진 경우도 재판상 청구에 포함되고, 응소행위로 인한 시효중단의 효력은 피고가 현실적으로 권리를 행사하여 응소한 때에 발생한다(소 제기 때로 소급하지 않음)",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2010. 8. 26.",
+     "no": "2008다42416, 42423",
+     "kind": "판결",
+     "point": "응소행위로 인한 시효중단의 효력은 피고가 현실적으로 권리를 행사하여 응소한 때에 발생한다. 채무부존재확인의 소에 채권자가 응소하여 답변서를 제출한 날에 대출금채권의 소멸시효가 중단되었다고 한 사례",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-가",
+   "card": "변2021-민사법-1의6-2a",
+   "law": "민법",
+   "article": "162",
+   "issue": "부동산 매수인이 목적물을 인도받아 사용·수익하는 동안 등기청구권이 소멸시효에 걸리지 않는다는 것은 판례 법리(76다148 전원합의체).",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-나",
+   "card": "변2021-민사법-1의6-2c",
+   "law": "민법",
+   "article": "404",
+   "issue": "피대위권리가 없을 때 소를 각하하지 않고 청구를 기각한다는 것은 판례 법리로 보이나 law.go.kr에서 판결을 찾지 못했다(검색어 '피대위권리 부존재 기각', '채권자대위소송 피대위채권 존재하지 않 청구 기각'). 사건번호 확인 필요, 판례 단계에서 확인한다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-다",
+   "card": "변2021-민사법-1의6-2e",
+   "law": "민법",
+   "article": "168",
+   "issue": "원장 v0은 조 전체였다. 청구를 정한 제1호로 정했다. 응소도 재판상 청구에 포함된다는 것과, 시효중단의 효과를 원하는 피고가 변론에서 이를 주장해야 한다는 것은 판례 법리(2003다17927). 甲은 제2회 변론기일에 이를 주장했다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-1의6",
+   "year": 2021,
+   "sub": "2-다",
+   "card": "변2021-민사법-1의6-2f",
+   "law": "민법",
+   "article": "245",
+   "issue": "응소로 인한 시효중단의 효력이 피고가 현실적으로 권리를 행사하여 응소한 때(답변서 제출일) 생긴다는 것은 판례 법리(2005다59383, 2008다42416), 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의1",
+   "year": 2021,
+   "sub": "1-1)",
+   "issue": "토지임차인의 차임연체 등 채무불이행으로 토지임대차가 해지된 경우 지상물매수청구권(제643조·제283조)이 생기지 않는다는 법리",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2003. 4. 22.",
+     "no": "2003다7685",
+     "kind": "판결",
+     "point": "공작물의 소유 등을 목적으로 하는 토지임대차에서 임차인의 채무불이행(이 사건은 차임 2기 이상 연체)을 이유로 계약이 해지된 경우 임차인은 임대인에게 제283조, 제643조에 의한 매수청구권을 가지지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "1997. 4. 8.",
+     "no": "96다54249, 54256",
+     "kind": "판결",
+     "point": "토지임차인의 차임연체 등 채무불이행을 이유로 임대차계약이 해지되는 경우 토지임차인은 토지임대인에게 지상건물의 매수를 청구할 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의1",
+   "year": 2021,
+   "sub": "1-2)",
+   "issue": "토지소유자의 건물점유자에 대한 퇴거청구(소유권에 기한 방해배제)와, 건물임차권의 대항력으로 토지소유자에게 대항할 수 없다는 법리",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2010. 8. 19.",
+     "no": "2010다43801",
+     "kind": "판결",
+     "point": "건물이 존립을 위한 토지사용권을 갖추지 못해 토지소유자가 건물소유자에게 철거와 대지 인도를 청구할 수 있는 경우에도 건물소유자 아닌 사람이 건물을 점유하고 있으면 철거를 실행할 수 없으므로, 토지소유자는 소유권에 기한 방해배제로서 건물점유자에게 건물로부터의 퇴출을 청구할 수 있다. 건물점유자가 대항력 있는 건물임차인이어도 같다. 건물임차권의 대항력은 건물에 관한 것이라 토지소유권을 제약할 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의1",
+   "year": 2021,
+   "sub": "1-2)",
+   "issue": "건물 부지의 점유자는 건물 소유자이고, 건물임차인은 토지소유자에게 부지 차임 상당 부당이득반환의무를 지지 않는다는 법리",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1994. 12. 9.",
+     "no": "94다27809",
+     "kind": "판결",
+     "point": "건물소유자의 토지임대차가 토지임대인 측의 해지통고로 종료해 건물소유자가 토지의 사용·수익 권한을 잃었어도 건물소유자는 토지소유자와의 관계에서 전체 부지의 불법점유자로서 부지 차임 상당 부당이득 전부의 반환의무를 지고, 건물 일부를 점유한 건물임차인이 토지소유자에게 부지점유자로서 부당이득반환의무를 진다고 볼 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2012. 5. 10.",
+     "no": "2012다4633",
+     "kind": "판결",
+     "point": "건물소유자가 부지 소유권을 잃어도 토지소유자와의 관계에서는 건물 부지의 불법점유자로서 부지 차임 상당 부당이득 전부의 반환의무를 지고, 건물을 점유하는 건물임차인이 토지소유자에게 부지점유자로서 부당이득반환의무를 진다고 볼 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "2003. 11. 13.",
+     "no": "2002다57935",
+     "kind": "판결",
+     "point": "건물의 부지가 된 토지는 건물 소유자가 점유하는 것으로 보고, 건물 소유자가 현실적으로 건물이나 부지를 점거하지 않아도 같다. 특별한 사정이 없는 한 건물 소유명의자가 아닌 자는 실제로 건물을 점유하고 있어도 건물 부지의 점유자로 볼 수 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의1",
+   "year": 2021,
+   "sub": "2",
+   "issue": "임대차 종료 뒤 보증금반환과 목적물반환의 동시이행, 동시이행항변권에 기한 점유의 불법점유 부정, 사용·수익하지 않은 점유의 부당이득 부정",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1998. 5. 29.",
+     "no": "98다6497",
+     "kind": "판결",
+     "point": "임차인이 임대차 종료 뒤에도 목적물을 계속 점유하였으나 본래의 임대차계약상 목적에 따라 사용·수익하지 않아 실질적 이득이 없으면 임대인에게 손해가 있어도 부당이득반환의무가 없다. 임차인의 목적물반환의무와 임대인의 (연체차임을 공제한) 보증금반환의무는 동시이행관계이므로, 임대인이 보증금반환의무를 이행하거나 현실적 이행제공을 하여 임차인이 동시이행항변권을 잃지 않는 한 임차인의 점유는 불법점유가 아니어서 손해배상의무도 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    },
+    {
+     "court": "대법원",
+     "date": "1992. 4. 14.",
+     "no": "91다45202, 45219",
+     "kind": "판결",
+     "point": "임대차 종료 뒤 임차인이 동시이행항변권을 행사하여 임차건물을 계속 점유하면 불법점유는 아니지만 이득이 있으면 부당이득으로 반환하여야 한다. 다만 이득은 실질적 이익을 말하므로, 점유만 계속하고 본래 목적대로 사용·수익하지 않았으면 부당이득반환의무가 없다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의1",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-2의1-2a",
+   "law": "민법",
+   "article": "536",
+   "issue": "임대차 종료 뒤 임차인의 목적물반환의무와 임대인의 (연체차임 등을 공제한) 보증금반환의무가 동시이행관계라는 것은 판례 법리다(아래 판결). 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의2",
+   "year": 2021,
+   "sub": "1",
+   "issue": "채권양도가 사해행위로 취소될 때 원상회복의 방법(수익자가 추심 전이면 제3채무자에게 취소 통지를 하도록 청구)과 원물반환 원칙",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2015. 11. 17.",
+     "no": "2012다2743",
+     "kind": "판결",
+     "point": "채무자의 수익자에 대한 채권양도가 사해행위로 취소되는 경우 수익자가 제3채무자에게서 아직 채권을 추심하지 않았으면, 채권자는 원상회복으로서 수익자가 제3채무자에게 채권양도가 취소되었다는 취지의 통지를 하도록 청구할 수 있다. 그러나 사해행위 취소는 채권자와 수익자의 관계에서 상대적으로 채무자와 수익자 사이의 법률행위를 무효로 할 뿐이어서, 채권은 채권자와 수익자의 관계에서 채무자의 책임재산으로 취급될 뿐 채무자가 직접 채권을 취득하는 것이 아니다. 그래서 채권자는 채무자를 대위하여 제3채무자에게 지급을 청구할 수 없다(피대위채권이 없다며 원심의 청구 기각 결론을 유지)",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의2",
+   "year": 2021,
+   "sub": "2",
+   "issue": "사해행위 취소의 상대적 효력: 채무자가 채권의 권리자로 되지 않아 취소채권자가 채무자를 대위해 제3채무자에게 지급을 청구할 수 없다(피대위채권 부존재, 청구 기각)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2015. 11. 17.",
+     "no": "2012다2743",
+     "kind": "판결",
+     "point": "채무자의 수익자에 대한 채권양도가 사해행위로 취소되는 경우 수익자가 제3채무자에게서 아직 채권을 추심하지 않았으면, 채권자는 원상회복으로서 수익자가 제3채무자에게 채권양도가 취소되었다는 취지의 통지를 하도록 청구할 수 있다. 그러나 사해행위 취소는 채권자와 수익자의 관계에서 상대적으로 채무자와 수익자 사이의 법률행위를 무효로 할 뿐이어서, 채권은 채권자와 수익자의 관계에서 채무자의 책임재산으로 취급될 뿐 채무자가 직접 채권을 취득하는 것이 아니다. 그래서 채권자는 채무자를 대위하여 제3채무자에게 지급을 청구할 수 없다(피대위채권이 없다며 원심의 청구 기각 결론을 유지)",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의2",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-2의2-1a",
+   "law": "민법",
+   "article": "406",
+   "issue": "원상회복은 원물반환이 원칙이고 원물반환이 불가능하거나 현저히 곤란할 때 가액배상을 한다는 것은 판례 법리다. 丁이 아직 추심하지 않아 채권이 그대로 있으므로 원물반환을 한다(카드 b). 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의2",
+   "year": 2021,
+   "sub": "1",
+   "card": "변2021-민사법-2의2-1b",
+   "law": "민법",
+   "article": "450",
+   "issue": "원상회복의 방법(취소 통지)은 판례 법리, 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의3",
+   "year": 2021,
+   "sub": "1",
+   "issue": "광고가 청약이 되는 경우와, 청약의 유인인 광고의 내용이 계약 내용이 되는 경우(광고 내용을 전제로 한 청약과 승낙), 계약내용에 관한 서면의 해석 방법",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2018. 2. 13.",
+     "no": "2017다275447",
+     "kind": "판결",
+     "point": "광고는 일반적으로 청약의 유인에 불과하지만 내용이 명확·확정적이고 광고주가 광고 내용대로 계약에 구속되려는 의사가 명백하면 청약으로 볼 수 있다. 청약의 유인이더라도 상대방이 광고 내용을 전제로 청약하고 광고주가 승낙하여 계약이 체결되면 광고 내용이 계약 내용이 된다. 계약내용에 관한 서면의 의사해석은 문언, 동기와 경위, 목적, 당사자의 진정한 의사를 종합해 합리적으로 하여야 한다(참조조문 민법 제105조, 제527조). 전자상거래 사이트의 숙박권 광고에 있던 무료 승마체험이 계약 내용이라고 보았다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의3",
+   "year": 2021,
+   "sub": "2",
+   "issue": "제391조 이행보조자의 범위(지시·감독, 독립적 지위, 계약관계, 호의 무관)와 무료 승마체험 제공자의 계약상 안전 의무",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2018. 2. 13.",
+     "no": "2017다275447",
+     "kind": "판결",
+     "point": "제391조의 이행보조자는 채무자의 의사 관여 아래 채무의 이행행위에 속하는 활동을 하는 사람이면 되고, 채무자의 지시·감독을 받는지, 종속적·독립적 지위인지, 채무자와 계약관계가 있는지, 호의로 한 것인지는 상관없다. 무료 승마체험을 계약 내용으로 한 리조트 운영자는 이용자 수준에 맞는 말과 안전장비, 안전요원, 안전교육과 수준별 지도를 제공할 계약상 의무가 있고, 그 부탁으로 승마를 지도한 사람이 안전 주의의무를 게을리하였으면 운영자는 제391조에 따라 과실이 있어 채무불이행 손해배상책임을 진다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의3",
+   "year": 2021,
+   "sub": "2",
+   "issue": "독립 사업자에게 일을 맡긴 자의 사용자책임: 구체적 지휘·감독권 유보 여부와 도급인 책임(제757조, 카드 없음)",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "1992. 6. 23.",
+     "no": "92다2615",
+     "kind": "판결",
+     "point": "도급인은 도급 또는 지시에 관하여 중대한 과실이 없는 한 수급인이 그 일에 관하여 제3자에게 가한 손해를 배상할 책임이 없다(제757조). 다만 도급인이 수급인의 일의 진행과 방법에 관하여 구체적인 지휘·감독권을 유보한 경우에는 실질적으로 사용자·피용자 관계와 다를 바 없어 제756조의 사용자책임을 진다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "판례 확인 전(판례 단계에서)"
+  },
+  {
+   "layer": "판례",
+   "set": "변2021-민사법-2의3",
+   "year": 2021,
+   "sub": "2",
+   "card": "변2021-민사법-2의3-2c",
+   "law": "민법",
+   "article": "756",
+   "issue": "사용자책임의 사용관계는 실질적인 지휘·감독 관계를 뜻하고, 일을 맡긴 도급인은 수급인의 일의 진행과 방법에 관하여 구체적인 지휘·감독권을 유보한 경우에만 사용자책임을 지며 그 밖에는 제757조로 원칙적으로 책임이 없다(아래 판결). 바탕 판결 2017다275447은 채무불이행만 판단해, 이 부분은 이 판결로 보았다. 판례 법리, 판례 문구 작업 때 카드로 만든다.",
+   "precedent": [],
+   "checked": "판례 확인 전(카드 해설 메모)"
+  },
+  {
    "layer": "학설",
    "set": "변2025-민사법-1의1",
    "year": 2025,
@@ -33553,6 +34829,51 @@
      "no": "83다카1489",
      "kind": "전원합의체 판결",
      "point": "표현대리가 성립된다고 하여 무권대리의 성질이 유권대리로 전환되는 것은 아니므로, 유권대리에 관한 주장 속에 표현대리의 주장이 포함되어 있다고 볼 수 없다. 표현대리와 제135조 책임의 관계는 다루지 않는다",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "2026-11-08 law.go.kr 검색(판례 없음)"
+  },
+  {
+   "layer": "학설",
+   "set": "변2021-공법-2",
+   "year": 2021,
+   "sub": "4(1)",
+   "issue": "B의 건강진단 및 예방접종명령의 법적 성질(카드 4a의 결론): 丁에게 건강진단·예방접종을 받을 의무를 지우는 하명으로서 항고소송의 대상인 처분인지, 재량행위인지, 행정상 즉시강제와 어떻게 구별되는지. 감염병예방법 제46조 명령의 성질을 판단한 판례를 찾지 못함. 같은 법 제49조 제1항의 예방 조치(종교시설 집합금지)를 처분으로 다투어 그 선택을 행정청의 재량으로 보고 비례의 원칙 위반 여부를 심사한 대법원 2024. 7. 18. 선고 2022두43528 전원합의체 판결(출제 뒤)이 참고가 된다",
+   "precedent": [],
+   "checked": "2026-11-08 law.go.kr 검색(제46조 명령의 판례 없음)"
+  },
+  {
+   "layer": "학설",
+   "set": "변2021-공법-2",
+   "year": 2021,
+   "sub": "4(2)",
+   "issue": "감염병예방법 제46조 제2호와 제81조 제10호가 丁의 신체의 자유·자기결정권 등을 과잉금지원칙에 반하여 침해하는지, ‘감염병에 감염되었을 것으로 의심되는 사람’이 명확성원칙에 맞는지(카드 4c~4e의 결론). 건강진단·예방접종명령과 그 거부 처벌을 다룬 헌법재판소 결정을 찾지 못함. 출제 뒤 같은 법의 감염병의심자 격리 조치 위반 처벌조항에 대해 재판관 4:4로 합헌을 선고한 결정이 있다",
+   "precedent": [
+    {
+     "court": "헌법재판소",
+     "date": "2025. 4. 10.",
+     "no": "2021헌바329",
+     "kind": "결정",
+     "point": "감염병의심자 격리 조치(감염병예방법 제49조 제1항 제14호)를 위반한 자를 처벌하는 같은 법 제79조의3 제5호 해당 부분은 감염병의심자를 특정 장소에 머물도록 강제하여 신체적 이동의 자유인 신체의 자유를 제한하고(일반적 행동자유권은 따로 판단하지 않음, ‘감염병의심자’의 광범위성은 과잉금지원칙에서 검토), 재판관 4인 합헌의견·4인 위헌의견으로 위헌결정 정족수에 이르지 못해 합헌",
+     "checked": "2026-11-08 law.go.kr 판결 원문 확인"
+    }
+   ],
+   "checked": "2026-11-08 law.go.kr 검색(건강진단·예방접종명령의 결정 없음)"
+  },
+  {
+   "layer": "학설",
+   "set": "변2021-민사법-1의5",
+   "year": 2021,
+   "sub": "2",
+   "issue": "부기등기 전 가압류채권자가 유용 합의로 대항받지 않는다는 데서 무효인 근저당권설정등기의 말소를 직접 청구할 권리가 생기는지(카드 2c의 결론). 2009다4787은 이 경우 '그 범위 내에서' 대항할 수 없다고만 하고 직접 청구권은 다루지 않는다",
+   "precedent": [
+    {
+     "court": "대법원",
+     "date": "2009. 5. 28.",
+     "no": "2009다4787",
+     "kind": "판결",
+     "point": "효력을 잃은 가등기를 유용하기로 합의하고 이전의 부기등기를 마친 자는 소유자와 그를 대위하는 채권자에게 대항할 수 있고, 부기등기 전 가압류채권자에게는 그 범위에서 대항할 수 없지만, 채권자대위권을 행사하는 채권자는 채무자가 주장할 수 있는 사유만 주장할 수 있으므로 소유자를 대위하여 말소를 구하는 가압류채권자는 부기등기 전에 가압류하였다는 자기 사유를 주장할 수 없다",
      "checked": "2026-11-08 law.go.kr 판결 원문 확인"
     }
    ],
