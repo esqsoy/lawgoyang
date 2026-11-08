@@ -7,6 +7,20 @@
  "method": "law.go.kr 웹 화면 두 곳(lsInfoR 전체·lsSideInfoP 조문 하나)을 따로 받아 글자 단위로 대조. Open API 키 전 임시.",
  "source": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=284415&efYd=20260317",
  "articles": {
+  "2": {
+   "title": "신의성실",
+   "paras": [
+    {
+     "no": 1,
+     "text": "권리의 행사와 의무의 이행은 신의에 좇아 성실히 하여야 한다."
+    },
+    {
+     "no": 2,
+     "text": "권리는 남용하지 못한다."
+    }
+   ],
+   "notes": []
+  },
   "10": {
    "title": "피성년후견인의 행위와 취소",
    "paras": [
