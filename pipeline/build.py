@@ -5,13 +5,35 @@
 - --check: 조립·검사만 하고 파일은 쓰지 않는다. --only: 그 세트만 읽는다(임시판은 늘 포함).
 - proto.html: 혼자 열리는 완성 문서(나중에 GitHub Pages용).
 - --artifact: claude.ai Artifact 미리보기용(문서 껍데기 없이 본문만).
+- --stamp: 빌드가 통과한 세트(pending 없음)에 '원문 대조' 검수 기록을 남긴다(대조한 법령 시행일 포함, 이미 같으면 그대로).
+  세트마다 조문 층 검수 단계(STAGES)의 상태를 계산해 직검수 페이지에 보인다. 법령 시행일이 바뀌면 원문 대조가 '낡음'이 된다.
 생성물(proto.html)을 손으로 고치지 않는다. game.html·judge.js·data/를 고치고 다시 조립한다.
 """
-import json, re, sys
+import datetime, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 P = ROOT / 'pipeline'
+
+
+TODAY = datetime.date.today().isoformat()
+STAGES = ['초안', '원문 대조', '확인 필요 분류', '바탕 판결', '영신 직검수']  # 조문 층 검수 단계(PRINCIPLES 1-2)
+
+
+def stages_of(checks, laws_now):
+    """세트의 검수 기록(checks)에서 단계마다 마지막 상태를 낸다. 원문 대조는 법령 시행일이 바뀌면 '낡음'."""
+    out = []
+    for stg in STAGES:
+        hs = [c for c in checks if c['stage'] == stg]
+        if not hs:
+            out.append({'stage': stg, 'state': '없음', 'date': ''})
+            continue
+        last = hs[-1]
+        state = last['result']
+        if stg == '원문 대조' and last.get('laws') != laws_now:
+            state = '낡음'
+        out.append({'stage': stg, 'state': state, 'date': last['date'], 'by': last.get('by', ''), 'note': last.get('note', '')})
+    return out
 
 
 def part_text(text, part):
@@ -173,9 +195,22 @@ def main():
         src = st['source']
         exam_src = f"출처: {src['org']}, {src['name']}({st['year']}), 공공누리 {src['kogl']}, {src['url']}"
         label = f"{src['short']}"
+        cs = cards_of(st['id'], label, st['facts'], st['issues'], exam_src)
+        laws_now = {c['law']: source(c['law']).get('efYd', '') for c in cs}
+        has_pending = any(ci.get('pending') for iss in st['issues'] for ci in iss['cites'])
+        if '--stamp' in sys.argv and not has_pending:
+            # 빌드가 통과했다 = 카드 조문·첫 문구가 지금 받은 원문과 맞다. 대조한 법령 시행일과 함께 기록한다.
+            last = [c for c in st.get('checks', []) if c['stage'] == '원문 대조']
+            if not last or last[-1].get('laws') != laws_now:
+                st.setdefault('checks', []).append({'stage': '원문 대조', 'date': TODAY, 'by': 'build.py', 'result': '통과', 'laws': laws_now,
+                                                    'note': '카드 조문과 첫 문구가 law.go.kr에서 받은 원문(두 화면 대조본)과 맞음'})
+                f.write_text(json.dumps(st, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+        stg = stages_of(st.get('checks', []), laws_now)
         sets.append({'id': st['id'], 'track': st['track'], 'title': st['title'], 'label': label, 'year': st['year'],
                      'q': st['q'], 'status': st.get('status_short', ''), 'later': st.get('later', []),
-                     'cards': cards_of(st['id'], label, st['facts'], st['issues'], exam_src)})
+                     'basis': st.get('basis', []), 'checks': st.get('checks', []), 'stages': stg,
+                     'todo': [x['stage'] for x in stg if x['state'] not in ('통과', '고침')],
+                     'cards': cs})
     sets.sort(key=lambda x: (TRACKS.index(x['track']), -x.get('year', 0), x.get('q', '')))
     articles = {}
     for key, src in srcs.items():

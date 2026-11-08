@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 R = ROOT / 'research'
 WINDOW = (2017, 2026)
 EXAM = {'변': '변호사시험', '사': '사법시험'}
+STAGES = ['초안', '원문 대조', '확인 필요 분류', '바탕 판결', '영신 직검수']  # build.py와 같게(PRINCIPLES 1-2)
 SOURCES = [
     ('gongbeop-pilot-20261107', None),
     ('minsa-pilot-20261107', None),
@@ -157,8 +158,15 @@ def main():
             seen.add(k)
             cards.append({'sub': h['sub'], 'law': h['law'], 'article': h['article'], 'para': h['para'],
                           'issue': h['issue'], 'confidence': h['confidence']})
+        st = written.get((exam, year, part, q))
+        if st:
+            done = {c['stage'] for c in st.get('checks', []) if c['result'] in ('통과', '고침')}
+            left = [x for x in STAGES if x not in done]
+            status = '카드 씀 · ' + ('조문 층 검수 끝' if not left else '남은 검수: ' + ', '.join(left))
+        else:
+            status = '카드 쓰기 전'
         plan.append({'id': f'{exam}{year}-{part}-{q}', 'exam': exam, 'year': year, 'round': hs[0]['round'], 'part': part,
-                     'q': q, 'cards': cards, 'status': '카드 쓰기 전'})
+                     'q': q, 'cards': cards, 'status': status})
     (out / 'sets-v0.json').write_text(json.dumps({'version': 'v0', 'order': '최근 회차부터, 같은 해는 시험·과목·문 순',
                                                   'sets': plan}, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f"외울 조문 {len(arts)} · 보관함 {len(archive)} · 원장 밖 {len(retired)}줄 · 세트 {len(plan)} · 카드 {sum(len(s['cards']) for s in plan)}"

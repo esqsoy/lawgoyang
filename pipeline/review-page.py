@@ -60,10 +60,34 @@ def row(id, k, v, cls='v'):
 
 
 only = sys.argv[sys.argv.index('--sets') + 1].split(',') if '--sets' in sys.argv else None
+# 검수 단계 요약(PRINCIPLES 1-2): 남은 단계가 있는 세트만 추가 작업한다
+exam_sets = [st for st in D['sets'] if st.get('stages') and (not only or st['id'] in only)]
+if exam_sets:
+    names = [x['stage'] for x in exam_sets[0]['stages']]
+    done_n = {n: sum(1 for st in exam_sets for x in st['stages'] if x['stage'] == n and x['state'] in ('통과', '고침')) for n in names}
+    P.append('<section class="card" id="checks-summary"><div class="id">조문 층 검수 단계(세트 ' + str(len(exam_sets)) + '개) · 통과·고침 수</div>')
+    P.append(row('checks-stages', '단계', e(' · '.join(f'{n} {done_n[n]}/{len(exam_sets)}' for n in names)), 'v s'))
+    finished = [st['id'] for st in exam_sets if not st['todo']]
+    P.append(row('checks-done', '재검수 없음', e(', '.join(finished) or '아직 없음'), 'v s'))
+    for st in exam_sets:
+        if st['todo']:
+            P.append(row('checks-todo-' + st['id'], '남음', f'<a href="#{e(st["id"])}">{e(st["id"])}</a> ' + e(', '.join(st['todo'])), 'v s'))
+    P.append('</section>')
 for st in D['sets']:
     if only and st['id'] not in only:
         continue
     P.append(f'<h2 id="{e(st["id"])}">{e(st["title"])} <small>{e(st["label"])}{" · " + e(st["status"]) if st.get("status") else ""}</small></h2>')
+    if st.get('stages'):
+        chips = ' · '.join(f"{x['stage']} {x['state']}" + (f"({x['date']})" if x['date'] else '') for x in st['stages'])
+        P.append(f'<p class="lead" id="{e(st["id"])}-stages">검수: {e(chips)}</p>')
+    for i, b in enumerate(st.get('basis', [])):
+        if b.get('none'):
+            txt = f"설문 {b['sub']}: 바탕 판결 못 찾음(검색: {b.get('searched', '')}) · {b.get('checked', '')}"
+        else:
+            txt = (f"설문 {b['sub']}: {b['court']} {b['date']} 선고 {b['no']} {b.get('kind', '판결')} · 유사도 {b['similarity']} · {b['diff']}"
+                   + (f" · 같은 법리 {', '.join(b['same_rule'])}" if b.get('same_rule') else '')
+                   + (f" · 고친 것: {b['conflict']}" if b.get('conflict') else '') + f" · {b.get('checked', '')}")
+        P.append(f'<p class="lead ln" id="{e(st["id"])}-basis{i + 1}">바탕 판결 {e(txt)}</p>')
     seen = set()
     for c in st['cards']:
         conf = f' · {c["conf"]}' if c.get('conf') else ''
