@@ -1,0 +1,21 @@
+{
+ "law": "행정소송규칙",
+ "lsiSeq": "260689",
+ "efYd": "20240301",
+ "header": "[시행 2024. 3. 1.] [대법원규칙 제3132호, 2024. 2. 22., 일부개정]",
+ "fetched": "2026-11-08",
+ "method": "law.go.kr 웹 화면 두 곳(lsInfoR 전체·lsSideInfoP 조문 하나)을 따로 받아 글자 단위로 대조. Open API 키 전 임시.",
+ "source": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=260689&efYd=20240301",
+ "articles": {
+  "9": {
+   "title": "처분사유의 추가ㆍ변경",
+   "paras": [
+    {
+     "no": null,
+     "text": "행정청은 사실심 변론을 종결할 때까지 당초의 처분사유와 기본적 사실관계가 동일한 범위 내에서 처분사유를 추가 또는 변경할 수 있다."
+    }
+   ],
+   "notes": []
+  }
+ }
+}
