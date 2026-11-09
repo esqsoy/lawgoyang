@@ -68,6 +68,15 @@ node pipeline/tests/sets.cjs proto.html
 
 세트 하나만 조립 검사: `python3 -I pipeline/build.py --check --only <세트 id,…>`(파일을 쓰지 않는다).
 
+```bash
+python3 -I pipeline/exams/scourt_fetch.py data_law <빈 폴더>        # 법무사 2차 문제
+python3 -I pipeline/exams/scourt_fetch.py data_hang <빈 폴더>       # 법원행정고시 2차 문제
+python3 -I pipeline/exams/gosi_list.py <목록.json>                 # 5급 공채 2차 글과 첨부 목록
+python3 -I pipeline/exams/gosi_fetch.py <목록.json> <빈 폴더> 2017 2026   # 5급(행정) 첨부 ZIP
+```
+
+기출 원문을 받는다. 받은 파일은 저장소 밖(영신 아이클라우드 `40 법학/기출원문/`)에 둔다. `--list-only`(scourt)는 받지 않고 목록만 본다. 글마다 `_index-*.json`이 같이 생긴다.
+
 ## 저장 키
 
 `lawgoyang-progress-v1`(판 진도, 보카고양 progress 꼴), `lawgoyang-stage-v1`(조문별 빈칸 단계 1~4), `lawgoyang-missed-v1`(조문별 틀린 횟수). 기록 옮기기는 숙련도·틀린 횟수를 합칠 때 큰 쪽을 남긴다(보카고양 missed와 같은 합치기라 공용 코드를 고치지 않았다).
