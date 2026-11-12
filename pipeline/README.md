@@ -73,9 +73,37 @@ python3 -I pipeline/exams/scourt_fetch.py data_law <빈 폴더>        # 법무�
 python3 -I pipeline/exams/scourt_fetch.py data_hang <빈 폴더>       # 법원행정고시 2차 문제
 python3 -I pipeline/exams/gosi_list.py <목록.json>                 # 5급 공채 2차 글과 첨부 목록
 python3 -I pipeline/exams/gosi_fetch.py <목록.json> <빈 폴더> 2017 2026   # 5급(행정) 첨부 ZIP
+python3 -I pipeline/exams/qnet_fetch.py 공인노무사 <빈 폴더> 2017 2026      # 큐넷: 노무사 2차
+python3 -I pipeline/exams/qnet_fetch.py 변리사 <빈 폴더> 2017 2026 --skip 선택   # 큐넷: 변리사 2차 필수과목
+python3 -I pipeline/exams/qnet_fetch.py 감정평가사 <빈 폴더> 2017 2026      # 큐넷: 감정평가사 2차
+python3 -I pipeline/exams/assembly_fetch.py <빈 폴더> 2017 2026            # 국회: 입법고시 2차(PDF판 ZIP)
 ```
 
-기출 원문을 받는다. 받은 파일은 저장소 밖(영신 아이클라우드 `40 법학/기출원문/`)에 둔다. `--list-only`(scourt)는 받지 않고 목록만 본다. 글마다 `_index-*.json`이 같이 생긴다.
+기출 원문을 받는다. 받은 파일은 저장소 밖(영신 아이클라우드 `40 법학/기출원문/`)에 둔다. `--list-only`는 받지 않고 목록만 본다. 글마다 `_index-*.json`이 같이 생긴다.
+
+```bash
+swiftc -O pipeline/exams/pdftext.swift -o <저장소 밖 폴더>/pdftext
+<저장소 밖 폴더>/pdftext <문제.pdf> --ocr > <저장소 밖 폴더>/<이름>.txt
+python3 -I pipeline/exams/court_check.py <txt 폴더>     # 법무사·법원행정고시: 과목별 쪽 바닥글·【문 N】 점검
+```
+
+PDF 글자층을 쪽마다 뽑는다. `--ocr`은 글자층이 없는 쪽(스캔본)을 맥 Vision OCR(한국어·영어)로 읽는다. 甲·乙·丙 같은 한자와 숫자를 가끔 잘못 읽으니, OCR 글자에만 기댄 조문 번호는 '확인 필요'로 둔다. 뽑은 글자도 저장소에 넣지 않는다.
+
+배포용 HWP(법무사·법원행정고시 2017~2026, 입법고시 2018·2019)는 맥미니 Polaris Office Editor에서 열어 인쇄 → PDF 메뉴 '웹 수신에 저장'으로 PDF를 만든다. 배포용 보호는 풀지 않는다(WORK_LOG 26.11.11).
+
+```bash
+python3 -I pipeline/ledger.py --v1
+```
+
+원장 v1을 만든다(`data/ledger/ledger-v1.json`, `sets-v1.json`). v0 매핑 넷에 `research/v1-*-20261111/` 여덟 묶음(일곱 시험)을 더한다. 묶음 폴더에 `review.jsonl`(줄마다 다시 판단한 확신도)과 `corrections.jsonl`(두 검토가 합의한 바꾸기·지우기·더하기)이 있으면 매핑 위에 얹는다. 게임은 아직 v0을 읽는다.
+
+```bash
+python3 -I pipeline/fetch_api.py --ledger data/ledger/ledger-v1.json --cache <저장소 밖 폴더> --outdir sources/api/laws
+python3 -I pipeline/fetch_api.py --show 민사소송법 451 452
+python3 -I pipeline/fetch_api.py --compare sources/web/laws --cache <같은 폴더>
+```
+
+law.go.kr Open API로 오늘 시행 중인 조문을 받는다(시행일 법령 `target=eflaw`. 그냥 '현행'은 시행 전 조항이 섞여 온다, PRINCIPLES 2). 키(OC)는 저장소에 두지 않고 `LAW_OC` 환경변수나 `~/.config/lawgoyang/oc`에서 읽는다. 키는 맥미니 IP로 등록했다. 법령 전체 응답은 cache(기본 `~/.cache/lawgoyang-api`)에 두고, `sources/api/laws/`에는 원장 조문만 웹 임시본과 같은 꼴로 쓴다. `index.json`의 `pending`은 공포됐지만 시행 전인 개정판의 [시행일, 공포번호]다. `--show`는 조문 하나를 바로 보여 주고, `--compare`는 웹 임시본과 글자 단위로 대조한다.
 
 ## 저장 키
 
