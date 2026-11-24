@@ -1,8 +1,8 @@
 {
  "checked": "2026-11-24",
  "since": "2026-01-01",
- "our_articles": 804,
- "card_precedents": 585,
+ "our_articles": 824,
+ "card_precedents": 663,
  "laws_changed": [],
  "laws_upcoming": [
   {
@@ -55,18 +55,6 @@
  ],
  "en_banc": [
   {
-   "no": "2022도5937",
-   "date": "20260722",
-   "name": "상관모욕",
-   "kind": "전원합의체 판결",
-   "our_articles": [
-    "헌법 제12조",
-    "헌법 제21조"
-   ],
-   "overruled": [],
-   "overruled_on_cards": {}
-  },
-  {
    "no": "2025두34707",
    "date": "20260722",
    "name": "부가가치세경정거부처분취소",
@@ -77,6 +65,18 @@
     "헌법 제38조",
     "헌법 제61조",
     "헌법 제75조"
+   ],
+   "overruled": [],
+   "overruled_on_cards": {}
+  },
+  {
+   "no": "2022도5937",
+   "date": "20260722",
+   "name": "상관모욕",
+   "kind": "전원합의체 판결",
+   "our_articles": [
+    "헌법 제12조",
+    "헌법 제21조"
    ],
    "overruled": [],
    "overruled_on_cards": {}
@@ -158,6 +158,18 @@
    "overruled_on_cards": {}
   },
   {
+   "no": "2022다214040",
+   "date": "20260122",
+   "name": "구상금",
+   "kind": "전원합의체 판결",
+   "our_articles": [],
+   "overruled": [
+    "2006다27093",
+    "2006다44760"
+   ],
+   "overruled_on_cards": {}
+  },
+  {
    "no": "2023다285162",
    "date": "20260122",
    "name": "손해배상(국)",
@@ -169,18 +181,6 @@
     "민법 제766조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
-  },
-  {
-   "no": "2022다214040",
-   "date": "20260122",
-   "name": "구상금",
-   "kind": "전원합의체 판결",
-   "our_articles": [],
-   "overruled": [
-    "2006다27093",
-    "2006다44760"
-   ],
    "overruled_on_cards": {}
   }
  ],

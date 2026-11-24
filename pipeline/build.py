@@ -43,7 +43,7 @@ def stages_of(checks, laws_now):
 
 def part_text(text, part):
     """본문·단서, 전문·후문을 원문 경계에서 자른다(설계안 B3).
-    단서는 '그러나'(민법 등 옛 법)·'다만,'으로 시작한다. 전문·후문은 첫 마침표 뒤에서 나눈다(단서가 아닌 둘째 문장)."""
+    단서는 '그러나'(민법 등 옛 법)·'다만,'(쉼표 없는 '다만'도)으로 시작한다. 전문·후문은 첫 마침표 뒤에서 나눈다(단서가 아닌 둘째 문장)."""
     if not part:
         return text
     if part in ('전문', '후문'):
@@ -60,7 +60,8 @@ def part_text(text, part):
         if cut is None:
             raise SystemExit(f'전문·후문 경계를 못 찾음: {text[:40]}')
         return text[:cut + 1].strip() if part == '전문' else text[cut + 1:].strip()
-    m = re.search(r'\s(그러나|다만,)\s', text)
+    # 26.11.24: 2025년 이후 개정 조문은 '다만' 뒤에 쉼표를 찍지 않기도 한다(민사소송규칙 제126조의2 제2항)
+    m = re.search(r'\s(그러나|다만,?)\s', text)
     if not m:
         raise SystemExit(f'본문·단서 경계를 못 찾음: {text[:40]}')
     if part == '본문':
