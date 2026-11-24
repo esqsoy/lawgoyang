@@ -5,6 +5,7 @@
  "efYd": "20200324",
  "header": "[시행 2020. 3. 24.] [법률 제17091호, 2020. 3. 24., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {

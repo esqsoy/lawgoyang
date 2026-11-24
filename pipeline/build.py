@@ -9,8 +9,13 @@
   세트마다 조문 층 검수 단계(STAGES)의 상태를 계산해 직검수 페이지에 보인다. 법령 시행일이 바뀌면 원문 대조가 '낡음'이 된다.
 생성물(proto.html)을 손으로 고치지 않는다. game.html·judge.js·data/를 고치고 다시 조립한다.
 """
-import datetime, json, re, sys
+import datetime, json, re, sys, unicodedata
 from pathlib import Path
+
+
+def compat(s):
+    """CJK 호환 한자(U+F900~FAFF)만 보통 한자로 바꾼다(그 밖의 글자는 그대로)."""
+    return ''.join(unicodedata.normalize('NFKC', ch) if '豈' <= ch <= '﫿' else ch for ch in s)
 
 ROOT = Path(__file__).resolve().parent.parent
 P = ROOT / 'pipeline'
@@ -111,11 +116,71 @@ def main():
     if unknown:
         raise SystemExit(f'모르는 옵션: {unknown}\n' + __doc__)
     near = json.loads((ROOT / 'data' / 'near.json').read_text(encoding='utf-8'))['pairs']
-    ledger = json.loads((ROOT / 'data' / 'ledger' / 'ledger-v0.json').read_text(encoding='utf-8'))
+    # 빈출도는 원장 v1(아홉 시험, 26.11.12)에서 읽는다. 없으면 v0.
+    led_path = ROOT / 'data' / 'ledger' / 'ledger-v1.json'
+    if not led_path.exists():
+        led_path = ROOT / 'data' / 'ledger' / 'ledger-v0.json'
+    ledger = json.loads(led_path.read_text(encoding='utf-8'))
+    exam_names = ledger.get('exams', {})
     freq = {(a['law'], a['article']): a['freq_text'] for a in ledger['articles']}
+    freq_title = {(a['law'], a['article']): ' · '.join(f"{exam_names.get(e, e)} {n}회" for e, n in a['freq'].items())
+                  for a in ledger['articles']}
     idx_path = ROOT / 'sources' / 'web' / 'laws' / 'index.json'
     index = json.loads(idx_path.read_text(encoding='utf-8')) if idx_path.exists() else {}
+    # Open API 원문(시행일 법령, 26.11.12~). 웹 임시본에 없는 조문은 여기서 가져온다.
+    api_path = ROOT / 'sources' / 'api' / 'laws' / 'index.json'
+    api_index = json.loads(api_path.read_text(encoding='utf-8')) if api_path.exists() else {}
     srcs = {}
+    # 시행 예정 개정(PRINCIPLES 2-1 '공포됐지만 아직 시행 전': 현행 문언을 외우고 '○○부터 바뀜'만 표시). 마지막 주기 점검 보고에서 읽는다.
+    upcoming = {}
+    upd = ROOT / 'data' / 'updates'
+    if (upd / 'last.json').exists():
+        rep_p = upd / (json.loads((upd / 'last.json').read_text(encoding='utf-8'))['checked'] + '.json')
+        if rep_p.exists():
+            for u in json.loads(rep_p.read_text(encoding='utf-8')).get('laws_upcoming', []):
+                upcoming.setdefault((u['law'], str(u['jo'])), []).append(u)
+
+    def upcoming_of(law, jo, para):
+        for u in upcoming.get((law, jo), []):
+            ps = u.get('paras')
+            if ps is None or para is None or para in ps or None in ps:
+                d = u['from']
+                return f"{d[:4]}. {int(d[4:6])}. {int(d[6:])}.부터 바뀜" + (' (조문 없어짐)' if u.get('kind') == '없어짐' else '')
+        return ''
+
+    def curly(t):
+        """API 글은 곧은 따옴표다. 법령 원문(웹 화면)처럼 짝을 맞춰 둥근 따옴표로 바꾼다."""
+        out, dq, sq = [], True, True
+        for ch in t or '':
+            if ch == '"':
+                out.append('“' if dq else '”')
+                dq = not dq
+            elif ch == "'":
+                out.append('‘' if sq else '’')
+                sq = not sq
+            else:
+                out.append(ch)
+        return ''.join(out)
+
+    def api_source(law):
+        key = law + '@api'
+        if key not in srcs:
+            if law not in api_index or law.startswith('_'):
+                return None
+            doc = json.loads((api_path.parent / api_index[law]['file']).read_text(encoding='utf-8'))
+            for a in doc['articles'].values():
+                a['title'] = curly(a.get('title', ''))
+                for p in a['paras']:
+                    p['text'] = curly(p['text'])
+                    for h in p.get('ho', []) or []:
+                        h['text'] = curly(h['text'])
+                        for m in h.get('mok', []) or []:
+                            m['text'] = curly(m['text'])
+                            for x in m.get('sub', []) or []:
+                                x['text'] = curly(x['text'])
+            doc['origin'] = 'api'
+            srcs[key] = doc
+        return srcs[key]
 
     def source(law, fallback=None):
         if law not in srcs:
@@ -123,8 +188,10 @@ def main():
                 srcs[law] = json.loads((idx_path.parent / index[law]['file']).read_text(encoding='utf-8'))
             elif fallback:
                 srcs[law] = json.loads((ROOT / fallback).read_text(encoding='utf-8'))
+            elif api_source(law):
+                return api_source(law)
             else:
-                raise SystemExit(f'조문 원문이 없음: {law} (pipeline/fetch_web.py --ledger 로 받는다)')
+                raise SystemExit(f'조문 원문이 없음: {law} (pipeline/fetch_api.py --ledger 로 받는다)')
         return srcs[law]
 
     def cite_of(ci, fallback=None):
@@ -135,6 +202,8 @@ def main():
             if key not in srcs:
                 srcs[key] = json.loads((ROOT / fallback).read_text(encoding='utf-8'))
             src = srcs[key]
+        if jo not in src['articles'] and api_source(ci['law']) and jo in api_source(ci['law'])['articles']:
+            src = api_source(ci['law'])  # 웹 임시본에 없는 조문(원장 v1에서 새로 들어온 조문 등)
         if jo not in src['articles']:
             raise SystemExit(f"{ci['law']} 제{jo}조 원문이 없음")
         art = src['articles'][jo]
@@ -163,7 +232,8 @@ def main():
                 raise SystemExit(f"{ci['law']} 제{jo}조 제{ci.get('para') or ''}항은 호가 있어 ho를 정해야 함")
             text = p['text']
         text = part_text(text, ci.get('part'))
-        if ci.get('phrase') and not re.sub(r'\s+', ' ', text).startswith(ci['phrase']):
+        # 원문의 한자 가운데 호환용 코드(U+F900~FAFF, 例: 回復의 復 U+F966)는 보통 한자로 친 첫 문구와 같게 본다(26.11.24 하위 작업이 짚음)
+        if ci.get('phrase') and not compat(re.sub(r'\s+', ' ', text)).startswith(compat(ci['phrase'])):
             raise SystemExit(f"{ci['law']} 제{jo}조 첫 문구가 원문 앞부분과 다름: {ci['phrase']}")
         tail = ((f" 제{ci['para']}항" if ci.get('para') else '') + (f" 제{ci['ho']}호" if ci.get('ho') else '')
                 + (f" {ci['mok']}목" if ci.get('mok') else '') + (f" {ci['sub']})" if ci.get('sub') else '') + (f" {ci['part']}" if ci.get('part') else ''))
@@ -174,8 +244,11 @@ def main():
             'skey': ':'.join(str(x) for x in [ci['law'], jo, ci.get('para'), ci.get('ho'), ci.get('mok'), ci.get('sub'), ci.get('part')] if x),
             'phrase': ci.get('phrase', ''), 'note': ci.get('note', []) + [prec_line(x) for x in ci.get('precedent', [])] + law_notes(art),
             'conf': ci.get('confidence', ''), 'research': ci.get('research', ''),
-            'freq': freq.get((ci['law'], jo), ''),
-            'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})",
+            'freq': freq.get((ci['law'], jo), ''), 'freqTitle': freq_title.get((ci['law'], jo), ''),
+            'upcoming': upcoming_of(ci['law'], jo, ci.get('para')),
+            'srcLine': f"{ci['law']} 제{jo}조" + (f"({art['title']})" if art['title'] else '') + f" · {when} · "
+                       + (f"law.go.kr Open API 시행일 법령({src.get('fetched', '')})" if src.get('origin') == 'api'
+                          else f"law.go.kr 웹 화면 두 곳 대조(API 키 전 임시, {src['fetched']})"),
         }
 
     pending = []
@@ -212,7 +285,9 @@ def main():
         if only and st['id'] not in only:
             continue
         src = st['source']
-        exam_src = f"출처: {src['org']}, {src['name']}({st['year']}), 공공누리 {src['kogl']}, {src['url']}"
+        # 공공누리 표시가 없는 국가 시험(법원·5급·입법고시)은 이용 근거를 그대로 적는다(PRINCIPLES 4)
+        basis_txt = f"{src['kogl']}에 따른 이용" if src['kogl'].startswith('저작권법') else f"공공누리 {src['kogl']}"
+        exam_src = f"출처: {src['org']}, {src['name']}({st['year']}), {basis_txt}, {src['url']}"
         label = f"{src['short']}"
         cs = cards_of(st['id'], label, st['facts'], st['issues'], exam_src)
         laws_now = {c['law']: source(c['law']).get('efYd', '') for c in cs}
@@ -240,7 +315,8 @@ def main():
                          for jo, a in src['articles'].items()] if a['label'] not in have]
     data = {
         'tracks': TRACKS, 'sets': sets, 'articles': articles, 'near': near,
-        'foot': '조문: law.go.kr 현행 법령. API 키를 받기 전이라 웹 화면 두 곳을 대조해 받은 임시본이다. 기출 사례는 세트마다 출처(공공누리)를 단다. 답안·해설은 Claude가 쓴 초안이고 영신 검수 전이다. 법학고양은 출제 기관과 관계없는 학습 게임이다.',
+        'foot': '조문: law.go.kr 현행 법령. 처음 받은 조문은 웹 화면 두 곳을 대조한 임시본이고, 그 뒤에 더한 조문은 Open API 시행일 법령으로 받았다(카드마다 출처 줄). 빈출도는 아홉 시험의 최근 10년 회차 수다. 기출 사례는 세트마다 출처(공공누리 또는 저작권법 제24조의2)를 단다. 답안·해설은 Claude가 쓴 초안이고 영신 검수 전이다. 법학고양은 출제 기관과 관계없는 학습 게임이다.',
+        'exams': exam_names,
     }
     cards = [c for st in sets for c in st['cards']]
     rt = {'game': '법학고양', 'app': 'lawgoyang-records', 'prefix': 'lawgoyang-', 'skip': [], 'target': 'proto.html',

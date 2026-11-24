@@ -5,10 +5,12 @@
  "efYd": "20220712",
  "header": "[시행 2022. 7. 12.] [법률 제18748호, 2022. 1. 11., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [
   [
    "20261203",
-   "21728"
+   "21728",
+   "286421"
   ]
  ],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",

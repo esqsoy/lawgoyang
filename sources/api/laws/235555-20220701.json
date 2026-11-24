@@ -5,6 +5,7 @@
  "efYd": "20220701",
  "header": "[시행 2022. 7. 1.] [법률 제18465호, 2021. 9. 24., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {

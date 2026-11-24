@@ -12,10 +12,11 @@
 조문 꼴: {title, paras:[{no, text, ho:[{no, text, mok:[{no, text}]}]}], notes}. 항 번호는 숫자(①→1), 항이 없으면 no=None.
 '<개정 2014. 12. 30.>', '[전문개정 …]' 같은 개정 표시는 글에서 떼어 notes에 둔다.
 """
-import argparse, json, os, re, sys, time, urllib.parse, urllib.request
+import argparse, datetime, json, os, re, sys, time, urllib.parse, urllib.request
 from pathlib import Path
 
 DRF = 'https://www.law.go.kr/DRF/'
+TODAY = datetime.date.today().isoformat()
 CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳'
 NOTE = re.compile(r'\s*(?:<(?:개정|신설|전문개정|본조신설|제목개정|타법개정)[^>]*>|\[(?:개정|신설|전문개정|본조신설|제목개정|타법개정|시행일|종전|제\d+조)[^\]]*\])\s*')
 ALIAS = {'헌법': '대한민국헌법'}  # 원장 이름 → law.go.kr 정식 이름
@@ -47,7 +48,9 @@ def call(path, params, tries=5):
 
 def find_current(name):
     """법령 이름 → 현행 {id, mst, ef, kind, pending}. 시행일 법령 목록(eflaw)에서 이름이 똑같고 '현행'인 것.
-    pending: 공포됐지만 아직 시행 전인 판(시행예정)의 [시행일, 공포번호]."""
+    pending: 공포됐지만 아직 시행 전인 판(시행예정)의 [시행일, 공포번호, 법령일련번호]. 시행일마다 하나,
+    같은 날 시행되는 판이 여럿이면 나중에 공포된 것(일련번호가 큰 것). 시행예정 판은 ID+시행일로는
+    빈 응답이 오고 일련번호(MST)+시행일로만 받힌다(fetch_full by_mst)."""
     name = ALIAS.get(name, name)
     d = call('lawSearch.do', {'target': 'eflaw', 'type': 'JSON', 'query': name, 'display': 100, 'nw': '2,3'})  # 2 시행예정, 3 현행(연혁 판은 빼야 100개 안에 든다)
     laws = as_list(d.get('LawSearch', {}).get('law'))
@@ -56,7 +59,14 @@ def find_current(name):
     if not hit:
         raise LookupError(f'현행 법령을 못 찾음: {name}')
     x = max(hit, key=lambda x: x.get('시행일자', ''))
-    pending = sorted([x2.get('시행일자'), x2.get('공포번호')] for x2 in same if x2.get('현행연혁코드') == '시행예정')
+    by_ef = {}
+    for x2 in same:
+        if x2.get('현행연혁코드') != '시행예정' or not x2.get('시행일자'):
+            continue
+        k = x2['시행일자']
+        if k not in by_ef or int(x2.get('법령일련번호') or 0) > int(by_ef[k][2] or 0):
+            by_ef[k] = [k, x2.get('공포번호'), x2.get('법령일련번호')]
+    pending = [by_ef[k] for k in sorted(by_ef)]
     return {'id': x['법령ID'], 'mst': x['법령일련번호'], 'ef': x['시행일자'], 'kind': x.get('법령구분명', ''), 'pending': pending}
 
 
@@ -66,7 +76,8 @@ def fetch_full(cur, cache):
     p = Path(cache) / f"eflaw-{cur['id']}-{cur['ef']}.json"
     if p.exists() and p.stat().st_size > 1000:
         return json.loads(p.read_text(encoding='utf-8'))
-    d = call('lawService.do', {'target': 'eflaw', 'ID': cur['id'], 'efYd': cur['ef'], 'type': 'JSON'})
+    key = {'MST': cur['mst']} if cur.get('by_mst') else {'ID': cur['id']}
+    d = call('lawService.do', {'target': 'eflaw', **key, 'efYd': cur['ef'], 'type': 'JSON'})
     if '법령' not in d:
         raise LookupError(f"시행일 법령 응답이 비었음: {cur}")
     p.write_text(json.dumps(d, ensure_ascii=False), encoding='utf-8')
@@ -199,9 +210,83 @@ def main():
     ap.add_argument('--compare')
     ap.add_argument('--cache', default=str(Path.home() / '.cache' / 'lawgoyang-api'), help='법령 전체 응답을 두는 저장소 밖 폴더')
     ap.add_argument('--outdir')
+    ap.add_argument('--rule', nargs='+', metavar='검색어', help='대법원 예규(등기예규·재판예규)와 행정규칙을 이름으로 찾는다(현행 먼저): --rule 상속재산 협의분할')
+    ap.add_argument('--rule-id', nargs='+', metavar='일련번호', help='행정규칙(예규) 본문을 보여 준다(--rule 결과의 일련번호)')
+    ap.add_argument('--prec-search', nargs='+', metavar='검색어', help='판결·결정을 키워드로 찾는다(사건명 먼저, 없으면 본문): --prec-search 퇴거 인도 처분권주의')
+    ap.add_argument('--body', action='store_true', help='--prec-search를 처음부터 본문 검색으로')
+    ap.add_argument('--case', nargs='+', metavar='사건번호', help='판결·결정을 사건번호로 찾아 판시사항·요지·참조조문·주문을 보여 준다: --case 2023다240299 2017헌가16')
     ap.add_argument('--show', nargs='+', metavar=('법령', '조'), help='조문 하나(또는 여럿)의 오늘 시행 중인 글을 보여 준다: --show 민사소송법 451 452')
     a = ap.parse_args()
     Path(a.cache).mkdir(parents=True, exist_ok=True)
+
+    if a.rule:
+        q = ' '.join(a.rule)
+        xs = []
+        for search in (1, 2):  # 1 이름, 2 본문
+            d = call('lawSearch.do', {'target': 'admrul', 'type': 'JSON', 'query': q, 'display': 50, 'search': search})
+            xs = as_list(d.get('AdmRulSearch', {}).get('admrul'))
+            if xs:
+                break
+        xs.sort(key=lambda x: (x.get('현행연혁구분') != '현행', -int(x.get('발령일자') or 0)))
+        print(f"== '{q}' {'이름' if search == 1 else '본문'} 검색 {len(xs)}건(현행 먼저, 50건까지)")
+        for x in xs[:20]:
+            print(f"[{x.get('현행연혁구분')}] {x.get('행정규칙종류')} 제{x.get('발령번호')}호 {x.get('발령일자')} {x.get('행정규칙명')} (일련번호 {x.get('행정규칙일련번호')})")
+        return
+
+    if a.rule_id:
+        for sid in a.rule_id:
+            d = call('lawService.do', {'target': 'admrul', 'ID': sid, 'type': 'JSON'}).get('AdmRulService', {})
+            b = d.get('행정규칙기본정보', {})
+            print(f"== {b.get('행정규칙종류')} 제{b.get('발령번호')}호 {b.get('행정규칙명')} 발령 {b.get('발령일자')} 현행 {b.get('현행여부')} ({b.get('소관부처명')})")
+            body = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', text_of(d.get('조문내용', '')))).strip()
+            print(body)  # 자르지 않는다(긴 예규의 뒤 조항을 놓친 일이 있었다, 26.11.13)
+        return
+
+    if a.prec_search:
+        # 사건번호를 모를 때(26.11.24 하위 작업이 짚음). 대법원·전원합의체·최근 먼저. 찾은 번호는 --case로 원문을 본다.
+        q = ' '.join(a.prec_search)
+        for tgt, root, key in (('prec', 'PrecSearch', 'prec'), ('detc', 'DetcSearch', 'Detc')):
+            xs, how = [], ''
+            for search in ([2] if a.body else [1, 2]):
+                d = call('lawSearch.do', {'target': tgt, 'type': 'JSON', 'query': q, 'display': 50, 'search': search})
+                xs = as_list(d.get(root, {}).get(key))
+                how = '이름' if search == 1 else '본문'
+                if xs:
+                    break
+            if tgt == 'prec':
+                xs.sort(key=lambda x: (x.get('법원명') != '대법원', '전원합의체' not in (x.get('판결유형') or ''),
+                                       -int(re.sub(r'\D', '', x.get('선고일자') or '') or 0)))
+            print(f"== {'판례' if tgt == 'prec' else '헌재'} '{q}' {how} 검색 {len(xs)}건(50건까지)")
+            for x in xs[:20]:
+                print(f"{x.get('사건번호')} {x.get('법원명') or '헌법재판소'} {x.get('선고일자') or x.get('종국일자') or ''} {x.get('판결유형') or ''} {(x.get('사건명') or '')[:80]}")
+        return
+
+    if a.case:
+        for no in a.case:
+            tgt = 'detc' if '헌' in no else 'prec'
+            root, key, sid = {'prec': ('PrecSearch', 'prec', '판례일련번호'), 'detc': ('DetcSearch', 'Detc', '헌재결정례일련번호')}[tgt]
+            same = lambda x: re.sub(r'\s+', '', x.get('사건번호', '')) == re.sub(r'\s+', '', no)
+            found = []
+            # 판례는 사건번호 칸(nb)으로 찾아야 정확하다. query는 사건명·본문을 봐서 '무'·'마' 사건(2015무26 등)을 놓친다.
+            for params in ([{'nb': no}] if tgt == 'prec' else []) + [{'query': no, 'display': 100}, {'query': no, 'display': 100, 'page': 2}]:
+                found = [x for x in as_list(call('lawSearch.do', {'target': tgt, 'type': 'JSON', 'display': 20, **params}).get(root, {}).get(key)) if same(x)]
+                if found:
+                    break
+            if not found:
+                print(f'== {no}: law.go.kr에서 못 찾음')
+                continue
+            d = call('lawService.do', {'target': tgt, 'ID': found[0][sid], 'type': 'JSON'})
+            x = d.get('PrecService') or d.get('DetcService') or {}
+            strip = lambda t: re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t or '')).strip()
+            print(f"== {x.get('사건번호')} {x.get('법원명', '헌법재판소')} {x.get('선고일자') or x.get('종국일자')} {x.get('판결유형', '')} {x.get('사건명', '')}")
+            for f in ('판시사항', '판결요지', '결정요지', '참조조문', '심판대상조문', '참조판례'):
+                if x.get(f):
+                    print(f'[{f}] ' + strip(x[f])[:1500])
+            body = strip(x.get('판례내용') or x.get('전문'))
+            m = re.search(r'【?\[?\s*주\s*문\s*\]?】?(.{0,400})', body)
+            if m:
+                print('[주문] ' + m.group(1))
+        return
 
     if a.show:
         law, jos = a.show[0], a.show[1:]
@@ -253,6 +338,13 @@ def main():
     want = {}
     for art in led['articles']:
         want.setdefault(art['law'], set()).add(art['article'])
+    # 카드가 인용한 조문도 받는다(원장 밖 조문, 원문이 없어 pending으로 둔 조문). 세트 폴더는 원장 옆 data/sets.
+    sets_dir = Path(a.ledger).resolve().parent.parent / 'sets'
+    for f in sorted(sets_dir.glob('*.json')):
+        st = json.loads(f.read_text(encoding='utf-8'))
+        for iss in st.get('issues', []):
+            for c in iss.get('cites', []):
+                want.setdefault(c['law'], set()).add(str(c['jo']))
     outdir = Path(a.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     index, missing = {}, {}
@@ -267,12 +359,16 @@ def main():
         jos = sorted(want[law], key=split_jo)
         got = {j: doc['articles'][j] for j in jos if j in doc['articles']}
         lost = [j for j in jos if j not in doc['articles']]
-        out = {'law': law, 'id': cur['id'], 'mst': cur['mst'], 'efYd': cur['ef'], 'header': doc['header'], 'kind': cur['kind'],
+        out = {'law': law, 'id': cur['id'], 'mst': cur['mst'], 'efYd': cur['ef'], 'header': doc['header'], 'kind': cur['kind'], 'fetched': TODAY,
                'pending': cur['pending'], 'source': 'law.go.kr Open API (DRF lawService target=eflaw, JSON)', 'articles': got}
         if lost:
             out['not_found'] = lost
             missing[law] = {'articles': lost, 'why': '현행 법령에 그 조가 없음'}
         f = outdir / f"{cur['mst']}-{cur['ef']}.json"
+        if f.exists():  # 같은 판·같은 글이면 처음 받은 날을 그대로 둔다(다시 받아도 diff가 생기지 않게)
+            old = json.loads(f.read_text(encoding='utf-8'))
+            if old.get('articles') == got and old.get('pending') == cur['pending']:
+                out['fetched'] = old.get('fetched', TODAY)
         f.write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
         index[law] = {'id': cur['id'], 'mst': cur['mst'], 'efYd': cur['ef'], 'kind': cur['kind'], 'header': doc['header'], 'file': f.name,
                       'articles': len(got), 'pending': cur['pending']}

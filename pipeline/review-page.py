@@ -47,11 +47,14 @@ body.cm-on .ln{cursor:text;border-radius:6px}
 .cbox .go:disabled{opacity:.5;cursor:default}
 """
 
-P = ['<title>법학고양 직검수</title><meta name="claude:viewport-fit-sides" content="cover">',
+only = sys.argv[sys.argv.index('--sets') + 1].split(',') if '--sets' in sys.argv else None
+TITLE = sys.argv[sys.argv.index('--title') + 1] if '--title' in sys.argv else '법학고양 직검수'
+SEL = [x for x in D['sets'] if not only or x['id'] in only]
+P = [f'<title>{e(TITLE)}</title><meta name="claude:viewport-fit-sides" content="cover">',
      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono&display=swap">',
      f'<style>{CSS}</style><div class="wrap">',
-     '<h1>법학고양 직검수</h1>',
-     f'<p class="lead">세트 {len(D["sets"])}개, 카드 {sum(len(x["cards"]) for x in D["sets"])}장. 답안·해설은 Claude 초안이야. 노랗게 표시한 자리가 게임에서 빈칸이 되는 조문이야(번호부터). 법적으로 틀린 곳, 어색한 답안, 빼거나 더할 해설, 근거 조문이 맞는지를 줄마다 달아 줘.</p>',
+     f'<h1>{e(TITLE)}</h1>',
+     f'<p class="lead">세트 {len(SEL)}개, 카드 {sum(len(x["cards"]) for x in SEL)}장. 답안·해설은 Claude 초안이야. 노랗게 표시한 자리가 게임에서 빈칸이 되는 조문이야(번호부터). 법적으로 틀린 곳, 어색한 답안, 빼거나 더할 해설, 근거 조문이 맞는지를 줄마다 달아 줘.</p>',
      '<p class="hint" id="cmhint">줄 댓글을 준비하는 중이야.</p>']
 
 
@@ -59,7 +62,6 @@ def row(id, k, v, cls='v'):
     return f'<div class="row ln" id="{e(id)}"><span class="k">{e(k)}</span><span class="{cls}">{v}</span></div>'
 
 
-only = sys.argv[sys.argv.index('--sets') + 1].split(',') if '--sets' in sys.argv else None
 # 검수 단계 요약(PRINCIPLES 1-2): 남은 단계가 있는 세트만 추가 작업한다
 exam_sets = [st for st in D['sets'] if st.get('stages') and (not only or st['id'] in only)]
 if exam_sets:

@@ -5,6 +5,7 @@
  "efYd": "20220101",
  "header": "[시행 2022. 1. 1.] [법률 제18655호, 2021. 12. 28., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {

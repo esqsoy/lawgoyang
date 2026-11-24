@@ -5,10 +5,12 @@
  "efYd": "20260820",
  "header": "[시행 2026. 8. 20.] [법률 제21344호, 2026. 2. 19., 일부개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [
   [
    "20270820",
-   "21344"
+   "21344",
+   "283349"
   ]
  ],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",

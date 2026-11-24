@@ -10,7 +10,7 @@ const file = path.resolve(process.argv[2] || path.join(__dirname, '..', '..', 'p
   const errs = [];
   p.on('pageerror', e => errs.push(String(e)));
   await p.goto('file://' + file);
-  const ids = await p.$$eval('.set', xs => xs.map(x => x.dataset.id));
+  const ids = await p.$$eval('#sets .set[data-id]', xs => xs.map(x => x.dataset.id));
   let cards = 0, maxW = 0;
   for (const id of ids) {
     await p.evaluate(() => { localStorage.removeItem('lawgoyang-stage-v1'); });

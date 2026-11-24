@@ -5,6 +5,7 @@
  "efYd": "20260312",
  "header": "[시행 2026. 3. 12.] [법률 제21452호, 2026. 3. 12., 일부개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {

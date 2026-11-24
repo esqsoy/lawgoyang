@@ -92,7 +92,7 @@ def rkey(x):
 def main():
     v1 = '--v1' in sys.argv
     ver, exams, sources = ('v1', EXAM_V1, SOURCES_V1) if v1 else ('v0', EXAM, SOURCES)
-    hits, retired = [], []
+    hits, retired, excluded = [], [], []
     for folder, subq in sources:
         rows = load(R / folder / 'mapping.jsonl')
         # 검토 결과(review.jsonl, 26.11.12~): 원문(Open API) 대조 뒤 '확인 필요' 줄을 다시 판단한 것. 같은 줄의 확신도를 바꾼다.
@@ -103,6 +103,10 @@ def main():
                 x = review.get(rkey(r))
                 if x and x.get('confidence') in ('확실', '확인 필요'):
                     r['confidence'] = x['confidence']
+                if x and x.get('role') in ('핵심', '보조', '제외'):
+                    r['role'] = x['role']  # PRINCIPLES 1-3
+                    if x['role'] == '제외':
+                        r['excluded_why'] = x.get('why', '')
             # 고침(corrections.jsonl, 26.11.12~): 두 검토가 합의한 매핑 고침. replace(조·항 바꾸기)·drop(줄 지우기)·add(줄 더하기).
             cv = R / folder / 'corrections.jsonl'
             if cv.exists():
@@ -114,7 +118,8 @@ def main():
                                 else '대법원규칙' if law.endswith('규칙') else '법률')
                         rows.append({'year': c['year'], 'round': c.get('round'), 'part': c['part'], 'q': c['q'], 'sub': c['sub'],
                                      'law': law, 'article': n['article'], 'para': n.get('para', ''), 'basis': 'Claude 판단(검토 추가)',
-                                     'confidence': c['confidence'], 'issue': c.get('issue', c.get('why', '')), 'kind': kind})
+                                     'confidence': c['confidence'], 'issue': c.get('issue', c.get('why', '')), 'kind': kind,
+                                     **({'role': c['role']} if c.get('role') else {})})
                         continue
                     hit = [r for r in rows if rkey(r) == rkey(c)]
                     if len(hit) != 1:
@@ -126,6 +131,8 @@ def main():
                         r.pop('current', None)
                         r['law'], r['article'], r['para'] = c['new']['law'], c['new']['article'], c['new'].get('para', '')
                         r['confidence'] = c['confidence']
+                        if c.get('role'):
+                            r['role'] = c['role']
         theory = set()
         if subq:
             for q in load(R / folder / subq):
@@ -137,11 +144,15 @@ def main():
             if (r['year'], r['part'], str(r['q']), str(r['sub'])) in theory:
                 continue
             exam = exam_of(r['part'])
+            if r.get('role') == '제외':
+                excluded.append({'exam': exam, 'year': r['year'], 'part': r['part'], 'q': str(r['q']), 'sub': str(r['sub']), 'law': r['law'],
+                                 'article': str(r.get('article') or ''), 'para': str(r.get('para') or ''), 'why': r.get('excluded_why', ''), 'source': folder})
+                continue
             num = now_number(r)
             h = {'exam': exam, 'year': r['year'], 'round': r.get('round'), 'part': r['part'], 'q': str(r['q']),
                  'sub': str(r['sub']), 'issue': r.get('issue', ''), 'basis': r['basis'], 'confidence': r['confidence'],
                  'asked': {'law': r['law'], 'article': str(r.get('article') or ''), 'para': str(r.get('para') or '')},
-                 'source': folder}
+                 'source': folder, **({'role': r['role']} if r.get('role') else {})}
             if num is None:
                 retired.append(h)
                 continue
@@ -155,6 +166,8 @@ def main():
     written = {}
     for f in sorted((ROOT / 'data' / 'sets').glob('*.json')):
         st = json.loads(f.read_text(encoding='utf-8'))
+        if st['exam'] not in exams:
+            continue  # v0은 변시·사시 세트만(v1 시험 세트가 생겨도 v0이 바이트까지 그대로 나오게, 26.11.13)
         written[(st['exam'], st['year'], st['part'], st['q'])] = st
     hits = [h for h in hits if (h['exam'], h['year'], h['part'], h['q']) not in written]
     for (exam, year, part, q), st in written.items():
@@ -164,7 +177,8 @@ def main():
                              'issue': st['title'], 'basis': '세트(Claude 판단)', 'confidence': c.get('confidence', '확인 필요'),
                              'asked': {'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or '')},
                              'source': 'data/sets/' + st['id'] + '.json',
-                             'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or '')})
+                             'law': c['law'], 'article': str(c['jo']), 'para': str(c.get('para') or ''),
+                             **({'role': c['role']} if c.get('role') else {})})
 
     # 나중 층(PRINCIPLES 1-2): 세트의 later와 카드 해설 속 '판례 법리' 메모를 모은다. 빈출도에는 세지 않는다.
     later = []
@@ -196,6 +210,10 @@ def main():
             'needs_check': any(h['confidence'] != '확실' or h.get('number_note') for h in inwin or hs),
             'hits': sorted(inwin or hs, key=lambda h: (-h['year'], h['exam'], h['part'], h['q'], h['sub'])),
         }
+        if v1:
+            # 핵심으로 나온 해 수(PRINCIPLES 1-3). 세트 고르기·카드 순서에 쓴다. 표시 빈출도는 위 freq(핵심+보조).
+            core = {e: len({h['year'] for h in inwin if h['exam'] == e and h.get('role') == '핵심'}) for e in exams}
+            a['core'] = {e: n for e, n in core.items() if n}
         (arts if inwin else archive).append(a)
     order = lambda a: (-sum(a['freq'].values()), -a['last_year'], a['law'], int(''.join(c for c in a['article'] if c.isdigit()) or 0))
     arts.sort(key=order)
@@ -209,9 +227,10 @@ def main():
                    if v1 else '변호사시험·사법시험만. 매핑은 Claude, 영신 검수 전. v1에서 노무사·변리사·감정평가사·법무사·5급·입법고시·법원행정고시를 더한다.'),
         'rules': '발췌 조문 제외, 현행 번호, 사례 설문만, 창 안 1회 이상이면 외울 조문, 빈출도는 시험별 회차 수.',
         'exams': exams,
-        'counts': {'articles': len(arts), 'archive': len(archive), 'retired_rows': len(retired),
+        'counts': {'articles': len(arts), 'archive': len(archive), 'retired_rows': len(retired), **({'excluded_rows': len(excluded)} if v1 else {}),
                    'later_판례': sum(1 for x in later if x['layer'] == '판례'), 'later_학설': sum(1 for x in later if x['layer'] == '학설')},
         'articles': arts, 'archive': archive, 'retired': retired,
+        **({'excluded': excluded} if v1 else {}),
         'later': sorted(later, key=lambda x: (x['layer'], -x['year'], x['set'])),
     }
     (out / f'ledger-{ver}.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')

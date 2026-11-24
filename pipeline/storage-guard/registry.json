@@ -1,0 +1,13 @@
+{
+  "about": "esqsoy.github.io에 올라가는 게임의 저장 키 앞머리 장부. 같은 주소라 브라우저 저장 공간(localStorage)을 함께 쓴다. 본가(보카고양)가 고치고 분가는 그대로 가져간다. 규칙은 README.",
+  "origin": "esqsoy.github.io",
+  "games": [
+    {"game": "보카고양", "repo": "vocagoyang", "prefixes": ["goyang-"], "note": "첫 게임이라 앞머리가 저장소 이름과 다르다. 바꾸면 학생 기록이 사라져서 그대로 둔다"},
+    {"game": "탄고고양", "repo": "tangogoyang", "prefixes": ["tangogoyang-"]},
+    {"game": "빨라고양", "repo": "palagoyang", "prefixes": ["palagoyang-"]},
+    {"game": "법학고양", "repo": "lawgoyang", "prefixes": ["lawgoyang-"]},
+    {"game": "발음고양", "repo": "ipagoyang", "prefixes": ["ipagoyang-"]},
+    {"game": "과학고양", "repo": "naturegoyang", "prefixes": ["naturegoyang-"], "note": "26.11.12 기준 아직 저장하지 않는다"},
+    {"game": "주기율표", "repo": "periodic-game", "prefixes": ["zerotwo_", "kf-zerotwo-"], "note": "고양 시리즈 전부터 있던 게임"}
+  ]
+}

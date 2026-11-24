@@ -5,6 +5,7 @@
  "efYd": "20201210",
  "header": "[시행 2020. 12. 10.] [법률 제17459호, 2020. 6. 9., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {

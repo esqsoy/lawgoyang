@@ -5,6 +5,7 @@
  "efYd": "20251001",
  "header": "[시행 2025. 10. 1.] [법률 제21065호, 2025. 10. 1., 타법개정]",
  "kind": "법률",
+ "fetched": "2026-11-13",
  "pending": [],
  "source": "law.go.kr Open API (DRF lawService target=eflaw, JSON)",
  "articles": {
