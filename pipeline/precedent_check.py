@@ -53,6 +53,20 @@ def main():
         c = json.loads(p.read_text(encoding='utf-8'))
         cards[c.get('id')] = (p, c)
 
+    def asked_all(c):
+        return (c.get('asked') or []) + [x for rp in c.get('rule_parts') or [] for x in rp.get('asked') or []]
+
+    def legit(c, seen=()):
+        """맞히기 구간 밖(만들기 구간)에 근거가 있는 카드. 그런 카드는 맞히기 구간 판결과 겹쳐도 정당하다.
+        ① 만들기 구간의 공식 기출에 나왔거나, ② 구별·최근 카드로서 검색어(searched)가 있고 정당한 카드의 turn이 가리킨다."""
+        if any((h.get('exam'), int(h.get('year') or 0)) not in holdout for h in asked_all(c)):
+            return True
+        if c.get('role') in ('구별', '최근') and c.get('searched') and c.get('id') not in seen:
+            return any(t.get('ref') == c.get('id') and legit(o, seen + (c.get('id'),))
+                       for _, o in cards.values() for t in o.get('turn') or [])
+        return False
+
+    overlap = 0
     for cid, (p, c) in cards.items():
         tag = p.name
         case = c.get('case') or {}
@@ -88,27 +102,40 @@ def main():
             ref = (t.get('ref') or '').strip()
             if not (ref in cards or ART.match(ref)):
                 err.append(f'{tag}: turn의 ref({ref or "빈칸"})가 카드 id나 조문 위치가 아니다')
-            if ref.split('#')[0] in hcases:
-                err.append(f'{tag}: turn이 맞히기 구간 판결({ref})을 가리킨다')
+            if ref.split('#')[0] in hcases and not (ref in cards and legit(cards[ref][1])):
+                err.append(f'{tag}: turn이 만들기 구간 근거가 없는 맞히기 구간 판결({ref})을 가리킨다')
         for n in c.get('same_rule') or []:
             if not NO.match(n):
                 warn.append(f'{tag}: same_rule 번호 꼴이 이상하다({n})')
             if n in hcases:
-                err.append(f'{tag}: same_rule에 맞히기 구간 판결({n})이 있다')
-        for h in (c.get('asked') or []) + [x for rp in c.get('rule_parts') or [] for x in rp.get('asked') or []]:
+                warn.append(f'{tag}: same_rule에 맞히기 구간 판결({n})이 있다. 만들기 구간 검색(searched)으로 찾은 것인지 확인')
+        for h in asked_all(c):
+            for k in ('exam', 'year', 'q'):
+                if not h.get(k):
+                    err.append(f'{tag}: asked에 {k}가 없다')
             if h.get('exam') not in EXAMS:
                 err.append(f'{tag}: asked의 시험({h.get("exam")})이 공식 기출 코드가 아니다')
             if (h.get('exam'), int(h.get('year') or 0)) in holdout:
                 err.append(f'{tag}: asked에 맞히기 구간 출제({h.get("exam")}{h.get("year")})가 있다')
         if no in hcases:
-            err.append(f'{tag}: 카드 판결 자체가 맞히기 구간 판결이다')
-        sl = c.get('slot')
-        if sl:
+            if legit(c):
+                overlap += 1
+            else:
+                err.append(f'{tag}: 만들기 구간 근거 없이 맞히기 구간 판결로 만든 카드다')
+        slots = c.get('slots') or ([c['slot']] if c.get('slot') else [])
+        if c.get('slot') and c.get('slots'):
+            err.append(f'{tag}: slot과 slots를 함께 두지 않는다(slots 하나로)')
+        for sl in slots:
             fr = frames.get(sl.get('frame'))
             if not fr:
                 err.append(f'{tag}: slot의 틀({sl.get("frame")})이 없다')
             elif sl.get('node') not in {n.get('id') for n in fr.get('nodes', [])}:
                 err.append(f'{tag}: slot의 마디({sl.get("node")})가 틀에 없다')
+        if c.get('role') and c['role'] not in ('바탕', '구별', '최근'):
+            err.append(f'{tag}: role은 바탕·구별·최근 가운데 하나다({c["role"]})')
+        bx = (c.get('editions') or {}).get('bar_extra')
+        if bx and (bx.get('kind') not in ('반대의견', '별개의견', '원심 논리') or not (bx.get('text') or '').strip()):
+            err.append(f'{tag}: bar_extra는 kind(반대의견·별개의견·원심 논리)와 text가 있어야 한다(학설 줄은 안 됨)')
         if c.get('confidence') == '확실':
             by = {x.get('by') for x in c.get('checks') or [] if x.get('result') == '확실'}
             if not {'이솝', '파핀'} <= by:
@@ -134,7 +161,7 @@ def main():
         print('경고:', w)
     for e in err:
         print('오류:', e)
-    print(f'카드 {len(cards)}, 틀 {len(frames)}, 오류 {len(err)}, 경고 {len(warn)}')
+    print(f'카드 {len(cards)}, 틀 {len(frames)}, 오류 {len(err)}, 경고 {len(warn)}' + (f', 맞히기 구간 판결과 겹치는 정당한 카드 {overlap}' if hcases else ''))
     sys.exit(1 if err else 0)
 
 
