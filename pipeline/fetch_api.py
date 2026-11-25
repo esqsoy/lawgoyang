@@ -258,7 +258,7 @@ def main():
                                        -int(re.sub(r'\D', '', x.get('선고일자') or '') or 0)))
             print(f"== {'판례' if tgt == 'prec' else '헌재'} '{q}' {how} 검색 {len(xs)}건(50건까지)")
             for x in xs[:20]:
-                print(f"{x.get('사건번호')} {x.get('법원명') or '헌법재판소'} {x.get('선고일자') or x.get('종국일자') or ''} {x.get('판결유형') or ''} {(x.get('사건명') or '')[:80]}")
+                print(f"{x.get('사건번호')} {x.get('법원명') or ('헌법재판소' if tgt == 'detc' else (x.get('데이터출처명') or '법원명 없음'))} {x.get('선고일자') or x.get('종국일자') or ''} {x.get('판결유형') or ''} {(x.get('사건명') or '')[:80]}")
         return
 
     if a.case:
@@ -278,7 +278,7 @@ def main():
             d = call('lawService.do', {'target': tgt, 'ID': found[0][sid], 'type': 'JSON'})
             x = d.get('PrecService') or d.get('DetcService') or {}
             strip = lambda t: re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t or '')).strip()
-            print(f"== {x.get('사건번호')} {x.get('법원명', '헌법재판소')} {x.get('선고일자') or x.get('종국일자')} {x.get('판결유형', '')} {x.get('사건명', '')}")
+            print(f"== {x.get('사건번호')} {x.get('법원명') or ('헌법재판소' if tgt == 'detc' else (x.get('데이터출처명') or '법원명 없음'))} {x.get('선고일자') or x.get('종국일자')} {x.get('판결유형', '')} {x.get('사건명', '')}")
             for f in ('판시사항', '판결요지', '결정요지', '참조조문', '심판대상조문', '참조판례'):
                 if x.get(f):
                     print(f'[{f}] ' + strip(x[f])[:1500])

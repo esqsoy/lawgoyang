@@ -28,6 +28,21 @@ NAMES = {'대한민국헌법': '헌법'}
 ART = re.compile(r'(?:(?P<law>[가-힣][가-힣ㆍ·\s]*?(?:법|령|규칙|규정|헌법))\s*)?제\s*(?P<jo>\d+)\s*조(?:\s*의\s*(?P<br>\d+))?')
 
 
+
+CHANGED = re.compile(r'(?:선고|자)\s*([0-9]{2,4}[가-힣]{1,3}[0-9]+)((?:\s*,\s*[0-9]+)*)[^,()<]*?(?:판결|결정)?\s*(?:\([^()]*\)\s*)*\(변경\)')
+
+
+def overruled_numbers(refs):
+    """참조판례 글에서 '(변경)'이 붙은 판결 번호를 뽑는다. 사이에 공보 표시 '(공…)'가 끼어도, 결정('자')이어도,
+    병합 번호('2021다244, 251')여도 잡는다(26.11.26 파핀이 찾은 결함: 옛 정규식은 2020그42 0/1, 2023다240299 1/5)."""
+    out = []
+    for m in CHANGED.finditer(refs):
+        first = re.sub(r'\s+', '', m.group(1))
+        out.append(first)
+        head = re.match(r'([0-9]{2,4}[가-힣]{1,3})', first).group(1)
+        out += [head + n for n in re.findall(r'[0-9]+', m.group(2) or '')]
+    return out
+
 def ymd(d):
     return d.strftime('%Y%m%d')
 
@@ -173,7 +188,7 @@ def check_precedents(arts, cards, since, cache):
             continue
         refs = parse_articles(d.get('참조조문'))
         mine = sorted({r for r in refs if r in arts})
-        changed_no = [re.sub(r'\s+', '', m) for m in re.findall(r'선고\s*([0-9]{2,4}[가-힣]{1,3}[0-9]+)\s*[^,(<]*\(변경\)', d.get('참조판례') or '')]
+        changed_no = overruled_numbers(d.get('참조판례') or '')
         on_cards = {n: cards[n] for n in changed_no if n in cards}
         hits.append({'no': d.get('사건번호'), 'date': d.get('선고일자'), 'name': d.get('사건명'), 'kind': d.get('판결유형'),
                      'our_articles': [f'{l} 제{j}조' for l, j in mine], 'overruled': changed_no, 'overruled_on_cards': on_cards})
