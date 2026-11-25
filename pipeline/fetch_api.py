@@ -248,6 +248,7 @@ def main():
     ap.add_argument('--prec-search', nargs='+', metavar='검색어', help='판결·결정을 키워드로 찾는다(사건명 먼저, 없으면 본문): --prec-search 퇴거 인도 처분권주의')
     ap.add_argument('--body', action='store_true', help='--prec-search를 처음부터 본문 검색으로')
     ap.add_argument('--full', nargs='+', metavar='사건번호', help='판결 원문(판례내용)을 받아 sources/api/prec/<번호>.json에 둔다. 판시사항·요지 등 전체 응답은 --cache에만 둔다: --full 2009다4787')
+    ap.add_argument('--force-full', action='store_true', help='--full이 이름을 가린(redacted) 본문도 덮어쓴다')
     ap.add_argument('--prec-dir', default=str(Path(__file__).resolve().parent.parent / 'sources' / 'api' / 'prec'))
     ap.add_argument('--case', nargs='+', metavar='사건번호', help='판결·결정을 사건번호로 찾아 판시사항·요지·참조조문·주문을 보여 준다: --case 2023다240299 2017헌가16')
     ap.add_argument('--show', nargs='+', metavar=('법령', '조'), help='조문 하나(또는 여럿)의 오늘 시행 중인 글을 보여 준다: --show 민사소송법 451 452')
@@ -300,6 +301,10 @@ def main():
         outdir = Path(a.prec_dir); outdir.mkdir(parents=True, exist_ok=True)
         for no in a.full:
             no = re.sub(r'\s+', '', no)
+            old = outdir / f'{no}.json'
+            if old.exists() and json.loads(old.read_text(encoding='utf-8')).get('redacted') and not a.force_full:
+                print(f'== {no}: 이름을 가린 본문이 이미 있어 덮지 않는다(--force-full로 덮으면 가림이 사라진다)')
+                continue
             try:
                 rec, raw = fetch_prec_full(no)
             except LookupError as e:

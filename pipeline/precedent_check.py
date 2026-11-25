@@ -150,6 +150,8 @@ def main():
 
     for fid, f in frames.items():
         for n in f.get('nodes', []):
+            if n.get('stage') not in ('청구원인', '항변', '재항변', '재재항변', '직권조사'):
+                err.append(f'틀 {fid}: 마디 {n.get("id")}의 stage({n.get("stage")})가 청구원인·항변·재항변·재재항변·직권조사가 아니다')
             basis = n.get('basis') or []
             if not basis:
                 err.append(f'틀 {fid}: 마디 {n.get("id")}에 근거가 없다')
