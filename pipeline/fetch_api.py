@@ -112,6 +112,39 @@ def clean(t, notes):
     return re.sub(r'\s+', ' ', NOTE.sub(' ', t)).strip()
 
 
+
+def prec_body(t):
+    """판례내용 HTML → 글. <br>은 줄바꿈, 다른 꼬리표는 지우고, 줄마다 공백을 하나로 줄인다."""
+    t = re.sub(r'<br\s*/?>', '\n', t or '', flags=re.I)
+    t = re.sub(r'<[^>]+>', '', t)
+    t = t.replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
+    return '\n'.join(re.sub(r'[ \t\u00a0]+', ' ', x).strip() for x in t.split('\n')).strip()
+
+
+def fetch_prec_full(no):
+    """사건번호 → (저장소에 둘 기록, 전체 응답). 기록에는 판결 본문(판례내용)과 사실 칸만 둔다.
+    판시사항·판결요지는 법원이 붙인 정리문이라 저작권 지위가 확인 전이므로 저장소에 넣지 않는다(PRINCIPLES 4, 26.11.26 회의)."""
+    tgt = 'detc' if '헌' in no else 'prec'
+    root, key, sid = {'prec': ('PrecSearch', 'prec', '판례일련번호'), 'detc': ('DetcSearch', 'Detc', '헌재결정례일련번호')}[tgt]
+    same = lambda x: re.sub(r'\s+', '', x.get('사건번호', '')) == no
+    found = []
+    for params in ([{'nb': no}] if tgt == 'prec' else []) + [{'query': no, 'display': 100}]:
+        found = [x for x in as_list(call('lawSearch.do', {'target': tgt, 'type': 'JSON', 'display': 20, **params}).get(root, {}).get(key)) if same(x)]
+        if found:
+            break
+    if not found:
+        raise LookupError('law.go.kr에서 못 찾음')
+    raw = call('lawService.do', {'target': tgt, 'ID': found[0][sid], 'type': 'JSON'})
+    x = raw.get('PrecService') or raw.get('DetcService') or {}
+    body = prec_body(x.get('판례내용') or x.get('전문'))
+    if not body:
+        raise LookupError('본문이 비었음')
+    rec = {'no': no, 'serial': found[0][sid], 'court': x.get('법원명') or ('헌법재판소' if tgt == 'detc' else ''),
+           'date': x.get('선고일자') or x.get('종국일자') or '', 'kind': x.get('판결유형') or x.get('사건종류명') or '',
+           'name': x.get('사건명') or '', 'refs_articles': prec_body(x.get('참조조문')), 'refs_cases': prec_body(x.get('참조판례')),
+           'fetched': TODAY, 'source': f"law.go.kr Open API {tgt} {found[0][sid]}", 'body': body}
+    return rec, raw
+
 def shape_unit(u):
     notes = []
     head = HEAD.match(u.get('조문내용', '').strip())
@@ -214,6 +247,8 @@ def main():
     ap.add_argument('--rule-id', nargs='+', metavar='일련번호', help='행정규칙(예규) 본문을 보여 준다(--rule 결과의 일련번호)')
     ap.add_argument('--prec-search', nargs='+', metavar='검색어', help='판결·결정을 키워드로 찾는다(사건명 먼저, 없으면 본문): --prec-search 퇴거 인도 처분권주의')
     ap.add_argument('--body', action='store_true', help='--prec-search를 처음부터 본문 검색으로')
+    ap.add_argument('--full', nargs='+', metavar='사건번호', help='판결 원문(판례내용)을 받아 sources/api/prec/<번호>.json에 둔다. 판시사항·요지 등 전체 응답은 --cache에만 둔다: --full 2009다4787')
+    ap.add_argument('--prec-dir', default=str(Path(__file__).resolve().parent.parent / 'sources' / 'api' / 'prec'))
     ap.add_argument('--case', nargs='+', metavar='사건번호', help='판결·결정을 사건번호로 찾아 판시사항·요지·참조조문·주문을 보여 준다: --case 2023다240299 2017헌가16')
     ap.add_argument('--show', nargs='+', metavar=('법령', '조'), help='조문 하나(또는 여럿)의 오늘 시행 중인 글을 보여 준다: --show 민사소송법 451 452')
     a = ap.parse_args()
@@ -259,6 +294,21 @@ def main():
             print(f"== {'판례' if tgt == 'prec' else '헌재'} '{q}' {how} 검색 {len(xs)}건(50건까지)")
             for x in xs[:20]:
                 print(f"{x.get('사건번호')} {x.get('법원명') or ('헌법재판소' if tgt == 'detc' else (x.get('데이터출처명') or '법원명 없음'))} {x.get('선고일자') or x.get('종국일자') or ''} {x.get('판결유형') or ''} {(x.get('사건명') or '')[:80]}")
+        return
+
+    if a.full:
+        outdir = Path(a.prec_dir); outdir.mkdir(parents=True, exist_ok=True)
+        for no in a.full:
+            no = re.sub(r'\s+', '', no)
+            try:
+                rec, raw = fetch_prec_full(no)
+            except LookupError as e:
+                print(f'== {no}: {e}')
+                continue
+            Path(a.cache).mkdir(parents=True, exist_ok=True)
+            (Path(a.cache) / f'prec-{no}.json').write_text(json.dumps(raw, ensure_ascii=False), encoding='utf-8')
+            (outdir / f'{no}.json').write_text(json.dumps(rec, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+            print(f"== {no} {rec['court']} {rec['date']} {rec['kind']} 본문 {len(rec['body'])}자 → {outdir / (no + '.json')}")
         return
 
     if a.case:
