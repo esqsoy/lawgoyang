@@ -247,6 +247,7 @@ def main():
     ap.add_argument('--rule-id', nargs='+', metavar='일련번호', help='행정규칙(예규) 본문을 보여 준다(--rule 결과의 일련번호)')
     ap.add_argument('--prec-search', nargs='+', metavar='검색어', help='판결·결정을 키워드로 찾는다(사건명 먼저, 없으면 본문): --prec-search 퇴거 인도 처분권주의')
     ap.add_argument('--body', action='store_true', help='--prec-search를 처음부터 본문 검색으로')
+    ap.add_argument('--until', metavar='YYYYMMDD', help='--prec-search 결과에서 이 날짜 뒤에 선고된 판결·결정을 숨긴다(맞히기 구간 보호): --until 20231231')
     ap.add_argument('--full', nargs='+', metavar='사건번호', help='판결 원문(판례내용)을 받아 sources/api/prec/<번호>.json에 둔다. 판시사항·요지 등 전체 응답은 --cache에만 둔다: --full 2009다4787')
     ap.add_argument('--force-full', action='store_true', help='--full이 이름을 가린(redacted) 본문도 덮어쓴다')
     ap.add_argument('--prec-dir', default=str(Path(__file__).resolve().parent.parent / 'sources' / 'api' / 'prec'))
@@ -289,6 +290,12 @@ def main():
                 how = '이름' if search == 1 else '본문'
                 if xs:
                     break
+            if a.until:
+                lim = re.sub(r'\D', '', a.until)
+                hidden = [x for x in xs if re.sub(r'\D', '', x.get('선고일자') or x.get('종국일자') or '') > lim]
+                xs = [x for x in xs if x not in hidden]
+                if hidden:
+                    print(f'== {lim} 뒤 선고 {len(hidden)}건은 숨김(--until)')
             if tgt == 'prec':
                 xs.sort(key=lambda x: (x.get('법원명') != '대법원', '전원합의체' not in (x.get('판결유형') or ''),
                                        -int(re.sub(r'\D', '', x.get('선고일자') or '') or 0)))
