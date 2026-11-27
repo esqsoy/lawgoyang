@@ -331,7 +331,7 @@ LOWER_START = re.compile(r'^\s*(?:\(?\d{1,2}\)?[.)]?\s*|[가-하][.)]\s*|[①-�
 REASON = re.compile(r'잘못이 있|위법이 있|위법을 저지|수긍할 수 없|수긍하기 어렵|상고이유(의)? 주장은 이유 있|논지는 이유 있|법리를 오해|심리를 다하지')
 SURNAME = '김이박최정강조윤장임한오서신권황안송류유전홍고문양손배백허남심노하곽성차주우구민진지엄채원천방공현함변염여추도소석선설마길연표왕금옥육맹탁국편용'
 NAME_TAIL = set('은 는 이 가 을 를 의 에 도 만 로 나 다 자 여 고 지 와 과 며 면 서 에게 으로 였고 였다 이다 이며 에서 하여 하고 하는 하지 한다 등은 등이 등을 등의 측의 측은 측이'.split())
-NAME_ROLE = re.compile(r'(?:소외|망|亡|원고|피고|신청인|피신청인|재항고인|상대방|채무자|채권자|참가인|상속인|증인|매도인|매수인|수익자|전득자)\s?(?:\([^()]{1,12}\)\s?)?'
+NAME_ROLE = re.compile(r'(?<![가-힣])(?:소외|망|亡|원고|피고|신청인|피신청인|재항고인|상대방|채무자|채권자|참가인|상속인|증인|매도인|매수인|수익자|전득자)\s?(?:\([^()]{1,12}\)\s?)?'
                        r'([' + SURNAME + r'][가-힣]{1,2})(?=[\s,.·ㆍ)(]|[은는이가을를의에과와로]|$)')
 NOT_NAME = set('''소유 주장 명의 전부 조합 은행 이름 이외 모두 지분 한국 정부 국가 국민 서울 인천 사이 주식 회사 종중 문중 공사 공단 조치 이전 이후 전원 일부 본인 대리
 전체 정당 지위 주소 소송 소외 원고 피고 채권 채무 권리 의무 인수 양수 양도 인정 지급 변제 선정 승계 한편 또는 이에 역시 고유 공동 연대 방어 이익 이행 제기 제출 주위
@@ -454,7 +454,8 @@ class Src:
             return (len(tok) == 3 and tok not in NOT_NAME and tok[:2] not in NOT_NAME and tok[1:] not in NAME_TAIL and tok[2:] not in NAME_TAIL
                     and not re.search(r'원고|피고|신청|상대|참가|소외|변호|법인|회사|조합|은행|종중|공사|주식|유한', tok))
         for m in re.finditer(r'【\s*(원고|피고|신청인|피신청인|재항고인|상대방|참가인|독립당사자참가인|채권자|채무자)[^】]*】([^\n(【]*)', head):
-            for tok in re.split(r'[,\s]+', m.group(2)):
+            party = re.split(r'소송대리인|담당변호사|변호사', m.group(2))[0]  # 대리인 이름은 직무로 나온 이름이라 대상이 아니다(26.11.28 이솝 판정: 헛후보 44개)
+            for tok in re.split(r'[,\s]+', party):
                 if re.fullmatch(r'[' + SURNAME + r'][가-힣]{2}', tok) and keep(tok):
                     out[tok] += 1
         for m in NAME_ROLE.finditer(self.body[self.reason_start:] + '\n' + ' '.join(str((self.rec.get('headnote') or {}).get(k) or '') for k in ('판시사항', '판결요지'))):
