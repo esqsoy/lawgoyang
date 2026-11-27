@@ -30,14 +30,45 @@ def parse_holdout(s):
     return out
 
 
+ART_PARTS = re.compile(r'^(.+?) 제(\d+)조(?:의(\d+))?(?: 제(\d+)항)?')
+LAW_ALIAS = {'헌법': '대한민국헌법'}
+
+
+def load_laws(d):
+    """{법령: {조: 항 수}}. 조문 원문은 fetch_api.py --ledger가 판례 카드·틀의 조문까지 받아 둔다."""
+    d = Path(d)
+    idx = json.loads((d / 'index.json').read_text(encoding='utf-8')) if (d / 'index.json').exists() else {}
+    out = {}
+    for law, e in idx.items():
+        if law.startswith('_'):
+            continue
+        doc = json.loads((d / e['file']).read_text(encoding='utf-8'))
+        out[law] = {jo: sum(1 for p in x.get('paras', []) if isinstance(p.get('no'), int)) for jo, x in doc['articles'].items()}
+    return out
+
+
+def art_problem(laws, law, jo, para):
+    """현행 원문에 없으면 이유를 돌려준다."""
+    law = LAW_ALIAS.get(law, law)
+    if law not in laws:
+        return f'{law}의 현행 원문을 받아 두지 않았다(fetch_api.py --ledger)'
+    if jo not in laws[law]:
+        return f'{law} 제{jo}조가 현행 원문에 없다'
+    if para and laws[law][jo] and int(para) > laws[law][jo]:
+        return f'{law} 제{jo}조에 제{para}항이 없다(항 {laws[law][jo]}개)'
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--cards', default=str(ROOT / 'data' / 'precedents'))
     ap.add_argument('--frames', default=str(ROOT / 'data' / 'frames'))
     ap.add_argument('--prec', default=str(ROOT / 'sources' / 'api' / 'prec'))
+    ap.add_argument('--laws', default=str(ROOT / 'sources' / 'api' / 'laws'), help='현행 조문 원문(fetch_api.py --ledger가 받은 것)')
     ap.add_argument('--holdout', default='', help="맞히기 구간 출제: '원:2024,원:2025,법:2024-2026'")
     ap.add_argument('--holdout-cases', default='', help='맞히기 구간에 쓰인 판결 번호(쉼표)')
     a = ap.parse_args()
+    laws = load_laws(a.laws)
     err, warn = [], []
     holdout = parse_holdout(a.holdout)
     hcases = {x.strip() for x in a.holdout_cases.split(',') if x.strip()}
@@ -98,10 +129,19 @@ def main():
                 err.append(f'{tag}: rule_parts[{i}] quote가 비었다'); quotes_ok = False
             elif body and q not in body:
                 err.append(f'{tag}: rule_parts[{i}] quote가 판결 본문에 없다: {q[:40]}…'); quotes_ok = False
+        for x in c.get('articles') or []:
+            pr = art_problem(laws, x.get('law'), str(x.get('jo')), x.get('para')) if laws else None
+            if pr:
+                err.append(f'{tag}: articles: {pr}')
         for t in c.get('turn') or []:
             ref = (t.get('ref') or '').strip()
             if not (ref in cards or ART.match(ref)):
                 err.append(f'{tag}: turn의 ref({ref or "빈칸"})가 카드 id나 조문 위치가 아니다')
+            elif laws and ART.match(ref):
+                m = ART_PARTS.match(ref)
+                pr = art_problem(laws, m.group(1), m.group(2) + (f'의{m.group(3)}' if m.group(3) else ''), m.group(4))
+                if pr:
+                    err.append(f'{tag}: turn: {pr}')
             if ref.split('#')[0] in hcases and not (ref in cards and legit(cards[ref][1])):
                 err.append(f'{tag}: turn이 만들기 구간 근거가 없는 맞히기 구간 판결({ref})을 가리킨다')
         for n in c.get('same_rule') or []:
@@ -175,6 +215,11 @@ def main():
             for b in basis:
                 if not (b in cards or ART.match(b) or (b in frames and frames[b].get('module'))):
                     err.append(f'틀 {fid}: 마디 {n.get("id")}의 근거({b})가 카드 id나 조문 위치가 아니다')
+                elif laws and ART.match(b):
+                    m = ART_PARTS.match(b)
+                    pr = art_problem(laws, m.group(1), m.group(2) + (f'의{m.group(3)}' if m.group(3) else ''), m.group(4))
+                    if pr:
+                        err.append(f'틀 {fid}: 마디 {n.get("id")}: {pr}')
 
     for w in warn:
         print('경고:', w)

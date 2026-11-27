@@ -407,6 +407,23 @@ def main():
         for iss in st.get('issues', []):
             for c in iss.get('cites', []):
                 want.setdefault(c['law'], set()).add(str(c['jo']))
+    # 판례 카드의 articles와 틀 마디·turn의 조문 위치도 받는다(26.11.28: 카드 조문이 현행 법령에 있는지 검사기가 대조한다).
+    data_dir = Path(a.ledger).resolve().parent.parent
+    art_ref = re.compile(r'^(.+?) 제(\d+)조(?:의(\d+))?')
+    def add_ref(t):
+        m = art_ref.match(t or '')
+        if m:
+            want.setdefault(ALIAS.get(m.group(1), m.group(1)), set()).add(m.group(2) + (f'의{m.group(3)}' if m.group(3) else ''))
+    for f in sorted((data_dir / 'precedents').glob('*.json')):
+        c = json.loads(f.read_text(encoding='utf-8'))
+        for x in c.get('articles') or []:
+            want.setdefault(x['law'], set()).add(str(x['jo']))
+        for t in c.get('turn') or []:
+            add_ref(t.get('ref'))
+    for f in sorted((data_dir / 'frames').glob('*.json')):
+        for n in json.loads(f.read_text(encoding='utf-8')).get('nodes', []):
+            for b in n.get('basis') or []:
+                add_ref(b)
     outdir = Path(a.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     index, missing = {}, {}

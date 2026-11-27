@@ -66,6 +66,16 @@ def our_targets():
         for b in st.get('basis', []):
             if b.get('no'):
                 cards.setdefault(re.sub(r'\s+', '', b['no']), set()).add(st['id'])
+    # 판례 카드(26.11.28): 카드 판결과 same_rule 판결 번호, 카드 조문도 대상으로 삼는다.
+    for f in sorted((ROOT / 'data' / 'precedents').glob('*.json')):
+        c = json.loads(f.read_text(encoding='utf-8'))
+        if (c.get('status') or {}).get('current') is False:
+            continue
+        cards.setdefault(re.sub(r'\s+', '', c['case']['no']), set()).add(c['id'])
+        for n in c.get('same_rule') or []:
+            cards.setdefault(re.sub(r'\s+', '', n), set()).add(c['id'] + '(같은 법리)')
+        for x in c.get('articles') or []:
+            arts.add((x['law'], str(x['jo'])))
     return arts, {k: sorted(v) for k, v in cards.items() if k}, {k: sorted(v) for k, v in on_cards.items()}
 
 
