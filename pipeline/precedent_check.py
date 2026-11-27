@@ -109,8 +109,13 @@ def main():
                 warn.append(f'{tag}: same_rule 번호 꼴이 이상하다({n})')
             if n in hcases:
                 warn.append(f'{tag}: same_rule에 맞히기 구간 판결({n})이 있다. 만들기 구간 검색(searched)으로 찾은 것인지 확인')
+        card_keys = {(h.get('exam'), h.get('subject'), h.get('year'), str(h.get('q')), str(h.get('sub') or '')) for h in c.get('asked') or []}
+        for rp in c.get('rule_parts') or []:
+            for h in rp.get('asked') or []:
+                if (h.get('exam'), h.get('subject'), h.get('year'), str(h.get('q')), str(h.get('sub') or '')) not in card_keys:
+                    err.append(f'{tag}: 마디 asked({h.get("exam")}{h.get("year")} {h.get("subject")} 문{h.get("q")} {h.get("sub")})가 카드 asked에 없다')
         for h in asked_all(c):
-            for k in ('exam', 'year', 'q'):
+            for k in ('exam', 'subject', 'year', 'q'):
                 if not h.get(k):
                     err.append(f'{tag}: asked에 {k}가 없다')
             if h.get('exam') not in EXAMS:
