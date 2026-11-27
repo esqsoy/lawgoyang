@@ -34,7 +34,7 @@ PRINCIPLES 1-1('판례 문구도 조문처럼')의 '판례 법리' 항목이다.
   "articles": [{"law": "민법", "jo": "404", "para": "1", "role": "핵심|보조"}],
   "same_rule": ["2020다223781"],
   "asked": [{"exam": "원", "subject": "민법", "year": 2024, "q": "1", "sub": "1", "similarity": "상|중|하", "diff": "판결과 기출의 차이 한 줄"}],
-  "status": {"current": true, "overruled_by": null, "reverse_checked": "2026-11-26"},
+  "status": {"current": true, "overruled_by": null, "reverse_checked": "2026-11-26", "scope": "(바뀌었을 때) 변경 범위"},
   "editions": {"court": true, "bar": true, "bar_extra": {"kind": "반대의견|별개의견|원심 논리", "text": "…"}},
   "confidence": "확실|확인 필요",
   "checks": [{"by": "이솝|파핀|울프", "date": "2026-11-26", "result": "확실|확인 필요", "note": ""}]
@@ -80,3 +80,5 @@ PRINCIPLES 1-1('판례 문구도 조문처럼')의 '판례 법리' 항목이다.
  "nodes": [{"id": "청구원인-1", "stage": "청구원인|항변|재항변|재재항변|직권조사", "element": "피보전채권의 존재",
             "basis": ["민법 제404조 제1항", "2009다4787#1"]}]}
 ```
+- **판례가 바뀐 카드는 지우지 않는다.** `status.current: false`와 `overruled_by`(바꾼 판결의 카드 id)를 적고, `status.scope`에 어디까지 바뀌었는지 적는다. 일부 요지만 바뀌었으면 `current`는 그대로 두고 `scope`만 적는다. 바뀐 법리를 다룬 시험 문제를 풀 때 옛 판결과 새 판결이 함께 보이게 하려는 것이다.
+- **모듈 틀.** 소멸시효 항변처럼 여러 청구에 끼우는 틀은 `"module": true`로 두고, `plug`(어느 자리에 어떻게 끼우는지)와 `not_ex_officio`(직권조사 마디가 없는 이유)를 적는다. 다른 틀의 마디는 `basis`에 모듈 틀 id를 적어 가리킬 수 있다. (2단계 소멸시효, 26.11.28)

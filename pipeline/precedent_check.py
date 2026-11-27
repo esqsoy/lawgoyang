@@ -149,11 +149,23 @@ def main():
                 err.append(f'{tag}: 확실인데 역방향 점검일(status.reverse_checked)이 없다')
             if not quotes_ok:
                 err.append(f'{tag}: 확실인데 quote가 다 맞지 않는다')
+        st = c.get('status') or {}
+        if st.get('current') is False:
+            if not st.get('overruled_by'):
+                err.append(f'{tag}: current가 false인데 overruled_by가 없다')
+            elif '#' in st['overruled_by'] and st['overruled_by'] not in cards:
+                warn.append(f'{tag}: overruled_by({st["overruled_by"]})가 카드에 없다')
+            if not st.get('scope'):
+                warn.append(f'{tag}: 변경 범위(status.scope)가 없다')
         ed = c.get('editions') or {}
         if ed.get('court') and (ed.get('court_extra') or ed.get('doctrine')):
             err.append(f'{tag}: 법원판에는 학설·추가 견해 칸을 두지 않는다')
 
     for fid, f in frames.items():
+        if f.get('module'):
+            for k in ('plug', 'not_ex_officio'):
+                if not f.get(k):
+                    err.append(f'틀 {fid}: 모듈 틀에 {k}가 없다')
         for n in f.get('nodes', []):
             if n.get('stage') not in ('청구원인', '항변', '재항변', '재재항변', '직권조사'):
                 err.append(f'틀 {fid}: 마디 {n.get("id")}의 stage({n.get("stage")})가 청구원인·항변·재항변·재재항변·직권조사가 아니다')
@@ -161,7 +173,7 @@ def main():
             if not basis:
                 err.append(f'틀 {fid}: 마디 {n.get("id")}에 근거가 없다')
             for b in basis:
-                if not (b in cards or ART.match(b)):
+                if not (b in cards or ART.match(b) or (b in frames and frames[b].get('module'))):
                     err.append(f'틀 {fid}: 마디 {n.get("id")}의 근거({b})가 카드 id나 조문 위치가 아니다')
 
     for w in warn:
