@@ -1,0 +1,95 @@
+{
+ "tool": "verify_machine",
+ "name": "가림 표지",
+ "what": "우리가 가린 이름 두 사람이 같은 표지(○○○)다. 시험용으로 지은 판결 글이다",
+ "control": {},
+ "expect": [
+  {
+   "check": "가림 표지",
+   "result": "후보",
+   "claim": "판결/2099다99999"
+  }
+ ],
+ "source": {
+  "no": "2099다99999",
+  "serial": "0",
+  "court": "대법원",
+  "date": "20990101",
+  "kind": "판결",
+  "name": "대여금",
+  "refs_articles": "",
+  "refs_cases": "",
+  "fetched": "2026-11-28",
+  "source": "시험용으로 지은 글(판결이 아니다)",
+  "body": "【원고, 상고인】 원고\n【피고, 피상고인】 피고\n【원심판결】 시험고법 2098. 1. 1. 선고 2097나1 판결\n【주 문】\n상고를 기각한다. 상고비용은 원고가 부담한다.\n\n【이 유】 1. 원고는 소외 ○○○에게 돈을 빌려주었다. 소외 ○○○이 보증하였다.\n2. 그러므로 상고를 기각한다.\n대법관 갑(재판장) 을 병",
+  "redacted": [
+   "시험용 가림 기록"
+  ]
+ },
+ "control_source": {
+  "no": "2099다99999",
+  "serial": "0",
+  "court": "대법원",
+  "date": "20990101",
+  "kind": "판결",
+  "name": "대여금",
+  "refs_articles": "",
+  "refs_cases": "",
+  "fetched": "2026-11-28",
+  "source": "시험용으로 지은 글(판결이 아니다)",
+  "body": "【원고, 상고인】 원고\n【피고, 피상고인】 피고\n【원심판결】 시험고법 2098. 1. 1. 선고 2097나1 판결\n【주 문】\n상고를 기각한다. 상고비용은 원고가 부담한다.\n\n【이 유】 1. 원고는 소외 ○○○1에게 돈을 빌려주었다. 소외 ○○○2가 보증하였다.\n2. 그러므로 상고를 기각한다.\n대법관 갑(재판장) 을 병",
+  "redacted": [
+   "시험용 가림 기록"
+  ]
+ },
+ "card": {
+  "id": "2099다99999#1",
+  "role": "바탕",
+  "case": {
+   "no": "2099다99999",
+   "court": "대법원",
+   "date": "2099-01-01",
+   "kind": "판결",
+   "en_banc": false,
+   "gazette": null,
+   "disposition": "상고기각"
+  },
+  "holding": "1",
+  "found_by": "검색",
+  "searched": [
+   "시험"
+  ],
+  "name": null,
+  "cue": "원고가 돈을 빌려주었다.",
+  "facts": [
+   "원고가 돈을 빌려주었다."
+  ],
+  "rule": "상고를 기각한다.",
+  "rule_parts": [
+   {
+    "part": "상고를 기각한다",
+    "quote": "그러므로 상고를 기각한다",
+    "asked": []
+   }
+  ],
+  "result": "상고를 기각하였다.",
+  "turn": [],
+  "not_decided": null,
+  "slots": [],
+  "articles": [],
+  "same_rule": [],
+  "asked": [],
+  "status": {
+   "current": true,
+   "overruled_by": null,
+   "reverse_checked": "2026-11-28"
+  },
+  "editions": {
+   "court": true,
+   "bar": true,
+   "bar_extra": null
+  },
+  "confidence": "확인 필요",
+  "checks": []
+ }
+}

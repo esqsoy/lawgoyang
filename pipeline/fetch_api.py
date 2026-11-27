@@ -123,7 +123,7 @@ def prec_body(t):
 
 def fetch_prec_full(no):
     """사건번호 → (저장소에 둘 기록, 전체 응답). 기록에는 판결 본문(판례내용)과 사실 칸만 둔다.
-    판시사항·판결요지는 법원이 붙인 정리문이라 저작권 지위가 확인 전이므로 저장소에 넣지 않는다(PRINCIPLES 4, 26.11.26 회의)."""
+    판시사항·판결요지는 따로 headnote 칸에 출처와 함께 둔다(PRINCIPLES 4, 26.11.28). 받은 뒤 `python3 -I pipeline/verify_machine.py --headnotes`를 돌린다."""
     tgt = 'detc' if '헌' in no else 'prec'
     root, key, sid = {'prec': ('PrecSearch', 'prec', '판례일련번호'), 'detc': ('DetcSearch', 'Detc', '헌재결정례일련번호')}[tgt]
     same = lambda x: re.sub(r'\s+', '', x.get('사건번호', '')) == no
