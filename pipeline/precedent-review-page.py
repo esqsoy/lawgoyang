@@ -25,9 +25,10 @@ for f in sorted((ROOT / 'data' / 'frames').glob('*.json')):
     fr = json.loads(f.read_text(encoding='utf-8'))
     frames[fr['id']] = fr
 
-# 틀 순서: 1단계(책임재산 보전) 틀 먼저, 그다음 0단계 틀
+# 틀 순서: 1단계(책임재산 보전), 2단계(소멸시효) 틀 먼저, 그다음 0단계 틀
 FIRST = ['F-채권자대위소송', 'F-대위-명의신탁-진정명의회복', 'F-대위-이중매매-등기말소', 'F-대위-반사회적처분-등기말소',
-         'F-대위-취득시효-소유권이전등기', 'F-사해행위취소소송', 'F-사해행위취소반소', 'F-사해방지참가', 'F-취소후-회복재산-등기말소']
+         'F-대위-취득시효-소유권이전등기', 'F-사해행위취소소송', 'F-사해행위취소반소', 'F-사해방지참가', 'F-취소후-회복재산-등기말소',
+         'F-소멸시효항변', 'F-시효중단재소', 'F-불법행위손해배상-시효항변']
 order = [x for x in FIRST if x in frames] + [x for x in frames if x not in FIRST]
 
 def aid(cid):
@@ -108,7 +109,11 @@ def card_html(c):
             + (' · 전원합의체' if cs.get('en_banc') else '') + f' · {e(cs.get("disposition") or "")}'
             + (f' · {e(cs["gazette"])}' if cs.get('gazette') else '') + '</span>',
             f'<span class="chip {"ok" if c["confidence"] == "확실" else "warn"}">{e(c["confidence"])}</span>']
+    if (c.get('status') or {}).get('current') is False:
+        head.append(f'<span class="chip warn">바뀜 → {e(c["status"].get("overruled_by") or "")}</span>')
     P = [f'<section class="card" id="{e(a)}"><div class="head">{"".join(head)}</div>']
+    if (c.get('status') or {}).get('scope'):
+        P.append(row(a + '-scope', '바뀐 범위', e(c['status']['scope']), 'v s'))
     if c.get('cue'):
         P.append(row(a + '-cue', '단서', e(c['cue'])))
     if c.get('facts'):
@@ -143,7 +148,7 @@ P = ['<title>판례 카드 검수</title><meta name="claude:viewport-fit-sides" 
      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap">',
      f'<style>{CSS}</style><div class="wrap">',
      '<h1>판례 카드 검수</h1>',
-     f'<p class="lead">법행 민법 시범의 판례 카드 {len(cards)}장(팀 판정 확실 {n_ok})과 요건사실 틀 {len(frames)}개야. 0단계(법행 2023 민법 문2)와 1단계(책임재산 보전, 민법 제404~407조)에서 만들었어. 틀마다 마디를 먼저 두고, 그 틀에 놓인 카드를 마디 순서로 이었어. 노란 글은 판결 이유에서 글자 그대로 딴 구절이야.</p>',
+     f'<p class="lead">법행 민법 시범의 판례 카드 {len(cards)}장(팀 판정 확실 {n_ok})과 요건사실 틀 {len(frames)}개야. 0단계(법행 2023 민법 문2), 1단계(책임재산 보전, 민법 제404~407조), 2단계(소멸시효, 민법 제162~184조·제766조, 상법 제64조)에서 만들었어. 판례가 바뀐 카드는 지우지 않고 “바뀜”으로 남겼어. 틀마다 마디를 먼저 두고, 그 틀에 놓인 카드를 마디 순서로 이었어. 노란 글은 판결 이유에서 글자 그대로 딴 구절이야.</p>',
      '<ol class="look"><li>법리 문장이 판결이 한 말보다 넓거나 좁지 않은가</li><li>결론과 틀 자리(인정·배척·다시 심리)가 맞는가</li><li>갈림: 그 사실이면 정말 결론이 바뀌는가</li><li>기출 유사도(상·중·하)와 차이 설명이 맞는가</li><li>답안에 쓸 때 어색한 말, 빠진 판례</li></ol>',
      '<p class="hint" id="cmhint">줄 댓글을 준비하는 중이야.</p>',
      '<nav class="toc" aria-label="틀 목록">']
