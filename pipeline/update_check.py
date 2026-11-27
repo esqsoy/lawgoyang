@@ -32,6 +32,11 @@ ART = re.compile(r'(?:(?P<law>[가-힣][가-힣ㆍ·\s]*?(?:법|령|규칙|규�
 CHANGED = re.compile(r'(?:선고|자)\s*([0-9]{2,4}[가-힣]{1,3}[0-9]+)((?:\s*,\s*[0-9]+)*)[^,()<]*?(?:판결|결정)?\s*(?:\([^()]*\)\s*)*\(변경\)')
 
 
+# 확인 끝 목록(26.11.28): 판례 변경이 걸렸지만 사람이 보고 '영향 없음'으로 정한 (판결 번호, 걸린 곳). 주기 점검마다 다시 알리지 않는다.
+ACK_FILE = ROOT / 'data' / 'updates' / 'ack.json'
+ACK = {(x['no'], x['where']) for x in (json.loads(ACK_FILE.read_text(encoding='utf-8')) if ACK_FILE.exists() else [])}
+
+
 def overruled_numbers(refs):
     """참조판례 글에서 '(변경)'이 붙은 판결 번호를 뽑는다. 사이에 공보 표시 '(공…)'가 끼어도, 결정('자')이어도,
     병합 번호('2021다244, 251')여도 잡는다(26.11.26 파핀이 찾은 결함: 옛 정규식은 2020그42 0/1, 2023다240299 1/5)."""
@@ -66,6 +71,12 @@ def our_targets():
         for b in st.get('basis', []):
             if b.get('no'):
                 cards.setdefault(re.sub(r'\s+', '', b['no']), set()).add(st['id'])
+            for n in b.get('same_rule') or []:  # 26.11.28: 바탕 판결의 같은 법리 번호도 본다(법2020-민법-2의 99다23888을 놓쳤다)
+                cards.setdefault(re.sub(r'\s+', '', n), set()).add(st['id'] + '(같은 법리)')
+        for x in st.get('later', []):
+            for p in x.get('precedent', []):
+                if p.get('no'):
+                    cards.setdefault(re.sub(r'\s+', '', p['no']), set()).add(st['id'] + '(나중 층)')
     # 판례 카드(26.11.28): 카드 판결과 same_rule 판결 번호, 카드 조문도 대상으로 삼는다.
     for f in sorted((ROOT / 'data' / 'precedents').glob('*.json')):
         c = json.loads(f.read_text(encoding='utf-8'))
@@ -199,9 +210,12 @@ def check_precedents(arts, cards, since, cache):
         refs = parse_articles(d.get('참조조문'))
         mine = sorted({r for r in refs if r in arts})
         changed_no = overruled_numbers(d.get('참조판례') or '')
-        on_cards = {n: cards[n] for n in changed_no if n in cards}
+        on_cards = {n: [w for w in cards[n] if (n, w) not in ACK] for n in changed_no if n in cards}
+        acked = {n: [w for w in cards[n] if (n, w) in ACK] for n in changed_no if n in cards}
+        on_cards = {n: v for n, v in on_cards.items() if v}
+        acked = {n: v for n, v in acked.items() if v}
         hits.append({'no': d.get('사건번호'), 'date': d.get('선고일자'), 'name': d.get('사건명'), 'kind': d.get('판결유형'),
-                     'our_articles': [f'{l} 제{j}조' for l, j in mine], 'overruled': changed_no, 'overruled_on_cards': on_cards})
+                     'our_articles': [f'{l} 제{j}조' for l, j in mine], 'overruled': changed_no, 'overruled_on_cards': on_cards, 'acknowledged': acked})
     return hits
 
 
@@ -275,7 +289,8 @@ def main():
     main_rel = [p for p in rel if not only_const(p)]
     const_rel = [p for p in rel if only_const(p)]
     L += [f"- {p['date']} {p['no']} {p['name'][:60]}: 우리 조문 {', '.join(p['our_articles']) or '-'}"
-          + (f"; **카드 판결 변경 {p['overruled_on_cards']}**" if p['overruled_on_cards'] else '') for p in main_rel] or ['- 우리 조문(헌법 말고)·카드와 겹치는 것 없음']
+          + (f"; **카드 판결 변경 {p['overruled_on_cards']}**" if p['overruled_on_cards'] else '')
+          + (f"; 확인 끝(data/updates/ack.json) {p['acknowledged']}" if p.get('acknowledged') else '') for p in main_rel] or ['- 우리 조문(헌법 말고)·카드와 겹치는 것 없음']
     if const_rel:
         L += [f"- 헌법 조문만 참조조문에서 겹침 {len(const_rel)}건: " + ', '.join(f"{p['no']}({p['name'].split('[')[0][:20]})" for p in const_rel)]
     L += [f'(기간 안 전원합의체 판결 {len(precs)}건 가운데 겹치는 것 {len(rel)}건)', '']

@@ -2,7 +2,7 @@
  "checked": "2026-11-28",
  "since": "2024-01-01",
  "our_articles": 851,
- "card_precedents": 1079,
+ "card_precedents": 1189,
  "laws_changed": [],
  "laws_upcoming": [
   {
@@ -72,7 +72,8 @@
     "98다17930",
     "2014다200619"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2022도5937",
@@ -86,7 +87,8 @@
    "overruled": [
     "99도3801"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2025두33035",
@@ -101,7 +103,8 @@
     "헌법 제75조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2025두34707",
@@ -116,7 +119,8 @@
     "헌법 제75조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2025도11170",
@@ -125,7 +129,8 @@
    "kind": "전원합의체 판결",
    "our_articles": [],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2022도13370",
@@ -141,7 +146,8 @@
    "overruled": [
     "2004도673"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2018다296229",
@@ -155,7 +161,8 @@
     "97누3644",
     "2006다40935"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2021도15611",
@@ -171,7 +178,8 @@
    "overruled": [
     "91도3219"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2024도163",
@@ -182,7 +190,8 @@
     "헌법 제12조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2023다285162",
@@ -196,7 +205,8 @@
     "민법 제766조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2022다214040",
@@ -211,7 +221,8 @@
     "2006다27093",
     "2006다44760"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2021다252977",
@@ -231,9 +242,10 @@
     "99다23888",
     "2009다48879"
    ],
-   "overruled_on_cards": {
+   "overruled_on_cards": {},
+   "acknowledged": {
     "99다23888": [
-     "변2022-민사법-1의5"
+     "법2020-민법-2(같은 법리)"
     ]
    }
   },
@@ -253,7 +265,8 @@
     "2019두50946",
     "2019두47100"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2023다240299",
@@ -271,7 +284,8 @@
     "2021다244",
     "2021다251"
    ],
-   "overruled_on_cards": {
+   "overruled_on_cards": {},
+   "acknowledged": {
     "2013다12464": [
      "2013다12464#2"
     ],
@@ -291,7 +305,8 @@
    "overruled": [
     "2018마5882"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2025도4697",
@@ -300,7 +315,8 @@
    "kind": "전원합의체 판결",
    "our_articles": [],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2023도10405",
@@ -309,7 +325,8 @@
    "kind": "전원합의체 판결",
    "our_articles": [],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2023다302838",
@@ -320,7 +337,8 @@
    "overruled": [
     "2012다89399"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2020다247190",
@@ -332,7 +350,8 @@
     "2012다89399",
     "2012다94643"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2022다289051",
@@ -347,7 +366,8 @@
     "헌법 제8조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2023두36800",
@@ -359,7 +379,8 @@
     "헌법 제11조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2022두43528",
@@ -374,7 +395,8 @@
     "헌법 제49조"
    ],
    "overruled": [],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2018스724",
@@ -395,7 +417,8 @@
     "2010므2068",
     "2010므2075"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   },
   {
    "no": "2021다299594",
@@ -407,7 +430,8 @@
     "2007다10245",
     "2009다100920"
    ],
-   "overruled_on_cards": {}
+   "overruled_on_cards": {},
+   "acknowledged": {}
   }
  ],
  "ccourt": [],
