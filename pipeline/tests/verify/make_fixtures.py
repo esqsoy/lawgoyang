@@ -233,9 +233,9 @@ def _(c, s, ctx):
 
 @recipe('turn 같은 상태', 'turn의 ref를 같은 마디에서 상태가 같은 카드로 두었다(결론이 같다)')
 def _(c, s, ctx):
-    mine = vm.slot_map(c)
+    mine = vm.node_states(c)
     for o in ctx.cards.values():
-        theirs = vm.slot_map(o)
+        theirs = vm.node_states(o)
         sh = set(mine) & set(theirs)
         if o['case']['no'] != s.no and sh and all(mine[k] == theirs[k] for k in sh) and (o.get('status') or {}).get('current') is not False:
             m = copy.deepcopy(c)
@@ -273,10 +273,11 @@ def _(c, s, ctx):
 
 @recipe('same_rule 방향', '같은 마디에서 상태가 반대인 판결을 same_rule에 적었다')
 def _(c, s, ctx):
-    mine = vm.slot_map(c)
+    mine = vm.node_states(c)
+    have = {vm.same_rule_parts(x)[0] for x in c['same_rule']}
     for o in ctx.cards.values():
-        theirs = vm.slot_map(o)
-        if o['case']['no'] != s.no and o['case']['no'] not in c['same_rule'] and any({mine[k], theirs[k]} == {'인정', '배척'} for k in set(mine) & set(theirs)):
+        theirs = vm.node_states(o)
+        if o['case']['no'] != s.no and o['case']['no'] not in have and any(vm.opposite(mine[k], theirs[k]) for k in set(mine) & set(theirs)):
             m = copy.deepcopy(c)
             m['same_rule'] = c['same_rule'] + [o['case']['no']]
             return out(m, {'same_rule': c['same_rule']}, [E('same_rule 방향', claim=f"same_rule[{len(c['same_rule'])}]")])
@@ -328,12 +329,17 @@ def _(c, s, ctx):
 
 @recipe('diff 첫머리', "diff가 '결론 같음/반대'로 시작하지 않는다")
 def _(c, s, ctx):
-    if not c['asked'] or re.match(r'^\s*결론 (같음|반대)', c['asked'][0]['diff'] or ''):
+    if not c['asked']:
         return None
+    m = copy.deepcopy(c)
+    if re.match(r'^\s*결론 (같음|반대)', c['asked'][0]['diff'] or ''):
+        # 진짜 카드는 모두 첫머리가 맞으므로, 틀린 사본은 첫머리(첫 문장)를 떼어 만든다
+        m['asked'][0]['diff'] = re.sub(r'^\s*결론 (같음|반대)(\([^)]*\))?[.\s]*', '', c['asked'][0]['diff']) or '판결과 기출의 사실이 다르다.'
+        return out(m, {'asked': c['asked']}, [E('diff 첫머리', claim='asked[0].diff')])
     fixed = copy.deepcopy(c['asked'])
     for h in fixed:
         h['diff'] = '결론 같음. ' + (h['diff'] or '')
-    return out(copy.deepcopy(c), {'asked': fixed}, [E('diff 첫머리', claim='asked[0].diff')])
+    return out(m, {'asked': fixed}, [E('diff 첫머리', claim='asked[0].diff')])
 
 
 @recipe('공보-다름', '공보 표기를 다른 판결들이 적는 것과 다르게 적었다')
@@ -390,9 +396,12 @@ def _(c, s, ctx):
 def _(c, s, ctx):
     st = c['status']
     sib = [o for o in ctx.by_case[s.no] if o['id'] != c['id'] and (o['status'].get('scope') or o['status'].get('current') is False)]
-    if not sib or not st.get('scope') or st.get('current') is False:
+    if not sib or st.get('current') is False:
         return None
     m = copy.deepcopy(c)
+    if not st.get('scope'):
+        # 진짜 카드에 scope가 없으면 그대로가 틀린 사본이고, 고친 사본에 scope를 적는다
+        return out(m, {'status': {**st, 'scope': '같은 판결의 다른 요지가 바뀌었고 이 요지는 그 범위 밖이다.'}}, [E('일관성(같은 판결 다른 요지)', claim='scope')])
     m['status'] = {k: v for k, v in st.items() if k != 'scope'}
     return out(m, {'status': st}, [E('일관성(같은 판결 다른 요지)', claim='scope')])
 
@@ -421,7 +430,7 @@ def _(c, s, ctx):
 
 @recipe('slot과 틀 basis', '그 마디 basis에 이 카드가 없는 틀 마디에 slot을 달았다')
 def _(c, s, ctx):
-    k = next(k for k, bs in ctx.basis.items() if c['id'] not in bs and k not in vm.slot_map(c))
+    k = next(k for k, bs in ctx.basis.items() if c['id'] not in bs and k not in vm.node_states(c))
     m = copy.deepcopy(c)
     m['slots'] = c['slots'] + [{'frame': k[0], 'node': k[1], 'status': '인정'}]
     return out(m, {'slots': c['slots']}, [E('slot과 틀 basis', '틀림', claim=f"slots[{len(c['slots'])}]")])
@@ -568,7 +577,97 @@ PC = [
     ('id와 요지 번호', '요지 번호를 id와 다르게 적었다', lambda m: m.__setitem__('holding', '99'), ['가 사건번호#요지번호']),
     ('current false', 'current false인데 overruled_by를 비웠다', lambda m: m.__setitem__('status', {**m['status'], 'current': False, 'overruled_by': None}), ['current가 false인데 overruled_by가 없다']),
     ('open_turns', '저장소에 두지 않는 open_turns 칸을 넣었다', lambda m: m.__setitem__('open_turns', []), ['open_turns는 저장소에 두지 않는다']),
+    ('same_rule 꼴', "same_rule을 사건번호도 '번호[요지]' 꼴도 아닌 글로 적었다(닫는 괄호가 없다)", lambda m: m['same_rule'].append('2021다244[2'), ['same_rule 번호 꼴이 이상하다(2021다244[2)']),
+    ('slot 자리', '한 마디에 같은 자리(틀, 마디, of)의 slot을 두 줄 적었다', lambda m: m['slots'].append(dict(m['slots'][0])), ['같은 자리 slot이 둘이다']),
+    ('slot law_only', '틀이 law_only(법리 근거)로 적은 마디에 그 카드의 slot을 달았다', lambda m: add_law_only_slot(m), ['law_only(법리 근거)에 이 카드가 있다']),
 ]
+
+
+def law_only_nodes():
+    """{카드 id: (틀, 마디)}: 틀 마디의 law_only에 든 카드."""
+    found = {}
+    for p in sorted((ROOT / 'data/frames').glob('*.json')):
+        f = json.loads(p.read_text(encoding='utf-8'))
+        for n in f.get('nodes', []):
+            for cid in n.get('law_only') or []:
+                found.setdefault(cid, (f['id'], n['id']))
+    return found
+
+
+def add_law_only_slot(m):
+    k = law_only_nodes()[m['id']]   # law_only에 없는 카드면 KeyError로 다음 카드로 넘어간다
+    m['slots'].append({'frame': k[0], 'node': k[1], 'status': '인정'})
+
+
+# 뒤에 더한 기계 층 조리법(26.11.28: same_rule의 번호[요지] 꼴, slot의 of, 틀 마디의 law_only). 앞 사본의 번호가 밀리지 않게 맨 뒤에 쓴다.
+LATE = []
+
+
+def late(name, what):
+    def deco(fn):
+        LATE.append((name, what, fn))
+        return fn
+    return deco
+
+
+def headnote_nums(src):
+    hn = src.rec.get('headnote') or {}
+    return list(vm.split_n(hn.get('판결요지') or hn.get('판시사항') or ''))
+
+
+@late('same_rule 번호와 요지', "요지 하나가 바뀐 판결을 요지 번호 없이 same_rule에 적었다(고친 사본은 바뀌지 않은 요지를 '번호[요지]' 꼴로 적는다)")
+def _(c, s, ctx):
+    have = {vm.same_rule_parts(x)[0] for x in c['same_rule']}
+    for no, cs in ctx.by_case.items():
+        src = ctx.srcs.get(no)
+        dead = {str(o['holding']) for o in cs if (o.get('status') or {}).get('current') is False}
+        if not dead or no == s.no or no in have or not src:
+            continue
+        nums = [n for n in headnote_nums(src) if n not in dead and not any(str(o['holding']) == n for o in cs)]
+        if nums:
+            m = copy.deepcopy(c)
+            m['same_rule'] = c['same_rule'] + [no]
+            return out(m, {'same_rule': c['same_rule'] + [f'{no}[{nums[0]}]']}, [E('same_rule 변경 표기', claim=f"same_rule[{len(c['same_rule'])}]")])
+    return None
+
+
+@late('same_rule 요지 번호', "same_rule을 '번호[요지]' 꼴로 적으면서 그 판결에 없는 요지 번호를 적었다")
+def _(c, s, ctx):
+    have = {vm.same_rule_parts(x)[0] for x in c['same_rule']}
+    for no, cs in ctx.by_case.items():
+        src = ctx.srcs.get(no)
+        if no == s.no or no in have or not src or any((o.get('status') or {}).get('current') is False or (o.get('status') or {}).get('scope') for o in cs):
+            continue
+        nums = headnote_nums(src)
+        if len(nums) >= 2:
+            m = copy.deepcopy(c)
+            m['same_rule'] = c['same_rule'] + [f'{no}[99]']
+            return out(m, {'same_rule': c['same_rule'] + [f'{no}[{nums[0]}]']}, [E('same_rule 요지 번호', claim=f"same_rule[{len(c['same_rule'])}]")])
+    return None
+
+
+@late('slot 자리 겹침', '한 마디에 slot 두 줄을 of 없이 적었다(고친 사본은 채권별로 of를 달리 적는다)')
+def _(c, s, ctx):
+    if not c.get('slots') or c['slots'][0].get('of'):
+        return None
+    a = dict(c['slots'][0])
+    m = copy.deepcopy(c)
+    m['slots'] = c['slots'] + [dict(a)]
+    fixed = [{**a, 'of': '시험용 채권 가'}] + c['slots'][1:] + [{**a, 'of': '시험용 채권 나'}]
+    return out(m, {'slots': fixed}, [E('slot 자리 겹침', '틀림', claim=f"slots[{len(c['slots'])}]")])
+
+
+@late('틀 law_only', "틀 마디의 law_only(법리 근거) 표시를 지웠다. 그러면 그 카드가 'basis에만 있는 카드'로 걸린다(고친 쪽은 표시가 있는 틀)")
+def _(c, s, ctx):
+    for k, lo in ctx.law_only.items():
+        if c['id'] in lo and k not in vm.node_states(c):
+            f = ctx.frames[k[0]]
+            bad = copy.deepcopy(f)
+            for n in bad['nodes']:
+                if n['id'] == k[1]:
+                    n['law_only'] = [x for x in n['law_only'] if x != c['id']]
+            return out(copy.deepcopy(c), {}, [E('틀 basis에만 있음', basis=f'{k[0]}/{k[1]}의 basis')], frames=[bad], control_frames=[copy.deepcopy(f)])
+    return None
 
 
 def main():
@@ -580,8 +679,8 @@ def main():
     n, fails, written = 0, [], set()
 
     def good(fx):
-        bad = vm.run_overlay(ctx, fx['card'], law_text, fx.get('watch'), fx.get('source'))
-        ok = vm.run_overlay(ctx, vm.fixed_copy(fx), law_text, fx.get('watch'), fx.get('control_source') or fx.get('source'))
+        bad = vm.run_overlay(ctx, fx['card'], law_text, fx.get('watch'), fx.get('source'), fx.get('frames'))
+        ok = vm.run_overlay(ctx, vm.fixed_copy(fx), law_text, fx.get('watch'), fx.get('control_source') or fx.get('source'), fx.get('control_frames'))
         return all(vm.expect_hit(bad, e) and not vm.expect_hit(ok, e) for e in fx['expect'])
 
     def write(name, what, fx, tool='verify_machine'):
@@ -592,18 +691,21 @@ def main():
         written.add(fn)
         (outdir / fn).write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 
-    for name, what, fn in RECIPES:
-        for c in ctx.cards.values():
-            s = ctx.srcs.get(c['case']['no'])
-            try:
-                fx = fn(c, s, ctx) if s else None
-            except (StopIteration, KeyError, IndexError):
-                fx = None
-            if fx and good(fx):
-                write(name, what, fx)
-                break
-        else:
-            fails.append(name)
+    def cook(recipes):
+        for name, what, fn in recipes:
+            for c in ctx.cards.values():
+                s = ctx.srcs.get(c['case']['no'])
+                try:
+                    fx = fn(c, s, ctx) if s else None
+                except (StopIteration, KeyError, IndexError):
+                    fx = None
+                if fx and good(fx):
+                    write(name, what, fx)
+                    break
+            else:
+                fails.append(name)
+
+    cook(RECIPES)
     for name, what, fn in SPECIAL:
         fx = fn()
         if good(fx):
@@ -625,6 +727,7 @@ def main():
             break
         else:
             fails.append(name)
+    cook(LATE)
     print(f'시험 카드 {n}장을 {outdir}에 썼다.' + (f' 바탕 카드를 찾지 못한 조리법: {", ".join(fails)}' if fails else ''))
     stale = sorted(p.name for p in outdir.glob('*.json') if p.name not in written)
     if stale:

@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parent.parent
 EXAMS = {'변', '사', '노', '법', '리', '원', '행', '입', '감'}
 ART = re.compile(r'^[가-힣·\s]+(법|법률|규칙|령) 제\d+조(의\d+)?( 제\d+항)?( 제\d+호)?( 본문| 단서)?$')
 NO = re.compile(r'^\d{2,4}[가-힣]{1,3}\d+$')
+# same_rule 한 줄: 사건번호, 또는 일부 요지만 같은 법리일 때의 '번호[요지]' 꼴(예: 2021다244[2], 80다1888[나])
+SAME = re.compile(r'^(\d{2,4}[가-힣]{1,3}\d+)(?:\[(\d+|[가-하])\])?$')
 
 
 def norm(t):
@@ -145,10 +147,12 @@ def main():
             if ref.split('#')[0] in hcases and not (ref in cards and legit(cards[ref][1])):
                 err.append(f'{tag}: turn이 만들기 구간 근거가 없는 맞히기 구간 판결({ref})을 가리킨다')
         for n in c.get('same_rule') or []:
-            if not NO.match(n):
+            sm = SAME.match(n if isinstance(n, str) else '')
+            if not sm:
                 warn.append(f'{tag}: same_rule 번호 꼴이 이상하다({n})')
-            if n in hcases:
-                warn.append(f'{tag}: same_rule에 맞히기 구간 판결({n})이 있다. 만들기 구간 검색(searched)으로 찾은 것인지 확인')
+            base = sm.group(1) if sm else n
+            if base in hcases:
+                warn.append(f'{tag}: same_rule에 맞히기 구간 판결({base})이 있다. 만들기 구간 검색(searched)으로 찾은 것인지 확인')
         card_keys = {(h.get('exam'), h.get('subject'), h.get('year'), str(h.get('q')), str(h.get('sub') or '')) for h in c.get('asked') or []}
         for rp in c.get('rule_parts') or []:
             for h in rp.get('asked') or []:
@@ -170,12 +174,24 @@ def main():
         slots = c.get('slots') or ([c['slot']] if c.get('slot') else [])
         if c.get('slot') and c.get('slots'):
             err.append(f'{tag}: slot과 slots를 함께 두지 않는다(slots 하나로)')
+        places = set()
         for sl in slots:
             fr = frames.get(sl.get('frame'))
+            node = next((n for n in fr.get('nodes', []) if n.get('id') == sl.get('node')), None) if fr else None
             if not fr:
                 err.append(f'{tag}: slot의 틀({sl.get("frame")})이 없다')
-            elif sl.get('node') not in {n.get('id') for n in fr.get('nodes', [])}:
+            elif node is None:
                 err.append(f'{tag}: slot의 마디({sl.get("node")})가 틀에 없다')
+            elif cid in (node.get('law_only') or []):
+                err.append(f'{tag}: slot({sl.get("frame")}/{sl.get("node")})을 달았는데 그 마디의 law_only(법리 근거)에 이 카드가 있다. 둘 가운데 하나를 고친다')
+            # slot 한 줄의 자리는 (틀, 마디, of)다. 한 마디에서 채권마다 결론이 갈리면 줄을 나누고 of를 다르게 적는다
+            if 'of' in sl and not (isinstance(sl['of'], str) and sl['of'].strip()):
+                err.append(f'{tag}: slot({sl.get("frame")}/{sl.get("node")})의 of가 비었다(어느 채권인지 적거나 칸을 뺀다)')
+            place = (sl.get('frame'), sl.get('node'), norm(sl.get('of')) if isinstance(sl.get('of'), str) else '')
+            if place in places:
+                err.append(f'{tag}: 같은 자리 slot이 둘이다({sl.get("frame")}/{sl.get("node")}' + (f', of {place[2]}' if place[2] else '')
+                           + '). 한 마디에서 채권마다 결론이 갈리면 줄마다 of를 다르게 적는다')
+            places.add(place)
         if c.get('role') and c['role'] not in ('바탕', '구별', '최근'):
             err.append(f'{tag}: role은 바탕·구별·최근 가운데 하나다({c["role"]})')
         bx = (c.get('editions') or {}).get('bar_extra')
@@ -220,6 +236,15 @@ def main():
                     pr = art_problem(laws, m.group(1), m.group(2) + (f'의{m.group(3)}' if m.group(3) else ''), m.group(4))
                     if pr:
                         err.append(f'틀 {fid}: 마디 {n.get("id")}: {pr}')
+            # law_only: 그 사건에서는 slot을 달 수 없지만 rule이 마디 문장을 직접 받치는 '법리 근거' 카드. basis 줄은 그대로 두고 마디에 목록으로 적는다
+            lo = n.get('law_only')
+            if lo is not None and not isinstance(lo, list):
+                err.append(f'틀 {fid}: 마디 {n.get("id")}의 law_only는 카드 id 목록이어야 한다')
+            for b in lo if isinstance(lo, list) else []:
+                if b not in basis:
+                    err.append(f'틀 {fid}: 마디 {n.get("id")}의 law_only({b})가 그 마디 basis에 없다')
+                elif b not in cards:
+                    err.append(f'틀 {fid}: 마디 {n.get("id")}의 law_only({b})가 카드 id가 아니다')
 
     for w in warn:
         print('경고:', w)

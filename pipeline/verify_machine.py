@@ -488,12 +488,18 @@ class Ctx:
         self.by_case = collections.defaultdict(list)
         for c in self.cards.values():
             self.by_case[c['case']['no']].append(c)
-        self.basis = {(f['id'], n['id']): list(n.get('basis') or []) for f in self.frames.values() for n in f.get('nodes', [])}
+        self.read_frames()
         self._ledger()
         self._sets()
         self._gazette()
         self.law_text = None
         self.rows, self.passed, self.skipped = [], collections.defaultdict(list), collections.defaultdict(list)
+
+    def read_frames(self):
+        """틀 마디마다 basis와 law_only를 읽는다. law_only는 그 사건에서는 slot을 달 수 없지만 rule이 마디 문장을 직접 받치는
+        '법리 근거' 카드다(지침서 8-3 K7 (c)). basis 줄은 그대로 두고 마디에 목록으로 적는다."""
+        self.basis = {(f['id'], n['id']): list(n.get('basis') or []) for f in self.frames.values() for n in f.get('nodes', [])}
+        self.law_only = {(f['id'], n['id']): set(n.get('law_only') or []) for f in self.frames.values() for n in f.get('nodes', [])}
 
     def _ledger(self):
         self.ledger_keys = collections.defaultdict(set)
@@ -589,13 +595,36 @@ def slots_of(c):
     return c.get('slots') or ([c['slot']] if c.get('slot') else [])
 
 
+def slot_key(s):
+    """slot 한 줄의 자리: (틀, 마디, of). 한 마디 안에서 채권마다 결론이 갈리면 줄을 나누고 of(어느 채권인지)를 적는다(지침서 8-3 덧붙임)."""
+    return (s.get('frame'), s.get('node'), norm(s.get('of')) if s.get('of') else '')
+
+
 def slot_map(c):
-    return {(s.get('frame'), s.get('node')): s.get('status') for s in slots_of(c)}
+    """{(틀, 마디, of): 상태}. of가 다른 줄은 서로 다른 자리다."""
+    return {slot_key(s): s.get('status') for s in slots_of(c)}
+
+
+def node_states(c):
+    """{(틀, 마디): {상태…}}. 다른 카드와 마디 단위로 견줄 때 쓴다. 채권별로 나눈 마디는 상태가 둘 넘게 든다."""
+    out = collections.defaultdict(set)
+    for s in slots_of(c):
+        out[(s.get('frame'), s.get('node'))].add(s.get('status'))
+    return dict(out)
+
+
+def opposite(a, b):
+    """두 카드의 한 마디 상태가 인정과 배척으로 갈리는가. 채권별로 나눠 두 값이 다 있는 쪽은 방향을 하나로 말할 수 없어 견주지 않는다."""
+    return (a == {'인정'} and b == {'배척'}) or (a == {'배척'} and b == {'인정'})
+
+
+def slot_text(s):
+    return f"{s.get('frame')}/{s.get('node')}" + (f"({s['of']})" if s.get('of') else '')
 
 
 def same_rule_parts(n):
-    """'2021다244[2]' → ('2021다244', '2')."""
-    m = re.match(r'^(.+?)(?:\[([^\]]+)\])?$', n or '')
+    """'2021다244[2]' → ('2021다244', '2'). 요지 번호가 없으면 ('2021다244', None). 번호[요지] 꼴은 지침서 8-3의 3."""
+    m = re.match(r'^(.+?)(?:\[([^\]]+)\])?$', (n or '').strip())
     return m.group(1), m.group(2)
 
 
@@ -648,7 +677,7 @@ def claims_of(c):
         out.append((f'facts[{i}]', 'facts', f))
     sents('cue', c.get('cue'))
     for i, s in enumerate(slots_of(c)):
-        out.append((f'slots[{i}]', 'slots', f"{s.get('frame')}/{s.get('node')}: {s.get('status')}"))
+        out.append((f'slots[{i}]', 'slots', f"{slot_text(s)}: {s.get('status')}"))
     for i, t in enumerate(c.get('turn') or []):
         out.append((f'turn[{i}]', 'turn', f"{t.get('fact')} → {t.get('result')} ({t.get('ref')})"))
     for i, n in enumerate(c.get('same_rule') or []):
@@ -815,10 +844,15 @@ def check_card(ctx, c):
 
     # --- same_rule
     refs_turn = {(t.get('ref') or '').split('#')[0] for t in c.get('turn') or []}
-    mine = slot_map(c)
+    mine = node_states(c)
     for i, raw in enumerate(c.get('same_rule') or []):
         n, hn = same_rule_parts(raw)
         clean = True
+        if hn and ctx.srcs.get(n) is not None:
+            nums = list(split_n((ctx.srcs[n].rec.get('headnote') or {}).get('판결요지') or (ctx.srcs[n].rec.get('headnote') or {}).get('판시사항') or ''))
+            if nums and hn not in nums:
+                R(cid, C(f'same_rule[{i}]'), 'same_rule', 'same_rule 요지 번호', CAND, f'{raw}: 그 판결에 요지 [{hn}]가 없다(요지 번호: {", ".join(nums)}). 번호[요지] 꼴의 요지 번호를 다시 본다(지침서 8-3의 3)')
+                clean = False
         if n not in ctx.srcs:
             R(cid, C(f'same_rule[{i}]'), 'same_rule', 'same_rule 원문', BAD, f'{n}의 원문이 저장소에 없다(받아 온 뒤 쌍 단위로 판정한다)')
             clean = False
@@ -840,9 +874,9 @@ def check_card(ctx, c):
               f'{raw}: 일부가 바뀐 판결이다({", ".join(part)}에 scope). 바뀌지 않은 요지이면 번호[요지] 꼴로 적는다')
             clean = False
         for o in others:
-            theirs = slot_map(o)
-            sh = set(mine) & set(theirs)
-            opp = [(k[1], mine[k], theirs[k]) for k in sh if {mine[k], theirs[k]} == {'인정', '배척'}]
+            theirs = node_states(o)
+            sh = sorted(set(mine) & set(theirs))
+            opp = [(k[1], '·'.join(sorted(mine[k])), '·'.join(sorted(theirs[k]))) for k in sh if opposite(mine[k], theirs[k])]
             if opp:
                 R(cid, C(f'same_rule[{i}]'), 'same_rule', 'same_rule 방향', CAND,
                   f"{o['id']}와 같은 마디에서 상태가 반대다: " + ', '.join(f'{a} 이 카드 {b}·상대 {d}' for a, b, d in opp))
@@ -862,11 +896,11 @@ def check_card(ctx, c):
             if o['case']['no'] == no:
                 R(cid, C(f'turn[{i}]'), 'turn', '같은 판결 turn', CAND, f'ref {ref}가 같은 판결의 다른 요지다. 판결이 스스로 두 갈래를 나눠 말했을 때만 turn이다')
                 clean = False
-            theirs = slot_map(o)
+            theirs = node_states(o)
             sh = sorted(set(mine) & set(theirs))
             if sh and all(mine[k] == theirs[k] for k in sh):
                 R(cid, C(f'turn[{i}]'), 'turn', '같은 마디·같은 상태 turn', CAND,
-                  f'ref {ref}와 같이 걸린 마디({", ".join(k[1] for k in sh)})의 상태가 모두 같다({mine[sh[0]]}). 결론이 다른지 본다')
+                  f'ref {ref}와 같이 걸린 마디({", ".join(k[1] for k in sh)})의 상태가 모두 같다({"·".join(sorted(mine[sh[0]]))}). 결론이 다른지 본다')
                 clean = False
             elif not sh:
                 ctx.skip(cid, 'turn 방향', f'turn[{i}] ref {ref}와 같이 걸린 마디가 없어 상태를 비교하지 못했다')
@@ -914,16 +948,30 @@ def check_card(ctx, c):
         else:
             okc(cid, '참조판례 변경 경고')
 
-    # --- slot과 틀 basis
+    # --- slot과 틀 basis. slot 한 줄의 자리는 (틀, 마디, of)다
+    seen = {}
     for i, s in enumerate(slots_of(c)):
         k = (s.get('frame'), s.get('node'))
+        key = slot_key(s)
+        if key in seen:
+            R(cid, C(f'slots[{i}]'), 'slots', 'slot 자리 겹침', BAD,
+              f'slots[{seen[key]}]와 같은 자리({slot_text(s)})다. 한 마디에서 채권마다 결론이 갈리면 줄마다 of(어느 채권인지)를 다르게 적는다(지침서 8-3 덧붙임)')
+        else:
+            seen[key] = i
+            okc(cid, 'slot 자리 겹침')
         if k in ctx.basis and cid not in ctx.basis[k] and st.get('current') is not False:
             R(cid, C(f'slots[{i}]'), 'slots', 'slot과 틀 basis', BAD, f'{k[0]}/{k[1]}에 slot이 있는데 그 마디 basis에 이 카드가 없다(지침서 8-3의 1)')
+        elif cid in ctx.law_only.get(k, ()):
+            R(cid, C(f'slots[{i}]'), 'slots', 'slot과 틀 basis', BAD,
+              f'{k[0]}/{k[1]}에 slot이 있는데 틀은 이 카드를 law_only(slot을 달 수 없는 법리 근거)로 적었다. 둘 가운데 하나를 고친다(지침서 8-3 K7 (c))')
         elif k in ctx.basis:
             okc(cid, 'slot과 틀 basis')
     for k, bs in ctx.basis.items():
-        if cid in bs and k not in mine:
-            R(cid, C('slots'), 'slots', '틀 basis에만 있음', CAND, f'{k[0]}/{k[1]}의 basis에 이 카드가 있는데 그 마디 slot이 없다. 사안이 그 마디를 다투지 않았거나 모듈 틀을 건너 가리킨 경우만 된다')
+        if cid in bs and k not in mine and cid not in ctx.law_only.get(k, ()):
+            R(cid, C('slots'), 'slots', '틀 basis에만 있음', CAND, f'{k[0]}/{k[1]}의 basis에 이 카드가 있는데 그 마디 slot이 없다. 사안이 그 마디를 다투지 않았거나 모듈 틀을 건너 가리킨 경우만 된다(법리 근거 카드이면 마디의 law_only에 적는다)')
+    for k, lo in ctx.law_only.items():
+        if cid in lo and cid not in ctx.basis.get(k, ()):
+            R(cid, C('slots'), 'slots', '틀 basis에만 있음', CAND, f'{k[0]}/{k[1]}의 law_only에 이 카드가 있는데 그 마디 basis에는 없다(law_only는 basis에 있는 카드에만 붙인다)')
 
     # --- asked와 원장, 세트
     rank = {'상': 3, '중': 2, '하': 1}
@@ -1318,7 +1366,7 @@ def check_global(ctx, only=None):
 
 
 GROUPS = {'turn': {'turn ref 현행', '같은 판결 turn', '같은 마디·같은 상태 turn', 'turn 이웃 쟁점'},
-          'same_rule': {'same_rule 원문', 'same_rule과 turn 겹침', 'same_rule 변경 표기', 'same_rule 방향'},
+          'same_rule': {'same_rule 원문', 'same_rule과 turn 겹침', 'same_rule 변경 표기', 'same_rule 방향', 'same_rule 요지 번호'},
           '한정어(요지)': {'한정어(요지에만)', '한정어(rule에만)'}, '한정어(quote)': {'한정어(quote에만)', '한정어(rule에만, quote 대조)'},
           'result와 주문': {'result와 주문', "result와 주문('일부'의 두 갈래)", 'slot과 주문'}, '글 속 사건번호 원문': {'글 속 사건번호 원문', '글 속 카드 id', '괄호 속 사건번호 인용'},
           '작업 기록 낱말': {'작업 기록 낱말'}, 'rule 속 주석': {'rule 속 주석'}}
@@ -1508,7 +1556,8 @@ CHECK_NOTES = collections.OrderedDict([
     ('같은 판결 turn', 'turn이 같은 판결의 다른 요지를 가리키는가'),
     ('turn 이웃 쟁점', "turn의 result가 '…가 문제 된다'로 끝나는가"),
     ('same_rule 변경 표기', 'same_rule의 판결이 바뀐(일부 바뀐) 판결인가'),
-    ('same_rule 방향', 'same_rule 판결의 카드와 같은 마디에서 상태가 반대인가'),
+    ('same_rule 방향', 'same_rule 판결의 카드와 같은 마디에서 상태가 반대인가(채권별로 나눈 마디는 견주지 않는다)'),
+    ('same_rule 요지 번호', "same_rule을 '번호[요지]' 꼴로 적었을 때 그 판결에 그 요지 번호가 있는가"),
     ('same_rule과 turn 겹침', '같은 번호가 same_rule과 turn에 함께 있는가'),
     ('asked와 원장', 'asked의 설문이 원장에 있는가, 과목이 같은가'),
     ('asked 거꾸로', '세트 글에 이 판결이 나오는데 asked에 그 설문이 없는가'),
@@ -1520,8 +1569,9 @@ CHECK_NOTES = collections.OrderedDict([
     ('일관성(같은 판결 다른 요지)', '같은 판결의 다른 카드에는 변경 표시가 있는데 이 카드에는 scope가 없음'),
     ('틀 basis 현행', 'current false 카드가 틀 마디 근거로 남아 있는가'),
     ('참조판례 변경 경고', '이 판결이 참조판례로 든 판결의 카드가 current false인가'),
-    ('slot과 틀 basis', 'slot이 있으면 그 마디 basis에 카드가 있어야 한다'),
-    ('틀 basis에만 있음', 'basis에는 있는데 그 마디 slot이 없는 카드'),
+    ('slot과 틀 basis', 'slot이 있으면 그 마디 basis에 카드가 있어야 한다. 마디의 law_only(법리 근거)에 든 카드에는 slot이 없어야 한다'),
+    ('slot 자리 겹침', '같은 (틀, 마디, of) 자리에 slot이 둘인가. 채권별로 나눈 줄은 of가 달라야 한다'),
+    ('틀 basis에만 있음', 'basis에는 있는데 그 마디 slot이 없는 카드(마디의 law_only에 든 법리 근거 카드는 뺀다)'),
     ('덮음', '카드의 모든 칸이 주장 표에 걸리는가, rule 문장마다 받치는 마디가 있는가'),
     ('cue 쟁점 문장', 'cue가 사실 없이 쟁점 문장뿐인가'),
     ('작업 기록 낱말', '카드 글에 검토자 이름·확인 경위 같은 작업 기록이 있는가'),
@@ -1592,8 +1642,8 @@ def summary_md(ctx, info, counts, sources, a):
 
 # ---------------------------------------------------------------- 자기 시험
 
-def run_overlay(base, card, law_text, watch=None, source=None):
-    """진짜 카드들 위에 카드 한 장(과 시험용 판결 원문)을 덮고, 그 카드(또는 watch 카드)의 결과 줄을 돌려준다."""
+def run_overlay(base, card, law_text, watch=None, source=None, frames=None):
+    """진짜 카드들 위에 카드 한 장(과 시험용 판결 원문, 시험용 틀)을 덮고, 그 카드(또는 watch 카드)의 결과 줄을 돌려준다."""
     ctx = Ctx.__new__(Ctx)
     ctx.__dict__.update(base.__dict__)
     ctx.cards = collections.OrderedDict(base.cards)
@@ -1604,6 +1654,11 @@ def run_overlay(base, card, law_text, watch=None, source=None):
     if source:
         ctx.srcs = dict(base.srcs)
         ctx.srcs[source['no']] = Src(source)
+    if frames:
+        ctx.frames = collections.OrderedDict(base.frames)
+        for f in frames:
+            ctx.frames[f['id']] = f
+        ctx.read_frames()
     ctx.rows, ctx.passed, ctx.skipped = [], collections.defaultdict(list), collections.defaultdict(list)
     ctx.law_text = law_text
     run_checks(ctx, only={watch or card['id']})
@@ -1624,7 +1679,8 @@ def expect_hit(rows, e):
 def selftest(a):
     """pipeline/tests/verify/cards의 일부러 틀린 카드가 기대한 검사에 걸리는지, 고친 사본(control)에서는 걸리지 않는지 본다.
     시험 카드 한 장의 꼴: {"tool": "verify_machine"|"precedent_check", "what": 무엇을 틀리게 했나, "card": 틀린 카드, "control": {고친 칸}, "expect": [기대 결과],
-    "watch": 결과를 볼 다른 카드 id(없으면 이 카드), "source"·"control_source": 시험용 판결 원문(판결 단위 검사)}"""
+    "watch": 결과를 볼 다른 카드 id(없으면 이 카드), "source"·"control_source": 시험용 판결 원문(판결 단위 검사),
+    "frames"·"control_frames": 시험용 틀(틀 쪽을 틀리게 한 시험. 틀린 쪽과 고친 쪽에 각각 덮는다)}"""
     d = Path(a.tests)
     fixtures = [json.loads(p.read_text(encoding='utf-8')) | {'_file': p.name} for p in sorted((d / 'cards').glob('*.json'))]
     a.no_cache = True
@@ -1633,8 +1689,8 @@ def selftest(a):
     base = Ctx(a)
     for fx in [f for f in fixtures if f['tool'] == 'verify_machine']:
         n += 1
-        bad = run_overlay(base, fx['card'], law_text, fx.get('watch'), fx.get('source'))
-        good = run_overlay(base, fixed_copy(fx), law_text, fx.get('watch'), fx.get('control_source') or fx.get('source'))
+        bad = run_overlay(base, fx['card'], law_text, fx.get('watch'), fx.get('source'), fx.get('frames'))
+        good = run_overlay(base, fixed_copy(fx), law_text, fx.get('watch'), fx.get('control_source') or fx.get('source'), fx.get('control_frames'))
         for e in fx['expect']:
             if not expect_hit(bad, e):
                 fails.append(f"{fx['_file']}: [{e['check']}] {e['result']}이 걸리지 않았다 ({fx['what']})")
