@@ -173,5 +173,15 @@
    "result": "확실",
    "note": "전수 반영: 제546조 핵심, cue를 날짜와 쟁점 구절로(시효 완성을 확정 사실로 적지 않음), rule_parts[3](이 사건 항변 해석)을 result로, slot 항변-2 인정 → 다시 심리, turn[0] result에 추론 표시, bar_extra에서 판결에 없는 기산점 구절 뺌, asked diff 첫머리"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "aedeb4e8be00f389",
+  "open": [
+   "same_rule 86다카2549: 원문 없음",
+   "same_rule 2010다56685: 원문 없음",
+   "same_rule 2017다205127: 원문 없음"
+  ]
+ }
 }

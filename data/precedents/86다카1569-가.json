@@ -130,5 +130,11 @@
    "result": "확실",
    "note": "전수 반영: turn[0](2011다76105#1, 같은 쪽 결론) 지움, articles에서 제440조 뺌, asked diff 첫머리(결론 같음), cue 따옴표 뗌, not_decided의 다른 판결 카드 편성 기록 지움. omit·result.s0은 가이 몫"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "cf73def125e7ee5a",
+  "open": []
+ }
 }

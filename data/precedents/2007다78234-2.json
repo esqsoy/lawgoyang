@@ -139,5 +139,13 @@
    "result": "확실",
    "note": "전수 반영: turn의 공유 지분 줄(같은 결론)을 지우고 not_decided의 뒤 판결 문장으로 옮김. not_decided 따옴표 구절에 출처 번호(2023다249739)를 붙임. asked.diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "cd839ef031bf5a20",
+  "open": [
+   "same_rule 2021다258777: 원문 없음"
+  ]
+ }
 }

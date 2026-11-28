@@ -110,5 +110,13 @@
    "result": "확실",
    "note": "전수 반영: asked.diff 결론 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "ac830ca5ec88c37f",
+  "open": [
+   "same_rule 2007다84352: 원문 없음"
+  ]
+ }
 }

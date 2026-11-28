@@ -109,5 +109,15 @@
    "result": "확실",
    "note": "전수 반영: rule을 이 카드 요지 [1](추정·추인) 명제로 세우고 quote 둘, 요지 [2] 문장·뒤 판결 괄호는 not_decided로, 변경 주석은 status.scope로(작업 경위는 뺌), turn[0](판례 변경 줄) 지움, same_rule에서 2012다45566·2024다254387 뺌, result에 두 파기 이유와 유지 갈래, cue·facts[2] 따옴표와 판결 밖 낱말(명의신탁) 고침"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "32b0725ef5fe165c",
+  "open": [
+   "same_rule 66다2173: 원문 없음",
+   "same_rule 91다44872: 원문 없음",
+   "same_rule 93다12824: 원문 없음"
+  ]
+ }
 }

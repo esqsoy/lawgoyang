@@ -109,5 +109,11 @@
    "result": "확실",
    "note": "전수 반영: asked.diff에 결론 첫머리를 닮."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "3b3cd29237faa5d9",
+  "open": []
+ }
 }

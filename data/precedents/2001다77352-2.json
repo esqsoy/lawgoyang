@@ -170,5 +170,14 @@
    "result": "확실",
    "note": "전수 반영: facts[0]에 전부 상속, result에 상속인이 제3자가 아니라는 판단, slot 항변-3(배척) 더함, asked diff 첫머리(결론 반대)"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "dca794c58bf110a2",
+  "open": [
+   "same_rule 87다카2561: 원문 없음",
+   "same_rule 93다12268: 원문 없음"
+  ]
+ }
 }

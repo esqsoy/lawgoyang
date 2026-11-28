@@ -117,5 +117,16 @@
    "result": "확실",
    "note": "전수 반영: rule에 요지 끝 갈래(소유자 변동이 있어도 같다), turn[0]을 not_decided 뒤 판결로, cue 괄호 메모를 not_decided로, cue·facts[1]·result의 판시사항 낱말(공유자인 등기명의인)을 본문대로."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "cff7603c9a9d8adf",
+  "open": [
+   "same_rule 80다2614: 원문 없음",
+   "same_rule 81다826: 원문 없음",
+   "same_rule 91다26577: 원문 없음",
+   "same_rule 2022다300019: 원문 없음"
+  ]
+ }
 }

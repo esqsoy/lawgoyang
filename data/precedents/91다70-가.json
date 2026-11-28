@@ -97,5 +97,11 @@
    "result": "확실",
    "note": "전수 반영: 쟁점 문장뿐이던 cue를 판결 사실과 쟁점 구절로 고침. asked.diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "8ef88e2fc09c058b",
+  "open": []
+ }
 }

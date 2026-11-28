@@ -204,5 +204,16 @@
    "result": "확실",
    "note": "전수 반영: facts에 주채무 변제기·항변 날짜, result 갈래와 파기 이유, slot 항변-4 다시 심리, turn[0] 따옴표 떼고 추론 표시, cue 괄호(기출 사실) 삭제, asked diff 첫머리 다섯, articles 제430조 → 제428조 제1항(보조)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "baafecab9cf9e798",
+  "open": [
+   "same_rule 77다418: 원문 없음",
+   "same_rule 93다21477: 원문 없음",
+   "same_rule 2011다78606: 원문 없음",
+   "same_rule 2016다211620: 원문 없음"
+  ]
+ }
 }

@@ -149,5 +149,11 @@
    "result": "확실",
    "note": "가이 판정 반영: not_decided에 요지 1·2 안내를 더함(#1·#2가 turn 대신 not_decided 안내로 이 카드를 가리키게 고쳐져 있어 꼴을 맞춤)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "e6492f46e7aef115",
+  "open": []
+ }
 }

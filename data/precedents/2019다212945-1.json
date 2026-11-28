@@ -135,5 +135,11 @@
    "result": "확실",
    "note": "전수 반영: facts에 소 제기일·변제기·3년 시효, status.scope를 비우고 not_decided 뒤 판결로, turn 둘 삭제(결론이 다르지 않음), asked diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "ca9fc12bd9e1b376",
+  "open": []
+ }
 }

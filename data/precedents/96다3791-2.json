@@ -118,5 +118,14 @@
    "result": "확실",
    "note": "전수 반영: turn[0] 삭제(결론 같음), articles 제425조 삭제, cue·facts[1]을 판결이 적은 주장으로. slots[0]은 가이 몫."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "0ba8a44b8516c887",
+  "open": [
+   "same_rule 93다32958: 원문 없음",
+   "same_rule 98다40466: 원문 없음"
+  ]
+ }
 }

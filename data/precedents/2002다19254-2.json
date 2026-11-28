@@ -103,5 +103,16 @@
    "result": "확실",
    "note": "가이 판정 반영: articles 민법 제372조 핵심 → 보조, note 자리표시(K1)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "7a509f12ab852f39",
+  "open": [
+   "same_rule 91다13830: 원문 없음",
+   "same_rule 91다25505: 원문 없음",
+   "same_rule 96다9218: 원문 없음",
+   "same_rule 97다8601: 원문 없음"
+  ]
+ }
 }

@@ -114,5 +114,11 @@
    "result": "확실",
    "note": "전수 반영: bar_extra에 반대의견의 한정(채무초과 상태인 채무자), turn[0]을 not_decided 안내로, asked diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "84c60efa4b4f5b57",
+  "open": []
+ }
 }

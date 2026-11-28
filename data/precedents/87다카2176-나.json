@@ -117,5 +117,11 @@
    "result": "확실",
    "note": "전수 반영: facts에 결론을 가른 날짜 셋, asked diff 첫머리(결론 반대)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "8493b992e12069f1",
+  "open": []
+ }
 }

@@ -103,5 +103,15 @@
    "result": "확실",
    "note": "전수 반영: cue에서 원심 판단과 따옴표를 빼고 판결 사실로, rule의 이 사건 판단 문장을 result로(마디 삭제), turn[0] 삭제(결론 같음), asked diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "6066179a9cb424fb",
+  "open": [
+   "same_rule 80다2270: 원문 없음",
+   "same_rule 95다19829: 원문 없음",
+   "same_rule 96다33938: 원문 없음"
+  ]
+ }
 }

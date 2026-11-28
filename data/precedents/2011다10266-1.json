@@ -152,5 +152,11 @@
    "result": "확실",
    "note": "재검증 반영: rule_parts[1]의 part에 quote의 한정어 \"다른 특별한 사정이 없는 한\"을 살림."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "6d1b9eacc24fa1d0",
+  "open": []
+ }
 }

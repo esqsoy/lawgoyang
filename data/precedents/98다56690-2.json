@@ -112,5 +112,14 @@
    "result": "확실",
    "note": "전수 반영: cue를 판결 사실로(매수·매도가 아니라 이전 약정과 채무변제), 요지 [1] 문장과 마디를 rule에서 빼고 not_decided에 안내, same_rule 95다27905 삭제, asked diff 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "3566dd199cde8eab",
+  "open": [
+   "same_rule 94다2534: 원문 없음",
+   "same_rule 95다1965: 원문 없음"
+  ]
+ }
 }

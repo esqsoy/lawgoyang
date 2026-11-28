@@ -130,5 +130,13 @@
    "result": "확실",
    "note": "전수 반영: rule 둘째 문장(이 사건 판단)과 그 마디를 result로 옮김, slot 항변-3 인정 → 다시 심리, asked diff 첫머리(결론 같음)"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "1a21d4f416f7266a",
+  "open": [
+   "same_rule 2006다70929: 원문 없음"
+  ]
+ }
 }

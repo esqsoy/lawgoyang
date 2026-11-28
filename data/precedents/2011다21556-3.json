@@ -98,5 +98,11 @@
    "result": "확실",
    "note": "전수 반영: cue의 따옴표를 뗌. not_decided의 작업 기록 괄호를 지움."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "388cfc43cfbc47ca",
+  "open": []
+ }
 }

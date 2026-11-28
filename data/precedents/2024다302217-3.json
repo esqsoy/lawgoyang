@@ -120,5 +120,13 @@
    "result": "확실",
    "note": "전수 반영: rule 셋째 문장(이 사건 판단)과 (사안) 마디를 result로, turn[0](조문만으로 결론이 나오지 않는 갈림) 지우고 not_decided 부재 문장으로, not_decided 안내를 요지별로 바르게, 제166조 제1항 뺌, asked diff 첫머리(결론 같음)"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "94aca545d3ef9988",
+  "open": [
+   "same_rule 87다카98: 원문 없음"
+  ]
+ }
 }

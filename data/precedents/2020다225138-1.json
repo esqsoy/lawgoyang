@@ -121,5 +121,11 @@
    "result": "확실",
    "note": "재검증 반영: articles 상법 제42조 제1항 보조 → 핵심(K1: rule 첫 문장이 이 조문에 따른 책임의 성질을 풀이)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "0dd3eb65b84bbaae",
+  "open": []
+ }
 }

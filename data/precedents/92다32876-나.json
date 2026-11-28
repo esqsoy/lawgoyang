@@ -125,5 +125,15 @@
    "result": "확실",
    "note": "전수 반영: turn[0] 삭제(이 사건 사실 그대로, 결론 같음), asked diff 첫머리 둘, facts[0] 전소의 상대방을 정확히."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "d93ef1d9def63a75",
+  "open": [
+   "same_rule 92다30016: 원문 없음",
+   "same_rule 80다735: 원문 없음",
+   "same_rule 80다2751: 원문 없음"
+  ]
+ }
 }

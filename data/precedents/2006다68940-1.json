@@ -94,5 +94,14 @@
    "result": "확실",
    "note": "전수 반영: turn[0] result에 추론 표시, cue의 판결 밖 주장 대립을 판결 사실로."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "3fbf658039976b08",
+  "open": [
+   "same_rule 77다2463: 원문 없음",
+   "same_rule 91다10152: 원문 없음"
+  ]
+ }
 }

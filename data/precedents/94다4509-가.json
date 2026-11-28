@@ -105,5 +105,14 @@
    "result": "확실",
    "note": "요지 가·이유와 같다. same_rule의 94다52416은 반대 방향(알고 처분→불법행위)이라 turn 쪽으로 옮길 것(papin-review 2-4). searched는 검색어가 아니다(2-6)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "56c41e04893f2e9d",
+  "open": [
+   "same_rule 93다60779: 원문 없음",
+   "same_rule 88다카8217: 원문 없음"
+  ]
+ }
 }

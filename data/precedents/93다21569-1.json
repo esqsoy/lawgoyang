@@ -109,5 +109,11 @@
    "result": "확실",
    "note": "전수 반영: 결론이 같은 쪽인 turn[0](본래 채권 시효 완성으로 해제 불가)을 지움, asked.diff 결론 첫머리."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "8e1cfef34fbacc94",
+  "open": []
+ }
 }

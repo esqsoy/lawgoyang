@@ -79,5 +79,11 @@
    "result": "확실",
    "note": "전수 반영: 다른 요지(가)의 quote 마디를 rule_parts에서 빼고 not_decided에 안내를 둠, 결론이 같은 turn[0]을 지우고 not_decided에 뒤 판결 문장(2007다83694, 한정어 포함)으로 옮김, cue의 따옴표를 뗌."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "1b21c0deb0a71d39",
+  "open": []
+ }
 }

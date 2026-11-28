@@ -106,5 +106,11 @@
    "result": "확실",
    "note": "전수 반영: result에 주문 방향(파기환송)과 이 요지가 덧붙인 판단이라는 점을 적음, asked diff의 결론 같음을 첫머리로"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "bca6bac0ee0411b1",
+  "open": []
+ }
 }

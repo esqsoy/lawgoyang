@@ -104,5 +104,13 @@
    "result": "확실",
    "note": "전수 반영: turn[0] result에 ref 판결의 한정(당사자표시정정 같은 특별한 사정이 없는 한) 넣음. articles[2]는 가이 몫"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "729ce9dd7e53aeb5",
+  "open": [
+   "same_rule 92다18184: 원문 없음"
+  ]
+ }
 }

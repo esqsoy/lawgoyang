@@ -136,5 +136,14 @@
    "result": "확실",
    "note": "전수 반영: 다투지 않은 마디의 slot 둘 삭제, cue를 이 사건 사실(보상금)로, result에 주문 방향, rule에 유예기간 경과 한정, turn[0] 삭제(같은 방향), asked diff 첫머리와 판결 쪽 서술."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "efb58ad346ce2035",
+  "open": [
+   "same_rule 99다21738: 원문 없음",
+   "same_rule 2001다61654: 원문 없음"
+  ]
+ }
 }

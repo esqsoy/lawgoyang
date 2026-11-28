@@ -115,5 +115,13 @@
    "result": "확실",
    "note": "전수 반영: turn[0] fact에 유체동산 한정, turn[1](2010다88019#1, 같은 마디·같은 상태) 지움, asked diff 첫머리(결론 반대), cue·facts[0]를 판결 글대로"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "0bf1556fe017f8ba",
+  "open": [
+   "same_rule 2006다32781: 원문 없음"
+  ]
+ }
 }

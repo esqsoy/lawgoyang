@@ -121,5 +121,11 @@
    "result": "확실",
    "note": "전수 반영: asked.diff 결론 첫머리(따옴표도 뗌)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "e1c0a85a2a624407",
+  "open": []
+ }
 }

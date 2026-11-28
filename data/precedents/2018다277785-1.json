@@ -192,5 +192,13 @@
    "result": "확실",
    "note": "전수 반영: rule 말의 세기(선결문제가 될 수 있다), turn[0] ref를 2004다17535#1로 바꾸고 인용 표시 뗌, 다투지 않은 반소 요건 slot 삭제, asked diff 첫머리 둘."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "dfa0f339189cdd2e",
+  "open": [
+   "same_rule 2003다6200: 원문 없음"
+  ]
+ }
 }

@@ -143,5 +143,13 @@
    "result": "확실",
    "note": "전수 반영: rule을 이 판결이 수긍한 원심의 추정 법리 한 문장으로 줄이고 '(원심 판단, 대법원 유지)'를 붙임. 판례 변경 주석과 지금의 기준은 rule에서 빼 status.scope에 모음. 이 사건 포섭 마디를 rule_parts에서 빼고 result에 적음. same_rule에서 2001다3580·2013다12464를 빼고 not_decided의 뒤 판결 문장으로 옮김. 판례 변경으로 갈리는 turn[0]을 지움. cue에서 기출 사실(각서, 확약서)을 뺌. asked.diff 셋에 결론 첫머리를 닮."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "ad24e68db4ba4398",
+  "open": [
+   "same_rule 66다2173: 원문 없음"
+  ]
+ }
 }

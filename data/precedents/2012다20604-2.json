@@ -82,5 +82,13 @@
    "result": "확실",
    "note": "전수 반영: (사안) 마디를 rule_parts에서 빼어 result에 조건과 함께 적음."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "675f2c38d8d8b042",
+  "open": [
+   "same_rule 2009다51028: 원문 없음"
+  ]
+ }
 }

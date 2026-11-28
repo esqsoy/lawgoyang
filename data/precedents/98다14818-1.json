@@ -151,5 +151,13 @@
    "result": "확실",
    "note": "재검증 반영: rule 둘째 문장과 rule_parts[1]에 점유 이전(인도) 요소를 살리고 quote를 그 구절부터로 넓힘."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "93fee7271e120bd5",
+  "open": [
+   "same_rule 92다21395: 원문 없음"
+  ]
+ }
 }

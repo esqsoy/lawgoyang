@@ -88,5 +88,14 @@
    "result": "확실",
    "note": "재검수(review-3). rule 끝 요지 나 문장을 not_decided로 옮긴 것 맞다. quote 본문에 있다."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "46ec32b44c7eb233",
+  "open": [
+   "same_rule 93다21477: 원문 없음",
+   "same_rule 89다카4946: 원문 없음"
+  ]
+ }
 }

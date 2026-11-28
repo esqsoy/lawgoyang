@@ -84,5 +84,11 @@
    "result": "확실",
    "note": "요지[2]와 같다."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "7abd25d0ff2d8b6e",
+  "open": []
+ }
 }

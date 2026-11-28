@@ -112,5 +112,11 @@
    "result": "확실",
    "note": "전수 반영: cue 따옴표 뗌."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "82c7cbc9036bbf34",
+  "open": []
+ }
 }

@@ -103,5 +103,13 @@
    "result": "확실",
    "note": "전수 반영: rule의 원심 수긍 사례 문장을 result로 옮김, articles 제163조 보조, cue 따옴표 뗌, facts[1]의 판결 밖 선후(그 뒤) 삭제."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "514d513e810b636c",
+  "open": [
+   "same_rule 97다47675: 원문 없음"
+  ]
+ }
 }

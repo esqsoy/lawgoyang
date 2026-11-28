@@ -142,5 +142,13 @@
    "result": "확실",
    "note": "재검증 반영: result의 끝 문장(대법원이 판단하지 않은 것)을 not_decided로 옮김."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "1c4bd90fcea211fb",
+  "open": [
+   "same_rule 96다14616: 원문 없음"
+  ]
+ }
 }

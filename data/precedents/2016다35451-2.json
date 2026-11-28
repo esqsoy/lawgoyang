@@ -138,5 +138,11 @@
    "result": "확실",
    "note": "전수 반영: facts에 지급기일·3년 시효, turn[1]을 not_decided 뒤 판결로, asked diff 첫머리 둘, cue에 날짜와 (계산) 표시."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "fe50435bce1d2d21",
+  "open": []
+ }
 }

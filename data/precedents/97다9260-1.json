@@ -216,5 +216,14 @@
    "result": "확실",
    "note": "재검증 반영: articles 상법 제47조 제1항 보조 → 핵심(K1: rule이 보조적 상행위를 직접 풀이)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "6cfe8bca9c1ff80b",
+  "open": [
+   "same_rule 93다54842: 원문 없음",
+   "same_rule 2005다7863: 원문 없음"
+  ]
+ }
 }

@@ -112,5 +112,14 @@
    "result": "확실",
    "note": "전수 반영: rule 셋째 문장(이 사건 포섭)을 result로 옮기고 rule에는 판결의 제170조 법리 문장과 quote를 둠, turn[0](2019다212945#1, 같은 결론) 지움. result의 갈래 표시는 가이 몫"
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "2402de1ae3e40e6b",
+  "open": [
+   "same_rule 94다7737: 원문 없음",
+   "same_rule 96다46484: 원문 없음"
+  ]
+ }
 }

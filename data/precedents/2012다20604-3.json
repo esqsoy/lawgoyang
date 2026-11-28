@@ -111,5 +111,13 @@
    "result": "확실",
    "note": "전수 반영: 다투지 않은 마디의 slot 삭제, cue를 판결이 인정한 사실로, rule 앞 절 한정 복원과 마디 추가, same_rule 둘 삭제, articles 제162조 → 제184조 제1항(보조), facts[2]에서 사건명에만 있는 말소 청구 삭제."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "ccff93026c90aa70",
+  "open": [
+   "same_rule 79다407: 원문 없음"
+  ]
+ }
 }

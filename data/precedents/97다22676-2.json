@@ -114,5 +114,14 @@
    "result": "확실",
    "note": "재검증 반영: articles 민법 제162조 제1항 핵심 → 보조, note 자리표시(K1)."
   }
- ]
+ ],
+ "verified": {
+  "date": "2026-11-28",
+  "guide": "v3.2",
+  "hash": "d82dd6d984ebc67a",
+  "open": [
+   "same_rule 79다407: 원문 없음",
+   "same_rule 2005다11312: 원문 없음"
+  ]
+ }
 }
