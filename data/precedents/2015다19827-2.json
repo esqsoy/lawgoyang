@@ -8,7 +8,7 @@
   "kind": "판결",
   "en_banc": false,
   "gazette": null,
-  "disposition": "일부 파기환송"
+  "disposition": "파기환송"
  },
  "holding": "2",
  "found_by": "검색",
@@ -128,6 +128,12 @@
    "date": "2026-11-28",
    "result": "확실",
    "note": "전수 반영: same_rule에서 2007다78616을 뺌(수급인 자신의 청구에 관한 요지 [1] 쪽 판결), asked.diff 결론 첫머리."
+  },
+  {
+   "by": "이솝",
+   "date": "2026-11-28",
+   "result": "확실",
+   "note": "재검증 반영: disposition 일부 파기환송 → 파기환송(기계가 주문에서 읽은 값. 지침서 1-3: 불복 기각·각하 문장이 함께 있을 때만 일부)."
   }
  ]
 }

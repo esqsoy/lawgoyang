@@ -8,7 +8,7 @@
   "kind": "판결",
   "en_banc": false,
   "gazette": null,
-  "disposition": "일부 파기자판"
+  "disposition": "파기자판"
  },
  "holding": "1",
  "found_by": "세트 후보를 --case로 확인",
@@ -170,6 +170,12 @@
    "date": "2026-11-28",
    "result": "확실",
    "note": "전수 반영: asked diff 첫머리 셋."
+  },
+  {
+   "by": "이솝",
+   "date": "2026-11-28",
+   "result": "확실",
+   "note": "재검증 반영: disposition 일부 파기자판 → 파기자판(기계가 주문에서 읽은 값. 지침서 1-3: 불복 기각·각하 문장이 함께 있을 때만 일부)."
   }
  ]
 }

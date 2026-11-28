@@ -246,6 +246,16 @@ def main():
                 elif b not in cards:
                     err.append(f'틀 {fid}: 마디 {n.get("id")}의 law_only({b})가 카드 id가 아니다')
 
+    # 검증됨 표시(verify_mark.py): hash가 지금 카드·원문·틀과 다르면 표시가 무효다
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('verify_mark', ROOT / 'pipeline' / 'verify_mark.py')
+    vm = importlib.util.module_from_spec(spec); spec.loader.exec_module(vm)
+    vfr = vm.frames()
+    for cid, (pth, c) in cards.items():
+        v = c.get('verified')
+        if v and v.get('hash') != vm.card_hash(c, vfr):
+            warn.append(f'{Path(pth).name}: 검증됨 표시가 무효다(표시 뒤에 카드·원문·틀이 바뀜). 다시 검증하고 verify_mark.py --mark로 단다')
+
     for w in warn:
         print('경고:', w)
     for e in err:
